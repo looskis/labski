@@ -16,7 +16,7 @@ The server retained the original 73,728-token, single-sequence configuration wit
 
 Prepare both local snapshots, generate the dense-prefix sidecars on GB10 and launch the same mode on both ranks. Use `published`, `scale_only` and `scale_and_codes` in separate runs. Prepare the fixed question and article files using the linked procedures. With the endpoint ready, collect the same trials for each mode. [Quantization and launch procedure](../../../experiments/glm53-nvfp4-scales/) · [Question corpus](../../qwen38-27b-precision-2026-11-19/#reproduce)
 
-From `inference-recipes/`, set `URL` to the head endpoint and `RUN` to a fresh output directory for this condition. The 28 free answers and eight lookups each have a 256-token budget. [Generate the eight 1,500-record lookup prompts](../../glm53-effort-2026-11-19/#reproduce)
+From `inference-recipes/`, set `URL` to the head endpoint and `RUN` to a fresh output directory for this condition. The 28 free answers and eight lookups each have a 256-token budget. [Generate the eight 1,500-record lookup prompts](../../glm53-effort-2026-11-19/#reproduce-the-effort-comparison)
 
 ```sh
 model=glm53-nvfp4-prefill

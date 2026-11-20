@@ -32,3 +32,5 @@ docker run --rm --network none -v "$PWD:/work" -v "$TF:/tf:ro" -w /work \
 docker run --rm --gpus all --network none --memory 12g -v "$PWD:/work" -w /work \
   --entrypoint python3 "$image" measure.py --library tiles.so --out measurements.jsonl
 ```
+
+The lab built the two winning tile layouts into TensorFold 1.3 and verified the same executable on both GB10 ranks. The switch is opt-in and records which shape was selected. [Integrated patch, exact source hashes and build](engine/)

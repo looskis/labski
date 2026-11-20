@@ -1,0 +1,106 @@
+diff --git a/zig/kernels/cuda/glm_mm.cu b/zig/kernels/cuda/glm_mm.cu
+index e082485..c0792e2 100644
+--- a/zig/kernels/cuda/glm_mm.cu
++++ b/zig/kernels/cuda/glm_mm.cu
+@@ -291,6 +291,19 @@ extern "C" __global__ void glm_mm_tile8(const uint32_t* src, const __half* ss, u
+     tile_packed<8>(src, ss, dst, ds, N, K);
+ }
+ 
++// Shape-specific Q8 prompt layouts measured on GB10. Each uses one ordered K slice.
++extern "C" __global__ void __launch_bounds__(256) labski_glm_q8_128_rows(
++    const __nv_bfloat16* x, long long ldx, const uint32_t* w, const __half* scales,
++    void* out, float* part, int f32, int m, int n, int k, int sk) {
++    mm_kernel<8, 128, 2, 2, true>(x, ldx, w, scales, out, part, f32, m, n, k, sk);
++}
++
++extern "C" __global__ void __launch_bounds__(512) labski_glm_q8_256_cols(
++    const __nv_bfloat16* x, long long ldx, const uint32_t* w, const __half* scales,
++    void* out, float* part, int f32, int m, int n, int k, int sk) {
++    mm_kernel<8, 256, 4, 2, false>(x, ldx, w, scales, out, part, f32, m, n, k, sk);
++}
++
+ // bf16 rows [N][K] -> the tiled chunks (16 bf16 a chunk, in pair order)
+ extern "C" __global__ void glm_mm_tile16(const __nv_bfloat16* __restrict__ src, __nv_bfloat16* __restrict__ dst, int N, int K) {
+     glm_pdl::enter_weights();
+diff --git a/zig/src/families/glm/cuda_mm.zig b/zig/src/families/glm/cuda_mm.zig
+index d1f8dfe..252f327 100644
+--- a/zig/src/families/glm/cuda_mm.zig
++++ b/zig/src/families/glm/cuda_mm.zig
+@@ -38,6 +38,9 @@ pub const Packed = struct {
+ };
+ 
+ /// glm_mm's bf16 kernels by row bucket, the K-slice reduce and the tiling.
++// One line per measured shape and calling thread enables a serving trace without logging each projection.
++threadlocal var observed_q8_shapes: u8 = 0;
++
+ pub const Kernels = struct {
+     by_rows: [4]cuda.Function, // bf16: 16, 32, 64, 128 rows a block
+     packed_rows: [3][4]cuda.Function, // 4, 6 and 8 bits, as by_rows
+@@ -45,6 +48,8 @@ pub const Kernels = struct {
+     reduce: cuda.Function,
+     tile: cuda.Function,
+     tile_packed: [3]cuda.Function, // glm_mm_tile4/6/8: packed rows and their scales into the tiles
++    trace_q8: bool = false,
++    gb10_q8: ?struct { rows_first: cuda.Function, cols_first: cuda.Function } = null,
+     prompt_fixed_k: bool = false, // opt-in prompt experiment; never selected from the number of batched rows
+     pdl: bool, // dependent launches: a matmul's weights stream in while the kernel before it finishes
+ 
+@@ -62,6 +67,15 @@ pub const Kernels = struct {
+             k.tile_packed[wi] = try m.function(std.fmt.comptimePrint("glm_mm_tile{d}", .{b}));
+         }
+         try k.prompt.allowDynamicShared(smem(128));
++        const enable_tiles = @import("sys").environment.value(bool, "TF_GLM_Q8_PROMPT_TILES", @import("profile").lookup("TF_GLM_Q8_PROMPT_TILES"), false) catch false;
++        k.trace_q8 = @import("sys").environment.value(bool, "TF_GLM_Q8_PROMPT_TRACE", @import("profile").lookup("TF_GLM_Q8_PROMPT_TRACE"), false) catch false;
++        if (enable_tiles) {
++            const rows_first = try m.function("labski_glm_q8_128_rows");
++            const cols_first = try m.function("labski_glm_q8_256_cols");
++            try rows_first.allowDynamicShared(q8TwoStages(128));
++            try cols_first.allowDynamicShared(q8TwoStages(256));
++            k.gb10_q8 = .{ .rows_first = rows_first, .cols_first = cols_first };
++        }
+         k.pdl = cuda_pdl.on();
+         return k;
+     }
+@@ -83,6 +97,10 @@ pub fn sharedBytes(bits: u8, bm: usize) u32 {
+     return @intCast(3 * (bm * 128 + 8 * 32 * wpc * 4 + 128));
+ }
+ 
++fn q8TwoStages(rows: usize) u32 {
++    return 2 * @divExact(sharedBytes(8, rows), 3);
++}
++
+ /// K slices fixed by the shape: column tiles times slices reach the target, each slice at least 4 groups of 64.
+ pub fn splitK(n: usize, k: usize) usize {
+     const tiles = (n + 63) / 64;
+@@ -124,7 +142,30 @@ pub fn matmul(k: *const Kernels, s: cuda.Stream, x: u64, ldx: usize, w: Tiled, o
+         a.add(@as(c_int, @intCast(sk)));
+         const cols: u32 = @intCast((w.n + 63) / 64);
+         const row_blocks: u32 = @intCast((rows + bm - 1) / bm);
+-        if (big and wi == 0) {
++        const shape: ?u3 = if (big and w.bits == 8 and w.n == 12576 and w.k == 4096) switch (rows) {
++            1024 => 0, 2048 => 1, 2049 => 2, 2560 => 3, 3072 => 4, 3584 => 5, 4096 => 6, else => null,
++        } else null;
++        const gb10_rows: usize = if (shape != null and k.gb10_q8 != null) (if (shape.? < 4) @as(usize, 128) else 256) else 0;
++        if (k.trace_q8) {
++            if (shape) |slot| {
++                const bit = @as(u8, 1) << slot;
++                if (observed_q8_shapes & bit == 0) {
++                    observed_q8_shapes |= bit;
++                    std.log.info("GLM Q8 prompt projection rows={d} tuned_tile={d}", .{ rows, gb10_rows });
++                }
++            }
++        }
++        if (gb10_rows != 0) {
++            const tiles = k.gb10_q8.?;
++            const rows_first = gb10_rows == 128;
++            const blocks: u32 = @intCast((rows + gb10_rows - 1) / gb10_rows);
++            try cuda.launch.launch(if (rows_first) tiles.rows_first else tiles.cols_first, .{
++                .grid = .{ .x = if (rows_first) blocks else cols, .y = if (rows_first) cols else blocks },
++                .block = .{ .x = if (rows_first) 256 else 512 },
++                .shared = q8TwoStages(gb10_rows),
++                .pdl = k.pdl,
++            }, s, &a);
++        } else if (big and wi == 0) {
+             try cuda.launch.launch(k.prompt, .{ .grid = .{ .x = row_blocks, .y = cols }, .block = .{ .x = 256 }, .shared = smem(128), .pdl = k.pdl }, s, &a);
+         } else { // packed prompts take the 128-row bucket's blocks, one slice
+             const f = if (wi == 0) k.by_rows[i] else k.packed_rows[wi - 1][i];
