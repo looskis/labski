@@ -18,6 +18,7 @@ At **5.5 GiB**, seven proposals delivered **93.86 tok/s at four clients**, with 
 | [Repeated control](7-kv3-repeat/) | 3 | 7 | 12,002 | 30.24 / 52.43 | 1.15 / 0.68 | 236 / 1868 | 3988 | 19 | 8 |
 | [5.5 GiB pool](7-kv5632m/) | 5.5 | 7 | 21,972 | 30.38 / 93.86 | 1.13 / 0.42 | 237 / 296 | 296 | 19 | 8 |
 | [5.25 GiB pool](7-kv5376m/) | 5.25 | 7 | 20,956 | 31.57 / 58.81 | 1.13 / 0.62 | 232 / 234 | 3698 | 19 | 8 |
+| [Batch-size schedule](7-dynamic73/) | 3 | 7 at one, 3 at two–four | 12,002 | 30.71 / 51.73 | 1.14 / 0.70 | 232 / 2015 | 4080 | 19 | 8 |
 
 ## Larger KV pool
 
@@ -49,7 +50,17 @@ Peak sampled KV usage across the four-client trials reached 77.5% of the allocat
 
 Inside the sampled trial windows, the engine reported 7.00 at 1 client, 7.00 at 4 clients proposed tokens per draft block. The counters use the first and last in-window samples and can omit boundary steps. [Observed proposal widths](7-kv5376m/observed-draft-widths.jsonl)
 
+## Batch-size schedule
+
+At four clients this run delivered 1.07× the throughput of the original seven and changed GPU energy per generated token by -13.0%. It gained 0 and lost 0 correct short answers. The maximum observed number of running requests in the three repeats was 2, 2, 2. Maximum waiting counts were 2, 2, 2. [Per-trial scheduler samples](7-dynamic73/scheduler-trials.jsonl) · [Timed trials](7-dynamic73/trials.jsonl)
+
+Peak sampled KV usage across the four-client trials reached 90.4% of the allocated pool.
+
+Inside the sampled trial windows, the engine reported 7.00 at 1 client, 3.03 at 4 clients proposed tokens per draft block. The counters use the first and last in-window samples and can omit boundary steps. [Observed proposal widths](7-dynamic73/observed-draft-widths.jsonl)
+
 Each rate and latency is a median across three trials. Each trial submitted four 96-token prose requests after an excluded warm-up. GPU energy uses the cumulative NVML counter. The scheduler was polled every 250 ms during the new runs. [Sampler](../sample_metrics.py)
+
+The adaptive run switched draft width. The engine reported 7.00 proposed tokens per block at one client and 3.03 at four. It still allocated 189 GPU blocks and exposed 12,002 KV-token slots, the same as fixed seven. Only two of four requests ran together. At four clients, the adaptive configuration achieved **51.73 tok/s** versus **86.54** for fixed three at the same 3 GiB budget. The schedule preserved single-client speed at 30.71 tok/s, but changing proposal width after startup did not recover the static three-proposal capacity. [Draft counters](7-dynamic73/observed-draft-widths.jsonl) · [Engine settings](7-dynamic73/effective-cache.json)
 
 ## Why four clients queue at 3 GiB
 
