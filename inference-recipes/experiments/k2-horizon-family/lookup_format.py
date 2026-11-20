@@ -19,24 +19,47 @@ def lookup_value(text, finish):
     return values[0] if finish == "stop" and len(values) == 1 else None
 
 
-def request(url, model, seed, records, constrained):
+def response_prefix(prompt):
+    match = re.match(r"Case [0-9a-f]{8}\. Return only the value of (bin-[0-9]{4})\.\n", prompt)
+    if not match:
+        raise ValueError("missing lookup key")
+    return f"\nThe value of **{match[1]}** is:\n\n**"
+
+
+def post(url, path, body):
+    call = urllib.request.Request(url.rstrip("/") + path, data=json.dumps(body).encode(),
+                                  headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(call, timeout=180) as reply:
+        return json.load(reply)
+
+
+def request(url, model, seed, records, constrained, prefill=False, raw_control=False):
     prompt, expected = workload("lookup", seed, records)
     body = dict(model=model, messages=[dict(role="user", content=prompt)],
                 temperature=0, max_tokens=128, chat_template_kwargs={"reasoning_effort": "low"})
+    prefix = response_prefix(prompt) if prefill else ""
+    path = "/v1/chat/completions"
+    input_digest = None
+    if prefill or raw_control:
+        ids = post(url, "/tokenize", dict(model=model, messages=body["messages"],
+                   add_generation_prompt=True, chat_template_kwargs=body["chat_template_kwargs"]))["tokens"]
+        if prefill:
+            ids += post(url, "/tokenize", dict(model=model, add_special_tokens=False,
+                        prompt="</ifm|think_faster>\n" + prefix.lstrip("\n")))["tokens"]
+        body = dict(model=model, prompt=ids, max_tokens=128, temperature=0)
+        input_digest = hashlib.sha256(json.dumps(ids, separators=(",", ":")).encode()).hexdigest()
+        path = "/v1/completions"
     if constrained:
         body["structured_outputs"] = {"regex": "[0-9]{6}"}
-    call = urllib.request.Request(url.rstrip("/") + "/v1/chat/completions",
-                                  data=json.dumps(body).encode(),
-                                  headers={"Content-Type": "application/json"})
     start = time.perf_counter()
-    with urllib.request.urlopen(call, timeout=180) as reply:
-        response = json.load(reply)
+    response = post(url, path, body)
     elapsed = time.perf_counter() - start
     choice = response["choices"][0]
-    text = choice["message"].get("content") or ""
+    text = (choice.get("message", {}).get("content") or "") if path == "/v1/chat/completions" else choice["text"]
     values = re.findall(r"(?<![0-9])[0-9]{6}(?![0-9])", text)
     stopped = choice["finish_reason"] == "stop"
     return dict(seed=seed, records=records, regex=constrained, expected=expected,
+                assistant_prefix=prefix, endpoint=path, input_token_ids_sha256=input_digest,
                 prompt_sha256=hashlib.sha256(prompt.encode()).hexdigest(),
                 finish=choice["finish_reason"], input_tokens=response["usage"]["prompt_tokens"],
                 output_tokens=response["usage"]["completion_tokens"], elapsed_s=elapsed,
@@ -54,6 +77,11 @@ if __name__ == "__main__":
     parser.add_argument("--seed", type=int, default=3000)
     parser.add_argument("--count", type=int, default=32, help="fresh prompts for each record count")
     parser.add_argument("--records", type=int, nargs="+", default=[32, 128])
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--assistant-prefix", action="store_true",
+                      help="close the empty low-effort block and prefill an answer naming the requested bin")
+    mode.add_argument("--raw-control", action="store_true",
+                      help="use the completions endpoint with the unmodified low-effort chat template")
     args = parser.parse_args()
     if args.count < 1 or not all(n > 0 for n in args.records):
         parser.error("count and records must be positive")
@@ -63,6 +91,7 @@ if __name__ == "__main__":
             for records in sizes:
                 seed = args.seed + index + args.records.index(records) * args.count
                 for constrained in ((False, True) if seed % 2 == 0 else (True, False)):
-                    out.write(json.dumps(request(args.url, args.model, seed, records, constrained),
+                    out.write(json.dumps(request(args.url, args.model, seed, records, constrained,
+                                                 args.assistant_prefix, args.raw_control),
                                          separators=(",", ":")) + "\n")
                     out.flush()

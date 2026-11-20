@@ -13,6 +13,8 @@ Forcing the first generated character to start a six-digit answer had a differen
 
 These measurements use one client, 128 output tokens, greedy decoding, low reasoning effort and a 2.16 GB BF16 checkpoint. The free-answer extraction accepts one standalone ASCII six-digit substring from a completed generation. It rejects multiple candidates, a longer run of digits and unfinished generations. The prompt supplied 32 or 128 possible values. Each seed was submitted in both modes, alternating which mode ran first.
 
+A new 64-query panel exposed the limit of the free-answer rule. It recovered 62/64 correct unique values. Supplying a short assistant prefix before unconstrained decoding gave 64/64 correct values with a median of five generated tokens. Every continuation ended in the same closing Markdown marker. [Paired endpoint controls and response hashes](assistant-prefix/)
+
 ## Reproduce
 
 From `inference-recipes/`, start the stock service on a DGX Spark, then run the paired client in a second terminal. The records include visible-output hashes, token counts, latencies and all six-digit matches. [Recipe](../../../../recipes/k2-horizon-0.9b-bf16.json) · [Client and extraction function](../../../../experiments/k2-horizon-family/lookup_format.py)
