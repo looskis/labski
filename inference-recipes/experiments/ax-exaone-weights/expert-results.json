@@ -1,0 +1,470 @@
+[
+  {
+    "tensor": "model.layers.2.mlp.experts.65.gate_proj.weight",
+    "source_sha256": "d5c13b9da7d707d1af44ae251df20df853f2ed2b0eebb086303f0cfb0d3102d5",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 0.5642940290313984,
+          "reference_squared_norm": 757.3618608330314
+        },
+        "projection": {
+          "squared_error": 17.99990767025818,
+          "reference_squared_norm": 24424.495122565542
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 6.664535929848103,
+          "reference_squared_norm": 757.3618608330314
+        },
+        "projection": {
+          "squared_error": 212.98075202375418,
+          "reference_squared_norm": 24424.495122565542
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.2.mlp.experts.65.up_proj.weight",
+    "source_sha256": "a6ba8972ba0fefeaf11f182b980864a57db3d036601ce611b92f52036202d849",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 0.5519523935789427,
+          "reference_squared_norm": 679.6294871310881
+        },
+        "projection": {
+          "squared_error": 17.492999734690567,
+          "reference_squared_norm": 21754.570645055366
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 6.0280324744601455,
+          "reference_squared_norm": 679.6294871310881
+        },
+        "projection": {
+          "squared_error": 194.01628456791912,
+          "reference_squared_norm": 21754.570645055366
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.2.mlp.experts.65.down_proj.weight",
+    "source_sha256": "7857367c2d3e3d8377c0a0360915911071a779b98336aea6a70af8110ea1a489",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 0.7035590418764108,
+          "reference_squared_norm": 1225.1036013083249
+        },
+        "projection": {
+          "squared_error": 22.88662557072356,
+          "reference_squared_norm": 39783.350664897815
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 10.715615784947358,
+          "reference_squared_norm": 1225.1036013083249
+        },
+        "projection": {
+          "squared_error": 348.44918369199877,
+          "reference_squared_norm": 39783.350664897815
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.3.mlp.experts.51.gate_proj.weight",
+    "source_sha256": "f3a2813d1cde502fef937574a42780c26c1a4d018c484ba4854217f25011db1a",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 0.4050370314851669,
+          "reference_squared_norm": 494.4251304244873
+        },
+        "projection": {
+          "squared_error": 13.031409476575085,
+          "reference_squared_norm": 15752.573909733026
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 4.461727287588471,
+          "reference_squared_norm": 494.4251304244873
+        },
+        "projection": {
+          "squared_error": 141.19406558768316,
+          "reference_squared_norm": 15752.573909733026
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.3.mlp.experts.51.up_proj.weight",
+    "source_sha256": "c74cfab38daa3c98e227ac3ff8724b2f45e085cd889f180c0a97ee21c23e57dc",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 0.38337774024993587,
+          "reference_squared_norm": 453.4174850533583
+        },
+        "projection": {
+          "squared_error": 12.274131042552217,
+          "reference_squared_norm": 14372.165688468984
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 3.9091757426059517,
+          "reference_squared_norm": 453.4174850533583
+        },
+        "projection": {
+          "squared_error": 124.27775473751949,
+          "reference_squared_norm": 14372.165688468984
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.3.mlp.experts.51.down_proj.weight",
+    "source_sha256": "96349a8e8eb2bec2717710c9a2fd7c52d680985555f445c26c1cb8103328ebe7",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 0.5294512976132192,
+          "reference_squared_norm": 1022.4677220753504
+        },
+        "projection": {
+          "squared_error": 17.115251052989336,
+          "reference_squared_norm": 33027.31161558749
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 8.925576925077957,
+          "reference_squared_norm": 1022.4677220753504
+        },
+        "projection": {
+          "squared_error": 289.80464449836785,
+          "reference_squared_norm": 33027.31161558749
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.4.mlp.experts.77.gate_proj.weight",
+    "source_sha256": "a360a0207402098555852d5a6062086d2686b30b563712a86958ecad5b939a3a",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 0.8387357648048749,
+          "reference_squared_norm": 1281.427583719677
+        },
+        "projection": {
+          "squared_error": 26.69146891742914,
+          "reference_squared_norm": 41440.737749262014
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 11.222228213093903,
+          "reference_squared_norm": 1281.427583719677
+        },
+        "projection": {
+          "squared_error": 360.49194258633383,
+          "reference_squared_norm": 41440.737749262014
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.4.mlp.experts.77.up_proj.weight",
+    "source_sha256": "f176a3e375ec4826a98046294bf94d557bb7b0940fd3125ebb715d6f22be8c72",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 0.907117200216423,
+          "reference_squared_norm": 1234.7788694901974
+        },
+        "projection": {
+          "squared_error": 29.068594318718326,
+          "reference_squared_norm": 39698.73065554256
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 10.47400508123981,
+          "reference_squared_norm": 1234.7788694901974
+        },
+        "projection": {
+          "squared_error": 333.76942873256036,
+          "reference_squared_norm": 39698.73065554256
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.4.mlp.experts.77.down_proj.weight",
+    "source_sha256": "908d9f3e7f26eae286776bf4f0b3643217175963e69ad351bf6f21652609f0db",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 1.1122954581384004,
+          "reference_squared_norm": 2077.351412978714
+        },
+        "projection": {
+          "squared_error": 35.93661184651463,
+          "reference_squared_norm": 67179.85971644227
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 18.384051135105477,
+          "reference_squared_norm": 2077.351412978714
+        },
+        "projection": {
+          "squared_error": 592.7376285338817,
+          "reference_squared_norm": 67179.85971644227
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.75.mlp.experts.240.gate_proj.weight",
+    "source_sha256": "943fcc3fd2bfb7a4637e0483a933cadcb30524b74e94d4f03a6799350ad9cfee",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 0.9034445443739662,
+          "reference_squared_norm": 1737.4596241829431
+        },
+        "projection": {
+          "squared_error": 28.988004664255065,
+          "reference_squared_norm": 55247.51041733903
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 14.74340979822184,
+          "reference_squared_norm": 1737.4596241829431
+        },
+        "projection": {
+          "squared_error": 466.3873118863826,
+          "reference_squared_norm": 55247.51041733903
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.75.mlp.experts.240.up_proj.weight",
+    "source_sha256": "d1012c2d79580b89d1133f3501048a4c04401a392678716c0b44b67f705db5b0",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 1.0111356641670457,
+          "reference_squared_norm": 1925.7208233960448
+        },
+        "projection": {
+          "squared_error": 32.229190261213546,
+          "reference_squared_norm": 61415.26229147703
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 17.817680633138657,
+          "reference_squared_norm": 1925.7208233960448
+        },
+        "projection": {
+          "squared_error": 567.183687995477,
+          "reference_squared_norm": 61415.26229147703
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.75.mlp.experts.240.down_proj.weight",
+    "source_sha256": "16282f2a87c765266a5be6fa276afca619d0287be5d1a88ee2b279d1c900f697",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 1.0817525123507536,
+          "reference_squared_norm": 1768.8911183936068
+        },
+        "projection": {
+          "squared_error": 35.18853081728188,
+          "reference_squared_norm": 57749.09338178744
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 16.237825882668083,
+          "reference_squared_norm": 1768.8911183936068
+        },
+        "projection": {
+          "squared_error": 526.1647861424551,
+          "reference_squared_norm": 57749.09338178744
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.76.mlp.experts.143.gate_proj.weight",
+    "source_sha256": "f201289d93805401095055363e7097dba43993b2bc9b555fd13fd2174ab6b806",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 0.9485548652786633,
+          "reference_squared_norm": 1614.891804762898
+        },
+        "projection": {
+          "squared_error": 30.260651855670385,
+          "reference_squared_norm": 52252.38198084889
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 14.113650627115534,
+          "reference_squared_norm": 1614.891804762898
+        },
+        "projection": {
+          "squared_error": 448.03862176517123,
+          "reference_squared_norm": 52252.38198084889
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.76.mlp.experts.143.up_proj.weight",
+    "source_sha256": "9e2826c922a8c15f2f10b6a310eaff8a3057d013c968a95760d49be51af48411",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 1.0366474908965686,
+          "reference_squared_norm": 1804.3868110033754
+        },
+        "projection": {
+          "squared_error": 33.20778126528249,
+          "reference_squared_norm": 57613.82861342722
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 15.761209023316177,
+          "reference_squared_norm": 1804.3868110033754
+        },
+        "projection": {
+          "squared_error": 504.40435076584066,
+          "reference_squared_norm": 57613.82861342722
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.76.mlp.experts.143.down_proj.weight",
+    "source_sha256": "3e302288d9e766e4bd412786e79ced2a2ac4adad246f4121a769b5aa9d82f991",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 1.03452413409,
+          "reference_squared_norm": 1617.0783684304702
+        },
+        "projection": {
+          "squared_error": 33.47978763897804,
+          "reference_squared_norm": 52521.03559131724
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 14.686621650905664,
+          "reference_squared_norm": 1617.0783684304702
+        },
+        "projection": {
+          "squared_error": 476.1052356490225,
+          "reference_squared_norm": 52521.03559131724
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.77.mlp.experts.64.gate_proj.weight",
+    "source_sha256": "bb771721dcdf019eddf2bc665fc97aef5d128a39a3da79667042705d7c9f46e7",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 1.0441982087095398,
+          "reference_squared_norm": 1709.982187010363
+        },
+        "projection": {
+          "squared_error": 33.21098778898531,
+          "reference_squared_norm": 54863.320691560664
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 15.351742962095585,
+          "reference_squared_norm": 1709.982187010363
+        },
+        "projection": {
+          "squared_error": 484.4415570650073,
+          "reference_squared_norm": 54863.320691560664
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.77.mlp.experts.64.up_proj.weight",
+    "source_sha256": "b08680a7f190e675647cf9199874cae5485ffa56d8966e4f412818d0469d6ab4",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 1.287693693699845,
+          "reference_squared_norm": 1965.8940029781147
+        },
+        "projection": {
+          "squared_error": 40.82275172265211,
+          "reference_squared_norm": 63171.79317741451
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 17.810455275228932,
+          "reference_squared_norm": 1965.8940029781147
+        },
+        "projection": {
+          "squared_error": 568.17607316212,
+          "reference_squared_norm": 63171.79317741451
+        }
+      }
+    }
+  },
+  {
+    "tensor": "model.layers.77.mlp.experts.64.down_proj.weight",
+    "source_sha256": "6543e8a60fc80ace73738b62a7d26fcd042f078630b2a93bf1eea41138bc7100",
+    "scores": {
+      "block_fp8": {
+        "weight": {
+          "squared_error": 1.5476385233777497,
+          "reference_squared_norm": 2035.0191976741266
+        },
+        "projection": {
+          "squared_error": 49.93119499498651,
+          "reference_squared_norm": 66367.86000943229
+        }
+      },
+      "block_nvfp4": {
+        "weight": {
+          "squared_error": 16.72952134255315,
+          "reference_squared_norm": 2035.0191976741266
+        },
+        "projection": {
+          "squared_error": 541.3299535212441,
+          "reference_squared_norm": 66367.86000943229
+        }
+      }
+    }
+  }
+]

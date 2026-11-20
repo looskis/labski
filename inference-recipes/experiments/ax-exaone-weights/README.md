@@ -39,6 +39,17 @@ python3 expert_error.py fetch ./header-cache ./expert-samples
 python3 expert_error.py evaluate ./expert-samples ./expert-scores.json
 ```
 
+### Measured conversion error
+
+On all 18 complete matrices, block FP8 had lower reconstruction and projection error than the maximum-scaled NVFP4 candidate. Across the sample, **relative projection error was 2.50% for FP8 and 9.37% for NVFP4**. We computed each pooled error as `sqrt(sum(squared error) / sum(squared reference norm))`. The Spark fetched 452.98 MB from six source shards and ran the scoring code on its ARM64 CPU in the pinned vLLM 0.33.0 image. [Input byte ranges and hashes](samples.json) · [Per-matrix errors](expert-results.json) · [Pooled results](expert-summary.json)
+
+| Weight representation | Relative weight error | Relative projection error | Projection error across individual matrices |
+| --- | ---: | ---: | ---: |
+| E4M3 with 128 × 128 block scales | 2.50% | 2.50% | 2.28–2.92% |
+| E2M1 with 16-weight group scales | 9.39% | 9.37% | 9.03–9.61% |
+
+With one FP32 scale per 128 × 128 weight block, converting one complete routed layer to FP8 would save **9.66 GB**, compared with **13.89 GB** for the adjacent layers’ NVFP4 layout. Converting all six to FP8 leaves a calculated **12.89 GiB per rank** beyond equally split target weights. Converting all six to NVFP4 leaves 18.80 GiB. The projection measurements favor FP8 on these samples. A full-model loading and accuracy comparison would determine whether those savings are usable for inference.
+
 ## Reproduce on a Spark
 
 The Python standard-library probe fetches the pinned metadata and two exact header ranges for each selected file. It checks the name and byte extent of each tensor, retains a local header cache and records per-header SHA-256. The DSpark run for K-EXAONE reads the full index and then only the draft shard’s header. Use new result filenames.
