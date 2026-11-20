@@ -7,6 +7,15 @@ import shlex
 import xml.etree.ElementTree as ET
 
 LOGICAL_NODES = (0, 1, 3, 2)
+# Upstream GB10 round costs in milliseconds for 1 through 48 verified rows.
+ROUND_MS = (
+    "21.5,26.3,31.1,36.0,40.3,44.7,49.0,53.4,"
+    "57.1,60.8,64.5,68.2,72.0,75.7,79.4,83.1,"
+    "86.4,89.7,93.0,96.3,99.6,102.9,106.2,109.5,"
+    "112.8,116.1,119.4,122.7,126.0,129.3,132.6,135.9,"
+    "138.6,141.3,144.0,146.7,149.4,152.1,154.8,157.5,"
+    "160.2,162.9,165.6,168.3,171.0,173.7,176.4,179.1"
+)
 
 
 def graphs(directory, rank, previous, following):
@@ -59,7 +68,7 @@ def command(a):
              NCCL_P2P_DISABLE=1,NCCL_SHM_DISABLE=1,NCCL_MIN_NCHANNELS=2,NCCL_MAX_NCHANNELS=2,NCCL_DEBUG="INFO",
              NCCL_DEBUG_SUBSYS="INIT,NET,GRAPH",LD_PRELOAD="/labski/libnccl.so.2",TF_DS_2D_GU="parity",TF_DS_2D_ORDER="0,1,3,2",
              TF_DS_ROUND_ROWS=48,TF_DS_STREAMS=a.slots,TF_DS_SERVED_K="solo",TF_DS_WINDOW=pool,TF_DS_GRAPHS=1,
-             TF_DS_HC_SIDE=1,TF_DS_L2_PREFETCH=1,TF_DS_ENGRAM_AIO=1,TF_DS_DECODE_DEC=0,TF_DS_DRAFT_MS=25)
+             TF_DS_HC_SIDE=1,TF_DS_L2_PREFETCH=1,TF_DS_ENGRAM_AIO=1,TF_DS_DECODE_DEC=0,TF_DS_ROUND_MS=ROUND_MS,TF_DS_DRAFT_MS=25)
     if rank==0:
         env.update(TF_TP_WORLD=4,TF_TP_MASTER=head,TF_TP_LISTEN=",".join([head]*3),TF_TP_PORT=a.master_port,
                    TF_DS_RANK_CACHE="/rank-cache",TF_DS_KIT="/kit",TENSORFOLD_CUDA_KERNELS="/kit/aot",

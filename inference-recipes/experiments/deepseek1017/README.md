@@ -33,4 +33,4 @@ python3 serve.py --rank "$RANK" --head "$HEAD_IP" --address-range "$FABRIC_CIDR"
   --ring-nccl "$RING_NCCL" --graph-dir "$stage/graphs"
 ```
 
-The defaults are 8,192 tokens per slot, four slots and a head API on loopback port 8000 under `deepseek1017-native`. Each rank uses the original Engram lookup, native drafting, two ring channels and the upstream correctness setting `TF_DS_DECODE_DEC=0`. Use `--dry-run` after provisioning a rank to inspect the Docker command and generated graph files. [Launcher](serve.py)
+The defaults are 8,192 tokens per slot, four slots and a head API on loopback port 8000 under `deepseek1017-native`. The draft scheduler uses the published GB10 costs for rounds of 1–48 rows and a 25 ms draft step. Each rank uses the original Engram lookup, native drafting, two ring channels and the upstream correctness setting `TF_DS_DECODE_DEC=0`. Use `--dry-run` after provisioning a rank to inspect the Docker command and generated graph files. [Launcher](serve.py) · [Upstream scheduler measurements](https://github.com/MiaAI-Lab/DeepSeek-V4.1-Flash-1017-4x-DGX-Sparks-TensorFold/blob/8ffa67d53ef15bab997399135f85e8b0910f30be/scripts/config.sh)
