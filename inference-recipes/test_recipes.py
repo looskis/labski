@@ -122,6 +122,12 @@ class NativeChatTests(unittest.TestCase):
             self.assertEqual(body["chat_template_kwargs"], {"reasoning_effort": "low"})
             self.assertEqual(body["max_tokens"], 8)
             self.assertEqual((result["answer"], result["finish"], result["reasoning_chars"]), ("", "length", 8))
+            args.reasoning_effort = None
+            args.enable_thinking = "off"
+            result = mmlu_probe.native_chat(args, "Choose a letter")
+            self.assertIs(result["enable_thinking"], False)
+            self.assertIs(request.call_args.args[1]["enable_thinking"], False)
+            self.assertNotIn("chat_template_kwargs", request.call_args.args[1])
             data["usage"]["completion_tokens"] = 9
             with self.assertRaises(ValueError):
                 mmlu_probe.native_chat(args, "Choose a letter")

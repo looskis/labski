@@ -69,9 +69,15 @@ def one_letter(args, prompt, allowed):
 def native_chat(args, prompt):
     start = time.perf_counter()
     budget = args.max_tokens or 256
+    if args.reasoning_effort:
+        options = {"chat_template_kwargs": {"reasoning_effort": args.reasoning_effort}}
+        settings = {"requested_effort": args.reasoning_effort}
+    else:
+        options = {"enable_thinking": args.enable_thinking == "on"}
+        settings = dict(options)
     data = post(args.url + "/v1/chat/completions", dict(
         model=args.model, messages=[{"role": "user", "content": prompt}], temperature=0,
-        max_tokens=budget, chat_template_kwargs={"reasoning_effort": args.reasoning_effort}), timeout=600)
+        max_tokens=budget, **options), timeout=600)
     choice = data["choices"][0]
     message = choice["message"]
     usage = data["usage"]
@@ -81,7 +87,7 @@ def native_chat(args, prompt):
     return dict(answer=message.get("content") or "", finish=choice["finish_reason"],
                 elapsed_s=time.perf_counter() - start, input_tokens=usage["prompt_tokens"],
                 output_tokens=usage["completion_tokens"], reasoning_chars=len(reasoning),
-                requested_effort=args.reasoning_effort, max_tokens=budget)
+                max_tokens=budget, **settings)
 
 
 def run(args):
@@ -98,7 +104,7 @@ def run(args):
             if allowed:
                 result = one_letter(args, item["prompt"], allowed)
                 complete = result["finish"] in ("stop", "length")
-            elif args.reasoning_effort:
+            elif args.reasoning_effort or args.enable_thinking:
                 result = native_chat(args, item["prompt"])
                 complete = result["finish"] == "stop"
             else:
@@ -125,6 +131,8 @@ if __name__ == "__main__":
     mode = trial.add_mutually_exclusive_group()
     mode.add_argument("--reasoning-effort", choices=("none", "low", "high", "max"),
                       help="request the model's native chat template effort and score final content")
+    mode.add_argument("--enable-thinking", choices=("on", "off"),
+                      help="set the top-level enable_thinking field on servers such as mlx-serve")
     trial.add_argument("--max-tokens", type=int, help="output budget (16 short-answer, 256 native effort)")
     trial.add_argument("--per-subject", type=int, help="score the first N pinned cases of each subject")
     mode.add_argument("--one-letter", action="store_true", help="restrict greedy decoding to one A–J token")
