@@ -49,3 +49,15 @@ A second November 19 run changed only the maximum batched token count from 8,192
 | 65,536 | 2,248 | 2,481 | +10.4% |
 
 The larger chunk helped once the prompt spanned multiple chunks. The 4K result is within 1% between settings, with three trials per cell. To reproduce the control, run the same replay with `--model glm53-chunk4096`. These timings measure prefill only.
+
+### Repeating the 8K setting and checking answers
+
+An independent server restart restored the 8K chunk after the 4K control. At 32K input length, both 8K runs were faster than the intervening 4K control by 10.8–11.2%. At 64K the gain was 10.4–11.3%. At 4K input length all three medians were within 0.6%. The exact input IDs and cold-cache checks matched across all 30 requests, including the three excluded warm-ups. [Second 8K request series](replay-8192-confirmation-2026-11-19.csv)
+
+| Input tokens | First 8K run, input tok/s | 4K control | Second 8K run |
+| ---: | ---: | ---: | ---: |
+| 4,096 | 2,188 | 2,199 | 2,200 |
+| 32,768 | 2,507 | 2,263 | 2,516 |
+| 65,536 | 2,481 | 2,248 | 2,501 |
+
+The 4K control and second 8K run also served 28 matched MMLU-Pro questions and eight long-context lookups at native low effort with a 256-token output cap. The short-answer scores were **23/28 at 4K** and **22/28 at 8K**. Three verdicts changed, including one 8K response that exhausted its budget. Exact-format lookup scores were **7/8 at 4K** and **8/8 at 8K**. The 4K miss contained the correct value with an extra label. We verified matching rendered prompt hashes on both configurations. These two single-pass samples show a repeatable prefill advantage alongside observable answer changes. [All 72 quality records](chunk-quality.jsonl.gz) · [Scoring and reproduction](../glm53-effort-2026-11-19/)

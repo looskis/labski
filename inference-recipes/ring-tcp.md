@@ -1,6 +1,6 @@
 # Routed TCP reference on four switchless Sparks
 
-The lab verified all 12 directed rank-to-rank IPv4 paths over the physical ConnectX ring, including both pairs of opposite nodes. The configuration below gives Gloo and NCCL one stable local IPv4 address per rank. TCP traffic to the opposite rank passes through one other Spark. The two-node RoCE recipes continue to use the direct ConnectX links. IP reachability and a successful CUDA all-reduce are separate checks.
+The lab verified all 12 directed rank-to-rank IPv4 paths over the physical ConnectX ring, including both pairs of opposite nodes. The configuration below gives Gloo and NCCL one stable local IPv4 address per rank. TCP traffic to the opposite rank passes through one other Spark. The two-node RoCE recipes continue to use the direct ConnectX links. PyTorch NCCL also completed an eight-iteration CUDA all-reduce at 1 KiB, 64 KiB and 1 MiB. Every element on every rank contained the expected sum. Across ranks, median latency was 1.00–1.03 ms, 1.43–1.58 ms and 3.80–3.95 ms respectively. Each median excludes the first collective at that size. [Rank-level timings](results/qwen38-27b-scaling-2026-11-19/ring-collectives.jsonl)
 
 ## Address the ring
 
