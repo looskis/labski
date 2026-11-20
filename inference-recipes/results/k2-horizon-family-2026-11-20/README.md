@@ -18,6 +18,8 @@ The tokenizer defines three native reasoning delimiters. The low-effort chat tem
 
 On the 3.7B model the stock endpoint reached **97.85 generated tok/s and 0.34 GPU J/token** at four clients, with seven exact streamed lookups. On the 512-token question panel, one returned answer passed strict scoring. Five outputs contained the high-effort closing marker, and counting exact final letters after those delimiters brought the total to four. The 3.7B checkpoint scored 0.7796 bits/byte on the matched text. [3.7B responses](3.7b/effort-low-512.jsonl.gz) · [3.7B throughput](3.7b/trials.jsonl)
 
+A live one-Spark repeat with a parser that accepts all three native K2 closing markers served **7/14, 9/14 and 8/8** on the same two question budgets and streamed lookups. All 16 fresh record values also matched in both API modes with identical generated token IDs. [Corrected 7B recipe and paired outputs](7b-parser/)
+
 ## Reproduce
 
 From `inference-recipes/`, prepare and serve `k2-horizon-7b-bf16`. Follow the 32B throughput, forced-choice, lookup and two open-answer commands with this model name. Use the matched-byte procedure for cross-tokenizer likelihood. [7B launch configuration](../../recipes/k2-horizon-7b-bf16.json) · [Benchmark commands](../k2-horizon-32b-2026-11-20/#reproduce) · [Build and score the byte corpus](../../experiments/k2-horizon-family/#reproduce)

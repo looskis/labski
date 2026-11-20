@@ -167,6 +167,12 @@ def serve_command(args, recipe, cache):
             serve.append("--headless")
     for flag, value in recipe["options"].items():
         serve.append(flag)
+        if flag == "--reasoning-parser-plugin":
+            plugin = (ROOT / value).resolve()
+            if ROOT not in plugin.parents or plugin.suffix != ".py" or not plugin.is_file():
+                raise ValueError("reasoning parser plugin must be a Python file inside inference-recipes")
+            value = "/opt/labski/" + plugin.name
+            cmd += ["--volume", f"{plugin}:{value}:ro"]
         if flag == "--speculative-config" and "draft" in recipe:
             value = dict(value, model=str(CONTAINER_CACHE / snapshot(recipe["draft"])))
         if isinstance(value, dict):

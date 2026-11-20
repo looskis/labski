@@ -1,0 +1,8 @@
+{"case":42,"prompt_sha256":"ab0f2aed35e7eea7b91407bcd6aaab95aa6cfd92f75096a1ce88b31cd4124ce7","expected":"329258","stock_visible_chars":0,"fixed_digits":"329258","generated_tokens":10,"correct":true}
+{"case":43,"prompt_sha256":"456f43e7989a78a7c07350b537dc2326f6251add88b1a970819e5d904ecc4c19","expected":"832365","stock_visible_chars":0,"fixed_digits":"832365","generated_tokens":10,"correct":true}
+{"case":44,"prompt_sha256":"3b4718db5fd1c1a67d4e954b1f28c477ed5c3537b914e00460e52c736a304644","expected":"696313","stock_visible_chars":0,"fixed_digits":"696313","generated_tokens":10,"correct":true}
+{"case":45,"prompt_sha256":"9b21ccf8e2c233d2775cf6760f7038c08ed251b85c17047eee70f4c406442481","expected":"989272","stock_visible_chars":0,"fixed_digits":"989272","generated_tokens":8,"correct":true}
+{"case":46,"prompt_sha256":"b8bbdd6a086d6652d47bc0e2ce989637f96409ee8a0bbb9761344713b2a14f70","expected":"941380","stock_visible_chars":0,"fixed_digits":"941380","generated_tokens":10,"correct":true}
+{"case":47,"prompt_sha256":"a5572981f16fe936705dc29c37f3644cfea2c99e7080b0bb57181578b5d9c7dd","expected":"349290","stock_visible_chars":0,"fixed_digits":"349290","generated_tokens":8,"correct":true}
+{"case":48,"prompt_sha256":"1e1d2ed0933968a3c5df2f17253bdabff4f0db95778ff6c3cc9557c7d1d9603a","expected":"848544","stock_visible_chars":0,"fixed_digits":"848544","generated_tokens":10,"correct":true}
+{"case":49,"prompt_sha256":"1b8087ce9c13aff5b54f2a4afaeb4e471dc5e31f8d508340c078d68f8b8ca59e","expected":"131946","stock_visible_chars":0,"fixed_digits":"131946","generated_tokens":8,"correct":true}

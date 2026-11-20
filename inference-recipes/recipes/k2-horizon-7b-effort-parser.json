@@ -1,0 +1,30 @@
+{
+  "purpose": "Serve K2 Horizon 7B at low effort and accept each of its three native reasoning delimiters in streamed and nonstreamed responses.",
+  "model": "IFM/K2-Horizon-7B",
+  "revision": "1ad5223c80f635ede5fb926f6304dc7228246a4b",
+  "precision": "IFM BF16",
+  "nodes": [
+    1
+  ],
+  "per_node_gb": 128,
+  "image": "vllm-0.33.0",
+  "context": 8192,
+  "sequences": 4,
+  "memory_fraction": 0.78,
+  "container_memory_gib": 110,
+  "options": {
+    "--dtype": "bfloat16",
+    "--kv-cache-dtype": "auto",
+    "--kv-cache-memory-bytes": 3221225472,
+    "--reasoning-parser": "labski_k2_effort",
+    "--no-enable-prefix-caching": true,
+    "--max-num-batched-tokens": 2048,
+    "--model-impl": "vllm",
+    "--trust-remote-code": true,
+    "--default-chat-template-kwargs": {
+      "reasoning_effort": "low"
+    },
+    "--reasoning-parser-plugin": "experiments/k2-horizon-family/k2_effort_parser.py"
+  },
+  "source": "https://huggingface.co/IFM/K2-Horizon-7B/tree/1ad5223c80f635ede5fb926f6304dc7228246a4b"
+}
