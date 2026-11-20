@@ -8,7 +8,7 @@ On one GB10, an offline change to GLM-5.3-Flash’s existing 4-bit weights reduc
 | Change only block scales | 8.79% | 13.13% | 12.80% |
 | Change block scales and 4-bit codes | 7.75% | 12.41% | 12.09% |
 
-Each entry is the square root of summed squared error divided by summed squared BF16 reference norm. We summed both quantities across panels before taking the square root. Each output reference used FP32 multiplication of the same BF16 inputs and original BF16 weights with TF32 disabled. The three native paths used identical activation quantization, input and weight global scales, BF16 output dtype and B12X kernel. These measurements cover matrix output fidelity on generated inputs. Model-level answer quality and serving speed remain unmeasured for the refitted weights. [Pinned NVIDIA checkpoint](https://huggingface.co/nvidia/GLM-5.3-Flash-NVFP4/tree/1d00738646cbb0c6d0a9eb403dac5f366f1473a7) · [Pinned Z.ai BF16 reference](https://huggingface.co/zai-org/GLM-5.3-Flash-BF16/tree/f9fed3bbc82291073373d67452e9f25317ef7577)
+Each entry is the square root of summed squared error divided by summed squared BF16 reference norm. We summed both quantities across panels before taking the square root. Each output reference used FP32 multiplication of the same BF16 inputs and original BF16 weights with TF32 disabled. The three native paths used identical activation quantization, input and weight global scales, BF16 output dtype and B12X kernel. These measurements cover matrix output fidelity on generated inputs. The full-model serving comparison below tests the separate dense-prefix refit. [Pinned NVIDIA checkpoint](https://huggingface.co/nvidia/GLM-5.3-Flash-NVFP4/tree/1d00738646cbb0c6d0a9eb403dac5f366f1473a7) · [Pinned Z.ai BF16 reference](https://huggingface.co/zai-org/GLM-5.3-Flash-BF16/tree/f9fed3bbc82291073373d67452e9f25317ef7577)
 
 ## Which bytes changed?
 
@@ -26,9 +26,9 @@ We then refitted the complete dense prefix that every text token traverses befor
 | Change only block scales | 8.89% | 13.08% | 12.93% |
 | Change block scales and 4-bit codes | 7.85% | 12.38% | 12.23% |
 
-The fixed-code candidate changed 6,447,486 of 28,311,552 block-scale bytes. The joint fit changed 18,408,671 block-scale bytes and 160,540,200 4-bit codes. We verified both resulting patches by digest on the two serving ranks. These are full-weight and synthetic-activation measurements. The effect on token likelihood and generated answers still needs the end-to-end comparison. [Scale-only receipt](dense-prefix/scale_only.json) · [Joint-fit receipt](dense-prefix/scale_and_codes.json) · [Reproduction and serving commands](../../experiments/glm53-nvfp4-scales/)
+The fixed-code candidate changed 6,447,486 of 28,311,552 block-scale bytes. The joint fit changed 18,408,671 block-scale bytes and 160,540,200 4-bit codes. We verified both resulting patches by digest on the two serving ranks. The table measures full-weight error and native output error on synthetic activations. [Scale-only receipt](dense-prefix/scale_only.json) · [Joint-fit receipt](dense-prefix/scale_and_codes.json) · [Reproduction and serving commands](../../experiments/glm53-nvfp4-scales/)
 
-The full original checkpoint served on two GB10s with the replacement hook in verification-only mode. It scored 22/28 free answers and 8/8 on 1,500-record lookups. [Original checkpoint control and per-article likelihood](serving/)
+On two Sparks, the joint dense refit moved WikiText perplexity from **2.6859 to 2.6688** over 30,938 predictions. The 95% paired interval for the NLL difference spans zero. Free answers rose from 22/28 to 23/28, while one of eight 1,500-record lookups echoed the correct key and value and failed strict scoring. Both versions generated about 13.6 tokens/s. [Serving results, matched answers and per-article likelihood](serving/)
 
 ## Reproduce on one Spark
 

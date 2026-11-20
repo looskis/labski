@@ -1,16 +1,27 @@
 # Serving GLM-5.3-Flash with refitted NVFP4 dense weights
 
-On two 128 GB Sparks we measured the original NVIDIA checkpoint as the control for the dense-prefix refits. The candidate tensors replace the corresponding tensors before vLLM shards and repacks them. The activation scales, tensor shapes and B12X inference kernels are the same. Each model was launched in a fresh process. Both physical ranks logged the source key count, replacement count and sidecar digest. [Offline fit and matrix errors](../) · [Build the sidecars and serve](../../../experiments/glm53-nvfp4-scales/)
-
-The control assigned a perplexity of **2.6859** to 30,938 token predictions, answered **22/28** free questions correctly at low reasoning effort and retrieved the correct values on **8/8** prompts containing 1,500 records each. The refitted weight comparisons are pending.
+On two 128 GB Sparks we measured NVIDIA’s original checkpoint and the completed dense-prefix variants below. The candidate tensors replace the corresponding tensors before vLLM shards and repacks them. The activation scales, tensor shapes and B12X inference kernels are the same. Each model was launched in a fresh process. Both physical ranks logged the source key count, replacement count and sidecar digest. [Offline fit and matrix errors](../) · [Build the sidecars and serve](../../../experiments/glm53-nvfp4-scales/)
 
 | Weights | NLL, nats/token | Perplexity | Free letters / 28 | Lookups / 8 | Forced letters / 112 | Output tok/s, 1 / 4 clients | Fleet GPU J/token, 1 / 4 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | [NVIDIA](published/) | 0.98802 | 2.6859 | 22 | 8 | 11 | 13.65 / 13.64 | 5.28 / 5.28 |
+| [Refit scales and codes](scale_and_codes/) | 0.98162 | 2.6688 | 23 | 7 | 10 | 13.64 / 13.66 | 5.26 / 5.27 |
 
 Each text condition scored the same 62 WikiText-2 raw test article prefixes, up to 511 token predictions per article. The published checkpoint scored 30,938 positions. We use a paired bootstrap over articles for differences in mean negative log likelihood. Lower values indicate a higher probability assigned to the reference tokens. [Likelihood probe](../../../wikitext_probe.py)
 
 The server retained the original 73,728-token, single-sequence configuration with 8,192-token prefill chunks. Four simultaneous clients therefore queued for one execution slot. Each throughput figure is the median of three trials of four matched prose prompts, with a 96-token completion limit and an excluded warm-up. Each rank’s cumulative NVML energy counter was interpolated at the start and end of each trial. The free-answer and record-lookup panels use the checkpoint’s low-effort template. The 112 constrained choices measure the first generated token.
+
+## Refit scales and codes compared with NVIDIA
+
+Mean NLL changed by **-0.00640 nats/token** (95% paired article-bootstrap interval -0.01313 to +0.00024). Perplexity changed by -0.637%. The refit assigned higher total likelihood to 34/62 article prefixes. The interval reflects these prefixes and their lengths.
+
+For free letters, 24/28 visible final answers and finish reasons matched. The refit gained 2 correct answers and lost 1.
+
+For lookup values, 7/8 visible final answers and finish reasons matched. The refit gained 0 correct answers and lost 1.
+
+For constrained first-token letters, 100/112 visible final answers and finish reasons matched. The refit gained 2 correct answers and lost 3.
+
+The key-aware six-digit parser returned the requested value for 8/8 candidate lookups. It accepts either the bare value or the exact requested key followed by an equals sign and the value. The table retains the original strict score. [Parser](../../../experiments/step5-reasoning/lookup_value.py) · [Per-request check](scale_and_codes-lookup-values.jsonl)
 
 ## Reproduce
 
