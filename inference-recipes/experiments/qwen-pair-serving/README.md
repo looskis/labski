@@ -16,7 +16,7 @@ python3 deploy.py tp2 --rank "$RANK" --cache "$HF_HUB_CACHE" --port 18100 \
   --head "$HEAD_IP" --node-ip "$FABRIC_IP" --interface "$INTERFACE" --hcas "$HCAS"
 ```
 
-For each deployment, give the benchmark a new output directory. The shared client uses round-robin dispatch across the supplied endpoints. Prepare the diagnostic corpus with the lab’s pinned MMLU-Pro procedure. [Corpus preparation](../../measurement.md)
+For each deployment, give the benchmark a new output directory. The shared client uses round-robin dispatch across the supplied endpoints. Prepare the diagnostic corpus with the lab’s pinned MMLU-Pro procedure. [Corpus preparation](../../results/qwen38-27b-precision-2026-11-19/#reproduce)
 
 ```sh
 python3 replay.py --endpoint http://127.0.0.1:18100 --endpoint "http://$PEER_API_IP:18100" \
