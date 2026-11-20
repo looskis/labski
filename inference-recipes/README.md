@@ -6,7 +6,7 @@ The lab has four 128 GB NVIDIA DGX Sparks cabled in a ConnectX‑7 ring. Each re
 
 **Measured on the lab fleet**
 
-- **Qwen3.8 27B precision.** Mixed FP4 delivered 2.78–2.79× the BF16 throughput at one client in a two-machine crossover. The mixed checkpoint scored 78/112 on the paired short-answer diagnostic against 83/112 for BF16. [Timing, answers and settings](results/qwen38-27b-precision-2026-11-19/)
+- **Qwen3.8 27B precision.** Mixed FP4 delivered 2.78–2.79× the BF16 throughput at one client in a two-machine crossover. The mixed checkpoint scored 74/112 and 78/112 on the paired short-answer diagnostic against 83/112 on both BF16 runs. [Timing, answers and settings](results/qwen38-27b-precision-2026-11-19/)
 - **Four replicas.** At 16 concurrent prose requests, Qwen3 0.6B delivered 1,894 aggregate output tok/s across four Sparks versus 538 on one. At four clients, the single Spark delivered 493 versus 427 across four. [Workload, raw requests and trial results](results/qwen3-four-replicas-2026-11-19/)
 - **GB10 kernel tuning.** A wider Q8 projection tile added 4.3% to GLM cold-prefill throughput at 32K. The sampled likelihoods and greedy answers matched the control. A separate INT8 activation setting was faster and changed a correct answer. [Code, timing and quality checks](results/glm53-tensorfold-wide-2026-11-18/)
 - **Two-node NVFP4.** GLM‑5.3‑Flash returned the first output token for a 32,768-token input in 13.07 s on the November 19 replay. The November 18 comparison recorded 13.15 s for NVFP4/vLLM and 17.22 s for EXL3/TensorFold on matching input IDs. [Token corpus, timing and quality results](results/glm53-prefill-2026-11-18/)

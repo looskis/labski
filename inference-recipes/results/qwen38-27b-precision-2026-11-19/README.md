@@ -1,17 +1,17 @@
 # Qwen3.8 27B on one Spark
 
-NVIDIA's mixed NVFP4/FP8 checkpoint delivered **12.84 output tokens/s at one client** against **4.46 for BF16**. At four clients the aggregate rates were **47.42 and 17.54 output tokens/s**. Mixed precision also answered five fewer questions correctly on a 112-item, short-answer MMLU-Pro diagnostic. Both configurations completed the workload on one 128 GB Spark. [BF16 recipe](../../recipes/qwen38-27b-bf16.json) · [Mixed-precision recipe](../../recipes/qwen38-27b-nvfp4.json)
+On each of two 128 GB Sparks, NVIDIA’s mixed NVFP4/FP8 checkpoint generated **2.78–2.79× as many output tokens per second as BF16 at one client**, and **2.61–2.67× at four clients**. On the same 112 short-answer questions, BF16 scored 83 on both Sparks. Mixed precision scored 74 and 78. [BF16 recipe](../../recipes/qwen38-27b-bf16.json) · [Mixed-precision recipe](../../recipes/qwen38-27b-nvfp4.json)
 
-| Configuration | Root weights | One client, output tok/s | Four clients, aggregate output tok/s | Correct / 112 | Truncated answers |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| BF16, Spark A | 55.56 GB | 4.46 | 17.54 | 83 (74.1%) | 3 |
-| Mixed NVFP4/FP8, Spark B | 21.92 GB | 12.84 | 47.42 | 78 (69.6%) | 4 |
+| Spark | Precision | Run order | One client, output tok/s | Four clients, aggregate output tok/s | Correct / 112 | Truncated |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| A | BF16 | 1 | 4.46 | 17.54 | 83 | 3 |
+| A | Mixed NVFP4/FP8 | 2 | 12.40 | 45.74 | 74 | 4 |
+| B | Mixed NVFP4/FP8 | 1 | 12.84 | 47.42 | 78 | 4 |
+| B | BF16 | 2 | 4.61 | 17.77 | 83 | 3 |
 
-The smaller checkpoint cut stored weight bytes by 60.5%. Batch throughput increased 2.88× at C1 and 2.70× at C4. Each cell is the median of three trials with four matched prose requests and an excluded warm-up. Every timed request hit the 96-token output budget. The checkpoints ran on separate GB10 units in this first pass. Each used ARM64 vLLM 0.33.0, driver 580.178.04, BF16 KV, an 8,192-token context, up to four active sequences, disabled prefix caching and the same 2,048-token batch limit. The benchmark measures client-observed throughput including prompt processing. [Per-trial timings](trials.jsonl)
+The smaller checkpoint cut stored weight bytes by 60.5%, from 55.56 GB to 21.92 GB. Each throughput cell is the median of three trials with four matched prose requests and an excluded warm-up. All 96 timed requests hit the 96-token output budget. Both checkpoints used ARM64 vLLM 0.33.0, driver 580.178.04, BF16 KV, an 8,192-token context, up to four active sequences, disabled prefix caching and a 2,048-token batch limit. Throughput includes prompt processing. [Trial timings](trials.jsonl) · [Request records](prose-requests.jsonl.gz)
 
-**Same-device crossover.** After the first pass the lab swapped checkpoints. At one client, Spark A delivered 4.46 tok/s in BF16 and 12.40 in mixed precision (2.78×). Spark B delivered 4.61 and 12.84 (2.79×) with the run order reversed. These ratios compare each physical machine against itself. Each rate is the median of three four-request trials. [Crossover medians](crossover-c1.csv)
-
-**Quality.** The paired outcome was 74 both correct, 25 both incorrect, nine BF16-only correct and four mixed-only correct. The observed difference is −4.5 percentage points on this sample. The two-sided exact McNemar test on the 13 discordant answers gives p = 0.267. This sample cannot establish a population-wide loss or equivalence. Each question had one vote, including truncations and formatting failures. [Per-question answers, prompt hashes and finish reasons](quality.jsonl.gz)
+**Quality.** On Spark A, ten answers were correct only in BF16 and one only in mixed precision. On Spark B those counts were nine and four. The BF16 verdict agreed on every item between machines. Eight mixed-precision verdicts changed between machines, including six correct only on B and two correct only on A. Identical rendered prompt lengths, question hashes and answer keys were checked for every pair. The experiment used one greedy pass per checkpoint per machine. Run-to-run and device effects cannot be disentangled with this design. Each truncation or malformed answer counted as incorrect. [Individual answers and finish reasons](quality.jsonl.gz)
 
 ## Reproduce
 
