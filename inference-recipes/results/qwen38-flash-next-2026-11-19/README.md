@@ -11,6 +11,19 @@ The quality probe scored **75/112** in a single thinking-off, greedy pass. Fifte
 
 The checkpoint uses NVFP4 routed experts and an FP8 PLE table. Both rank logs reported 37.44 GiB for the model-loading allocation. Rank zero reported 27.79 GiB available for KV cache under the 0.8 utilization target. These are engine accounting figures in a shared-memory machine. The CPU-side embedding, operating system, file cache and other allocations also consume physical memory. Benchmarking overlapped host-side distribution of a separate container image. The native compilation job on rank zero was paused during the timing trials. [Complete settings](settings.jsonl)
 
+## A smaller KV cache for short contexts
+
+With an 8,192-token context and one scheduler slot, rank zero sized the default KV pool for **1,007,616 tokens**. Setting `--kv-cache-memory-bytes 2147483648` reduced the per-rank KV reservation from **27.79 GiB to 2 GiB**, leaving a 77,451-token pool. Two GB10s on the lab’s other direct pair completed all 24 timing requests and all 112 quality requests with the smaller cache. [2 GiB recipe](../../recipes/qwen38-flash-next-kv2g-c1.json)
+
+| KV setting, one scheduler slot | One client, output tok/s | Four queued clients, total output tok/s | GPU J/output token, one / four clients | Correct / 112 |
+| --- | ---: | ---: | --- | ---: |
+| Automatic, pair A–B | 21.34 | 21.87 | 2.52 / 2.46 | 75 |
+| 2 GiB per rank, pair C–D | 21.80 | 22.38 | 2.51 / 2.47 | 76 |
+
+The smaller pool freed about 25.8 GiB of configured KV capacity per rank. The hardware pairs differed, so the roughly 2% timing difference cannot be attributed to the cache cap alone. Three quality verdicts changed. Both runs used the same checkpoint, BF16 KV dtype, 2,048-token prefill cap and single active sequence. [Small-pool timing trials](kv2g-c1/trials.jsonl) · [Energy by trial](kv2g-c1/flash-next-kv2g-c1-energy.jsonl) · [Free-response answers](kv2g-c1/quality.jsonl.gz)
+
+**For applications that require one option letter**, constraining the greedy decoder to one uppercase A–J token improved the small-pool score from **76 to 84 out of 112** and reduced total generation from **448 tokens to 112**. Eight responses became correct and every previously correct verdict was retained. Free-response decoding had hit its 16-token limit on 16 questions. Both tests used identical prompts with thinking disabled. The constrained grammar applies to this output contract. [Constrained answers and allowed token IDs](kv2g-c1/one-letter.jsonl.gz) · [Scoring code](../../mmlu_probe.py)
+
 ## Reproduce
 
 Prepare and serve `qwen38-flash-next-nvfp4` on a direct ConnectX pair, with rank zero as the client. Use the pinned ARM64 image, the recipe’s 8,192-token window, one scheduler slot, a 2,048-token batch cap and eager execution. Prepare the 112-item corpus using the Qwen 27B instructions, then run its quality and prose commands with `MODEL=qwen38-flash-next-nvfp4`. For energy, start the NVML sampler on each rank before the first timed trial. [Distributed launcher](../../README.md#one-endpoint-on-multiple-sparks) · [Exact prompts and benchmark commands](../qwen38-27b-precision-2026-11-19/#reproduce) · [Energy capture](../../measurement.md#measure-energy-on-gb10)
