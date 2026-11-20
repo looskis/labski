@@ -1,0 +1,73 @@
+{
+  "llama_cpp_revision": "f498f864fbc0472004ee1c3616c1188c68eb157f",
+  "architecture": "aarch64",
+  "cuda_target": "sm_121a",
+  "lab_runtime_tar_gz_sha256": "0d2fbd4a6056e6662877b903785a310f044609ff921a507a7e0c419b41147f6b",
+  "small_model_fabric_check": {
+    "repository": "Qwen/Qwen3-0.6B-GGUF",
+    "revision": "23749fefcc72300e3a2ad315e1317431b06b590a",
+    "file": "Qwen3-0.6B-Q8_0.gguf",
+    "bytes": 639446688,
+    "sha256": "9465e63a22add5354d9bb4b99e90117043c7124007664907259bd16d043bb031",
+    "reported_layers_offloaded": "29/29",
+    "slots": 4,
+    "context_per_slot": 1024,
+    "devices": [
+      {
+        "device": "CUDA0",
+        "free_mib_at_device_enumeration": 120288
+      },
+      {
+        "device": "RPC0",
+        "free_mib_at_device_enumeration": 120351
+      },
+      {
+        "device": "RPC1",
+        "free_mib_at_device_enumeration": 119613
+      },
+      {
+        "device": "RPC2",
+        "free_mib_at_device_enumeration": 119689
+      }
+    ],
+    "workers": [
+      {
+        "worker": 1,
+        "path": "direct RoCEv2",
+        "observed_rdma_activations": 11,
+        "worker_cuda_execution": true
+      },
+      {
+        "worker": 2,
+        "path": "routed TCP",
+        "observed_rdma_activations": 0,
+        "worker_cuda_execution": true
+      },
+      {
+        "worker": 3,
+        "path": "direct RoCEv2",
+        "observed_rdma_activations": 11,
+        "worker_cuda_execution": true
+      }
+    ],
+    "question": "What is 7 plus 5? Return only the number.",
+    "visible_answer": "7 + 5 = 12",
+    "reported_output_tokens": 9
+  },
+  "mimo_metadata_only": {
+    "pro": {
+      "no_alloc": true,
+      "layers": 70,
+      "parameters": 1021248126336,
+      "routed_experts": 384,
+      "active_experts": 8
+    },
+    "flash": {
+      "no_alloc": true,
+      "layers": 48,
+      "parameters": 308778780864,
+      "routed_experts": 256,
+      "active_experts": 8
+    }
+  }
+}

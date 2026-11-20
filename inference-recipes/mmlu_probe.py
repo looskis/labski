@@ -55,8 +55,12 @@ def letter_ids(url, model):
 def one_letter(args, prompt, allowed):
     body = dict(model=args.model, messages=[dict(role="user", content=prompt)], temperature=0,
                 max_tokens=1, chat_template_kwargs={"enable_thinking": False})
-    use_regex = getattr(args, "one_letter_regex", False)
-    constraint = {"regex_pattern": "[A-J]"} if use_regex else {"allowed_token_ids": allowed}
+    if getattr(args, "one_letter_regex", False):
+        constraint = {"regex_pattern": "[A-J]"}
+    elif getattr(args, "one_letter_gbnf", False):
+        constraint = {"grammar": "root ::= [A-J]"}
+    else:
+        constraint = {"allowed_token_ids": allowed}
     body.update(constraint)
     by_token = getattr(args, "one_letter_token", False)
     if by_token:
@@ -117,7 +121,7 @@ def run(args):
             subjects[item["subject"]] += 1
             if args.per_subject and subjects[item["subject"]] > args.per_subject:
                 continue
-            if allowed or getattr(args, "one_letter_regex", False):
+            if allowed or getattr(args, "one_letter_regex", False) or getattr(args, "one_letter_gbnf", False):
                 result = one_letter(args, item["prompt"], allowed)
                 complete = result["finish"] in ("stop", "length")
             elif args.reasoning_effort or args.enable_thinking:
@@ -154,6 +158,8 @@ if __name__ == "__main__":
     mode.add_argument("--one-letter", action="store_true", help="restrict greedy decoding to one A–J token")
     mode.add_argument("--one-letter-regex", action="store_true",
                       help="constrain the first visible token to [A-J] with a TabbyAPI regex grammar")
+    mode.add_argument("--one-letter-gbnf", action="store_true",
+                      help="constrain the first visible token to [A-J] with a llama.cpp GBNF grammar")
     mode.add_argument("--one-letter-token", action="store_true",
                       help="score the one allowed generated token ID and preserve its visible rendering")
     for parser in (prep, trial):
@@ -162,6 +168,7 @@ if __name__ == "__main__":
     if args.per_subject is not None and args.per_subject < 1:
         cli.error("--per-subject must be positive")
     if args.command == "run" and args.max_tokens is not None:
-        if args.max_tokens < 1 or ((args.one_letter or args.one_letter_token or args.one_letter_regex) and args.max_tokens != 1):
+        constrained = args.one_letter or args.one_letter_token or args.one_letter_regex or args.one_letter_gbnf
+        if args.max_tokens < 1 or (constrained and args.max_tokens != 1):
             cli.error("use a positive output budget, or 1 for a one-letter probe")
     (prepare if args.command == "prepare" else run)(args)

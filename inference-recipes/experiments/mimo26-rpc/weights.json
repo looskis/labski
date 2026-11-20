@@ -1,0 +1,64 @@
+{
+  "pro": {
+    "repository": "ggml-org/MiMo-V2.6-Pro-MOPD-GGUF",
+    "revision": "cd70ac158ea81ca857eb0e6feb9fb46d4996a242",
+    "files": [
+      {
+        "name": "MiMo-V2.6-Pro-MOPD-Q2_K-00001-of-00007.gguf",
+        "bytes": 5949088,
+        "sha256": "b87221a1764b3c848af9e1c480eeba9c7181459ae2860e2b89f41ca3d7be6335"
+      },
+      {
+        "name": "MiMo-V2.6-Pro-MOPD-Q2_K-00002-of-00007.gguf",
+        "bytes": 73006058336,
+        "sha256": "f8c44670392bd9e2699bd7ef04c1e87e2ff2cd9e3d4acbb05466ef908d8c0ff2"
+      },
+      {
+        "name": "MiMo-V2.6-Pro-MOPD-Q2_K-00003-of-00007.gguf",
+        "bytes": 73006058368,
+        "sha256": "fd0d507dbb691eafb3717c85f98bd98d3e631c5eaa6cf0e7255d81604df00cd5"
+      },
+      {
+        "name": "MiMo-V2.6-Pro-MOPD-Q2_K-00004-of-00007.gguf",
+        "bytes": 72024591232,
+        "sha256": "cd1074c5ae33ee9a25ef14317c971547bf0bf50b5fc05df6648bc118d022a8ca"
+      },
+      {
+        "name": "MiMo-V2.6-Pro-MOPD-Q2_K-00005-of-00007.gguf",
+        "bytes": 73006058368,
+        "sha256": "c78ae07e1eecc78eee2b8016053ec53521b6009a2cd1b2671cece066004e2d97"
+      },
+      {
+        "name": "MiMo-V2.6-Pro-MOPD-Q2_K-00006-of-00007.gguf",
+        "bytes": 73006058368,
+        "sha256": "6ac111255bd9b79ccef2c34ca4a8b975e191ed6f7eb45207680f9d27a8890ba1"
+      },
+      {
+        "name": "MiMo-V2.6-Pro-MOPD-Q2_K-00007-of-00007.gguf",
+        "bytes": 54714526400,
+        "sha256": "cc09a29e090cfd36164c3a30f9c58700dac80f9c5e56801df9bf1580de9a50b9"
+      }
+    ]
+  },
+  "flash": {
+    "repository": "ggml-org/MiMo-V2.6-Flash-MOPD-GGUF",
+    "revision": "c9d8697904d2564708b5197d176543983b9d8db5",
+    "files": [
+      {
+        "name": "MiMo-V2.6-Flash-MOPD-Q2_K_S-00001-of-00002.gguf",
+        "bytes": 5948992,
+        "sha256": "06907f217a77b33acde0b2d22c733ab781e269d5a73fa250998af9ef83440137"
+      },
+      {
+        "name": "MiMo-V2.6-Flash-MOPD-Q2_K_S-00002-of-00002.gguf",
+        "bytes": 105858242656,
+        "sha256": "4f21f6083146630b2b633a8a68193c97817e2d102c30e7d92c8a7c8a6fd6949a"
+      },
+      {
+        "name": "mtp-MiMo-V2.6-Flash-MOPD-Q8_0.gguf",
+        "bytes": 2383728960,
+        "sha256": "c2189e7130727e698f3b744859dc763da730fd00f4c42a2be2c613fc9d918b97"
+      }
+    ]
+  }
+}
