@@ -28,6 +28,8 @@ We then refitted the complete dense prefix that every text token traverses befor
 
 The fixed-code candidate changed 6,447,486 of 28,311,552 block-scale bytes. The joint fit changed 18,408,671 block-scale bytes and 160,540,200 4-bit codes. We verified both resulting patches by digest on the two serving ranks. These are full-weight and synthetic-activation measurements. The effect on token likelihood and generated answers still needs the end-to-end comparison. [Scale-only receipt](dense-prefix/scale_only.json) · [Joint-fit receipt](dense-prefix/scale_and_codes.json) · [Reproduction and serving commands](../../experiments/glm53-nvfp4-scales/)
 
+The full original checkpoint served on two GB10s with the replacement hook in verification-only mode. It scored 22/28 free answers and 8/8 on 1,500-record lookups. [Original checkpoint control and per-article likelihood](serving/)
+
 ## Reproduce on one Spark
 
 Run from `inference-recipes/experiments/glm53-nvfp4-scales`. The sampler uses pinned Hub byte ranges. To reuse a local copy of NVIDIA’s checkpoint add `--nvfp4 /path/to/its/pinned/snapshot`. The sampler records a digest for every source slice. The comparison checks those digests before loading the samples.
