@@ -1,0 +1,87 @@
+{
+  "rank0": {
+    "machine": "aarch64",
+    "metadata": {
+      "model": "IFM/K2-Horizon-375B-A23B-NVFP4",
+      "revision": "d3a6e26e4d59243ed6e569e39ca6facf4da84c05",
+      "rank": 0,
+      "ranks": 2,
+      "first_expert": 0,
+      "experts": 96,
+      "index_tensors": 67484,
+      "index_tensor_bytes": 126137495808
+    },
+    "shards": [
+      {
+        "file": "model-00001-of-00012.safetensors",
+        "bytes": 14646920064
+      },
+      {
+        "file": "model-00002-of-00012.safetensors",
+        "bytes": 11082642352
+      },
+      {
+        "file": "model-00003-of-00012.safetensors",
+        "bytes": 10922988576
+      },
+      {
+        "file": "model-00004-of-00012.safetensors",
+        "bytes": 10141898744
+      },
+      {
+        "file": "model-00005-of-00012.safetensors",
+        "bytes": 10392699352
+      },
+      {
+        "file": "model-00006-of-00012.safetensors",
+        "bytes": 11082646936
+      },
+      {
+        "file": "model-00007-of-00012.safetensors",
+        "bytes": 10978731544
+      },
+      {
+        "file": "model-00008-of-00012.safetensors",
+        "bytes": 10141898744
+      },
+      {
+        "file": "model-00009-of-00012.safetensors",
+        "bytes": 10298412400
+      },
+      {
+        "file": "model-00010-of-00012.safetensors",
+        "bytes": 11078523808
+      },
+      {
+        "file": "model-00011-of-00012.safetensors",
+        "bytes": 11077141648
+      },
+      {
+        "file": "model-00012-of-00012.safetensors",
+        "bytes": 4301364640
+      }
+    ],
+    "rank_index_sha256": "ae1ec945a93720e397321278c05b970fd5ad111038faf8cdea0d0bd67d419646",
+    "total_weight_file_bytes": 126145868808,
+    "allocated_weight_file_bytes": 126145945600,
+    "assembler_sha256": "94910bbdb783c8b028ba696b2e6a3b54d6d72aa79b3f04a91f99787618b65522"
+  },
+  "resumed_compact_prefixes": [
+    {
+      "file": "model-00008-of-00012.safetensors",
+      "rank": 0,
+      "preserved_compact_bytes": 743440384,
+      "source_payload_bytes": 9398458360,
+      "source_header_bytes": 1528712,
+      "compact_sha256": "2f18660d2f83c51e233fd09c7890b78f771c28c34c227ced6e67f796a02656f0"
+    },
+    {
+      "file": "model-00001-of-00012.safetensors",
+      "rank": 1,
+      "preserved_compact_bytes": 10816061440,
+      "source_payload_bytes": 3768925536,
+      "source_header_bytes": 873464,
+      "compact_sha256": "79b8876a40d4fc823c2c6c4124901ed3db872eb3ffaacbb8324024e964928ccd"
+    }
+  ]
+}
