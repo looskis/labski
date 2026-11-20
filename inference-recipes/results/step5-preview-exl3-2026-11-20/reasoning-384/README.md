@@ -17,6 +17,8 @@ All eight preclosed replies contained the right value. Six echoed the exact requ
 
 The paired order alternated by case. Each condition ran once per prompt at one client. The 14 questions cover one item per subject and do not estimate full-benchmark accuracy. Lookups each contained 32 records. The exact scorer requires a normal stop and a single correct letter or six-digit value. Native answers begin after a generated closing token. In the preclosed condition the entire new response is the answer. Raw token-ID hashes, output lengths, matched prompt hashes, timestamps and per-rank joules accompany the results. The energy figures cover the four GPUs during each HTTP request. [Paired records](requests.jsonl.gz) · [Cumulative GPU counters](fleet-energy.csv.gz)
 
+The same reader subsequently recovered 63/64 preclosed answers on fresh inventories. It rejected one full sentence containing the right value. [Held-out evaluation and retry policy](../rank-local/held-out-lookups/)
+
 ## Reproduce
 
 Launch the full four-rank model using the GEMV-off configuration. Run the following from `inference-recipes/` with the fixed MMLU-Pro corpus. The probe checks both special token IDs, the last rendered prompt token, and server-reported counts. It issues token-ID completions and alternates which condition runs first. [Serving configuration](../) · [Probe](../../../experiments/step5-reasoning/pair.py)
