@@ -1,5 +1,7 @@
 # Inkling 2 Small on GB10
 
+**Thinking Machines’ native 393.48 GB Inkling 2 Small checkpoint served text on four 128 GB DGX Sparks** using SGLang, one tensor and expert rank per Spark, a 4,096-token request limit, and the switchless RoCE ring. This uses the published mixed NVFP4/MXFP8 weights and BF16 KV. At low and high requested reasoning effort it answered both the arithmetic and number-retrieval checks exactly. [Pinned recipe](../../recipes/inkling2-small-native.json) · [Six chat completions](native/native-effort.jsonl)
+
 A single-rank hardware probe found an architecture mismatch before loading the 393 GB checkpoint. The designated vLLM ARM64 image recognizes Inkling 2, but its routed-expert implementation loads the FlashInfer SM100 module and requests kernels for CUDA major architecture 10. The fleet's GB10 reports compute capability **12.1**. Executing that architecture-selection call on a Spark raised `RuntimeError: No supported CUDA architectures found for major versions [10].` PyTorch reported `2.14.0+cu130` and vLLM reported `0.1.dev25249+gb974b306f.cu130`. This is a kernel compatibility result. It does not measure model memory, quality or throughput. [vLLM deployment guide](https://recipes.vllm.ai/thinkingmachines/Inkling-2-Small) · [Probe source](probe.py)
 
 ```sh
@@ -8,9 +10,9 @@ docker run --rm -i --gpus all --entrypoint python3 \
   - < probe.py
 ```
 
-The four-node candidate uses Aiden Le's pinned GB10 SGLang image and its FlashInfer expert hooks. It retains the official checkpoint, a BF16 KV cache, and a short 4K text workload. Expert parallelism distributes whole experts. Plain decoding and an 8K total token pool keep the initial fit experiment small. For the lab's routed ConnectX ring the launcher offers a TCP collective baseline. The original author's four-node deployment uses switched RoCE and a different KV and drafting configuration. [Lab candidate](../../recipes/inkling2-small-native.json) · [Upstream GB10 implementation](https://github.com/aidendle94/sparkrun-recipes/tree/3d7e798cfaecf1298576b79c945455bb5a75ac46/recipes/inkling-2-small/sglang)
+The four-node deployment uses Aiden Le's pinned GB10 SGLang image and its FlashInfer expert hooks. It retains the official checkpoint, a BF16 KV cache, and a short 4K text workload. Expert parallelism distributes whole experts. Plain decoding and an 8K total token pool keep the initial fit experiment small. For the lab's routed ConnectX ring the launcher offers a TCP collective baseline. The original author's four-node deployment uses switched RoCE and a different KV and drafting configuration. [Lab recipe](../../recipes/inkling2-small-native.json) · [Upstream GB10 implementation](https://github.com/aidendle94/sparkrun-recipes/tree/3d7e798cfaecf1298576b79c945455bb5a75ac46/recipes/inkling-2-small/sglang)
 
-The SGLang image runs on all four lab hosts. Its OCI revision label is `7832fd9+image`, and the baked `/patches/sitecustomize.py` has SHA-256 `9545ffa8280ce5210df0b0134802adae323307b12978ffc54b146e78e3419ac8`. The ARM64 image includes the FlashInfer MoE and paged-decode hooks on its Python path. The installed launcher advertises every flag used by the lab recipe. The later upstream recipe reference describes configuration changes since that image build. These checks cover the image and command line. A full-checkpoint completion is the serving test. [Source revision recorded by the image](https://github.com/aidendle94/sparkrun-recipes/tree/7832fd9d9d123837973b05c16197cac98370804b/recipes/inkling-2-small/sglang)
+The SGLang image runs on all four lab hosts. Its OCI revision label is `7832fd9+image`, and the baked `/patches/sitecustomize.py` has SHA-256 `9545ffa8280ce5210df0b0134802adae323307b12978ffc54b146e78e3419ac8`. The ARM64 image includes the FlashInfer MoE and paged-decode hooks on its Python path. The installed launcher advertises every flag used by the lab recipe. The later upstream recipe reference describes configuration changes since that image build. These checks cover the image and command line. The native completions above exercise the full checkpoint. [Source revision recorded by the image](https://github.com/aidendle94/sparkrun-recipes/tree/7832fd9d9d123837973b05c16197cac98370804b/recipes/inkling-2-small/sglang)
 
 
 ## Four-rank SGLang transport probe
@@ -28,3 +30,17 @@ Keep the management node’s unified memory available during startup. A separate
 ## Fit the short-context KV pools
 
 After all four ranks loaded their weights, SGLang’s default sliding-window ratio of 0.1 assigned 819 window tokens under the 8,192-token cap. The allocator needs at least 1,024 tokens to admit one request (a 1,023-token window plus one page). All four ranks rejected the smaller pool. Setting `--swa-full-tokens-ratio 0.25` allocated **8,192 full-attention tokens and 2,048 sliding-window tokens per rank** in BF16 with the same cap. In that launch SGLang measured a 95.12–95.54 GiB decrease in available memory through weight loading on each rank. All four completed that phase in about 162 seconds. [Per-rank memory and allocation results](native-load.jsonl) · [Short-context recipe](../../recipes/inkling2-small-native.json)
+
+## Reproduce the first completions
+
+Build the ring-specific library and prepare the pinned checkpoint on each Spark. Use one rank per host and supply the local rank address, neighbor HCAs and link subnet from the ring instructions. The serving image already includes the GB10 kernels. [NCCL build](../../transport/nccl-switchless/) · [Example ring addresses](../../ring-tcp.md#use-roce-on-the-same-four-cables)
+
+```sh
+python3 spark.py prepare inkling2-small-native
+python3 spark.py serve inkling2-small-native --nodes 4 --rank "$RANK" \
+  --head "$HEAD_IP" --node-ip "$NODE_IP" --interface "$FABRIC_IF" \
+  --transport ring-roce --hcas "$CCW_HCA,$CW_HCA" --fabric-range "$LINK_CIDR" --link-prefix 30 \
+  --ring-nccl "$NCCL_LIBRARY" --ring-only-init
+```
+
+Send separate greedy chat requests with `max_tokens=256` and `chat_template_kwargs.reasoning_effort` set to `none`, `low` or `high`. The prompts were “Return only the sum of 19 and 23.” and “Bin N5 holds the number 321907. Return only the number held in bin N5.” Low and high each gave two exact answers. At `none` the sum was exact and the lookup response included an explanation alongside the correct number. The first arithmetic request took 154.42 seconds while prefill kernels compiled. The other five requests took 2.11–6.38 seconds, with different output lengths. Each rank spent about 128 seconds capturing its batch-one decode graph before API startup. Available memory after graph capture was 14.04–15.19 GiB per rank. [Reply hashes, token counts and timing](native/native-effort.jsonl) · [Per-rank graph capture](native/decode-graph.jsonl)

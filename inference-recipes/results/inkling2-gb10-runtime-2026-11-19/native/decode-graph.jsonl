@@ -1,0 +1,4 @@
+{"rank":0,"decode_graph_batch":1,"graph_capture_s":127.7,"reported_graph_memory_gib":2.29,"available_after_graph_gib":14.04}
+{"rank":1,"decode_graph_batch":1,"graph_capture_s":127.78,"reported_graph_memory_gib":2.51,"available_after_graph_gib":15.19}
+{"rank":2,"decode_graph_batch":1,"graph_capture_s":127.56,"reported_graph_memory_gib":2.61,"available_after_graph_gib":14.66}
+{"rank":3,"decode_graph_batch":1,"graph_capture_s":127.79,"reported_graph_memory_gib":3.01,"available_after_graph_gib":14.4}

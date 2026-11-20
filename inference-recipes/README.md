@@ -1,6 +1,6 @@
 # Inference recipes for DGX Spark
 
-The lab has four 128 GB NVIDIA DGX Sparks cabled in a ConnectX‑7 ring. Each reports one GB10 and approximately 121 GiB of system memory. One Spark serves Qwen3.8 27B in BF16 or mixed precision. A direct pair serves GLM-5.3-Flash and Qwen3.8 Flash-Next. The lab also measured a single Qwen endpoint sharded across all four Sparks. Each result records its transport and workload.
+The lab has four 128 GB NVIDIA DGX Sparks cabled in a ConnectX‑7 ring. Each reports one GB10 and approximately 121 GiB of system memory. One Spark serves Qwen3.8 27B in BF16 or mixed precision. A direct pair serves GLM-5.3-Flash and Qwen3.8 Flash-Next. Four Sparks serve the full native Inkling 2 Small checkpoint. The lab also measured a single Qwen endpoint sharded across all four Sparks. Each result records its transport and workload.
 
 [Open-weight leaderboard and Spark fit inventory](leaderboard/)
 
@@ -28,7 +28,7 @@ Additional catalog entries are candidates unless a result is linked. Node counts
 | [Gemma 4 31B IT](recipes/gemma4-31b-nvfp4.json) | 1 × 128 GB | NVFP4 | Tool calling with an assistant drafter |
 | [GLM 5.3 Flash measured prefill](recipes/glm53-nvfp4-prefill.json) | 2 × 128 GB | NVFP4 | 8K prefill chunks, C1, [archived measurements](results/glm53-prefill-2026-11-18/) |
 | [Qwen3.8 Flash-Next](recipes/qwen38-flash-next-nvfp4.json) | 2 × 128 GB | Mixed NVFP4/FP8/BF16 | Measured text-only service at 8K context with a 133 GB checkpoint |
-| [Inkling 2 Small](recipes/inkling2-small-native.json) | 4 × 128 GB | Native NVFP4/MXFP8 experts | Four-node text fit trial with the SGLang GB10 hooks and BF16 KV |
+| [Thinking Machines Inkling 2 Small](recipes/inkling2-small-native.json) | 4 × 128 GB | Native mixed NVFP4/MXFP8 | [Served at 4K context with one scheduler slot](results/inkling2-gb10-runtime-2026-11-19/) |
 | [GLM 5.3 Flash 4K chunk control](recipes/glm53-chunk4096.json) | 2 × 128 GB | NVFP4 | Same image and runtime settings as the 8K recipe, with [one parameter varied](results/glm53-prefill-2026-11-18/#isolating-prefill-chunk-size) |
 | [Qwen3.8 Flash-Next, four clients](recipes/qwen38-flash-next-kv2g-c4.json) | 2 × 128 GB | Mixed NVFP4/FP8/BF16 | Tuned 8K service with 2 GiB KV per rank and four scheduler slots |
 | [Qwen3.8 Flash-Next, small KV pool](recipes/qwen38-flash-next-kv2g-c1.json) | 2 × 128 GB | Mixed NVFP4/FP8/BF16 | 2 GiB BF16 KV per rank and 21.80 output tok/s at one client |
