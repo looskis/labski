@@ -13,6 +13,7 @@
   "sequences": 4,
   "memory_fraction": 0.8,
   "container_memory_gib": 112,
+  "seccomp_profile": "runtime/spark-io-uring.json",
   "options": {
     "--language-model-only": true,
     "--mamba-cache-mode": "align",

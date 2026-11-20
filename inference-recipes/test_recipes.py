@@ -28,6 +28,10 @@ class RecipeTests(unittest.TestCase):
                                                interface="cx0" if n > 1 else None, hcas="rdma0,rdma1" if n > 1 else None,
                                                transport=None)
                         cmd = spark.serve_command(args, r, Path("/tmp/test cache"))
+                        if r.get("env", {}).get("B12X_DISK_BACKEND") == "io_uring":
+                            profile = spark.ROOT / r["seccomp_profile"]
+                            self.assertEqual(cmd[cmd.index("--security-opt") + 1], f"seccomp={profile}")
+                            self.assertEqual(json.loads(profile.read_bytes())["defaultAction"], "SCMP_ACT_ERRNO")
                         if r.get("engine") == "tensorfold-glm53":
                             self.assertIn("RANK=" + str(rank), cmd)
                             self.assertIn("PARALLEL=4", cmd)

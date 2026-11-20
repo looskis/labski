@@ -63,6 +63,8 @@ def serve_command(args, recipe, cache):
            "--volume", f"{cache}:{CONTAINER_CACHE}:ro",
            "--label", f"labski.nodes={nodes}", "--label", f"labski.rank={args.rank}"]
     env = {"HF_HUB_OFFLINE": "1", "HF_HUB_CACHE": str(CONTAINER_CACHE), **recipe.get("env", {})}
+    if "seccomp_profile" in recipe:
+        cmd += ["--security-opt", f"seccomp={ROOT / recipe['seccomp_profile']}"]
     if "container_memory_gib" in recipe:
         limit = f"{recipe['container_memory_gib']}g"
         cmd += ["--memory", limit, "--memory-swap", limit]
