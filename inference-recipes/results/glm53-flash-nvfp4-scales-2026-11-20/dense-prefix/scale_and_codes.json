@@ -1,0 +1,23 @@
+{
+  "sha256": "b47d703731071992ebcf88bdc5887dea66d265d34a5499057c8b154527268977",
+  "source_sha256": {
+    "model.language_model.layers.0.mlp.gate_proj.weight": "a02b297c0213286cebb7cf51938780201c0736a713b8482fe53b31f334a1cece",
+    "model.language_model.layers.0.mlp.gate_proj.weight_scale": "f2b3cf45f5930305b4a935ced634577a36607ad0b829b74775eed385a919f272",
+    "model.language_model.layers.0.mlp.up_proj.weight": "ae64dae6d733978eb96b72f403fe31e429275e35ed76c2ed2c6645da4cd5a624",
+    "model.language_model.layers.0.mlp.up_proj.weight_scale": "048fb905f48f08f8044dc0a2cfac3b03a1556a2d4089cb9acdc777ba28772408",
+    "model.language_model.layers.0.mlp.down_proj.weight": "2d9df25006eda267ba07de42abcacd9ab8c53689cf7b9a09a94bb3b42fae915d",
+    "model.language_model.layers.0.mlp.down_proj.weight_scale": "fe76cee709d364331c7bfca726a714faf093d1171aefd9ee67089c0d12fb4c2f",
+    "model.language_model.layers.1.mlp.gate_proj.weight": "f7c9e0ee62ae25d245fb45bdb055af8ead0a013c8eefb16277e9f07c89448f45",
+    "model.language_model.layers.1.mlp.gate_proj.weight_scale": "0bc18459d0c8310646be9bcb5e77474b7fc9c7cdb6ae4212a3eff3e90729a1f8",
+    "model.language_model.layers.1.mlp.up_proj.weight": "af13a4ed97d64a7013368d21a18146f3a9c59c1222c1430473103b83bb947ca1",
+    "model.language_model.layers.1.mlp.up_proj.weight_scale": "deaf298419ba34ba427be20fe0003d98e396c65e93688a96f55825deaffee7c2",
+    "model.language_model.layers.1.mlp.down_proj.weight": "625ad6e1350f77f2e0689c78a3ff15ad268b5df278b1cb3dfe2841a3abac8400",
+    "model.language_model.layers.1.mlp.down_proj.weight_scale": "5a29dbec72519d08fa93785f28a086af426c82db41447c792910168373766df9",
+    "model.language_model.layers.2.mlp.gate_proj.weight": "6c397897589dafe37c8b40be4e3c953d2d59d44f9996cbddee18f43c88a8d9e1",
+    "model.language_model.layers.2.mlp.gate_proj.weight_scale": "deef7d1a0502df2a9a7184cec5131b90c17f0d1f8d50e3aef48088890f6bab81",
+    "model.language_model.layers.2.mlp.up_proj.weight": "2252df306d04beb441e4965b95c3a968d559afc0ca59378b81a0fca527baf16b",
+    "model.language_model.layers.2.mlp.up_proj.weight_scale": "8256cadd45f8514daf46623ca2411bd34632da3b5b40b1d505fb47b34359f8c6",
+    "model.language_model.layers.2.mlp.down_proj.weight": "7ab65a80e645a00de2db288660fc7ecf9c65e3f9af9df2f382920c24bad6716f",
+    "model.language_model.layers.2.mlp.down_proj.weight_scale": "22b54f239fcb28ba55b69ec462a421d7d4a0f541173feb87e3fc49318229ecb8"
+  }
+}

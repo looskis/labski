@@ -1,6 +1,7 @@
 """Compare published and refitted NVFP4 groups with the same native GB10 GEMM."""
 
 import argparse
+from contextlib import ExitStack
 import hashlib
 import json
 from pathlib import Path
@@ -68,7 +69,31 @@ def fit(reference, packed, scales, global_scale):
     ]
 
 
-def measure(root, panel):
+def patched_arms(panel, packed, scales, patches):
+    if panel["expert"] is not None or panel["start_row"] != 0:
+        raise ValueError("dense patches require complete prefix projections")
+    prefix = f"model.language_model.layers.{panel['layer']}.mlp.{panel['projection']}."
+    arms = [("published", packed, scales)]
+    for mode, (file, originals) in patches.items():
+        weights, block_scales = packed, scales
+        for suffix, source, previous in [("weight_scale", "scale", scales), ("weight", "packed", packed)]:
+            if mode == "scale_only" and suffix == "weight":
+                continue
+            key = prefix + suffix
+            if originals[key] != panel["tensors"][source]["sha256"]:
+                raise ValueError(f"patch refers to a different source tensor for {key}")
+            value = file.get_tensor(key)
+            if value.shape != previous.shape or value.dtype != previous.dtype:
+                raise ValueError(f"patch shape or dtype differs for {key}")
+            if suffix == "weight":
+                weights = value.cuda()
+            else:
+                block_scales = value.cuda()
+        arms.append((mode, weights, block_scales))
+    return arms
+
+
+def measure(root, panel, patches=None):
     rows, width = panel["rows"], panel["width"]
 
     def load(label, dtype):
@@ -86,7 +111,7 @@ def measure(root, panel):
     if not (torch.isfinite(gs).all() and gs.item() > 0 and torch.isfinite(ins).all() and ins.item() > 0):
         raise ValueError("positive finite global scales required")
     values = torch.tensor(LEVELS + [-x for x in LEVELS], device="cuda")
-    arms = fit(ref, packed, scales, gs)
+    arms = patched_arms(panel, packed, scales, patches) if patches else fit(ref, packed, scales, gs)
     ref32 = ref.float()
     ref_norm = ref32.double().square().sum().item()
     generator = torch.Generator(device="cpu").manual_seed(51863 + width)
@@ -121,13 +146,29 @@ def main():
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument("samples", type=Path)
     cli.add_argument("--out", type=Path, required=True)
+    cli.add_argument("--patches", type=Path, help="read already-fitted dense prefix tensors")
     args = cli.parse_args()
     torch.set_float32_matmul_precision("highest")
     torch.backends.cuda.matmul.allow_tf32 = False
     source = json.loads((args.samples / "manifest.json").read_bytes())
-    with args.out.open("x") as out, torch.inference_mode():
+    with ExitStack() as files, torch.inference_mode():
+        patches = {}
+        if args.patches:
+            from safetensors import safe_open
+            from overlay import digest_file
+
+            for mode in ("scale_only", "scale_and_codes"):
+                path = args.patches / (mode + ".safetensors")
+                receipt = json.loads((args.patches / (mode + ".json")).read_bytes())
+                if digest_file(path) != receipt["sha256"]:
+                    raise ValueError(f"patch digest changed for {mode}")
+                handle = files.enter_context(safe_open(path, framework="pt", device="cpu"))
+                if set(handle.keys()) != set(receipt["source_sha256"]):
+                    raise ValueError(f"unexpected patch keys for {mode}")
+                patches[mode] = handle, receipt["source_sha256"]
+        out = files.enter_context(args.out.open("x"))
         for panel in source["panels"]:
-            row = measure(args.samples, panel)
+            row = measure(args.samples, panel, patches)
             out.write(json.dumps(row, separators=(",", ":"), allow_nan=False) + "\n")
             out.flush()
             print(row["layer"], row["expert"], row["projection"], flush=True)

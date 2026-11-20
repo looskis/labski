@@ -1,0 +1,14 @@
+{
+  "sha256": "1357499721575e471a60bdfd38e4dac7d5e90358fd7f7210edf94bdecae37be3",
+  "source_sha256": {
+    "model.language_model.layers.0.mlp.gate_proj.weight_scale": "f2b3cf45f5930305b4a935ced634577a36607ad0b829b74775eed385a919f272",
+    "model.language_model.layers.0.mlp.up_proj.weight_scale": "048fb905f48f08f8044dc0a2cfac3b03a1556a2d4089cb9acdc777ba28772408",
+    "model.language_model.layers.0.mlp.down_proj.weight_scale": "fe76cee709d364331c7bfca726a714faf093d1171aefd9ee67089c0d12fb4c2f",
+    "model.language_model.layers.1.mlp.gate_proj.weight_scale": "0bc18459d0c8310646be9bcb5e77474b7fc9c7cdb6ae4212a3eff3e90729a1f8",
+    "model.language_model.layers.1.mlp.up_proj.weight_scale": "deaf298419ba34ba427be20fe0003d98e396c65e93688a96f55825deaffee7c2",
+    "model.language_model.layers.1.mlp.down_proj.weight_scale": "5a29dbec72519d08fa93785f28a086af426c82db41447c792910168373766df9",
+    "model.language_model.layers.2.mlp.gate_proj.weight_scale": "deef7d1a0502df2a9a7184cec5131b90c17f0d1f8d50e3aef48088890f6bab81",
+    "model.language_model.layers.2.mlp.up_proj.weight_scale": "8256cadd45f8514daf46623ca2411bd34632da3b5b40b1d505fb47b34359f8c6",
+    "model.language_model.layers.2.mlp.down_proj.weight_scale": "22b54f239fcb28ba55b69ec462a421d7d4a0f541173feb87e3fc49318229ecb8"
+  }
+}
