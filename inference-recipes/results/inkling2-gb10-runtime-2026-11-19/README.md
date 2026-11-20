@@ -68,6 +68,15 @@ With the two-slot configuration the six consecutive inventory requests all retur
 
 On the same 28 MMLU-Pro questions, with greedy decoding and one scheduler slot, requested effort `none` gave **14/28 exact answers** while `low` gave **7/28**. The run at low effort generated 6,531 tokens, compared with 3,404 at none. Low effort exhausted the budget on 21 items and none exhausted it on 11. Moving to low gained two correct items and lost nine. The native chat template added two prompt tokens at low on every question. The score requires a stopped response containing just the correct letter. At none, three stopped responses included additional text. This measures short-answer delivery under a fixed budget. [None-effort items](native/none-quality.jsonl.gz) · [Low-effort items](native/low-quality.jsonl.gz) · [Probe command](../../measurement.md#score-native-chat-reasoning-effort)
 
+## How many output tokens does low effort need?
+
+On the two-slot endpoint, raising the output limit from 256 to 768 at low effort recovered **eight correct answers on 14 matched MMLU-Pro questions**. The selection was fixed in advance at the first question from each subject. At 256 tokens the model scored 5/14 and nine responses hit the cap. At 768 it scored 13/14, every response stopped naturally, and the longest used 522 tokens. All five previously correct answers stayed correct. The larger budget used 4,165 generated tokens in total, up from 2,984 (+40%). The sample measures exact final-letter delivery on these questions. [256-token run, first item per subject](native/c2-low-quality.jsonl.gz) · [768-token run, all 14 items](native/c2-low768-quality.jsonl.gz)
+
+```sh
+python3 mmlu_probe.py run inkling2-small-native-c2 labski-mmlu-112.jsonl \
+  --reasoning-effort low --max-tokens 768 --per-subject 1 --out inkling-low-768.jsonl
+```
+
 ## Shared-prefix retrieval near the context limit
 
 The one-slot endpoint returned the exact inventory number for both target depths at 519 input tokens and both at 2,058 tokens. After those four requests, the next lookup shared its inventory prefix with the earlier prompts. The client still had no response about 185 seconds after the preceding completion, and the lab cancelled it. After aborting the pending request and flushing SGLang’s prefix cache, the **same 3,597-token request** stopped with the exact number in **2.91 seconds**. This is one observed stall and one recovery. The one-slot run did not exercise the second target depth at 3,597 tokens. [Request hashes, lengths and repeat](native/one-slot-context.jsonl)

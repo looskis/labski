@@ -28,7 +28,7 @@
       "method": "mtp",
       "num_speculative_tokens": 4
     },
-    "--attention-backend": "B12X",
+    "--gdn-decode-kernel": "b12x",
     "--linear-backend": "b12x",
     "--moe-backend": "b12x",
     "--no-enable-flashinfer-autotune": true,
