@@ -1,0 +1,290 @@
+{
+  "revision": "d3a6e26e4d59243ed6e569e39ca6facf4da84c05",
+  "indexed_files": [
+    {
+      "file": "model-00001-of-00012.safetensors",
+      "tensors": 7017,
+      "file_bytes": 19998244560,
+      "header_bytes": 873464,
+      "header_sha256": "75a1d726f8ff098b1607fcf0ca87525ac5e9be9c5e97b60ab20d33cd9688a387"
+    },
+    {
+      "file": "model-00002-of-00012.safetensors",
+      "tensors": 12180,
+      "file_bytes": 20001518344,
+      "header_bytes": 1518800,
+      "header_sha256": "2f2e6e2ee8c6fa89d628045f1c87f82c7c7510d0e871cd8a6280c596e0f7e13b"
+    },
+    {
+      "file": "model-00003-of-00012.safetensors",
+      "tensors": 12182,
+      "file_bytes": 19996711056,
+      "header_bytes": 1528400,
+      "header_sha256": "7571a755d09b9cd000093b573d77c0f81474615ce544b5e99e786d0677082e8a"
+    },
+    {
+      "file": "model-00004-of-00012.safetensors",
+      "tensors": 12180,
+      "file_bytes": 20001528256,
+      "header_bytes": 1528712,
+      "header_sha256": "79276954b69dfb4f1dd82f2860f1a1781c84d883a1cc9887c6125b480f29e7a4"
+    },
+    {
+      "file": "model-00005-of-00012.safetensors",
+      "tensors": 12037,
+      "file_bytes": 19999765280,
+      "header_bytes": 1510552,
+      "header_sha256": "bac259895fe912ece6739b0aec7fd92fc0d976adcf6040d46b36020cf89ae520"
+    },
+    {
+      "file": "model-00006-of-00012.safetensors",
+      "tensors": 12180,
+      "file_bytes": 20001527536,
+      "header_bytes": 1527992,
+      "header_sha256": "6c231ad9eeeaf75b4063bb4448e6dd32fee8036a6061e9bbf58a69b46550605e"
+    },
+    {
+      "file": "model-00007-of-00012.safetensors",
+      "tensors": 12182,
+      "file_bytes": 19996711024,
+      "header_bytes": 1528368,
+      "header_sha256": "18dbf3ba226730be397b387a2ac7ff9794bda5465ad4fbed18ab59280ac553f9"
+    },
+    {
+      "file": "model-00008-of-00012.safetensors",
+      "tensors": 12180,
+      "file_bytes": 20001528256,
+      "header_bytes": 1528712,
+      "header_sha256": "e51e2a25188cc3634de47e72b16dafa5bbbe0419b7e38ec48afa679b8f29a3e8"
+    },
+    {
+      "file": "model-00009-of-00012.safetensors",
+      "tensors": 12064,
+      "file_bytes": 19961221328,
+      "header_bytes": 1514000,
+      "header_sha256": "e78d9d40f0e983a63ee99b089f8406b100b65b427e8a55350d35c9f7b2b1abf8"
+    },
+    {
+      "file": "model-00010-of-00012.safetensors",
+      "tensors": 12128,
+      "file_bytes": 19997404408,
+      "header_bytes": 1521448,
+      "header_sha256": "bfad1439c58f54da5714f797c2ac9954df67da5748c0a0e64db4aa7fa1e36308"
+    },
+    {
+      "file": "model-00011-of-00012.safetensors",
+      "tensors": 12180,
+      "file_bytes": 20001527648,
+      "header_bytes": 1528104,
+      "header_sha256": "d609ece171421ee42d7f25314d991b47300378b87f5e295bf4ad7ffc2b5da302"
+    },
+    {
+      "file": "model-00012-of-00012.safetensors",
+      "tensors": 5790,
+      "file_bytes": 9647182968,
+      "header_bytes": 721664,
+      "header_sha256": "0878e8532f6dab672f382969403c3af60f950ff1bda00d1e7be9045d6a8ad95c"
+    }
+  ],
+  "tensors": 134300,
+  "expert_tensors": 133632,
+  "expert_bytes": 206901089280,
+  "common_tensor_bytes": 22686951168,
+  "header_bytes": 16830216,
+  "components": [
+    {
+      "component": "common",
+      "dtype": "BF16",
+      "tensors": 668,
+      "bytes": 22686951168
+    },
+    {
+      "component": "input_global_scale",
+      "dtype": "F32",
+      "tensors": 33408,
+      "bytes": 133632
+    },
+    {
+      "component": "weight_global_scale",
+      "dtype": "F32",
+      "tensors": 33408,
+      "bytes": 133632
+    },
+    {
+      "component": "weight_packed",
+      "dtype": "U8",
+      "tensors": 33408,
+      "bytes": 183911841792
+    },
+    {
+      "component": "weight_scale",
+      "dtype": "F8_E4M3",
+      "tensors": 33408,
+      "bytes": 22988980224
+    }
+  ],
+  "rank_placement": [
+    {
+      "ranks": 2,
+      "rank": 0,
+      "experts_per_sparse_layer": 96,
+      "ranges": [
+        {
+          "max_gap_bytes": 0,
+          "requests": 1737,
+          "transfer_bytes": 126154326024
+        },
+        {
+          "max_gap_bytes": 4096,
+          "requests": 1157,
+          "transfer_bytes": 126154459656
+        },
+        {
+          "max_gap_bytes": 65536,
+          "requests": 1157,
+          "transfer_bytes": 126154459656
+        },
+        {
+          "max_gap_bytes": 1048576,
+          "requests": 1157,
+          "transfer_bytes": 126154459656
+        }
+      ]
+    },
+    {
+      "ranks": 2,
+      "rank": 1,
+      "experts_per_sparse_layer": 96,
+      "ranges": [
+        {
+          "max_gap_bytes": 0,
+          "requests": 1733,
+          "transfer_bytes": 126154326024
+        },
+        {
+          "max_gap_bytes": 4096,
+          "requests": 1157,
+          "transfer_bytes": 126154459656
+        },
+        {
+          "max_gap_bytes": 65536,
+          "requests": 1157,
+          "transfer_bytes": 126154459656
+        },
+        {
+          "max_gap_bytes": 1048576,
+          "requests": 1156,
+          "transfer_bytes": 126155147784
+        }
+      ]
+    },
+    {
+      "ranks": 4,
+      "rank": 0,
+      "experts_per_sparse_layer": 48,
+      "ranges": [
+        {
+          "max_gap_bytes": 0,
+          "requests": 2568,
+          "transfer_bytes": 74429053704
+        },
+        {
+          "max_gap_bytes": 4096,
+          "requests": 1711,
+          "transfer_bytes": 74429254152
+        },
+        {
+          "max_gap_bytes": 65536,
+          "requests": 1711,
+          "transfer_bytes": 74429254152
+        },
+        {
+          "max_gap_bytes": 1048576,
+          "requests": 1711,
+          "transfer_bytes": 74429254152
+        }
+      ]
+    },
+    {
+      "ranks": 4,
+      "rank": 1,
+      "experts_per_sparse_layer": 48,
+      "ranges": [
+        {
+          "max_gap_bytes": 0,
+          "requests": 1035,
+          "transfer_bytes": 74429053704
+        },
+        {
+          "max_gap_bytes": 4096,
+          "requests": 691,
+          "transfer_bytes": 74429229544
+        },
+        {
+          "max_gap_bytes": 65536,
+          "requests": 686,
+          "transfer_bytes": 74429254152
+        },
+        {
+          "max_gap_bytes": 1048576,
+          "requests": 686,
+          "transfer_bytes": 74429254152
+        }
+      ]
+    },
+    {
+      "ranks": 4,
+      "rank": 2,
+      "experts_per_sparse_layer": 48,
+      "ranges": [
+        {
+          "max_gap_bytes": 0,
+          "requests": 979,
+          "transfer_bytes": 74429053704
+        },
+        {
+          "max_gap_bytes": 4096,
+          "requests": 654,
+          "transfer_bytes": 74429254152
+        },
+        {
+          "max_gap_bytes": 65536,
+          "requests": 654,
+          "transfer_bytes": 74429254152
+        },
+        {
+          "max_gap_bytes": 1048576,
+          "requests": 654,
+          "transfer_bytes": 74429254152
+        }
+      ]
+    },
+    {
+      "ranks": 4,
+      "rank": 3,
+      "experts_per_sparse_layer": 48,
+      "ranges": [
+        {
+          "max_gap_bytes": 0,
+          "requests": 956,
+          "transfer_bytes": 74429053704
+        },
+        {
+          "max_gap_bytes": 4096,
+          "requests": 638,
+          "transfer_bytes": 74429235968
+        },
+        {
+          "max_gap_bytes": 65536,
+          "requests": 634,
+          "transfer_bytes": 74429254152
+        },
+        {
+          "max_gap_bytes": 1048576,
+          "requests": 634,
+          "transfer_bytes": 74429254152
+        }
+      ]
+    }
+  ]
+}
