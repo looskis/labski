@@ -23,6 +23,22 @@ Six routed MLP layers (2, 3, 4, 75, 76 and 77) retain **115.96 GB of BF16 routed
 
 The separate DSpark repository indexes 17 weight files totaling **1.503 TB**. Its 62 draft tensors all reside in the **5.065 GB** `model-dspark.safetensors` file. A draft-only inspection therefore needs just that file’s 6,912-byte header. The compatibility of these five draft layers with the NVFP4 target needs a live test. [Draft component and index](exaone-draft.json) · [Pinned DSpark snapshot](https://huggingface.co/LGAI-EXAONE/K-EXAONE-2.0-750B-A37B-DSpark/tree/e42409dbd652ade0bc043fd85ef0c86044f97b46)
 
+## Expert conversion test fixed before scoring
+
+The first precision test samples one expert in each of the six BF16 layers, selecting the expert by a fixed SHA-256 rule. It reads the complete gate, up and down matrices for those six experts. The 18 tensors contain **452,984,832 source bytes**, fetched as individual ranges on a Spark. Two conversions use the original BF16 values as their reference.
+
+- E4M3 FP8 uses one FP32 maximum-derived scale per 128 × 128 tile.
+- NVFP4 uses signed E2M1 values, one E4M3 scale per 16 adjacent weights and one FP32 scale from the maximum of the complete tensor. Magnitude ties select the lower value.
+
+The program records squared weight error and squared projection error for 32 fixed Gaussian input vectors rounded to BF16. Reference and reconstructed weights both use FP32 matrix multiplication with those same vectors. This measures weight-only error on sampled experts. Native low-precision activation error, task accuracy, and serving speed require separate tests. [Sampling and conversion code](expert_error.py)
+
+After preparing the EXAONE headers, run the following on a Spark with PyTorch installed. The sampling step uses only the Python standard library. Keep the downloaded matrices on the Spark used for scoring.
+
+```sh
+python3 expert_error.py fetch ./header-cache ./expert-samples
+python3 expert_error.py evaluate ./expert-samples ./expert-scores.json
+```
+
 ## Reproduce on a Spark
 
 The Python standard-library probe fetches the pinned metadata and two exact header ranges for each selected file. It checks the name and byte extent of each tensor, retains a local header cache and records per-header SHA-256. The DSpark run for K-EXAONE reads the full index and then only the draft shard’s header. Use new result filenames.
