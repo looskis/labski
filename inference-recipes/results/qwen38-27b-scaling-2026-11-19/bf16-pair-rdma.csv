@@ -1,0 +1,5 @@
+rank,rail,rx_unicast_rdma_bytes,tx_unicast_rdma_bytes
+0,PCI domain 2,21899023820,21898578536
+0,PCI domain 0,27651685692,27651194466
+1,PCI domain 2,21898578536,21899023820
+1,PCI domain 0,27651194466,27651685692
