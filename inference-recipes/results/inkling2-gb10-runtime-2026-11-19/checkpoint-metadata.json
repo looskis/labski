@@ -1,0 +1,25 @@
+[
+  {
+    "revision": "b0e7afb8892a07897c78ce1c5b801a0d9cbd5e7b",
+    "safetensors_files": 25,
+    "safetensors_bytes": 393480084520,
+    "weights_sha256_manifest": "c4f84af5c484894bb89af800587c820ef39b5733f1c87ba10909b490cee0d469",
+    "hf_quant_config_git_blob": "1ab93314f309e37aa60396d39eeb113be9f74886",
+    "chat_template_git_blob": "2700da57e278de6d6f768dbff8dfccf02c191c07",
+    "quantization_config": null,
+    "log_scaling_n_floor": 128000
+  },
+  {
+    "revision": "4d564489295e30e9341a9822a8046f0c9ded1a7b",
+    "safetensors_files": 25,
+    "safetensors_bytes": 393480084520,
+    "weights_sha256_manifest": "c4f84af5c484894bb89af800587c820ef39b5733f1c87ba10909b490cee0d469",
+    "hf_quant_config_git_blob": "1ab93314f309e37aa60396d39eeb113be9f74886",
+    "chat_template_git_blob": "85258f99ecae6ed8d915eab923945e5d5a851e38",
+    "quantization_config": {
+      "quant_method": "modelopt",
+      "quant_algo": "NVFP4"
+    },
+    "log_scaling_n_floor": 8192
+  }
+]

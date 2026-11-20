@@ -22,7 +22,10 @@
     "--watchdog-timeout": 1800,
     "--enable-metrics": true,
     "--cuda-graph-max-bs-decode": 1,
-    "--cuda-graph-max-bs-prefill": 1
+    "--cuda-graph-max-bs-prefill": 1,
+    "--json-model-override-args": {
+      "quantization_config": null
+    }
   },
   "source": "https://github.com/aidendle94/sparkrun-recipes/tree/3d7e798cfaecf1298576b79c945455bb5a75ac46/recipes/inkling-2-small/sglang",
   "engine": "sglang",
@@ -34,5 +37,8 @@
     "NCCL_DEBUG": "INFO",
     "NCCL_DEBUG_SUBSYS": "INIT,NET",
     "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:False"
-  }
+  },
+  "required_files": [
+    "hf_quant_config.json"
+  ]
 }
