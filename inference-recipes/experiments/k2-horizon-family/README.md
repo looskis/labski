@@ -31,6 +31,16 @@ python3 reuse_mova.py "$FP8_SNAPSHOT/$shard" "$BF16_SNAPSHOT"
 python3 reuse_mova.py "$FP8_SNAPSHOT/$shard" "$BF16_SNAPSHOT" --bf16-shard-url "$BF16_ORIGIN/$shard"
 ```
 
+### Resume an ordinary BF16 download from its last byte
+
+On one Spark, two interrupted downloads held 1,027,825,664 and 912,928,768 contiguous BF16 bytes. We kept both prefixes and read another 832,686,736 bytes from the local FP8 checkpoint. The two completed 1.596 GB BF16 shards each matched the publisher’s SHA-256. On shard 10, the remaining upstream responses totaled 151.92 MB, including the header. [Per-shard bytes and hashes](mova-download-handover.json)
+
+Once the original downloader has stopped, `--resume-download` adopts its contiguous `<shard>.part` file in the destination directory. The program verifies the pinned final hash before publishing the result. On the Spark we also exercised this CLI with an 8,388,611-byte prefix ending inside a tensor on shard 1. It read 159,395,157 bytes from the local FP8 file and requested only the 1,368-byte official BF16 header. Running it again verified and skipped the completed shard. [Download handover program](reuse_mova.py) · [CLI measurements](mova-download-handover.json)
+
+```sh
+python3 reuse_mova.py "$FP8_SNAPSHOT/$shard" "$BF16_SNAPSHOT" --resume-download
+```
+
 ## Reproduce
 
 From this directory, set `ARTICLES` to the prepared 62-article file. Fetch the two pinned tokenizer JSON files and prepare a corpus in a fresh directory. The preparation step checks the 7B tokenizer against the original 32B token IDs on every article. [WikiText preparation](../glm53-nvfp4-scales/#score-the-same-text-under-all-three-sets-of-weights) · [7B checkpoint](https://huggingface.co/IFM/K2-Horizon-7B/tree/1ad5223c80f635ede5fb926f6304dc7228246a4b) · [0.9B checkpoint](https://huggingface.co/IFM/K2-Horizon-0.9B/tree/fc5c9dc7c13df2360acee789fca2cd55d439e644)

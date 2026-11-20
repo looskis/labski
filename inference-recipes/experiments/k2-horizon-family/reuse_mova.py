@@ -79,12 +79,23 @@ def digest(path):
     return sha.hexdigest()
 
 
-def restore(sibling, directory, bf16_shard_url=None):
+def restore(sibling, directory, bf16_shard_url=None, resume_download=False):
     state = directory / '.mova-reuse'
     state.mkdir(parents=True, exist_ok=True)
     with (state / (sibling.name + '.lock')).open('a') as lock:
         fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
-        return restore_locked(sibling, directory, state / (sibling.name + '.part'), bf16_shard_url)
+        partial = state / (sibling.name + '.part')
+        downloaded = directory / (sibling.name + '.part')
+        if resume_download and downloaded.exists() and not (directory / sibling.name).exists():
+            if downloaded.is_symlink() or not downloaded.is_file():
+                raise ValueError('expected a regular contiguous BF16 download prefix')
+            if partial.exists():
+                if not partial.samefile(downloaded):
+                    raise FileExistsError('both downloaders have separate partial files for this shard')
+            else:
+                os.link(downloaded, partial)
+            downloaded.unlink()
+        return restore_locked(sibling, directory, partial, bf16_shard_url)
 
 
 def restore_locked(sibling, directory, partial, bf16_shard_url):
@@ -159,5 +170,7 @@ if __name__ == "__main__":
     cli.add_argument("fp8_shard", type=Path)
     cli.add_argument("bf16_directory", type=Path)
     cli.add_argument("--bf16-shard-url", help="read the pinned BF16 shard from a peer supporting HTTP Range")
+    cli.add_argument("--resume-download", action="store_true",
+                     help="adopt a stopped contiguous BF16 <shard>.part in the destination directory")
     args = cli.parse_args()
-    print(json.dumps(restore(args.fp8_shard, args.bf16_directory, args.bf16_shard_url), indent=2))
+    print(json.dumps(restore(args.fp8_shard, args.bf16_directory, args.bf16_shard_url, args.resume_download), indent=2))
