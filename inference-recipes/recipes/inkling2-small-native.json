@@ -1,0 +1,23 @@
+{
+  "purpose": "Four-Spark text-only fit experiment with Thinking Machines' native checkpoint, short context and one active request.",
+  "model": "thinkingmachines/Inkling-2-Small",
+  "revision": "4d564489295e30e9341a9822a8046f0c9ded1a7b",
+  "precision": "native mixed NVFP4/MXFP8 routed experts",
+  "nodes": [4],
+  "per_node_gb": 128,
+  "image": "inkling2-small",
+  "context": 4096,
+  "sequences": 1,
+  "memory_fraction": 0.89,
+  "container_memory_gib": 112,
+  "options": {
+    "--language-model-only": true,
+    "--dtype": "bfloat16",
+    "--kv-cache-dtype": "auto",
+    "--max-num-batched-tokens": 1024,
+    "--no-enable-prefix-caching": true,
+    "--enforce-eager": true,
+    "--reasoning-parser": "inkling"
+  },
+  "source": "https://recipes.vllm.ai/thinkingmachines/Inkling-2-Small"
+}

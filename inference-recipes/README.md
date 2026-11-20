@@ -2,6 +2,8 @@
 
 The lab has four 128 GB NVIDIA DGX Sparks cabled in a ConnectX‑7 ring. Each reports one GB10 and approximately 121 GiB of system memory. Start with one for interactive serving, use a pair for GLM, or shard MiniMax across all four. The matched Qwen recipes let you measure what an extra Spark or a lower-precision checkpoint buys on the same workload.
 
+[Open-weight leaderboard and Spark fit inventory](leaderboard/)
+
 **Measured on the lab fleet**
 
 - **Four replicas.** At 16 concurrent prose requests, Qwen3 0.6B delivered 1,894 aggregate output tok/s across four Sparks versus 538 on one. At four clients, the single Spark delivered 493 versus 427 across four. [Workload, raw requests and trial results](results/qwen3-four-replicas-2026-11-19/)
@@ -21,6 +23,8 @@ Additional catalog entries are candidates unless a result is linked. Node counts
 | [Qwen3.8 27B DFlash2](recipes/qwen38-27b-dflash.json) | 1 × 128 GB | Mixed NVFP4/FP8 | Seven-token draft, FP8 KV cache, GB10 dynamic linear backend |
 | [Gemma 4 31B IT](recipes/gemma4-31b-nvfp4.json) | 1 × 128 GB | NVFP4 | Tool calling with an assistant drafter |
 | [GLM 5.3 Flash measured prefill](recipes/glm53-nvfp4-prefill.json) | 2 × 128 GB | NVFP4 | 8K prefill chunks, C1, [archived measurements](results/glm53-prefill-2026-11-18/) |
+| [Qwen3.8 Flash-Next](recipes/qwen38-flash-next-nvfp4.json) | 2 × 128 GB | Mixed NVFP4/FP8/BF16 | Text-only fit trial with a 133 GB checkpoint |
+| [Inkling 2 Small](recipes/inkling2-small-native.json) | 4 × 128 GB | Native NVFP4/MXFP8 experts | Four-node text-only fit trial with the Inkling 2 ARM64 image |
 | [GLM 5.3 Flash chat](recipes/glm53-flash-fp4.json) | 2 × 128 GB | Mixed FP4-Local | 320B MoE, B12X loader, MTP and 64K context |
 | [MiniMax M3.1 Flash](recipes/minimax31-flash-tp4.json) | 4 × 128 GB | NVFP4 experts + MXFP8 | One large endpoint using all four Sparks and the bundled DSpark head |
 
