@@ -78,3 +78,19 @@ done
 ```
 
 On a pair of Sparks low effort scored 23/28 under this fixed budget. Maximum effort scored 14/28, with twelve truncations before the final answer. [Measured effort comparison](results/glm53-effort-2026-11-19/)
+
+## Measure energy on GB10
+
+On each participating rank, start the sampler before warm-up and let it run past the final trial. Check `timedatectl show -p NTPSynchronized` on the client and each rank. Choose a duration long enough for the run. Copy each CSV to the client under a distinct name.
+
+```sh
+python3 gpu_energy.py sample --seconds 300 --out rank-0.csv
+```
+
+The benchmark writes UTC nanosecond start and end times for each measured trial alongside its monotonic duration. Supply every participating rank's trace in rank order. The command interpolates the cumulative counter at both boundaries, sums the energy increments and divides by the actual generated token count.
+
+```sh
+python3 gpu_energy.py join runs/pair/prose-c4/trial-1.json rank-0.csv rank-1.csv
+```
+
+The reported unit is NVML joules per delivered output token, including GPU activity during prefill, decoding and scheduling inside the trial. The default sample interval is 200 ms. Clock alignment and the counter's update cadence limit precision for short trials. Report the number of ranks, trial duration and whether any background workloads shared the GPU. Whole-system or wall-outlet energy requires a separate meter. [NVIDIA cumulative energy counter](https://docs.nvidia.com/deploy/nvml-api/latest/api/group__nvmlDeviceQueries.html)

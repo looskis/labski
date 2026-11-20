@@ -174,10 +174,13 @@ def main():
     runs = []
     with ThreadPoolExecutor(max_workers=args.concurrency) as pool:
         for trial in range(args.repeats):
+            start_unix_ns = time.time_ns()
             start = time.perf_counter()
             jobs = [pool.submit(sample, args, i, args.seed + trial * args.requests + i) for i in range(args.requests)]
             rows = [job.result() for job in jobs]
-            result = summary(rows, time.perf_counter() - start)
+            wall = time.perf_counter() - start
+            end_unix_ns = time.time_ns()
+            result = dict(summary(rows, wall), start_unix_ns=start_unix_ns, end_unix_ns=end_unix_ns)
             save(f"trial-{trial + 1}.json", {"summary": result, "requests": rows})
             print(json.dumps(result), flush=True)
             if result["failed"]:
