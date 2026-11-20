@@ -10,7 +10,7 @@ REQUIRED_FILES = ("config.json", "quantization_config.json", "chat_template.jinj
                   "tokenizer_config.json", "special_tokens_map.json", "model.safetensors.index.json")
 
 
-def command(work, snapshot, mtp=False):
+def command(work, snapshot, mtp=False, draft_tokens=2):
     weights = sorted(snapshot.glob("*.safetensors"))
     if len(weights) != 13 or sum(p.stat().st_size for p in weights) != WEIGHT_BYTES:
         raise ValueError("expected 13 Ling 3.1 Flash 1019 mixed EXL3 shards totalling 100,805,781,294 bytes")
@@ -40,7 +40,7 @@ def command(work, snapshot, mtp=False):
            "-e", "HF_HUB_OFFLINE=1", "-e", "PYTHONUNBUFFERED=1", "-e", "HOME=/tmp",
            "-v", f"{view.parent}:/models:ro", "-v", f"{work / 'wheels'}:/wheels:ro", "-v", f"{config}:/app/config.yml:ro"]
     if mtp:
-        cmd.extend(["-e", "TABBY_DRAFT_MODEL_DRAFT_MODE=mtp", "-e", "TABBY_DRAFT_MODEL_DRAFT_NUM_TOKENS=2"])
+        cmd.extend(["-e", "TABBY_DRAFT_MODEL_DRAFT_MODE=mtp", "-e", f"TABBY_DRAFT_MODEL_DRAFT_NUM_TOKENS={draft_tokens}"])
     for path in sorted(mounts):
         cmd.extend(["-v", f"{path}:{path}:ro"])
     wheel = "/wheels/" + wheels[0].name
@@ -52,10 +52,11 @@ if __name__ == "__main__":
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument("work", type=Path)
     cli.add_argument("snapshot", type=Path)
-    cli.add_argument("--mtp", action="store_true", help="use the checkpoint’s native two-token draft")
+    cli.add_argument("--mtp", nargs="?", const=2, type=int, choices=(1, 2, 4), metavar="DEPTH",
+                     help="use native drafting with 1, 2 (default) or 4 tokens")
     cli.add_argument("--dry-run", action="store_true")
     args = cli.parse_args()
-    cmd = command(args.work.resolve(strict=True), args.snapshot.resolve(strict=True), args.mtp)
+    cmd = command(args.work.resolve(strict=True), args.snapshot.resolve(strict=True), args.mtp is not None, args.mtp)
     print(shlex.join(cmd), flush=True)
     if not args.dry_run:
         os.execvp(cmd[0], cmd)

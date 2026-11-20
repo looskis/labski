@@ -1,21 +1,25 @@
 # Ling 3.1 Flash 1019 on one DGX Spark
 
-**Using the model’s own two-token draft, one Spark served the 100.81 GB mixed EXL3 checkpoint at 22.67 output tok/s for one client and 42.56 aggregate for four.** The 560B parameter model ran in exllamav3 with 8,192 tokens per sequence and a 32,768-token eight-bit KV cache. On the 28-question diagnostic, ordinary decoding and drafting each scored 4/28 with free short answers. A single-letter grammar yielded 14/28 and 15/28 respectively. [Build and serving recipe](../../experiments/ling31-exl3/) · [Weights, wheel and runtime versions](build.json)
+**A one-token draft served four simultaneous clients at 46.65 aggregate output tok/s. A two-token draft was fastest for one client at 22.67 tok/s.** Ordinary decoding on the same 100.81 GB EXL3 checkpoint reached 36.74 and 15.77 respectively. All three draft depths scored 15/28 on constrained letters and 4/28 on free responses. The 560B parameter model ran with 8,192 tokens per sequence and a 32,768-token eight-bit KV cache. [Build and serving recipe](../../experiments/ling31-exl3/) · [Weights and versions](build.json)
 
-| Decoding | Concurrent clients | Output tok/s | Median first streamed delta | GPU J/output token |
-| --- | ---: | ---: | ---: | ---: |
-| Ordinary | 1 | 15.77 | 508 ms | 3.41 |
-| Two-token draft | 1 | 22.67 | 600 ms | 2.75 |
-| Ordinary | 4 | 36.74 | 1,513 ms | 1.87 |
-| Two-token draft | 4 | 42.56 | 1,423 ms | 1.55 |
+| Draft tokens | Output tok/s, 1 / 4 clients | Median first streamed delta ms, 1 / 4 | GPU J/output token, 1 / 4 | Proposed tokens accepted, 1 / 4 |
+| ---: | --- | --- | --- | --- |
+| 0 | 15.77 / 36.74 | 508 / 1,513 | 3.41 / 1.87 | — |
+| 1 | 22.34 / 46.65 | 555 / 1,342 | 2.61 / 1.52 | 81.1% / 82.6% |
+| 2 | 22.67 / 42.56 | 600 / 1,423 | 2.75 / 1.55 | 58.9% / 56.7% |
+| 4 | 20.61 / 34.09 | 665 / 2,505 | 3.12 / 1.87 | 34.5% / 35.1% |
 
-Each condition used one warm-up and three timed trials of four greedy prose prompts. Every timed response reached the 96-token limit. Medians are across the three trials. The ordinary service loaded all 75 model modules in 84.3 seconds. Linux reported 18.5 GiB of available host memory after the first single-client trial. [Request settings](settings.jsonl) · [Prose requests](requests.jsonl.gz) · [Trials](trials.jsonl) · [GPU energy](ling31-single-energy.jsonl) · [NVML counters](ling31-single-energy.csv.gz) · [Memory snapshot](memory.json)
+Each concurrency used one excluded warm-up and three trials of four greedy prose prompts. Every timed response reached the 96-token limit. Each table cell reports the median across the three trials, except acceptance, which pools the engine’s accepted and proposed token counts. At four clients, proposing one token gained 27.0% throughput over ordinary decoding. Proposing four cost 7.2%, and the first streamed delta took nearly a second longer. [Ordinary requests and timing](trials.jsonl) · [Depth one](mtp1/) · [Depth two](mtp/) · [Depth four](mtp4/)
 
-## What changed with two-token drafting
+## Four-client repeat with all slots warmed
 
-The native multi-token prediction (MTP) component increased throughput by 43.8% at one client and 15.9% at four. GPU energy per generated token fell by 19.4% and 17.5%. The median wait for the first streamed delta grew by 91 ms at one client and shrank by 91 ms at four. Across the timed prose requests the engine accepted 623 of 1,058 proposed tokens at one client and 612 of 1,080 at four. The service loaded in 81.5 seconds with drafting enabled. Linux reported 14.9 GiB available after the first single-client trial. [Engine confirmation and per-request acceptance](mtp/startup.json) · [Timing](mtp/trials.jsonl) · [Energy](mtp/ling31-mtp-energy.jsonl) · [Memory](mtp/memory.json)
+Four fresh service launches ran in depth order 1, 2, 2, 1. Each first served a batch of four separate warm-up prompts, then ran the same 12 measured requests across three trials. Median throughput for the four launches was 45.51, 43.43, 45.54 and 47.23 tok/s in order. Pooling six trials per setting gave 46.37 tok/s at depth one and 44.02 at depth two, a 5.3% advantage. Median first delta was 1,430 versus 1,507 ms. GPU energy was close at 1.485 versus 1.470 J/token. The repeated launches narrow the original throughput gap and show run-to-run variation. [Trial and warm-up timings](abba/trials.jsonl) · [Requests](abba/requests.jsonl.gz) · [Power-counter measurements](abba/energy.jsonl) · [Raw NVML counters](abba/nvml.csv.gz)
 
-The 28 free-answer verdicts and eight lookup texts all matched ordinary decoding. The one-letter grammar gained one correct answer and lost zero, with 26 of 28 letters identical. Only 22 of 28 free-answer texts and six of 24 timed prose outputs matched byte for byte, even with greedy sampling and identical reported output lengths. These short probes cannot establish broad quality equivalence. [Drafted free answers](mtp/quality.jsonl.gz) · [Grammar answers](mtp/grammar.jsonl.gz) · [Lookups](mtp/lookup.json) · [Prose outputs](mtp/requests.jsonl.gz)
+## Quality and memory
+
+All three draft depths preserved the 28 free-answer verdicts and the eight lookup texts and lengths. Each gained one correct constrained letter over ordinary decoding and lost zero. On the 24 greedy prose responses, five, six and six texts respectively matched ordinary decoding byte for byte at depths one, two and four. The best throughput settings have different visible generation on this corpus. [Ordinary prose](requests.jsonl.gz) · [Depth-one prose](mtp1/requests.jsonl.gz) · [Depth-two prose](mtp/requests.jsonl.gz) · [Depth-four prose](mtp4/requests.jsonl.gz)
+
+The ordinary service loaded all 75 modules in 84.3 seconds and Linux reported 18.5 GiB available after the first single-client trial. At depth two, loading took 81.5 seconds and 14.9 GiB remained available. Across timed requests, depth two accepted 623 of 1,058 proposed tokens at one client and 612 of 1,080 at four. [Ordinary memory](memory.json) · [Depth-two memory](mtp/memory.json) · [Engine-reported acceptance](mtp/startup.json)
 
 ## Why the answer format matters
 
@@ -25,7 +29,7 @@ Six of eight 524-token table lookups met the exact numeric-answer rule. The othe
 
 ## Reproduce
 
-Launch the pinned exllamav3 and TabbyAPI service and prepare the fixed question corpus. Run the same commands in a fresh output directory for each launch, using the default launcher for ordinary decoding and appending `--mtp` to enable the native two-token draft. From `inference-recipes/`, use fresh output paths for each run. [Serving instructions](../../experiments/ling31-exl3/) · [Question preparation](../qwen38-27b-precision-2026-11-19/#reproduce)
+Launch the pinned service and prepare the fixed question corpus. Use fresh output paths for each run. Omit `--mtp` for ordinary decoding or pass `--mtp 1`, `--mtp 2` or `--mtp 4` on the service command. For the four-launch repeat, use order 1, 2, 2, 1. Run one extra four-client prose batch with `--seed 94701 --repeats 1` before the standard four-client trials in each launch. [Serving instructions](../../experiments/ling31-exl3/) · [Question preparation](../qwen38-27b-precision-2026-11-19/#reproduce)
 
 ```sh
 model=ling31-exl3-low
