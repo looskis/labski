@@ -4,6 +4,8 @@
 
 **For the tested 4K service, use two scheduler slots and a 0.5 sliding-window ratio.** It served two clients at 39.34 aggregate generated tokens/s and 2.98 GPU J/output token across the four Sparks. All six inventory lookups returned the exact answer, including both repeated-prefix inputs at 3,597 tokens. [Two-slot recipe](../../recipes/inkling2-small-native-c2.json)
 
+A rank-local sparse layout for the same checkpoint retains 107.99 GB of indexed weights per Spark. The lab compared all 54 local tensors in a mixed NVFP4/MXFP8 shard and matched all 5.27 GB of rank-visible data. [Storage layout and loader check](../../experiments/inkling2-sparse-weights/)
+
 A single-rank hardware probe found an architecture mismatch before loading the 393 GB checkpoint. The designated vLLM ARM64 image recognizes Inkling 2, but its routed-expert implementation loads the FlashInfer SM100 module and requests kernels for CUDA major architecture 10. The fleet's GB10 reports compute capability **12.1**. Executing that architecture-selection call on a Spark raised `RuntimeError: No supported CUDA architectures found for major versions [10].` PyTorch reported `2.14.0+cu130` and vLLM reported `0.1.dev25249+gb974b306f.cu130`. This is a kernel compatibility result. It does not measure model memory, quality or throughput. [vLLM deployment guide](https://recipes.vllm.ai/thinkingmachines/Inkling-2-Small) · [Probe source](probe.py)
 
 ```sh
