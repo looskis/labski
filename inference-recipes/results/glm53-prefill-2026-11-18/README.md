@@ -40,7 +40,7 @@ The records in this directory come from the lab’s archived experiment. They we
 
 ## Isolating prefill chunk size
 
-A second November 19 run changed only the maximum batched token count from 8,192 to 4,096. It used the same two Sparks, checkpoint, image, dual-rail RoCE transport, greedy one-token responses, 2 GiB FP8 KV allocation, NCCL settings, CPU threads and cold token-ID corpus as the 8K replay above. Each median covers three timed requests after the excluded warm-up. Run order was 8K then 4K in separate server lifetimes. [4K control recipe](../../recipes/glm53-chunk4096.json)
+A second November 19 run changed only the maximum batched token count from 8,192 to 4,096. It used the same two Sparks, checkpoint, image, dual-rail RoCE transport, greedy one-token responses, 2 GiB FP8 KV allocation, NCCL settings, CPU threads and cold token-ID corpus as the 8K replay above. Each median covers three timed requests after the excluded warm-up. Run order was 8K then 4K in separate server lifetimes. [4K control recipe](../../recipes/glm53-chunk4096.json) · [4K control request timings](replay-4096-2026-11-19.csv)
 
 | Input tokens | 4K chunk, input tok/s | 8K chunk, input tok/s | Change with 8K |
 | ---: | ---: | ---: | ---: |

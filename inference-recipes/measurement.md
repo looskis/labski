@@ -76,3 +76,5 @@ for effort in low max; do
     --effort "$effort" --per-subject 2 --max-tokens 256 --out "glm-$effort.jsonl"
 done
 ```
+
+On a pair of Sparks low effort scored 23/28 under this fixed budget. Maximum effort scored 14/28, with twelve truncations before the final answer. [Measured effort comparison](results/glm53-effort-2026-11-19/)
