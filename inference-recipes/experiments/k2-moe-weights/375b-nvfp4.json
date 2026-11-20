@@ -132,22 +132,26 @@
         {
           "max_gap_bytes": 0,
           "requests": 1737,
-          "transfer_bytes": 126154326024
+          "transfer_bytes": 126154326024,
+          "requests_with_64mib_limit": 3366
         },
         {
           "max_gap_bytes": 4096,
           "requests": 1157,
-          "transfer_bytes": 126154459656
+          "transfer_bytes": 126154459656,
+          "requests_with_64mib_limit": 2786
         },
         {
           "max_gap_bytes": 65536,
           "requests": 1157,
-          "transfer_bytes": 126154459656
+          "transfer_bytes": 126154459656,
+          "requests_with_64mib_limit": 2786
         },
         {
           "max_gap_bytes": 1048576,
           "requests": 1157,
-          "transfer_bytes": 126154459656
+          "transfer_bytes": 126154459656,
+          "requests_with_64mib_limit": 2786
         }
       ]
     },
@@ -159,22 +163,26 @@
         {
           "max_gap_bytes": 0,
           "requests": 1733,
-          "transfer_bytes": 126154326024
+          "transfer_bytes": 126154326024,
+          "requests_with_64mib_limit": 3158
         },
         {
           "max_gap_bytes": 4096,
           "requests": 1157,
-          "transfer_bytes": 126154459656
+          "transfer_bytes": 126154459656,
+          "requests_with_64mib_limit": 2582
         },
         {
           "max_gap_bytes": 65536,
           "requests": 1157,
-          "transfer_bytes": 126154459656
+          "transfer_bytes": 126154459656,
+          "requests_with_64mib_limit": 2582
         },
         {
           "max_gap_bytes": 1048576,
           "requests": 1156,
-          "transfer_bytes": 126155147784
+          "transfer_bytes": 126155147784,
+          "requests_with_64mib_limit": 2581
         }
       ]
     },
@@ -186,22 +194,26 @@
         {
           "max_gap_bytes": 0,
           "requests": 2568,
-          "transfer_bytes": 74429053704
+          "transfer_bytes": 74429053704,
+          "requests_with_64mib_limit": 3336
         },
         {
           "max_gap_bytes": 4096,
           "requests": 1711,
-          "transfer_bytes": 74429254152
+          "transfer_bytes": 74429254152,
+          "requests_with_64mib_limit": 2479
         },
         {
           "max_gap_bytes": 65536,
           "requests": 1711,
-          "transfer_bytes": 74429254152
+          "transfer_bytes": 74429254152,
+          "requests_with_64mib_limit": 2479
         },
         {
           "max_gap_bytes": 1048576,
           "requests": 1711,
-          "transfer_bytes": 74429254152
+          "transfer_bytes": 74429254152,
+          "requests_with_64mib_limit": 2479
         }
       ]
     },
@@ -213,22 +225,26 @@
         {
           "max_gap_bytes": 0,
           "requests": 1035,
-          "transfer_bytes": 74429053704
+          "transfer_bytes": 74429053704,
+          "requests_with_64mib_limit": 1898
         },
         {
           "max_gap_bytes": 4096,
           "requests": 691,
-          "transfer_bytes": 74429229544
+          "transfer_bytes": 74429229544,
+          "requests_with_64mib_limit": 1554
         },
         {
           "max_gap_bytes": 65536,
           "requests": 686,
-          "transfer_bytes": 74429254152
+          "transfer_bytes": 74429254152,
+          "requests_with_64mib_limit": 1549
         },
         {
           "max_gap_bytes": 1048576,
           "requests": 686,
-          "transfer_bytes": 74429254152
+          "transfer_bytes": 74429254152,
+          "requests_with_64mib_limit": 1549
         }
       ]
     },
@@ -240,22 +256,26 @@
         {
           "max_gap_bytes": 0,
           "requests": 979,
-          "transfer_bytes": 74429053704
+          "transfer_bytes": 74429053704,
+          "requests_with_64mib_limit": 1795
         },
         {
           "max_gap_bytes": 4096,
           "requests": 654,
-          "transfer_bytes": 74429254152
+          "transfer_bytes": 74429254152,
+          "requests_with_64mib_limit": 1470
         },
         {
           "max_gap_bytes": 65536,
           "requests": 654,
-          "transfer_bytes": 74429254152
+          "transfer_bytes": 74429254152,
+          "requests_with_64mib_limit": 1470
         },
         {
           "max_gap_bytes": 1048576,
           "requests": 654,
-          "transfer_bytes": 74429254152
+          "transfer_bytes": 74429254152,
+          "requests_with_64mib_limit": 1470
         }
       ]
     },
@@ -267,22 +287,26 @@
         {
           "max_gap_bytes": 0,
           "requests": 956,
-          "transfer_bytes": 74429053704
+          "transfer_bytes": 74429053704,
+          "requests_with_64mib_limit": 1835
         },
         {
           "max_gap_bytes": 4096,
           "requests": 638,
-          "transfer_bytes": 74429235968
+          "transfer_bytes": 74429235968,
+          "requests_with_64mib_limit": 1517
         },
         {
           "max_gap_bytes": 65536,
           "requests": 634,
-          "transfer_bytes": 74429254152
+          "transfer_bytes": 74429254152,
+          "requests_with_64mib_limit": 1513
         },
         {
           "max_gap_bytes": 1048576,
           "requests": 634,
-          "transfer_bytes": 74429254152
+          "transfer_bytes": 74429254152,
+          "requests_with_64mib_limit": 1513
         }
       ]
     }

@@ -11,7 +11,11 @@ The checkpoint stores **183.91 GB of packed 4-bit expert codes**, **22.99 GB of 
 
 The calculation gives each rank contiguous expert IDs and a complete copy of every common tensor and header. For two ranks, dividing the original checkpoint by two would underestimate the input each rank needs by 10.57 GiB under this policy. A loader can partition common tensors again for tensor parallelism, and it can require additional buffers and KV memory. These figures describe checkpoint storage and transfer. Serving fit and output quality still require a live run.
 
-A range fetcher can reduce the number of HTTP requests by reading across small gaps. On two ranks, merging gaps of up to 4 KiB takes the request count to **1,157 per rank** and adds only **133,632 bytes per rank**. The counts include the original header of each file. The rank's packed weights, block scales and global scales are all included. [Two- and four-rank range counts and bytes](375b-nvfp4.json)
+A range fetcher can reduce the number of HTTP requests by reading across small gaps. On two ranks, merging gaps of up to 4 KiB takes the request count to **1,157 per rank** and adds only **133,632 bytes per rank**. Those counts allow a request to span an entire contiguous run. With a 64 MiB maximum per request, the counts are 3,366 / 3,158 (ranks 0 / 1) before merging and 2,786 / 2,582 afterward. The counts include the original header of each file. The rank's packed weights, block scales and global scales are all included. [Two- and four-rank range counts and bytes](375b-nvfp4.json)
+
+## Compact shard with real weights
+
+For the first 20.00 GB source shard, we wrote a regular SafeTensors file containing only rank 1 of a two-rank expert placement. This source shard also contains dense weights, so the compact file was **14.58 GB**. An independent CPU read matched all **3,519 tensor names, shapes and dtypes**, then compared all **14,584,549,248 payload bytes** against the original. This included 3,456 routed tensors and 63 common tensors. The complete source file matched IFM’s LFS SHA-256. This pilot ran on the preparation machine. A multi-Spark server has yet to load the compact K2 checkpoint. [Source and payload hashes](rank1-shard01.json) · [Writer and byte comparison](slice_shard.py)
 
 ## Reproduce
 
@@ -19,4 +23,12 @@ Run the inventory against the pinned snapshot. It reads the 12 headers and index
 
 ```sh
 python3 inventory.py "$SNAPSHOT"
+```
+
+To repeat the first-shard check, install the Python `safetensors` and `numpy` packages for the independent reader. The output file must be new.
+
+```sh
+shard=model-00001-of-00012.safetensors
+python3 slice_shard.py "$SNAPSHOT/$shard" "rank1/$shard" --ranks 2 --rank 1
+python3 slice_shard.py "$SNAPSHOT/$shard" "rank1/$shard" --ranks 2 --rank 1 --verify-existing
 ```

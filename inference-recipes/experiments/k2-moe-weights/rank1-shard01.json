@@ -1,0 +1,17 @@
+{
+  "file": "model-00001-of-00012.safetensors",
+  "ranks": 2,
+  "rank": 1,
+  "source_bytes": 19998244560,
+  "packed_bytes": 14584986976,
+  "payload_bytes": 14584549248,
+  "common_tensors": 63,
+  "routed_tensors": 3456,
+  "payload_sha256": "f1382985a0b0c9983c4791da4669dd248a025905ba5a2feb77023b38f953fb34",
+  "input_header_sha256": "75a1d726f8ff098b1607fcf0ca87525ac5e9be9c5e97b60ab20d33cd9688a387",
+  "source_lfs_sha256": "4134e6022462d6f4fc7157de73aa8cbd3b4da7e0644d40e8089a292c2bcd994a",
+  "tensor_count": 3519,
+  "all_tensor_bytes_equal": true,
+  "shape_dtype_matches": 3519,
+  "verification_device": "CPU"
+}

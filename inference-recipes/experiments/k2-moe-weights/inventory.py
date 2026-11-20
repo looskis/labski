@@ -17,15 +17,15 @@ GAPS = (0, 4096, 65536, 1048576)
 
 
 def intervals(ranges, gap):
-    count, total, end = 0, 0, None
+    merged = []
     for start, stop in ranges:
-        if end is None or start - end > gap:
-            count += 1
-            total += stop - start
+        if merged and start - merged[-1][1] <= gap:
+            merged[-1] = (merged[-1][0], stop)
         else:
-            total += stop - end
-        end = stop
-    return count, total
+            merged.append((start, stop))
+    lengths = [stop - start for start, stop in merged]
+    block = 64 << 20
+    return len(lengths), sum(lengths), sum((length + block - 1) // block for length in lengths)
 
 
 def inventory(snapshot):
@@ -33,7 +33,7 @@ def inventory(snapshot):
     shards = sorted(set(index.values()))
     if len(shards) != 12 or any(Path(name).name != name for name in shards):
         raise ValueError("expected the 12 indexed NVFP4 shards")
-    placements = {(n, rank): {gap: [0, 0] for gap in GAPS} for n in (2, 4) for rank in range(n)}
+    placements = {(n, rank): {gap: [0, 0, 0] for gap in GAPS} for n in (2, 4) for rank in range(n)}
     experts, expert_bytes, common_bytes, header_bytes = 0, 0, 0, 0
     components = {}
     files = []
@@ -89,16 +89,18 @@ def inventory(snapshot):
                           header_bytes=offset, header_sha256=hashlib.sha256(prefix + raw).hexdigest()))
         for p, kept in spans.items():
             for gap in GAPS:
-                count, total = intervals(kept, gap)
+                count, total, bounded = intervals(kept, gap)
                 placements[p][gap][0] += count
                 placements[p][gap][1] += total
+                placements[p][gap][2] += bounded
     if experts != 58 * 192 * 3 * 4 or len(index) != 134300:
         raise ValueError("unexpected number of tensors")
     pinned = json.loads(Path(__file__).with_name("375b-nvfp4.json").read_bytes())
     if files != pinned["indexed_files"]:
         raise ValueError("the indexed headers differ from the pinned K2 Horizon checkpoint")
     ranks = [dict(ranks=n, rank=r, experts_per_sparse_layer=192 // n,
-                  ranges=[dict(max_gap_bytes=g, requests=v[0], transfer_bytes=v[1]) for g, v in totals.items()])
+                  ranges=[dict(max_gap_bytes=g, requests=v[0], transfer_bytes=v[1],
+                               requests_with_64mib_limit=v[2]) for g, v in totals.items()])
              for (n, r), totals in placements.items()]
     return dict(revision=REVISION, indexed_files=files, tensors=len(index), expert_tensors=experts,
                 expert_bytes=expert_bytes, common_tensor_bytes=common_bytes, header_bytes=header_bytes,
