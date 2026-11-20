@@ -1,0 +1,186 @@
+{
+  "weight_fixture": "Qwen/Qwen3-0.6B-GGUF@23749fefcc72300e3a2ad315e1317431b06b590a",
+  "template": "tokenizer.chat_template from original Inkling Q3_K_M",
+  "engine": "danielhanchen/llama.cpp@eeac951be2038fc27e89613d8d1158c31d97d732",
+  "endpoint": "/apply-template",
+  "tests": [
+    {
+      "server": "reasoning-off",
+      "request": "plain",
+      "body": {
+        "model": "fixture",
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is seven plus five?"
+          }
+        ]
+      },
+      "rendered": {
+        "prompt": "<|message_system|><|content_text|>Thinking effort level: 0.9<|end_message|><|message_user|><|content_text|>What is seven plus five?<|end_message|><|message_model|>"
+      }
+    },
+    {
+      "server": "reasoning-off",
+      "request": "bench-thinking-off",
+      "body": {
+        "model": "fixture",
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is seven plus five?"
+          }
+        ],
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        }
+      },
+      "rendered": {
+        "prompt": "<|message_system|><|content_text|>Thinking effort level: 0.9<|end_message|><|message_user|><|content_text|>What is seven plus five?<|end_message|><|message_model|>"
+      }
+    },
+    {
+      "server": "reasoning-off",
+      "request": "numeric-zero",
+      "body": {
+        "model": "fixture",
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is seven plus five?"
+          }
+        ],
+        "chat_template_kwargs": {
+          "reasoning_effort": 0.0,
+          "enable_thinking": false
+        }
+      },
+      "rendered": {
+        "prompt": "<|message_system|><|content_text|>Thinking effort level: 0<|end_message|><|message_user|><|content_text|>What is seven plus five?<|end_message|><|message_model|>"
+      }
+    },
+    {
+      "server": "reasoning-off",
+      "request": "top-level-none",
+      "body": {
+        "model": "fixture",
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is seven plus five?"
+          }
+        ],
+        "reasoning_effort": "none"
+      },
+      "rendered": {
+        "prompt": "<|message_system|><|content_text|>Thinking effort level: 0.9<|end_message|><|message_user|><|content_text|>What is seven plus five?<|end_message|><|message_model|>"
+      }
+    },
+    {
+      "server": "reasoning-off",
+      "request": "top-level-high",
+      "body": {
+        "model": "fixture",
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is seven plus five?"
+          }
+        ],
+        "reasoning_effort": "high"
+      },
+      "rendered": {
+        "prompt": "<|message_system|><|content_text|>Thinking effort level: 0.9<|end_message|><|message_user|><|content_text|>What is seven plus five?<|end_message|><|message_model|>"
+      }
+    },
+    {
+      "server": "reasoning-off-effort-zero",
+      "request": "plain",
+      "body": {
+        "model": "fixture",
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is seven plus five?"
+          }
+        ]
+      },
+      "rendered": {
+        "prompt": "<|message_system|><|content_text|>Thinking effort level: 0<|end_message|><|message_user|><|content_text|>What is seven plus five?<|end_message|><|message_model|>"
+      }
+    },
+    {
+      "server": "reasoning-off-effort-zero",
+      "request": "bench-thinking-off",
+      "body": {
+        "model": "fixture",
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is seven plus five?"
+          }
+        ],
+        "chat_template_kwargs": {
+          "enable_thinking": false
+        }
+      },
+      "rendered": {
+        "prompt": "<|message_system|><|content_text|>Thinking effort level: 0<|end_message|><|message_user|><|content_text|>What is seven plus five?<|end_message|><|message_model|>"
+      }
+    },
+    {
+      "server": "reasoning-off-effort-zero",
+      "request": "numeric-zero",
+      "body": {
+        "model": "fixture",
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is seven plus five?"
+          }
+        ],
+        "chat_template_kwargs": {
+          "reasoning_effort": 0.0,
+          "enable_thinking": false
+        }
+      },
+      "rendered": {
+        "prompt": "<|message_system|><|content_text|>Thinking effort level: 0<|end_message|><|message_user|><|content_text|>What is seven plus five?<|end_message|><|message_model|>"
+      }
+    },
+    {
+      "server": "reasoning-off-effort-zero",
+      "request": "top-level-none",
+      "body": {
+        "model": "fixture",
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is seven plus five?"
+          }
+        ],
+        "reasoning_effort": "none"
+      },
+      "rendered": {
+        "prompt": "<|message_system|><|content_text|>Thinking effort level: 0.9<|end_message|><|message_user|><|content_text|>What is seven plus five?<|end_message|><|message_model|>"
+      }
+    },
+    {
+      "server": "reasoning-off-effort-zero",
+      "request": "top-level-high",
+      "body": {
+        "model": "fixture",
+        "messages": [
+          {
+            "role": "user",
+            "content": "What is seven plus five?"
+          }
+        ],
+        "reasoning_effort": "high"
+      },
+      "rendered": {
+        "prompt": "<|message_system|><|content_text|>Thinking effort level: 0.9<|end_message|><|message_user|><|content_text|>What is seven plus five?<|end_message|><|message_model|>"
+      }
+    }
+  ]
+}
