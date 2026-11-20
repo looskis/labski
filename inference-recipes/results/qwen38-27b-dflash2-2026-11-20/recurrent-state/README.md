@@ -2,6 +2,8 @@
 
 At a fixed 3 GiB cache budget, changing the recurrent state from FP32 to BF16 raised four-client throughput from **53.73 to 94.78 generated tokens/s** (+76.4%) and cut GPU energy from **0.67 to 0.42 J/output token** (−37.5%). Fresh FP32 and BF16 launches returned the same 28 short answers and the same 16 lookup answers. Both runs used NVIDIA’s mixed NVFP4/FP8 target, the same DFlash2 draft with seven proposals, an 8,192-token request limit and four configured slots. [BF16 recipe](../../../recipes/qwen38-27b-dflash-v033-7-ssmbf16.json) · [FP32 control recipe](../../../recipes/qwen38-27b-dflash-v033-7.json)
 
+![One-Spark throughput rose from 53.73 to 94.78 and 104.34 tokens per second across the two BF16 launches. The share of positions with different FP32 and BF16 top tokens rose after the first 2,048 positions.](recurrent-state.png)
+
 | Effective recurrent state | Client count | Aggregate output tok/s | p95 first text delta, ms | GPU J/output token |
 | --- | ---: | ---: | ---: | ---: |
 | FP32 | 1 | 30.72 | 247 | 1.17 |
@@ -84,7 +86,7 @@ The 64 standalone greedy requests agreed **61/64** across precision settings. Ea
 python3 compare_next_token.py windows.jsonl long-context/next-fp32.jsonl.gz long-context/next-bf16.jsonl.gz
 ```
 
-For the next control, double `--max-num-batched-tokens` to 4,096 in both launch configurations and repeat the identical nine-window sequence and 64 unique direct probes. Compare the first changed token in each window and all positions across both chunk budgets. The current launches also differ in effective attention block size. This control tests whether the location of the first disagreement moves with the configured budget. [Paired analysis](compare_next_token.py)
+For the next control, double `--max-num-batched-tokens` to 4,096 in both launch configurations and repeat the identical nine-window sequence and 64 unique direct probes. Compare the first changed token in each window and all positions across both chunk budgets. The current launches also differ in effective attention block size. This control tests whether the location of the first disagreement moves with the configured budget. [Paired analysis](compare_next_token.py) · [Figure source](plot.py)
 
 ## Reproduce
 
