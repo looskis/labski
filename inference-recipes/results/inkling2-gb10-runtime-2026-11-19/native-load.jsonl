@@ -1,0 +1,8 @@
+{"rank":0,"swa_full_tokens_ratio":0.1,"load_s":180.63,"available_after_load_gib":16.75,"reported_load_delta_gib":94.78,"swa_tokens":819,"admission_floor":1024,"allocated":false}
+{"rank":1,"swa_full_tokens_ratio":0.1,"load_s":180.91,"available_after_load_gib":18.4,"reported_load_delta_gib":94.86,"swa_tokens":819,"admission_floor":1024,"allocated":false}
+{"rank":2,"swa_full_tokens_ratio":0.1,"load_s":180.91,"available_after_load_gib":17.71,"reported_load_delta_gib":94.93,"swa_tokens":819,"admission_floor":1024,"allocated":false}
+{"rank":3,"swa_full_tokens_ratio":0.1,"load_s":180.91,"available_after_load_gib":17.72,"reported_load_delta_gib":94.88,"swa_tokens":819,"admission_floor":1024,"allocated":false}
+{"rank":0,"swa_full_tokens_ratio":0.25,"load_s":161.64,"available_after_load_gib":16.77,"reported_load_delta_gib":95.12,"full_tokens":8192,"swa_tokens":2048,"allocated":true}
+{"rank":1,"swa_full_tokens_ratio":0.25,"load_s":161.64,"available_after_load_gib":18.07,"reported_load_delta_gib":95.54,"full_tokens":8192,"swa_tokens":2048,"allocated":true}
+{"rank":2,"swa_full_tokens_ratio":0.25,"load_s":161.62,"available_after_load_gib":17.68,"reported_load_delta_gib":95.28,"full_tokens":8192,"swa_tokens":2048,"allocated":true}
+{"rank":3,"swa_full_tokens_ratio":0.25,"load_s":161.75,"available_after_load_gib":17.83,"reported_load_delta_gib":95.21,"full_tokens":8192,"swa_tokens":2048,"allocated":true}

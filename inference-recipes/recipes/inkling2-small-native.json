@@ -25,7 +25,8 @@
     "--cuda-graph-max-bs-prefill": 1,
     "--json-model-override-args": {
       "quantization_config": null
-    }
+    },
+    "--swa-full-tokens-ratio": 0.25
   },
   "source": "https://github.com/aidendle94/sparkrun-recipes/tree/3d7e798cfaecf1298576b79c945455bb5a75ac46/recipes/inkling-2-small/sglang",
   "engine": "sglang",
