@@ -18,6 +18,7 @@ def main():
     parser.add_argument("--cache", type=Path, required=True)
     parser.add_argument("--api-host", type=ipaddress.IPv4Address, default=ipaddress.IPv4Address("127.0.0.1"))
     parser.add_argument("--port", type=int, default=8000)
+    parser.add_argument("--kv-gib", type=int, default=3, help="fixed KV pool on each Spark in GiB")
     parser.add_argument("--head", help="rank zero address for tensor parallelism")
     parser.add_argument("--node-ip", help="local fabric address for tensor parallelism")
     parser.add_argument("--interface", help="local fabric interface for tensor parallelism")
@@ -25,6 +26,8 @@ def main():
     parser.add_argument("--master-port", type=int, default=29531)
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
+    if args.kv_gib <= 0:
+        parser.error("--kv-gib must be positive")
     if args.api_host.is_unspecified:
         parser.error("specify the API's loopback or serving-interface address")
     if args.shape == "tp2" and args.rank == 1 and not args.api_host.is_loopback:
@@ -36,7 +39,7 @@ def main():
     args.recipe = "qwen38-27b-nvfp4"
     recipe = json.loads(spark.RECIPES[args.recipe].read_bytes())
     recipe["sequences"] = 16 * args.nodes
-    recipe["options"]["--kv-cache-memory-bytes"] = 3 * 1024**3
+    recipe["options"]["--kv-cache-memory-bytes"] = args.kv_gib * 1024**3
     args.cache = args.cache.expanduser().resolve()
     if not args.dry_run:
         spark.check_host(recipe, args.cache)
