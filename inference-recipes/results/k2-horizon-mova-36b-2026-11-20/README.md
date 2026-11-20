@@ -11,6 +11,12 @@ Each entry is the median of three trial statistics. Each trial served four disti
 
 On the lab’s 112-question MMLU-Pro diagnostic, constraining the first output token to an answer letter yielded **19/112**. The model had one token in which to choose. The lab’s low-effort, deterministic application protocol differs from IFM’s published high-effort sampling evaluation. [Questions, labels and per-item results](fp8/grammar112.jsonl.gz) · [Publisher evaluation settings](https://huggingface.co/IFM/K2-Horizon-MoVA-36B-A4B-FP8/blob/deaeefb1bb9e0c080be6d8844f3b222f90fd4bc7/README.md)
 
+## Open answers, retrieval and likelihood
+
+With room to reason, the model returned **7/14 correct final answers at 128 output tokens** and **9/14 at 512**. Two 128-token responses reached their cap. All 14 requests at 512 finished before the cap. The model also returned **8/8 exact six-digit inventory values**. These are deterministic tests on the official FP8 release with low reasoning effort. [128-token answers](fp8/effort-low-128.jsonl.gz) · [512-token answers](fp8/effort-low-512.jsonl.gz) · [Streamed lookups](fp8/lookup.json)
+
+On the 60 matched WikiText continuations (139,378 UTF-8 bytes), MoVA FP8 scored **0.6238 bits/byte**. On these same bytes K2 Horizon 32B scored 0.5692 in BF16, 0.5723 in FP8 and 0.5936 in NVFP4. MoVA FP8 assigned lower probability to the observed continuation on all 60 passages compared with 32B FP8, and on 54 of 60 compared with 32B NVFP4. This comparison changes the model architecture and training as well as the deployed precision. The separate token-based MoVA diagnostic gave perplexity 7.4741 on 30,935 predictions from 62 passages. [MoVA scores per continuation](fp8/bytes.jsonl) · [32B controls on the identical bytes](../../experiments/k2-horizon-family/reference/) · [MoVA token-level totals](fp8/wikitext.jsonl)
+
 ## Reproduce
 
 Run these commands from `inference-recipes/` on one Spark. Use the matched K2 32B benchmark procedure with the MoVA served name for the two client counts and diagnostic panels. [Throughput, question and retrieval commands](../k2-horizon-32b-2026-11-20/#reproduce)
