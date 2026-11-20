@@ -1,0 +1,29 @@
+{
+  "purpose": "Compare the BF16 3.7B checkpoint with the other K2 Horizon sizes on the same Spark.",
+  "model": "IFM/K2-Horizon-3.7B",
+  "revision": "ea9a45d0e46f25a9a1848621e0f5605d937040a2",
+  "precision": "IFM BF16",
+  "nodes": [
+    1
+  ],
+  "per_node_gb": 128,
+  "image": "vllm-0.33.0",
+  "context": 8192,
+  "sequences": 4,
+  "memory_fraction": 0.78,
+  "container_memory_gib": 110,
+  "options": {
+    "--dtype": "bfloat16",
+    "--kv-cache-dtype": "auto",
+    "--kv-cache-memory-bytes": 3221225472,
+    "--reasoning-parser": "k2_horizon",
+    "--no-enable-prefix-caching": true,
+    "--max-num-batched-tokens": 2048,
+    "--model-impl": "vllm",
+    "--trust-remote-code": true,
+    "--default-chat-template-kwargs": {
+      "reasoning_effort": "low"
+    }
+  },
+  "source": "https://huggingface.co/IFM/K2-Horizon-3.7B/tree/ea9a45d0e46f25a9a1848621e0f5605d937040a2"
+}
