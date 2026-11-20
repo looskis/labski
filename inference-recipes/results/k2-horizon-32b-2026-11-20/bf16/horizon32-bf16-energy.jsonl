@@ -1,0 +1,6 @@
+{"concurrency":1,"repeat":1,"start_unix_ns":1795178444923351356,"end_unix_ns":1795178559586148867,"wall_s":114.66279570299957,"output_tokens":384,"rank_joules":[4351.668676511288],"joules_per_output_token":11.332470511748147}
+{"concurrency":1,"repeat":2,"start_unix_ns":1795178559586711077,"end_unix_ns":1795178674009141082,"wall_s":114.4224284209995,"output_tokens":384,"rank_joules":[4413.61591227603],"joules_per_output_token":11.493791438218828}
+{"concurrency":1,"repeat":3,"start_unix_ns":1795178674019063821,"end_unix_ns":1795178788473736866,"wall_s":114.45467117299995,"output_tokens":384,"rank_joules":[4454.821105537534],"joules_per_output_token":11.601096629003996}
+{"concurrency":4,"repeat":1,"start_unix_ns":1795178817230920749,"end_unix_ns":1795178846256063293,"wall_s":29.02514089599572,"output_tokens":384,"rank_joules":[996.9697523230315],"joules_per_output_token":2.596275396674561}
+{"concurrency":4,"repeat":2,"start_unix_ns":1795178846256411796,"end_unix_ns":1795178875460146332,"wall_s":29.203732408001088,"output_tokens":384,"rank_joules":[1005.2986255700588],"joules_per_output_token":2.6179651707553613}
+{"concurrency":4,"repeat":3,"start_unix_ns":1795178875460557092,"end_unix_ns":1795178904892959539,"wall_s":29.43240139099362,"output_tokens":384,"rank_joules":[1005.5583404864072],"joules_per_output_token":2.6186415116833524}
