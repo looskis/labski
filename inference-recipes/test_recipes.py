@@ -115,6 +115,19 @@ class RecipeTests(unittest.TestCase):
 
 
 class NativeChatTests(unittest.TestCase):
+    def test_constrained_token_preserves_rendered_answer(self):
+        args = SimpleNamespace(model="example", url="http://localhost", one_letter_token=True)
+        allowed = list(range(20, 30))
+        choice = dict(token_ids=[27], message={"content": " H"}, finish_reason="length")
+        data = dict(choices=[choice], usage={"prompt_tokens": 12, "completion_tokens": 1})
+        with patch("mmlu_probe.post", return_value=data) as request:
+            row = mmlu_probe.one_letter(args, "Choose a letter", allowed)
+            self.assertTrue(request.call_args.args[1]["return_token_ids"])
+            self.assertEqual((row["answer"], row["visible_answer"], row["answer_token_id"]), ("H", " H", 27))
+            choice["token_ids"] = [91]
+            with self.assertRaises(ValueError):
+                mmlu_probe.one_letter(args, "Choose a letter", allowed)
+
     def test_reasoning_only_response_and_output_budget(self):
         args = SimpleNamespace(model="example", url="http://localhost", max_tokens=8, reasoning_effort="low")
         data = {"choices": [{"message": {"content": None, "reasoning_content": "analysis"},

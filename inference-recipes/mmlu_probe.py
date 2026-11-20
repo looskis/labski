@@ -55,11 +55,24 @@ def letter_ids(url, model):
 def one_letter(args, prompt, allowed):
     body = dict(model=args.model, messages=[dict(role="user", content=prompt)], temperature=0,
                 max_tokens=1, allowed_token_ids=allowed, chat_template_kwargs={"enable_thinking": False})
+    by_token = getattr(args, "one_letter_token", False)
+    if by_token:
+        body["return_token_ids"] = True
     start = time.perf_counter()
     data = post(args.url + "/v1/chat/completions", body)
     elapsed = time.perf_counter() - start
     choice = data["choices"][0]
-    answer = choice["message"]["content"]
+    message = choice["message"]
+    answer = message.get("content")
+    if by_token:
+        ids = choice.get("token_ids")
+        if (data["usage"]["completion_tokens"] != 1 or not isinstance(ids, list) or len(ids) != 1
+                or type(ids[0]) is not int or ids[0] not in allowed):
+            raise ValueError(f"server did not return one of the ten allowed token IDs: {ids!r}")
+        return dict(answer=LETTERS[allowed.index(ids[0])], answer_token_id=ids[0], visible_answer=answer,
+                    reasoning_answer=message.get("reasoning") or message.get("reasoning_content") or "",
+                    finish=choice["finish_reason"], elapsed_s=elapsed, input_tokens=data["usage"]["prompt_tokens"],
+                    output_tokens=1, allowed_token_ids=allowed)
     if not isinstance(answer, str) or len(answer) != 1 or answer not in LETTERS or data["usage"]["completion_tokens"] != 1:
         raise ValueError("server did not return exactly one allowed answer token")
     return dict(answer=answer, finish=choice["finish_reason"], elapsed_s=elapsed,
@@ -94,7 +107,7 @@ def run(args):
     cases = [json.loads(line) for line in args.corpus.read_text().splitlines()]
     if not cases or len({c["id"] for c in cases}) != len(cases):
         raise ValueError("empty corpus or duplicate IDs")
-    allowed = letter_ids(args.url, args.model) if args.one_letter else None
+    allowed = letter_ids(args.url, args.model) if args.one_letter or args.one_letter_token else None
     subjects = Counter()
     with args.out.open("x") as stream:
         for item in cases:
@@ -136,12 +149,14 @@ if __name__ == "__main__":
     trial.add_argument("--max-tokens", type=int, help="output budget (16 short-answer, 256 native effort)")
     trial.add_argument("--per-subject", type=int, help="score the first N pinned cases of each subject")
     mode.add_argument("--one-letter", action="store_true", help="restrict greedy decoding to one A–J token")
+    mode.add_argument("--one-letter-token", action="store_true",
+                      help="score the one allowed generated token ID and preserve its visible rendering")
     for parser in (prep, trial):
         parser.add_argument("--out", required=True, type=Path)
     args = cli.parse_args()
     if args.per_subject is not None and args.per_subject < 1:
         cli.error("--per-subject must be positive")
     if args.command == "run" and args.max_tokens is not None:
-        if args.max_tokens < 1 or (args.one_letter and args.max_tokens != 1):
-            cli.error("use a positive output budget, or 1 for --one-letter")
+        if args.max_tokens < 1 or ((args.one_letter or args.one_letter_token) and args.max_tokens != 1):
+            cli.error("use a positive output budget, or 1 for a one-letter probe")
     (prepare if args.command == "prepare" else run)(args)
