@@ -12,14 +12,11 @@ patch="$PWD/0014-labski-q8-prompt-tiles.patch"
 work=$(mktemp -d)
 engine_revision=81de26f649677aa72ae0034d4af6e010cd947038
 recipe_revision=d8a7439e8c5aac8645c423ccd24189690359ab69
-git -C "$work" init -q engine
-git -C "$work/engine" fetch --quiet --depth=1 https://github.com/ashhart/TensorFold.git "$engine_revision"
-git -C "$work/engine" checkout -q --detach FETCH_HEAD
-git -C "$work" init -q recipe
-git -C "$work/recipe" fetch --quiet --depth=1 https://github.com/MiaAI-Lab/GLM-5.3-Flash-DGX-Sparks-1104.git "$recipe_revision"
-git -C "$work/recipe" checkout -q --detach FETCH_HEAD
-mkdir "$work/src" "$work/zig" "$work/out" "$work/cache" "$work/global"
-git -C "$work/engine" archive HEAD | tar -x -C "$work/src"
+mkdir "$work/src" "$work/recipe" "$work/zig" "$work/out" "$work/cache" "$work/global"
+curl -fL --retry 3 "https://codeload.github.com/ashhart/TensorFold/tar.gz/$engine_revision" -o "$work/engine.tar.gz"
+curl -fL --retry 3 "https://codeload.github.com/MiaAI-Lab/GLM-5.3-Flash-DGX-Sparks-1104/tar.gz/$recipe_revision" -o "$work/recipe.tar.gz"
+tar -xzf "$work/engine.tar.gz" -C "$work/src" --strip-components=1
+tar -xzf "$work/recipe.tar.gz" -C "$work/recipe" --strip-components=1
 (
   cd "$work/src"
   set -- "$work"/recipe/patches/engine/*.patch
