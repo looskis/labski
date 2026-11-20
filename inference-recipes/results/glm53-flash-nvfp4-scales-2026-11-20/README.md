@@ -28,7 +28,7 @@ We then refitted the complete dense prefix that every text token traverses befor
 
 The fixed-code candidate changed 6,447,486 of 28,311,552 block-scale bytes. The joint fit changed 18,408,671 block-scale bytes and 160,540,200 4-bit codes. We verified both resulting patches by digest on the two serving ranks. The table measures full-weight error and native output error on synthetic activations. [Scale-only receipt](dense-prefix/scale_only.json) · [Joint-fit receipt](dense-prefix/scale_and_codes.json) · [Reproduction and serving commands](../../experiments/glm53-nvfp4-scales/)
 
-On two Sparks, the joint dense refit moved WikiText perplexity from **2.6859 to 2.6688** over 30,938 predictions. The 95% paired interval for the NLL difference spans zero. Free answers rose from 22/28 to 23/28, while one of eight 1,500-record lookups echoed the correct key and value and failed strict scoring. Both versions generated about 13.6 tokens/s. [Serving results, matched answers and per-article likelihood](serving/)
+On two Sparks, the joint dense refit moved WikiText perplexity from **2.6859 to 2.6688** over 30,938 predictions. The 95% paired interval for the NLL difference spans zero. Free answers rose from 22/28 to 23/28, while one of eight 1,500-record lookups echoed the correct key and value and failed strict scoring. Both versions generated about 13.6 tokens/s. Refitting scales alone moved perplexity to 2.6698 while retaining 22/28 free answers and 8/8 strict lookups. Its paired NLL interval also included zero. [Serving results, matched answers and per-article likelihood](serving/)
 
 ## Reproduce on one Spark
 

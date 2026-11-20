@@ -1,0 +1,11 @@
+{
+  "articles": 62,
+  "scored_tokens": 30938,
+  "articles_lower_nll": 35,
+  "mean_nll_delta": -0.000379030424236708,
+  "perplexity_ratio": 0.9996210413987199,
+  "paired_article_bootstrap_95": [
+    -0.006806576896402944,
+    0.005952617091024945
+  ]
+}
