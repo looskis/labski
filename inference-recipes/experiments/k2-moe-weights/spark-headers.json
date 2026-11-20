@@ -1,0 +1,9 @@
+{
+  "revision": "d3a6e26e4d59243ed6e569e39ca6facf4da84c05",
+  "arm64_machine": "aarch64",
+  "indexed_files": 12,
+  "metadata_tensors_checked": 134300,
+  "sparse_fixture_allocated_bytes": 16863232,
+  "physical_weight_payload_read_bytes": 0,
+  "all_rank_plans_identical": true
+}

@@ -1,0 +1,33 @@
+{
+  "loader_source_sha256": "a853b916a975e2256a944a203cd707fb67a83efffeecb2fe55b88792791e45e2",
+  "rank_results": [
+    {
+      "rank": 0,
+      "shards": 24,
+      "tensors": 1770,
+      "expert_tensors": 272,
+      "tensor_bytes": 107988363584
+    },
+    {
+      "rank": 1,
+      "shards": 24,
+      "tensors": 1770,
+      "expert_tensors": 272,
+      "tensor_bytes": 107988363584
+    },
+    {
+      "rank": 2,
+      "shards": 24,
+      "tensors": 1770,
+      "expert_tensors": 272,
+      "tensor_bytes": 107988363584
+    },
+    {
+      "rank": 3,
+      "shards": 24,
+      "tensors": 1770,
+      "expert_tensors": 272,
+      "tensor_bytes": 107988363584
+    }
+  ]
+}
