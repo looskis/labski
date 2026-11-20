@@ -20,7 +20,7 @@ All six kernels produced identical bytes across every output of every tested sha
 
 ## Reproduce
 
-Check out TensorFold at the pinned revision. Mia’s November 20 recipe selects the same engine commit. Its 13 patches leave the CUDA source and headers used here intact. The lab used an ARM64 SM121a build of the following PyTorch image and mounted its TensorFold checkout read-only. Run the commands from this results directory. [Mia recipe revision](https://github.com/MiaAI-Lab/GLM-5.3-Flash-DGX-Sparks-1104/tree/d8a7439e8c5aac8645c423ccd24189690359ab69) · [TensorFold license](https://github.com/ashhart/TensorFold/blob/81de26f649677aa72ae0034d4af6e010cd947038/LICENSE)
+Check out TensorFold at the pinned revision. Mia’s November 20 recipe selects the same engine commit. Its 13 patches leave the CUDA source and headers used here intact. The lab compiled the pinned sources for ARM64 and SM121a in the following PyTorch image. Set `TF` to the path for a fresh TensorFold checkout and run these commands from this results directory. [Mia recipe revision](https://github.com/MiaAI-Lab/GLM-5.3-Flash-DGX-Sparks-1104/tree/d8a7439e8c5aac8645c423ccd24189690359ab69) · [TensorFold license](https://github.com/ashhart/TensorFold/blob/81de26f649677aa72ae0034d4af6e010cd947038/LICENSE)
 
 ```sh
 git clone https://github.com/ashhart/TensorFold.git "$TF"

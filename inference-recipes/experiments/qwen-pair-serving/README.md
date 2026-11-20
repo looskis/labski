@@ -16,7 +16,7 @@ python3 deploy.py tp2 --rank "$RANK" --cache "$HF_HUB_CACHE" --port 18100 \
   --head "$HEAD_IP" --node-ip "$FABRIC_IP" --interface "$INTERFACE" --hcas "$HCAS"
 ```
 
-To reproduce the higher-throughput 32-client run, pass `--kv-gib 9` on both ranks. For finer increments, pass a whole number of MiB with `--kv-mib`. At each budget use the same value for both replicas and the tensor-parallel pair. [Throughput, latency and GPU energy](../../results/qwen38-27b-pair-serving-2026-11-20/)
+To reproduce the higher-throughput 32-client run, pass `--kv-gib 9` on both ranks. The 3.25 GiB follow-up used `--kv-mib 3328` and admitted all 32 short requests. Replay it with `--clients 32 64 --timing-only`. At each budget use the same value for both replicas and the tensor-parallel pair. [Throughput, latency and GPU energy](../../results/qwen38-27b-pair-serving-2026-11-20/)
 
 For each deployment, give the benchmark a new output directory. The shared client uses round-robin dispatch across the supplied endpoints. Prepare the diagnostic corpus with the lab’s pinned MMLU-Pro procedure. [Corpus preparation](../../results/qwen38-27b-precision-2026-11-19/#reproduce)
 

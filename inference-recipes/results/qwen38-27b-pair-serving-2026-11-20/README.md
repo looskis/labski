@@ -2,6 +2,8 @@
 
 On two DGX Sparks, one tensor-parallel Qwen3.8 27B endpoint delivered the most output tokens per second at every tested load. With 9 GiB of KV cache on each Spark, **32 clients reached 354.39 tok/s at 0.21 GPU J/token**. Two independent replicas reached 296.47 tok/s at 0.25 GPU J/token and started responding sooner at the 95th percentile, 455 ms against 587 ms. At 64 clients the sharded endpoint led on both throughput and first-token latency. [Launcher and replay](../../experiments/qwen-pair-serving/)
 
+An extra **256 MiB per Spark** was enough to admit all 32 short requests in a follow-up on the lab’s second directly connected pair. At 3.25 GiB, TP2 reached **351.58 tok/s** and the slowest client in any 32-client trial received its first token within 0.60 s. The original pair’s 9 GiB configuration reached 354.39 tok/s. [3.25 GiB follow-up](#recovering-the-last-slot-with-256-mib)
+
 ![Aggregate throughput and p95 first-token latency for Qwen3.8 27B at six client counts, by placement and 3 or 9 GiB of KV per GPU](serving.png)
 
 ## 3 GiB KV per Spark
@@ -40,10 +42,23 @@ Replicas scored **19/28** free answers. TP2 scored **18/28**, gaining 0 correct 
 
 At fixed placement, changing the KV budget retained all 28 correctness verdicts for replicas and 26/28 for TP2. The two changed TP2 verdicts offset one another. Across both budgets, each deployment answered all eight exact lookups correctly. These small diagnostics leave general accuracy unresolved. [3 GiB TP2 answers](3g/tp2/quality.jsonl.gz) · [9 GiB TP2 answers](9g/tp2/quality.jsonl.gz)
 
-For short bursts on this checkpoint, use 9 GiB per Spark and TP2 when aggregate output or GPU energy per token is the priority. At 32 clients the independent pair traded 16% of TP2’s throughput for a 132 ms shorter p95 wait to the first token. At 64 clients, both choices queued requests beyond the 32 offered slots. TP2 reached 355.78 tok/s with 9.16 s p95, compared with 296.01 tok/s and 10.80 s for replicas. [Per-request replica timings](9g/replicas/requests.jsonl.gz) · [Per-request TP2 timings](9g/tp2/requests.jsonl.gz) · [Replica energy](9g/replicas/energy.jsonl) · [TP2 energy](9g/tp2/energy.jsonl)
+For short bursts on this checkpoint, the 9 GiB TP2 run led on aggregate output and GPU energy per token. The 3.25 GiB follow-up below recovers nearly all of its throughput using 5.75 GiB less cache per Spark. At 32 clients the independent pair traded 16% of TP2’s throughput for a 132 ms shorter p95 wait to the first token. At 64 clients, both choices queued requests beyond the 32 offered slots. TP2 reached 355.78 tok/s with 9.16 s p95, compared with 296.01 tok/s and 10.80 s for replicas. [Per-request replica timings](9g/replicas/requests.jsonl.gz) · [Per-request TP2 timings](9g/tp2/requests.jsonl.gz) · [Replica energy](9g/replicas/energy.jsonl) · [TP2 energy](9g/tp2/energy.jsonl)
 
 ## Why two requests waited ten seconds
 
 At 32 clients and 3 GiB per GPU, each replica actually ran 15 requests while one waited and the KV pool was 98.4% occupied. TP2 ran 31 while one waited with the pool at 100%. All three 32-client bursts showed the same tail. For replicas, two clients waited 10.19–10.53 s for their first token and the other 30 started in under 0.48 s. For TP2, one waited 8.58–8.60 s and 31 started in under 0.60 s. With 32 observations, nearest-rank p95 is the second-slowest request. TP2’s subsecond p95 hides its slowest client at this budget. [Replica scheduler samples](3g/replicas/scheduler.json) · [TP2 scheduler samples](3g/tp2/scheduler.json) · [Raw replica requests](3g/replicas/requests.jsonl.gz) · [Raw TP2 requests](3g/tp2/requests.jsonl.gz)
 
 The hybrid attention/recurrent engine selected a 784-token attention block in every configuration. Even these short requests used enough pages to fall one scheduled request short of each endpoint’s advertised maximum at 3 GiB. With 9 GiB, both replicas ran 16 requests at 34.2% occupancy and TP2 ran 32 at 34.1%. Every client in every 32-client burst started within 0.60 s. The server samples arrive about ten seconds apart. Only samples whose entire timestamp second lay inside a measured trial are included. [9 GiB replicas](9g/replicas/scheduler.json) · [9 GiB TP2](9g/tp2/scheduler.json) · [Extraction from UTC engine logs](../../experiments/qwen-pair-serving/scheduler.py)
+
+## Recovering the last slot with 256 MiB
+
+We set `--kv-mib 3328` on both GPUs and repeated the 32- and 64-client tests on the lab’s other pair of DGX Sparks. Every prompt hash, input length, 96-token output budget and client assignment matched the earlier runs. There were three trials per cell. The new run tested the admission and latency hypothesis using the same checkpoint and serving flags. It did not repeat the answer-quality panel.
+
+| Clients | Placement | Output tok/s | p95 first token, ms | Slowest first token across all three trials, ms | GPU J/token |
+| ---: | --- | ---: | ---: | ---: | ---: |
+| 32 | [Two replicas](3328m/replicas/) | 297.67 | 461 | 469 | 0.24 |
+| 32 | [TP2](3328m/tp2/) | 351.58 | 568 | 592 | 0.23 |
+| 64 | [Two replicas](3328m/replicas/) | 298.40 | 10,722 | 10,751 | 0.24 |
+| 64 | [TP2](3328m/tp2/) | 352.53 | 9,219 | 9,313 | 0.23 |
+
+At 32 clients, each replica ran 16 requests with 97.0% KV occupancy, and TP2 ran 32 with 95.5%. At 64, the same engines queued a second wave, as expected with 32 total scheduler slots. Use 3.25 GiB as a measured starting point for these short bursts. Longer prompts, outputs or simultaneous sessions require their own capacity check. Absolute energy also varied across the two physical pairs. [Replica scheduler](3328m/replicas/scheduler.json) · [TP2 scheduler](3328m/tp2/scheduler.json) · [Replica requests](3328m/replicas/requests.jsonl.gz) · [TP2 requests](3328m/tp2/requests.jsonl.gz)
