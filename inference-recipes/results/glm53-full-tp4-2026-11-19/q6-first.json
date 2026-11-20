@@ -1,0 +1,13 @@
+{
+  "finish": "stop",
+  "elapsed_s": 0.6086115650014108,
+  "input_tokens": 24,
+  "output_tokens": 2,
+  "reasoning_chars": 0,
+  "max_tokens": 512,
+  "enable_thinking": false,
+  "visible_chars": 2,
+  "visible_sha256": "73475cb40a568e8da8a045ced110137e159f890ac4da883b6b17dc651b3a8049",
+  "answer": "42",
+  "exact_sum": true
+}

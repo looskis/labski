@@ -16,7 +16,8 @@
     "DRAFTER": "mtp",
     "TF_GLM53_ROCE": "0",
     "TF_GLM53_PROMPT_REUSE": "0",
-    "NCCL_CUMEM_ENABLE": "0"
+    "NCCL_CUMEM_ENABLE": "0",
+    "NCCL_MAX_CTAS": "2"
   },
   "options": {},
   "source": "https://github.com/drowzeys/keys-TensorFold-GLM-5.3-TP4-4x-DGX-Spark/tree/ea05ec696d1c408268a3d1de39b090b154c1ebff"
