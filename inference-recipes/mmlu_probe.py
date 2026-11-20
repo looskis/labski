@@ -35,10 +35,10 @@ def prepare(args):
                 stream.write(json.dumps(item) + "\n")
 
 
-def post(url, body):
+def post(url, body, timeout=180):
     request = urllib.request.Request(url, data=json.dumps(body).encode(),
                                      headers={"Content-Type": "application/json"})
-    with urllib.request.urlopen(request, timeout=180) as response:
+    with urllib.request.urlopen(request, timeout=timeout) as response:
         return json.load(response)
 
 
@@ -71,7 +71,7 @@ def native_chat(args, prompt):
     budget = args.max_tokens or 256
     data = post(args.url + "/v1/chat/completions", dict(
         model=args.model, messages=[{"role": "user", "content": prompt}], temperature=0,
-        max_tokens=budget, chat_template_kwargs={"reasoning_effort": args.reasoning_effort}))
+        max_tokens=budget, chat_template_kwargs={"reasoning_effort": args.reasoning_effort}), timeout=600)
     choice = data["choices"][0]
     message = choice["message"]
     usage = data["usage"]
