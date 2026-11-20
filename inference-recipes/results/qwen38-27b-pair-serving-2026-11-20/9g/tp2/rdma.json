@@ -1,0 +1,44 @@
+[
+  {
+    "rank": 0,
+    "delta": {
+      "enp1s0f0np0": {
+        "rx_vport_rdma_unicast_bytes": 0,
+        "tx_vport_rdma_unicast_bytes": 0
+      },
+      "enp1s0f1np1": {
+        "rx_vport_rdma_unicast_bytes": 65264102104,
+        "tx_vport_rdma_unicast_bytes": 65261576472
+      },
+      "enP2p1s0f0np0": {
+        "rx_vport_rdma_unicast_bytes": 0,
+        "tx_vport_rdma_unicast_bytes": 0
+      },
+      "enP2p1s0f1np1": {
+        "rx_vport_rdma_unicast_bytes": 58664582688,
+        "tx_vport_rdma_unicast_bytes": 58662019422
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "delta": {
+      "enp1s0f0np0": {
+        "rx_vport_rdma_unicast_bytes": 65261576472,
+        "tx_vport_rdma_unicast_bytes": 65264102104
+      },
+      "enp1s0f1np1": {
+        "rx_vport_rdma_unicast_bytes": 0,
+        "tx_vport_rdma_unicast_bytes": 0
+      },
+      "enP2p1s0f0np0": {
+        "rx_vport_rdma_unicast_bytes": 58662019422,
+        "tx_vport_rdma_unicast_bytes": 58664582688
+      },
+      "enP2p1s0f1np1": {
+        "rx_vport_rdma_unicast_bytes": 0,
+        "tx_vport_rdma_unicast_bytes": 0
+      }
+    }
+  }
+]
