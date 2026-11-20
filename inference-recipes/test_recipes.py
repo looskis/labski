@@ -13,6 +13,17 @@ import spark
 
 
 class RecipeTests(unittest.TestCase):
+    def test_one_letter_regex_records_the_enforced_constraint(self):
+        args = SimpleNamespace(model="ling", url="http://localhost", one_letter_regex=True)
+        reply = {"choices": [{"message": {"content": "C"}, "finish_reason": "length"}],
+                 "usage": {"prompt_tokens": 10, "completion_tokens": 1}}
+        with patch.object(mmlu_probe, "post", return_value=reply) as request:
+            row = mmlu_probe.one_letter(args, "Choose a letter", None)
+        body = request.call_args.args[1]
+        self.assertEqual(body["regex_pattern"], "[A-J]")
+        self.assertNotIn("allowed_token_ids", body)
+        self.assertEqual((row["answer"], row["regex_pattern"], row["output_tokens"]), ("C", "[A-J]", 1))
+
     def test_all_ranks_and_pins(self):
         for name, path in spark.RECIPES.items():
             r = json.loads(path.read_text())

@@ -1,0 +1,115 @@
+{
+  "checkpoint": "auryn-macmillan/Ling-3.1-flash-1019-EXL3-1.5-1.0bpw",
+  "checkpoint_revision": "5da2462decd55ba876f2331b462105650f6b31ac",
+  "exllamav3_commit": "bd1f519172406a9560bd5c90e61000691bb69a07",
+  "tabbyapi_commit": "a32a82e255d9ffe1b6e805cb37527a1f53d9a62f",
+  "base_image": "nvcr.io/nvidia/pytorch:26.07-py3@sha256:7531d90bcbe0e43e1f7363029c7e145ce90eebeb494a7b4695fdba0329d7c3c3",
+  "runtime_image_id": "sha256:14e7ae7e4deffe83a13877e7ef4f14ecdde0027cefbba9735992ab9f4ebd240d",
+  "wheel": "exllamav3-1.6.6-cp312-cp312-linux_aarch64.whl",
+  "wheel_sha256": "043c97ebb095380583437752f9295e570f3d09f44653b152c02faad724e2aab0",
+  "reported_load_seconds": 84.3,
+  "model_modules": 75,
+  "single_gpu": true,
+  "recurrent_storage": "fp16",
+  "weight_files": [
+    {
+      "file": "model-00001-of-00013.safetensors",
+      "bytes": 7472418055,
+      "hub_blob": "470d5a3938577f91c4286281ecef670a5d253f88d19db89170a7464d663d5312"
+    },
+    {
+      "file": "model-00002-of-00013.safetensors",
+      "bytes": 8214116966,
+      "hub_blob": "b548a8f8f6cc2e405981e63896db257f2d33c5f6e5cbed46f609655661fa39b2"
+    },
+    {
+      "file": "model-00003-of-00013.safetensors",
+      "bytes": 8175965585,
+      "hub_blob": "a09ebfa4cbc31b6d64f6d0669c87340b9128e0a6e9f6855b80f20147b0b21dd5"
+    },
+    {
+      "file": "model-00004-of-00013.safetensors",
+      "bytes": 8308843803,
+      "hub_blob": "799821ebd0404ca2c36e01fbfd1283b6e5f840f360353ba3a69ec87de7e2a0ca"
+    },
+    {
+      "file": "model-00005-of-00013.safetensors",
+      "bytes": 7976564882,
+      "hub_blob": "c185e51f892788697b9a9fc0b9649130af1b5998d03772096f387e6b5d3794c7"
+    },
+    {
+      "file": "model-00006-of-00013.safetensors",
+      "bytes": 7938401139,
+      "hub_blob": "90df52a291421d76774a6a9bad7b7b89aa05b2ddd71c45c6cc585ff4371ed06e"
+    },
+    {
+      "file": "model-00007-of-00013.safetensors",
+      "bytes": 7302206441,
+      "hub_blob": "6ae7a348b30ffad75f1dece159c9da77a65cb476d1ce3a175696e8c0ff512910"
+    },
+    {
+      "file": "model-00008-of-00013.safetensors",
+      "bytes": 7169332625,
+      "hub_blob": "41944a81721a0dbef62a1e39136ef37b21e00c9b1cd2600ea9a33cdcf0004929"
+    },
+    {
+      "file": "model-00009-of-00013.safetensors",
+      "bytes": 8214129328,
+      "hub_blob": "719ea4ed85ca36dc7593d08ffbbc6a21b8237ea0b474bf967a357e16aa60e23c"
+    },
+    {
+      "file": "model-00010-of-00013.safetensors",
+      "bytes": 7672644703,
+      "hub_blob": "8898c288af6c7802fa1b677e3c5e2183a2ceccb5262a6dda15a3b7a5ca04655c"
+    },
+    {
+      "file": "model-00011-of-00013.safetensors",
+      "bytes": 8175965585,
+      "hub_blob": "e2075fa2d3d1177ee33b0131e380e803006d4e8085a8f00f9629ed7d92102978"
+    },
+    {
+      "file": "model-00012-of-00013.safetensors",
+      "bytes": 8479885764,
+      "hub_blob": "b8054491ad7868c2abdc7c0ae26a10ddf72b542aa549421d6198408cd835285a"
+    },
+    {
+      "file": "model-00013-of-00013.safetensors",
+      "bytes": 5705306418,
+      "hub_blob": "323ec10c38def015ee172681a0b4e0e69e17eec73d2067439c2c0f9611f0310c"
+    }
+  ],
+  "launcher_sha256": "2da680c56eb4d4baa2077402bd11385cd6ace3fd55cd3caf2bc497d13cd45f2f",
+  "runtime_versions": {
+    "aiofiles": "25.1.0",
+    "aiohttp": "3.14.3",
+    "async_lru": "2.3.0",
+    "fastapi": "0.165.0",
+    "fastapi-slim": "0.129.1",
+    "flash_attn": "2.7.4.post1+git5231d95fe1.54157505",
+    "httptools": "0.9.0",
+    "huggingface_hub": "1.24.0",
+    "jinja2": "3.1.6",
+    "llguidance": "1.9.1",
+    "loguru": "0.8.0",
+    "marisa_trie": "1.4.1",
+    "ninja": "1.13.0",
+    "numpy": "2.1.0",
+    "packaging": "26.2",
+    "pillow": "12.3.0",
+    "psutil": "7.2.2",
+    "pydantic": "2.13.4",
+    "pyyaml": "6.0.1",
+    "requests": "2.34.2",
+    "rich": "15.0.0",
+    "ruamel.yaml": "0.19.1",
+    "safetensors": "0.8.0",
+    "setuptools": "81.0.0",
+    "sse-starlette": "3.7.0",
+    "tokenizers": "0.23.1",
+    "torch": "2.13.0a0+9186a08b2c.nv26.7.59513937",
+    "triton": "3.7.1+gitf797708c.nv26.7",
+    "typing_extensions": "4.16.0",
+    "uvicorn": "0.54.0",
+    "uvloop": "0.22.1"
+  }
+}

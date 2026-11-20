@@ -1,0 +1,17 @@
+network:
+  host: 127.0.0.1
+  port: 8000
+  disable_auth: true
+model:
+  model_dir: /models
+  model_name: ling31-exl3-low
+  max_seq_len: 8192
+  cache_size: 32768
+  cache_mode: "8,8"
+  chunk_size: 512
+  max_batch_size: 4
+  tensor_parallel: false
+  template_vars_default:
+    thinking_option: "off"
+memory:
+  sysmem_recurrent_cache: 1024

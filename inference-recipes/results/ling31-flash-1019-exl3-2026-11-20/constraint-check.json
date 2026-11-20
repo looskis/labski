@@ -1,0 +1,65 @@
+[
+  {
+    "id": 770,
+    "constraint": {
+      "allowed_token_ids": [
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ]
+    },
+    "visible": "Let",
+    "reasoning": null,
+    "finish": "length",
+    "usage": {
+      "prompt_tokens": 175,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "prompt_time": 1.2,
+      "prompt_tokens_per_sec": 145.83,
+      "completion_tokens": 1,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      },
+      "completion_time": 1.16,
+      "completion_tokens_per_sec": 0.86,
+      "total_tokens": 176,
+      "total_time": 2.36
+    }
+  },
+  {
+    "id": 770,
+    "constraint": {
+      "regex_pattern": "[A-J]"
+    },
+    "visible": "H",
+    "reasoning": null,
+    "finish": "length",
+    "usage": {
+      "prompt_tokens": 175,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "prompt_time": 0.89,
+      "prompt_tokens_per_sec": 196.63,
+      "completion_tokens": 1,
+      "completion_tokens_details": {
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      },
+      "completion_time": 0.07,
+      "completion_tokens_per_sec": 13.48,
+      "total_tokens": 176,
+      "total_time": 0.97
+    }
+  }
+]
