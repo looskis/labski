@@ -68,6 +68,11 @@ def serve_command(args, recipe, cache):
         limit = f"{recipe['container_memory_gib']}g"
         cmd += ["--memory", limit, "--memory-swap", limit]
     model_path = str(CONTAINER_CACHE / snapshot(recipe))
+    output_head = getattr(args, "output_head", None)
+    if output_head is not None:
+        if engine != "tensorfold-glm53":
+            raise ValueError("--output-head applies to the full GLM-5.3 TensorFold checkpoint")
+        env["HEAD_Q"] = "off" if output_head == "bf16" else "/model/lm_head-6bit/lm_head-6bit.safetensors"
     fabric_range = getattr(args, "fabric_range", None)
     link_prefix = getattr(args, "link_prefix", None)
     if (fabric_range is not None or link_prefix is not None) and args.transport != "ring-roce":
@@ -129,7 +134,7 @@ def serve_command(args, recipe, cache):
         env.update(RANK=str(args.rank), MASTER=f"{args.head}:{args.master_port}",
                    CONTEXT=str(recipe["context"]), PARALLEL=str(recipe["sequences"]), PORT=str(args.port))
         # Keep the image's pinned rank-specific entrypoint and bind its API to loopback.
-        digest = "e3096824c387c47b4196d8382ca3bd321e0c3ef83f63f880e20b6e1239c0e597"
+        digest = "7ab8ff9e55eb2ee6052ea51a2066e571967f9b294af17d0804caa4f9267eaa32"
         serve = ["-c", f"set -eu; echo '{digest}  /opt/keys-glm53/serve' | sha256sum -c -; "
                  "sed 's/--host 0[.]0[.]0[.]0/--host 127.0.0.1/g' /opt/keys-glm53/serve > /tmp/labski-serve; "
                  "exec /bin/bash /tmp/labski-serve"]
@@ -210,6 +215,7 @@ def main():
     cli.add_argument("--link-prefix", type=int, help="IPv4 prefix length of each RoCE ring edge (default: 30)")
     cli.add_argument("--ring-nccl", type=Path, help="local replacement NCCL shared library for a SGLang or TensorFold RoCE ring")
     cli.add_argument("--ring-only-init", action="store_true", help="enable the Sparkring library’s ring-only setup")
+    cli.add_argument("--output-head", choices=("q6", "bf16"), help="select the full GLM-5.3 output projection")
     args = parser.parse_args()
     if args.action == "list":
         for name, file in RECIPES.items():

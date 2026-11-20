@@ -1,5 +1,6 @@
 """Prepare and run a deterministic zero-shot, short-answer MMLU-Pro diagnostic."""
 import argparse
+from collections import Counter
 from collections import defaultdict
 import hashlib
 import json
@@ -65,18 +66,43 @@ def one_letter(args, prompt, allowed):
                 input_tokens=data["usage"]["prompt_tokens"], output_tokens=1, allowed_token_ids=allowed)
 
 
+def native_chat(args, prompt):
+    start = time.perf_counter()
+    budget = args.max_tokens or 256
+    data = post(args.url + "/v1/chat/completions", dict(
+        model=args.model, messages=[{"role": "user", "content": prompt}], temperature=0,
+        max_tokens=budget, chat_template_kwargs={"reasoning_effort": args.reasoning_effort}))
+    choice = data["choices"][0]
+    message = choice["message"]
+    usage = data["usage"]
+    if usage["prompt_tokens"] <= 0 or not 0 < usage["completion_tokens"] <= budget:
+        raise ValueError("server token usage falls outside the request budget")
+    reasoning = message.get("reasoning_content") or message.get("reasoning") or ""
+    return dict(answer=message.get("content") or "", finish=choice["finish_reason"],
+                elapsed_s=time.perf_counter() - start, input_tokens=usage["prompt_tokens"],
+                output_tokens=usage["completion_tokens"], reasoning_chars=len(reasoning),
+                requested_effort=args.reasoning_effort, max_tokens=budget)
+
+
 def run(args):
     cases = [json.loads(line) for line in args.corpus.read_text().splitlines()]
     if not cases or len({c["id"] for c in cases}) != len(cases):
         raise ValueError("empty corpus or duplicate IDs")
     allowed = letter_ids(args.url, args.model) if args.one_letter else None
+    subjects = Counter()
     with args.out.open("x") as stream:
         for item in cases:
+            subjects[item["subject"]] += 1
+            if args.per_subject and subjects[item["subject"]] > args.per_subject:
+                continue
             if allowed:
                 result = one_letter(args, item["prompt"], allowed)
                 complete = result["finish"] in ("stop", "length")
+            elif args.reasoning_effort:
+                result = native_chat(args, item["prompt"])
+                complete = result["finish"] == "stop"
             else:
-                result = bench.stream(args.url, args.model, item["prompt"], 16, 180, "off")
+                result = bench.stream(args.url, args.model, item["prompt"], args.max_tokens or 16, 180, "off")
                 complete = result["finish"] == "stop"
             answer = result["answer"].strip()
             row = dict(id=item["id"], subject=item["subject"], expected=item["expected"],
@@ -96,10 +122,18 @@ if __name__ == "__main__":
     trial.add_argument("model")
     trial.add_argument("corpus", type=Path)
     trial.add_argument("--url", default="http://127.0.0.1:8000")
-    trial.add_argument("--one-letter", action="store_true", help="restrict greedy decoding to one A–J token")
+    mode = trial.add_mutually_exclusive_group()
+    mode.add_argument("--reasoning-effort", choices=("none", "low", "high", "max"),
+                      help="request the model's native chat template effort and score final content")
+    trial.add_argument("--max-tokens", type=int, help="output budget (16 short-answer, 256 native effort)")
+    trial.add_argument("--per-subject", type=int, help="score the first N pinned cases of each subject")
+    mode.add_argument("--one-letter", action="store_true", help="restrict greedy decoding to one A–J token")
     for parser in (prep, trial):
         parser.add_argument("--out", required=True, type=Path)
     args = cli.parse_args()
-    if args.command == "prepare" and args.per_subject < 1:
-        cli.error("per-subject must be positive")
+    if args.per_subject is not None and args.per_subject < 1:
+        cli.error("--per-subject must be positive")
+    if args.command == "run" and args.max_tokens is not None:
+        if args.max_tokens < 1 or (args.one_letter and args.max_tokens != 1):
+            cli.error("use a positive output budget, or 1 for --one-letter")
     (prepare if args.command == "prepare" else run)(args)

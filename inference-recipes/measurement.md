@@ -94,3 +94,15 @@ python3 gpu_energy.py join runs/pair/prose-c4/trial-1.json rank-0.csv rank-1.csv
 ```
 
 The reported unit is NVML joules per delivered output token, including GPU activity during prefill, decoding and scheduling inside the trial. The default sample interval is 200 ms. Clock alignment and the counter's update cadence limit precision for short trials. Report the number of ranks, trial duration and whether any background workloads shared the GPU. Whole-system or wall-outlet energy requires a separate meter. [NVIDIA cumulative energy counter](https://docs.nvidia.com/deploy/nvml-api/latest/api/group__nvmlDeviceQueries.html)
+
+
+### Score native chat reasoning effort
+
+For a chat template that accepts a named reasoning effort, the probe can send that setting directly and score only the final answer. This command selects the same first two items in each of the 14 pinned subjects across configurations. Use a fresh output path for each run.
+
+```sh
+python3 mmlu_probe.py run inkling2-small-native labski-mmlu-112.jsonl \
+  --reasoning-effort low --max-tokens 256 --per-subject 2 --out inkling-low.jsonl
+```
+
+Each item records the prompt hash, requested effort, finish reason, reported input and generated tokens, elapsed time and number of reasoning characters exposed by the server. Only a stopped response whose final content exactly matches the expected letter counts as correct. Match the prompt hashes and token budgets before comparing scores. [Scoring implementation](mmlu_probe.py)

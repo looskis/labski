@@ -8,6 +8,7 @@ from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
 import bench
+import mmlu_probe
 import spark
 
 
@@ -34,6 +35,8 @@ class RecipeTests(unittest.TestCase):
                             self.assertIn("MASTER=192.0.2.1:29501", cmd)
                             self.assertIn("TF_GLM53_ROCE=0", cmd)
                             self.assertIn("--host 127.0.0.1", cmd[-1])
+                            args.output_head = "bf16"
+                            self.assertIn("HEAD_Q=off", spark.serve_command(args, r, Path("/tmp/test cache")))
                             self.assertIn(":/model:ro", cmd[cmd.index("--volume") + 1])
                             continue
                         self.assertEqual(cmd[cmd.index("--tensor-parallel-size") + 1], str(n))
@@ -100,6 +103,23 @@ class RecipeTests(unittest.TestCase):
             args.ring_nccl = None
             with self.assertRaises(ValueError):
                 spark.serve_command(args, recipe, Path(folder))
+
+
+class NativeChatTests(unittest.TestCase):
+    def test_reasoning_only_response_and_output_budget(self):
+        args = SimpleNamespace(model="example", url="http://localhost", max_tokens=8, reasoning_effort="low")
+        data = {"choices": [{"message": {"content": None, "reasoning_content": "analysis"},
+                             "finish_reason": "length"}],
+                "usage": {"prompt_tokens": 5, "completion_tokens": 8}}
+        with patch("mmlu_probe.post", return_value=data) as request:
+            result = mmlu_probe.native_chat(args, "Choose a letter")
+            body = request.call_args.args[1]
+            self.assertEqual(body["chat_template_kwargs"], {"reasoning_effort": "low"})
+            self.assertEqual(body["max_tokens"], 8)
+            self.assertEqual((result["answer"], result["finish"], result["reasoning_chars"]), ("", "length", 8))
+            data["usage"]["completion_tokens"] = 9
+            with self.assertRaises(ValueError):
+                mmlu_probe.native_chat(args, "Choose a letter")
 
 
 class StreamingTests(unittest.TestCase):

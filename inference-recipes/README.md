@@ -36,6 +36,8 @@ Additional catalog entries are candidates unless a result is linked. Node counts
 | [GLM 5.3 Flash chat](recipes/glm53-flash-fp4.json) | 2 × 128 GB | Mixed FP4-Local | 320B MoE, B12X loader, MTP and 64K context |
 | [MiniMax M3.1 Flash](recipes/minimax31-flash-tp4.json) | 4 × 128 GB | NVFP4 experts + MXFP8 | One large endpoint using all four Sparks and the bundled DSpark head |
 
+For full GLM-5.3, `--output-head q6` selects the pinned auxiliary 6-bit output projection. Use `--output-head bf16` on all four ranks for the control. Both use the same EXL3 checkpoint and MTP setting. This launcher invokes the final image layer’s rank-specific entrypoint with its API bound to loopback. [Full GLM-5.3 recipe](recipes/full-glm53.json) · [Upstream head comparison](https://github.com/drowzeys/keys-TensorFold-GLM-5.3-TP4-4x-DGX-Spark/tree/ea05ec696d1c408268a3d1de39b090b154c1ebff)
+
 ## First completion on one Spark
 
 From this directory on a GB10 Spark running DGX OS, use Python 3.9+, Docker with NVIDIA GPU support. Use a driver compatible with the selected image. Each recipe's `source` points to its model or platform reference. On the lab’s 580.178.04 driver, the NGC 26.10.pre1 image hit a PTX toolchain error serving Qwen3 0.6B. Its verified bring-up recipe uses vLLM 0.33.0 in eager mode. The DFlash2 candidate still uses the NGC build for its GB10-specific kernel flags and needs a separate driver check. The launcher resolves container tags to the immutable digests in [images.json](images.json).
