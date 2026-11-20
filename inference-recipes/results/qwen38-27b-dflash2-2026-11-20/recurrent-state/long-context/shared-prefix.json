@@ -1,0 +1,24 @@
+{
+  "bf16": [
+    {
+      "window_start": 0,
+      "article_row": 1,
+      "scored_tokens": 511,
+      "prefix_token_ids_sha256": "879c4f8cb58da18964fa65581654119a783bbda3f55e9ef365219a9bccf924b9",
+      "short_nll_sum": 939.0654845662084,
+      "long_prefix_nll_sum": 949.5710466482151,
+      "long_minus_short_mean_nll": 0.02055882990607963
+    }
+  ],
+  "fp32": [
+    {
+      "window_start": 0,
+      "article_row": 1,
+      "scored_tokens": 511,
+      "prefix_token_ids_sha256": "879c4f8cb58da18964fa65581654119a783bbda3f55e9ef365219a9bccf924b9",
+      "short_nll_sum": 939.0654845662084,
+      "long_prefix_nll_sum": 943.5750724271275,
+      "long_minus_short_mean_nll": 0.008825025168139052
+    }
+  ]
+}

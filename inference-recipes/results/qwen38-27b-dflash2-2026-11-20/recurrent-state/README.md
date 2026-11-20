@@ -47,10 +47,13 @@ On the eight 6,144-token windows, **only 19 of 49,144 target-token log probabili
 
 Token-weighted perplexity was **7.1389 for FP32 and 7.1091 for BF16**, a 0.42% decrease on these windows. BF16 had lower mean NLL on four windows and higher mean NLL on four. The windows came from one corpus. The launches also used different attention block sizes as a consequence of the cache setting. This comparison measures the deployed configurations and leaves the source of the numerical differences open. Position 0 in each window has no preceding token and is excluded. The repeated window appears only in the repeatability calculation.
 
+The first long window starts with the exact 512 token IDs of one short passage. In the **same BF16 launch**, scoring those first 511 target positions alone gave a summed NLL of 939.0655. Scoring them as the prefix of the 6,144-token request gave 949.5710. FP32 gave 939.0655 and 943.5751 in separate launches. This matched-prefix check shows that request length can change the reported scores even with the state dtype fixed. It does not identify which kernel or cache behavior caused the difference. [Verified prefix IDs and NLL sums](long-context/shared-prefix.json)
+
 The BF16 scores came from the second BF16 launch, after the timing, retrieval and short-passage measurements. A fresh FP32 launch on the same Spark scored the identical window token IDs in the same order. Both used the seven-proposal recipe and disabled prefix caching. To recompute the tables from this directory, run the following.
 
 ```sh
 python3 long_likelihood.py compare long-context/fp32.jsonl.gz long-context/bf16.jsonl.gz
+python3 long_likelihood.py prefix windows.jsonl bf16-repeat/wikitext.jsonl long-context/bf16.jsonl.gz
 ```
 
 ## Reproduce

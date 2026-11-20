@@ -107,6 +107,29 @@ def compare(control, candidate):
     return dict(overall=overall, windows=windows, nominal_chunks=chunks, within_launch_first_window=repeats)
 
 
+def compare_prefixes(windows, short_scores, long_scores):
+    cases = [json.loads(line) for line in windows.read_text().splitlines()]
+    articles = [json.loads(line) for line in short_scores.read_text().splitlines()]
+    scores = read_scores(long_scores)[:-1]
+    if [r["token_ids_sha256"] for r in cases] != [r["token_ids_sha256"] for r in scores]:
+        raise ValueError("long scores and token windows differ")
+    matches = []
+    for case, row in zip(cases, scores):
+        ids = case["ids"]
+        if len(ids) != WIDTH or ids_digest(ids) != row["token_ids_sha256"]:
+            raise ValueError("invalid window IDs")
+        for article in articles:
+            count = article["scored_tokens"]
+            if ids_digest(ids[:count + 1]) != article["token_ids_sha256"]:
+                continue
+            long_nll = -math.fsum(row["logprobs"][:count])
+            matches.append(dict(window_start=row["start"], article_row=article["article_row"], scored_tokens=count,
+                                prefix_token_ids_sha256=article["token_ids_sha256"], short_nll_sum=article["nll_sum"],
+                                long_prefix_nll_sum=long_nll,
+                                long_minus_short_mean_nll=(long_nll - article["nll_sum"]) / count))
+    return matches
+
+
 if __name__ == "__main__":
     cli = argparse.ArgumentParser(description=__doc__)
     commands = cli.add_subparsers(dest="command", required=True)
@@ -122,7 +145,14 @@ if __name__ == "__main__":
     paired = commands.add_parser("compare")
     paired.add_argument("control", type=Path)
     paired.add_argument("candidate", type=Path)
+    prefix = commands.add_parser("prefix")
+    prefix.add_argument("windows", type=Path)
+    prefix.add_argument("short_scores", type=Path)
+    prefix.add_argument("long_scores", type=Path)
     args = cli.parse_args()
+    if args.command == "prefix":
+        print(json.dumps(compare_prefixes(args.windows, args.short_scores, args.long_scores), indent=2))
+        sys.exit(0)
     if args.command == "compare":
         print(json.dumps(compare(args.control, args.candidate), indent=2))
         sys.exit(0)
