@@ -20,6 +20,8 @@ The official FP8 release leaves all MoVA value experts, attention, shared expert
 
 Two shards have passed that check on a physical Spark. Shard 1 needed just **1,368 bytes** of upstream BF16 header for a 167.78 MB output. For mixed shard 4, the Spark reused **416.35 MB** from its FP8 file and requested **1,179.69 MB** from a peer with a verified BF16 copy over a direct ConnectX-7 link. This produced the exact **1,596,042,512-byte** official file. The receiving Spark already had 612.37 MB of the FP8 sibling and fetched only its remaining 394.03 MB from that peer. Those sibling-transfer bytes are separate from the BF16 reconstruction cost. [Physical Spark receipts](mova-reuse-pilots.json)
 
+In a separate recovery test on the Spark, we interrupted the public program while reconstructing mixed shard 4 from range reads against the verified local BF16 source. It kept **134,268,872 bytes** of the partial output, resumed without repeating a completed payload range, and produced the same official SHA-256. An additional invocation verified and skipped the finished file. [Interrupted-run receipt](mova-reuse-recovery.json)
+
 On the Spark holding the FP8 snapshot, set `FP8_SNAPSHOT` and the destination `BF16_SNAPSHOT`. The second form reads a verified BF16 shard from a peer that supports HTTP ranges on the fabric. The utility checks existing final files and resumes its own partial outputs. It prepares weight shards. The target model also needs the configuration and tokenizer files from its pinned BF16 revision. [Reconstruction utility](reuse_mova.py)
 
 ```sh

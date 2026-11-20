@@ -1,0 +1,13 @@
+{
+  "file": "model-00004-of-00048.safetensors",
+  "bf16_bytes": 1596042512,
+  "fp8_tensor_bytes_reused": 416343368,
+  "preserved_bf16_bytes": 134268872,
+  "bf16_response_bytes": 1045476296,
+  "http_ranges": 18,
+  "bf16_sha256": "bfb969b497118c50c0b30dd02a8390bc82189b2973473e6a31c8ae8e34589758",
+  "interrupted_after_range_calls": 4,
+  "duplicate_payload_ranges": 0,
+  "source": "range reads from the verified BF16 file on the same Spark",
+  "machine": "aarch64"
+}
