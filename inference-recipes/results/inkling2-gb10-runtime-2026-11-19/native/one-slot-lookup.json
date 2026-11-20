@@ -1,0 +1,80 @@
+{
+  "summary": {
+    "completed": 4,
+    "failed": 0,
+    "wall_s": 9.03804306100028,
+    "correct": 4,
+    "output_tokens_per_s": 20.247745973866447,
+    "median_first_delta_ms": 480.79271799906564,
+    "p95_first_delta_ms": 526.8479310016119,
+    "length_limited": 0,
+    "start_unix_ns": 1795152675581496565,
+    "end_unix_ns": 1795152684619541546
+  },
+  "requests": [
+    {
+      "case": 42,
+      "endpoint_index": 0,
+      "prompt_sha256": "424f638014b786423457d014c8524c13f8b8a04f90e44d366714ac8754f24161",
+      "elapsed_s": 2.758771542999966,
+      "first_delta_s": 0.5268479310016119,
+      "first_text_s": 2.63347965200046,
+      "finish": "stop",
+      "input_tokens": 140,
+      "output_tokens": 57,
+      "expected": "876646",
+      "correct": true,
+      "visible_chars": 6,
+      "visible_sha256": "3ad512c31ad159ef00d8123d77481771e719bdc54dbbb037cbe7fad2b5a7a712",
+      "answer": "876646"
+    },
+    {
+      "case": 43,
+      "endpoint_index": 0,
+      "prompt_sha256": "f8036b5878208b8ba26d5a0daf806b9fc1817ce9223dca38dc1b6db4b8604ac8",
+      "elapsed_s": 1.801080566001474,
+      "first_delta_s": 0.47447431900036463,
+      "first_text_s": 1.6757896190010797,
+      "finish": "stop",
+      "input_tokens": 140,
+      "output_tokens": 35,
+      "expected": "575203",
+      "correct": true,
+      "visible_chars": 6,
+      "visible_sha256": "55a771b611af2f0944e8b88394f131e517ebbfb2dbdc35eae28cd0aa66ebf174",
+      "answer": "575203"
+    },
+    {
+      "case": 44,
+      "endpoint_index": 0,
+      "prompt_sha256": "b34343981719b14f9d871bce7be195ead136ffa738fda0c670bad84f6663ecbe",
+      "elapsed_s": 1.8042165789993305,
+      "first_delta_s": 0.48133634999976493,
+      "first_text_s": 1.6800214399991091,
+      "finish": "stop",
+      "input_tokens": 140,
+      "output_tokens": 35,
+      "expected": "835695",
+      "correct": true,
+      "visible_chars": 6,
+      "visible_sha256": "2cce7092a49f92954a25168180c06bca9848f50190b22deebb69444826acd17c",
+      "answer": "835695"
+    },
+    {
+      "case": 45,
+      "endpoint_index": 0,
+      "prompt_sha256": "d53fcafee4e413fc6952fd3e213fb243e0a705a50cadb144a4f4c1a31bdbafa0",
+      "elapsed_s": 2.672587956998541,
+      "first_delta_s": 0.48024908599836635,
+      "first_text_s": 2.547818193999774,
+      "finish": "stop",
+      "input_tokens": 140,
+      "output_tokens": 56,
+      "expected": "370176",
+      "correct": true,
+      "visible_chars": 6,
+      "visible_sha256": "7ae89edc84f4b18705bc3ea4d025f96f15f9ad344981bdcb600f5d614a49781f",
+      "answer": "370176"
+    }
+  ]
+}
