@@ -83,14 +83,15 @@ def serve_command(args, recipe, cache):
     if ring_only_init and ring_nccl is None:
         raise ValueError("--ring-only-init requires the ring-specific --ring-nccl library")
     if ring_nccl is not None:
-        if args.transport != "ring-roce" or engine not in ("sglang", "tensorfold-glm53"):
-            raise ValueError("--ring-nccl requires a four-node SGLang or TensorFold RoCE ring")
+        if args.transport != "ring-roce" or engine not in ("vllm", "sglang", "tensorfold-glm53"):
+            raise ValueError("--ring-nccl requires a four-node RoCE ring")
         if not ring_nccl.is_absolute() or not ring_nccl.is_file():
             raise ValueError("--ring-nccl must be an absolute path to a local library file")
         container_library = "/labski/libnccl.so.2"
         cmd += ["--volume", f"{ring_nccl}:{container_library}:ro"]
         env["LD_PRELOAD"] = container_library
-        loader = "SGLANG_NCCL_SO_PATH" if engine == "sglang" else "TF_GLM53_NCCL_LIB"
+        loader = {"vllm": "VLLM_NCCL_SO_PATH", "sglang": "SGLANG_NCCL_SO_PATH",
+                  "tensorfold-glm53": "TF_GLM53_NCCL_LIB"}[engine]
         env[loader] = container_library
         if ring_only_init:
             env["NCCL_SWITCHLESS_RING_ONLY"] = "1"
@@ -214,7 +215,7 @@ def main():
     cli.add_argument("--transport", choices=("roce", "tcp", "ring-roce"), help="distributed NCCL transport (default: roce)")
     cli.add_argument("--fabric-range", help="IPv4 CIDR covering the point-to-point RoCE ring links")
     cli.add_argument("--link-prefix", type=int, help="IPv4 prefix length of each RoCE ring edge (default: 30)")
-    cli.add_argument("--ring-nccl", type=Path, help="local replacement NCCL shared library for a SGLang or TensorFold RoCE ring")
+    cli.add_argument("--ring-nccl", type=Path, help="local replacement NCCL shared library for a four-node RoCE ring")
     cli.add_argument("--ring-only-init", action="store_true", help="enable the Sparkring library’s ring-only setup")
     cli.add_argument("--output-head", choices=("q6", "bf16"), help="select the full GLM-5.3 output projection")
     args = parser.parse_args()

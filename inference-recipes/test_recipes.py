@@ -120,6 +120,11 @@ class RecipeTests(unittest.TestCase):
             self.assertNotIn("NCCL_SWITCHLESS_RING_ONLY=1", cmd)
             args.ring_only_init = True
             self.assertIn("NCCL_SWITCHLESS_RING_ONLY=1", spark.serve_command(args, recipe, Path(folder)))
+            step_recipe = json.loads(spark.RECIPES["step5-preview-exl3"].read_text())
+            args.recipe = "step5-preview-exl3"
+            vllm = spark.serve_command(args, step_recipe, Path(folder))
+            self.assertIn("VLLM_NCCL_SO_PATH=/labski/libnccl.so.2", vllm)
+            self.assertIn("LD_PRELOAD=/labski/libnccl.so.2", vllm)
             args.ring_nccl = None
             with self.assertRaises(ValueError):
                 spark.serve_command(args, recipe, Path(folder))
