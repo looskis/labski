@@ -1,0 +1,24 @@
+{
+  "purpose": "Compare Nanbeige inference precision on one 128 GB Spark with a matched scheduler, BF16 KV and fixed 8K context.",
+  "model": "primitive-ai/Nanbeige4.3-33B-NVFP4",
+  "revision": "5ddf8788ed1fa4bec0c0b6fc74ddb0bef7dc4212",
+  "precision": "Community compressed-tensors NVFP4",
+  "nodes": [
+    1
+  ],
+  "per_node_gb": 128,
+  "image": "vllm-0.33.0",
+  "context": 8192,
+  "sequences": 4,
+  "memory_fraction": 0.78,
+  "container_memory_gib": 110,
+  "options": {
+    "--dtype": "bfloat16",
+    "--kv-cache-dtype": "auto",
+    "--kv-cache-memory-bytes": 3221225472,
+    "--reasoning-parser": "qwen3",
+    "--no-enable-prefix-caching": true,
+    "--max-num-batched-tokens": 2048
+  },
+  "source": "https://huggingface.co/primitive-ai/Nanbeige4.3-33B-NVFP4/tree/5ddf8788ed1fa4bec0c0b6fc74ddb0bef7dc4212"
+}

@@ -1,0 +1,24 @@
+{
+  "purpose": "Compare Nanbeige inference precision on one 128 GB Spark with a matched scheduler, BF16 KV and fixed 8K context.",
+  "model": "Nanbeige/Nanbeige4.3-33B",
+  "revision": "df919e1e2cf077a22204c78b6c826bf3db18bc08",
+  "precision": "BF16",
+  "nodes": [
+    1
+  ],
+  "per_node_gb": 128,
+  "image": "vllm-0.33.0",
+  "context": 8192,
+  "sequences": 4,
+  "memory_fraction": 0.78,
+  "container_memory_gib": 110,
+  "options": {
+    "--dtype": "bfloat16",
+    "--kv-cache-dtype": "auto",
+    "--kv-cache-memory-bytes": 3221225472,
+    "--reasoning-parser": "qwen3",
+    "--no-enable-prefix-caching": true,
+    "--max-num-batched-tokens": 2048
+  },
+  "source": "https://huggingface.co/Nanbeige/Nanbeige4.3-33B/tree/df919e1e2cf077a22204c78b6c826bf3db18bc08"
+}
