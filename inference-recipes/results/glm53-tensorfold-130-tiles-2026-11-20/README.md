@@ -24,6 +24,24 @@ Before collecting another sweep, we fixed a simple prediction for lengths betwee
 
 The test uses 2,047, 2,304, 2,688, 2,816, 2,944, 3,071, 3,073, 3,328 and 3,840 rows, both output types, input seed 80411 and order seed 73519. For each length and dtype, compare the predicted layout's median with the published kernel and with the faster of the two candidates. Report every case more than 5% slower than the better candidate. This tests shape generalization on GB10. [Measurement program](measure.py)
 
+## Held-out results
+
+The preregistered rule beat the upstream kernel in all 18 held-out shape and output-type combinations. The speedup ranged from 1.13× to 1.46×. It selected the faster of the two candidates on all nine FP32 shapes and five of nine BF16 shapes. At 2,816, 2,944 and 3,073 rows, switching BF16 to the larger block cost 13.4%, 10.4% and 11.8% against the faster candidate. At 3,071 BF16 rows the cost was 1.5%. These results support separate dispatch choices for FP32 and BF16 near the transition. [Prediction recorded before the run](https://github.com/looskis/labski/commit/ecf8974) · [All 972 held-out timing records](held-out-measurements.jsonl.gz)
+
+| Prompt rows | FP32 upstream, ms | FP32 predicted, ms | Excess over faster candidate | BF16 upstream, ms | BF16 predicted, ms | Excess over faster candidate |
+| ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| 2047 | 4.332 | 2.975 | 0.0% | 4.085 | 2.892 | 0.0% |
+| 2304 | 4.842 | 3.515 | 0.0% | 4.562 | 3.374 | 0.0% |
+| 2688 | 5.787 | 4.486 | 0.0% | 5.339 | 3.989 | 0.0% |
+| 2816 | 5.925 | 4.914 | 0.0% | 5.570 | 4.816 | 13.4% |
+| 2944 | 6.352 | 5.320 | 0.0% | 5.984 | 5.259 | 10.4% |
+| 3071 | 6.642 | 5.381 | 0.0% | 6.232 | 5.294 | 1.5% |
+| 3073 | 6.850 | 5.845 | 0.0% | 6.461 | 5.732 | 11.8% |
+| 3328 | 7.104 | 5.718 | 0.0% | 6.771 | 5.586 | 0.0% |
+| 3840 | 8.264 | 6.581 | 0.0% | 7.840 | 6.547 | 0.0% |
+
+Every candidate matched every upstream output byte on the synthetic fixtures. The independent FP64 check covered 1,024 output positions per shape and output type. Times are medians over nine randomized rounds, with four kernel launches per timing. To reproduce this sweep, run the measurement command below with `--rows 2047 2304 2688 2816 2944 3071 3073 3328 3840 --seed 80411 --order-seed 73519` and a fresh output path.
+
 ## Reproduce
 
 Check out TensorFold at the pinned revision. Mia’s November 20 recipe selects the same engine commit. Its 13 patches leave the CUDA source and headers used here intact. The lab compiled the pinned sources for ARM64 and SM121a in the following PyTorch image. Set `TF` to the path for a fresh TensorFold checkout and run these commands from this results directory. [Mia recipe revision](https://github.com/MiaAI-Lab/GLM-5.3-Flash-DGX-Sparks-1104/tree/d8a7439e8c5aac8645c423ccd24189690359ab69) · [TensorFold license](https://github.com/ashhart/TensorFold/blob/81de26f649677aa72ae0034d4af6e010cd947038/LICENSE)
