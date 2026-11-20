@@ -1,0 +1,27 @@
+[
+  {
+    "file": "model-00001-of-00048.safetensors",
+    "bf16_bytes": 167783768,
+    "fp8_tensor_bytes_reused": 167782400,
+    "bf16_response_bytes": 1368,
+    "http_ranges": 2,
+    "bf16_sha256": "47f00aa366bda93756179717a937b65a5f379af380a3af4f68f2284ffbe57c58",
+    "machine": "aarch64",
+    "fp8_sha256": "1c89f25a7abdc0f18a0460597b872881ef03a15453075c90753ed3b5aadf2117",
+    "installed_output_rehashed": true
+  },
+  {
+    "file": "model-00004-of-00048.safetensors",
+    "bf16_bytes": 1596042512,
+    "fp8_tensor_bytes_reused": 416348488,
+    "bf16_response_bytes": 1179694024,
+    "http_ranges": 20,
+    "bf16_sha256": "bfb969b497118c50c0b30dd02a8390bc82189b2973473e6a31c8ae8e34589758",
+    "machine": "aarch64",
+    "fp8_sha256": "ddff9b30d1e402a1f0de001b053ace55568a0978cbf09374a0cacc57fa28de26",
+    "installed_output_rehashed": true,
+    "bf16_source": "verified Spark peer over direct ConnectX-7",
+    "fp8_preserved_bytes": 612368384,
+    "fp8_fabric_bytes": 394030208
+  }
+]
