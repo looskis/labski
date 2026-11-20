@@ -1,8 +1,10 @@
 # MiMo V2.6 MOPD on DGX Spark
 
-The one-Spark Flash candidate uses the Q2_K_S text checkpoint and can load a separate Q8_0 multi-token prediction head. The four-Spark Pro deployment uses Q2_K text weights. In Pro, the routed expert gate and up projections are Q2_K and the down projections retain MXFP4. These are Xiaomi's MOPD variants. The leaderboard also lists the releases without a post-training suffix. [Flash conversion](https://huggingface.co/ggml-org/MiMo-V2.6-Flash-MOPD-GGUF/blob/c9d8697904d2564708b5197d176543983b9d8db5/README.md) · [Pro conversion](https://huggingface.co/ggml-org/MiMo-V2.6-Pro-MOPD-GGUF/blob/cd70ac158ea81ca857eb0e6feb9fb46d4996a242/README.md)
+The one-Spark Flash deployment uses the Q2_K_S text checkpoint and can load a separate Q8_0 multi-token prediction head. The four-Spark Pro deployment uses Q2_K text weights. In Pro, the routed expert gate and up projections are Q2_K and the down projections retain MXFP4. These are Xiaomi's MOPD variants. The leaderboard also lists the releases without a post-training suffix. [Flash conversion](https://huggingface.co/ggml-org/MiMo-V2.6-Flash-MOPD-GGUF/blob/c9d8697904d2564708b5197d176543983b9d8db5/README.md) · [Pro conversion](https://huggingface.co/ggml-org/MiMo-V2.6-Pro-MOPD-GGUF/blob/cd70ac158ea81ca857eb0e6feb9fb46d4996a242/README.md)
 
 The lab served the 418.77 GB MOPD Q2_K conversion on four Sparks at 5.85 / 11.74 output tok/s for one / four clients. It scored 17/28 free and 20/28 constrained, with 8/8 exact lookups. [Measurements and reproduction](../../results/mimo-v26-pro-mopd-rpc-2026-11-20/)
+
+The lab’s Flash measurements include the 105.86 GB target on one Spark. [Flash timings, quality and placement](../../results/mimo-v26-flash-mopd-2026-11-20/)
 
 ## Runtime qualification
 

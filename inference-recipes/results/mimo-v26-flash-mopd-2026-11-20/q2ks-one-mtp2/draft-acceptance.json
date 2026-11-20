@@ -1,0 +1,180 @@
+{
+  "source": "llama.cpp slot print_timing per-task draft acceptance",
+  "output_tokens_per_response": 96,
+  "excluded_warmup_tasks": [
+    159,
+    777
+  ],
+  "accepted": 1212,
+  "proposed": 2102,
+  "responses": [
+    {
+      "clients": 1,
+      "trial": 1,
+      "server_task": 206,
+      "accepted": 48,
+      "proposed": 91
+    },
+    {
+      "clients": 1,
+      "trial": 1,
+      "server_task": 256,
+      "accepted": 53,
+      "proposed": 84
+    },
+    {
+      "clients": 1,
+      "trial": 1,
+      "server_task": 301,
+      "accepted": 49,
+      "proposed": 90
+    },
+    {
+      "clients": 1,
+      "trial": 1,
+      "server_task": 350,
+      "accepted": 48,
+      "proposed": 93
+    },
+    {
+      "clients": 1,
+      "trial": 2,
+      "server_task": 400,
+      "accepted": 54,
+      "proposed": 82
+    },
+    {
+      "clients": 1,
+      "trial": 2,
+      "server_task": 444,
+      "accepted": 46,
+      "proposed": 96
+    },
+    {
+      "clients": 1,
+      "trial": 2,
+      "server_task": 496,
+      "accepted": 51,
+      "proposed": 87
+    },
+    {
+      "clients": 1,
+      "trial": 2,
+      "server_task": 543,
+      "accepted": 53,
+      "proposed": 83
+    },
+    {
+      "clients": 1,
+      "trial": 3,
+      "server_task": 588,
+      "accepted": 52,
+      "proposed": 84
+    },
+    {
+      "clients": 1,
+      "trial": 3,
+      "server_task": 634,
+      "accepted": 49,
+      "proposed": 90
+    },
+    {
+      "clients": 1,
+      "trial": 3,
+      "server_task": 683,
+      "accepted": 52,
+      "proposed": 84
+    },
+    {
+      "clients": 1,
+      "trial": 3,
+      "server_task": 729,
+      "accepted": 50,
+      "proposed": 90
+    },
+    {
+      "clients": 4,
+      "trial": 1,
+      "server_task": 824,
+      "accepted": 50,
+      "proposed": 89
+    },
+    {
+      "clients": 4,
+      "trial": 1,
+      "server_task": 825,
+      "accepted": 50,
+      "proposed": 89
+    },
+    {
+      "clients": 4,
+      "trial": 1,
+      "server_task": 826,
+      "accepted": 50,
+      "proposed": 89
+    },
+    {
+      "clients": 4,
+      "trial": 1,
+      "server_task": 828,
+      "accepted": 51,
+      "proposed": 86
+    },
+    {
+      "clients": 4,
+      "trial": 2,
+      "server_task": 876,
+      "accepted": 55,
+      "proposed": 79
+    },
+    {
+      "clients": 4,
+      "trial": 2,
+      "server_task": 877,
+      "accepted": 51,
+      "proposed": 86
+    },
+    {
+      "clients": 4,
+      "trial": 2,
+      "server_task": 879,
+      "accepted": 53,
+      "proposed": 83
+    },
+    {
+      "clients": 4,
+      "trial": 2,
+      "server_task": 880,
+      "accepted": 49,
+      "proposed": 90
+    },
+    {
+      "clients": 4,
+      "trial": 3,
+      "server_task": 929,
+      "accepted": 51,
+      "proposed": 86
+    },
+    {
+      "clients": 4,
+      "trial": 3,
+      "server_task": 930,
+      "accepted": 49,
+      "proposed": 90
+    },
+    {
+      "clients": 4,
+      "trial": 3,
+      "server_task": 932,
+      "accepted": 52,
+      "proposed": 85
+    },
+    {
+      "clients": 4,
+      "trial": 3,
+      "server_task": 933,
+      "accepted": 46,
+      "proposed": 96
+    }
+  ]
+}

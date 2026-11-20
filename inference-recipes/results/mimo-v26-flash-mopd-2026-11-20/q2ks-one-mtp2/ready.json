@@ -1,0 +1,6 @@
+{
+  "container_started_utc": "2026-11-20T10:48:07.701314005Z",
+  "first_observed_ready_unix_s": 1795171786.250076,
+  "elapsed_to_observed_ready_s": 98.54876208305359,
+  "poll_interval_s": 1
+}
