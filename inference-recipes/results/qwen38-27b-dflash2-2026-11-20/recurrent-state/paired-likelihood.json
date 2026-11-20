@@ -1,0 +1,11 @@
+{
+  "articles": 62,
+  "scored_tokens": 30939,
+  "articles_lower_nll": 0,
+  "mean_nll_delta": 0.0,
+  "perplexity_ratio": 1.0,
+  "paired_article_bootstrap_95": [
+    0.0,
+    0.0
+  ]
+}

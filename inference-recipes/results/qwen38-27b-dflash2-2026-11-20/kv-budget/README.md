@@ -62,7 +62,7 @@ Each rate and latency is a median across three trials. Each trial submitted four
 
 The adaptive run switched draft width. The engine reported 7.00 proposed tokens per block at one client and 3.03 at four. It still allocated 189 GPU blocks and exposed 12,002 KV-token slots, the same as fixed seven. Only two of four requests ran together. At four clients, the adaptive configuration achieved **51.73 tok/s** versus **86.54** for fixed three at the same 3 GiB budget. The schedule preserved single-client speed at 30.71 tok/s, but changing proposal width after startup did not recover the static three-proposal capacity. [Draft counters](7-dynamic73/observed-draft-widths.jsonl) · [Engine settings](7-dynamic73/effective-cache.json)
 
-Explicit BF16 recurrent state offers another option at 3 GiB. On the same Spark it raised the effective block count to 351 and delivered 94.78 tok/s at four clients. One of 28 short-answer correctness verdicts changed. [Recurrent-state precision experiment](../recurrent-state/)
+Explicit BF16 recurrent state offers another option at 3 GiB. On the same Spark it raised the effective block count to 351 and delivered 94.78 tok/s at four clients. A fresh FP32 control reached 53.73 tok/s with the same 28 short answers. [Recurrent-state precision experiment](../recurrent-state/)
 
 ## Why four clients queue at 3 GiB
 
