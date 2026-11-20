@@ -1,0 +1,45 @@
+{
+  "purpose": "Serve two active requests with a larger sliding-window pool on the native four-Spark Inkling checkpoint.",
+  "model": "thinkingmachines/Inkling-2-Small",
+  "revision": "4d564489295e30e9341a9822a8046f0c9ded1a7b",
+  "precision": "native mixed NVFP4/MXFP8 routed experts",
+  "nodes": [
+    4
+  ],
+  "per_node_gb": 128,
+  "image": "inkling2-gb10",
+  "context": 4096,
+  "sequences": 2,
+  "memory_fraction": 0.9,
+  "container_memory_gib": 112,
+  "options": {
+    "--ep-size": 4,
+    "--attention-backend": "fa4",
+    "--chunked-prefill-size": 1024,
+    "--max-total-tokens": 8192,
+    "--kv-cache-dtype": "auto",
+    "--cuda-graph-backend-prefill": "disabled",
+    "--watchdog-timeout": 1800,
+    "--enable-metrics": true,
+    "--cuda-graph-max-bs-decode": 2,
+    "--cuda-graph-max-bs-prefill": 1,
+    "--json-model-override-args": {
+      "quantization_config": null
+    },
+    "--swa-full-tokens-ratio": 0.5
+  },
+  "source": "https://github.com/aidendle94/sparkrun-recipes/tree/3d7e798cfaecf1298576b79c945455bb5a75ac46/recipes/inkling-2-small/sglang",
+  "engine": "sglang",
+  "env": {
+    "SPARK_FI_MOE": "1",
+    "SPARK_ROCE_AR": "0",
+    "SPARK_PAGED_DECODE": "1",
+    "NCCL_CUMEM_ENABLE": "0",
+    "NCCL_DEBUG": "INFO",
+    "NCCL_DEBUG_SUBSYS": "INIT,NET",
+    "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:False"
+  },
+  "required_files": [
+    "hf_quant_config.json"
+  ]
+}

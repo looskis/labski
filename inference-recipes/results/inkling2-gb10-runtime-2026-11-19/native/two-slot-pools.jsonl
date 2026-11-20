@@ -1,0 +1,4 @@
+{"rank":0,"decode_graph_batches":[1,2],"graph_capture_s":127.96,"reported_graph_memory_gib":2.66,"available_after_graph_gib":13.52,"full_tokens":8192,"swa_tokens":4096}
+{"rank":1,"decode_graph_batches":[1,2],"graph_capture_s":128.08,"reported_graph_memory_gib":2.65,"available_after_graph_gib":15.12,"full_tokens":8192,"swa_tokens":4096}
+{"rank":2,"decode_graph_batches":[1,2],"graph_capture_s":127.97,"reported_graph_memory_gib":1.33,"available_after_graph_gib":15.3,"full_tokens":8192,"swa_tokens":4096}
+{"rank":3,"decode_graph_batches":[1,2],"graph_capture_s":127.82,"reported_graph_memory_gib":2.01,"available_after_graph_gib":15.08,"full_tokens":8192,"swa_tokens":4096}

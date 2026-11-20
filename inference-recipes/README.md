@@ -28,7 +28,8 @@ Additional catalog entries are candidates unless a result is linked. Node counts
 | [Gemma 4 31B IT](recipes/gemma4-31b-nvfp4.json) | 1 × 128 GB | NVFP4 | Tool calling with an assistant drafter |
 | [GLM 5.3 Flash measured prefill](recipes/glm53-nvfp4-prefill.json) | 2 × 128 GB | NVFP4 | 8K prefill chunks, C1, [archived measurements](results/glm53-prefill-2026-11-18/) |
 | [Qwen3.8 Flash-Next](recipes/qwen38-flash-next-nvfp4.json) | 2 × 128 GB | Mixed NVFP4/FP8/BF16 | Measured text-only service at 8K context with a 133 GB checkpoint |
-| [Thinking Machines Inkling 2 Small](recipes/inkling2-small-native.json) | 4 × 128 GB | Native mixed NVFP4/MXFP8 | [Served at 4K context with one scheduler slot](results/inkling2-gb10-runtime-2026-11-19/) |
+| [Inkling 2 Small, two slots](recipes/inkling2-small-native-c2.json) | 4 × 128 GB | Native mixed NVFP4/MXFP8 | [39.34 aggregate tok/s at two clients and six exact lookups up to 3,597 input tokens](results/inkling2-gb10-runtime-2026-11-19/#two-slot-throughput-and-shared-prefix-context) |
+| [Inkling 2 Small, one slot](recipes/inkling2-small-native.json) | 4 × 128 GB | Native mixed NVFP4/MXFP8 | [Served at 4K context with one scheduler slot](results/inkling2-gb10-runtime-2026-11-19/) |
 | [GLM 5.3 Flash 4K chunk control](recipes/glm53-chunk4096.json) | 2 × 128 GB | NVFP4 | Same image and runtime settings as the 8K recipe, with [one parameter varied](results/glm53-prefill-2026-11-18/#isolating-prefill-chunk-size) |
 | [Qwen3.8 Flash-Next FP4-Local](recipes/qwen38-flash-next-fp4-local.json) | 1 × 128 GB | Mixed FP4-Local, FP8 KV | Single-Spark candidate at 8K and four scheduler slots, with disk-backed PLE and four-token MTP |
 | [Qwen3.8 Flash-Next, four clients](recipes/qwen38-flash-next-kv2g-c4.json) | 2 × 128 GB | Mixed NVFP4/FP8/BF16 | Tuned 8K service with 2 GiB KV per rank and four scheduler slots |

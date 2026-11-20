@@ -2,6 +2,8 @@
 
 **Thinking Machines’ native 393.48 GB Inkling 2 Small checkpoint served text on four 128 GB DGX Sparks** using SGLang, one tensor and expert rank per Spark, a 4,096-token request limit, and the switchless RoCE ring. This uses the published mixed NVFP4/MXFP8 weights and BF16 KV. At low and high requested reasoning effort it answered both the arithmetic and number-retrieval checks exactly. [Pinned recipe](../../recipes/inkling2-small-native.json) · [Six chat completions](native/native-effort.jsonl)
 
+**For the tested 4K service, use two scheduler slots and a 0.5 sliding-window ratio.** It served two clients at 39.34 aggregate generated tokens/s and 2.98 GPU J/output token across the four Sparks. All six inventory lookups returned the exact answer, including both repeated-prefix inputs at 3,597 tokens. [Two-slot recipe](../../recipes/inkling2-small-native-c2.json)
+
 A single-rank hardware probe found an architecture mismatch before loading the 393 GB checkpoint. The designated vLLM ARM64 image recognizes Inkling 2, but its routed-expert implementation loads the FlashInfer SM100 module and requests kernels for CUDA major architecture 10. The fleet's GB10 reports compute capability **12.1**. Executing that architecture-selection call on a Spark raised `RuntimeError: No supported CUDA architectures found for major versions [10].` PyTorch reported `2.14.0+cu130` and vLLM reported `0.1.dev25249+gb974b306f.cu130`. This is a kernel compatibility result. It does not measure model memory, quality or throughput. [vLLM deployment guide](https://recipes.vllm.ai/thinkingmachines/Inkling-2-Small) · [Probe source](probe.py)
 
 ```sh
@@ -50,6 +52,17 @@ Send separate greedy chat requests with `max_tokens=256` and `chat_template_kwar
 With one scheduler slot, the four-Spark endpoint delivered **22.99 generated tokens/s at one client** and **23.04 aggregate tokens/s at two clients**. The second client queued. The median summed GPU energy was **5.18 and 5.21 J per output token**, respectively. All 24 measured prose requests reached their 96-token cap. The rates include prefill and scheduling, and the token count includes reasoning. Each concurrency had an excluded warm-up and three timed trials with four prompts each. A short CPU tokenizer check ran during the two-client block. GPU energy comes from synchronized per-rank NVML counters. [Per-trial timing](native/one-slot-trials.jsonl) · [Per-request measurements](native/one-slot-requests.jsonl.gz) · [Settings](native/one-slot-settings.jsonl) · [Integrated energy](native/inkling-base-energy.jsonl) · [Raw counters](native/inkling-base-energy.csv.gz)
 
 At the template’s default effort, all four short inventory responses stopped with the exact six-digit number. These were separate from the timed prose cases. [Lookup trial](native/one-slot-lookup.json)
+
+## Two-slot throughput and shared-prefix context
+
+| Four Sparks, native Inkling | One client, output tok/s | Two clients, aggregate output tok/s | One client, GPU J/token | Two clients, GPU J/token |
+| --- | ---: | ---: | ---: | ---: |
+| One slot and 2,048 sliding-window entries | 22.99 | 23.04 | 5.18 | 5.21 |
+| Two slots and 4,096 sliding-window entries | 22.66 | 39.34 | 5.37 | 2.98 |
+
+At two clients the second configuration delivered **71% more aggregate throughput** and used **43% fewer GPU joules per generated token**. At one client throughput was 1.4% lower. The 24 timed prompts, input-token counts and 96-token outputs matched case for case. The three two-client trials with two slots delivered 38.24, 41.35 and 39.34 tok/s. The change set comprised two scheduler slots, a batch-two decode graph and a larger sliding-window allocation. Both runs used the same weights, BF16 KV, 8,192 full-attention entries, 4K request limit and four-rank RoCE transport. [Two-slot settings](native/two-slot-settings.jsonl) · [Per-rank pool and graph sizes](native/two-slot-pools.jsonl) · [Trials](native/two-slot-trials.jsonl) · [Request hashes and timings](native/two-slot-requests.jsonl.gz) · [GPU energy](native/inkling-two-energy.jsonl) · [Raw counters](native/inkling-two-energy.csv.gz)
+
+With the two-slot configuration the six consecutive inventory requests all returned the exact number at 519, 2,058 and 3,597 input tokens. The two longest requests took 2.01 and 2.00 seconds without a cache flush. At low reasoning effort, this launch scored 8/28 under the fixed 256-token limit against 7/28 with one slot. One item changed from incorrect to correct. Twenty responses hit the budget versus 21 with one slot. These are single passes. To launch this version, substitute `inkling2-small-native-c2` for the recipe and model name in the four-rank commands above. [Retrieval trials](native/two-slot-context.jsonl) · [Matched low-effort responses](native/c2-low-quality.jsonl.gz)
 
 ## Reasoning effort at a 256-token limit
 
