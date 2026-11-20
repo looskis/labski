@@ -4,6 +4,8 @@ from collections import defaultdict
 import hashlib
 import json
 from pathlib import Path
+import time
+import urllib.request
 
 import bench
 
@@ -32,18 +34,54 @@ def prepare(args):
                 stream.write(json.dumps(item) + "\n")
 
 
+def post(url, body):
+    request = urllib.request.Request(url, data=json.dumps(body).encode(),
+                                     headers={"Content-Type": "application/json"})
+    with urllib.request.urlopen(request, timeout=180) as response:
+        return json.load(response)
+
+
+def letter_ids(url, model):
+    allowed = []
+    for letter in LETTERS:
+        tokens = post(url + "/tokenize", dict(model=model, prompt=letter, add_special_tokens=False))["tokens"]
+        if len(tokens) != 1 or tokens[0] in allowed:
+            raise ValueError("this probe requires distinct single-token uppercase letters A through J")
+        allowed.append(tokens[0])
+    return allowed
+
+
+def one_letter(args, prompt, allowed):
+    body = dict(model=args.model, messages=[dict(role="user", content=prompt)], temperature=0,
+                max_tokens=1, allowed_token_ids=allowed, chat_template_kwargs={"enable_thinking": False})
+    start = time.perf_counter()
+    data = post(args.url + "/v1/chat/completions", body)
+    elapsed = time.perf_counter() - start
+    choice = data["choices"][0]
+    answer = choice["message"]["content"]
+    if not isinstance(answer, str) or len(answer) != 1 or answer not in LETTERS or data["usage"]["completion_tokens"] != 1:
+        raise ValueError("server did not return exactly one allowed answer token")
+    return dict(answer=answer, finish=choice["finish_reason"], elapsed_s=elapsed,
+                input_tokens=data["usage"]["prompt_tokens"], output_tokens=1, allowed_token_ids=allowed)
+
+
 def run(args):
     cases = [json.loads(line) for line in args.corpus.read_text().splitlines()]
     if not cases or len({c["id"] for c in cases}) != len(cases):
         raise ValueError("empty corpus or duplicate IDs")
+    allowed = letter_ids(args.url, args.model) if args.one_letter else None
     with args.out.open("x") as stream:
         for item in cases:
-            result = bench.stream(args.url, args.model, item["prompt"], 16, 180, "off")
-            # A truncated or non-letter answer is an incorrect answer.
+            if allowed:
+                result = one_letter(args, item["prompt"], allowed)
+                complete = result["finish"] in ("stop", "length")
+            else:
+                result = bench.stream(args.url, args.model, item["prompt"], 16, 180, "off")
+                complete = result["finish"] == "stop"
             answer = result["answer"].strip()
             row = dict(id=item["id"], subject=item["subject"], expected=item["expected"],
                        prompt_sha256=hashlib.sha256(item["prompt"].encode()).hexdigest(),
-                       correct=result["finish"] == "stop" and answer == item["expected"], **result)
+                       correct=complete and answer == item["expected"], **result)
             stream.write(json.dumps(row) + "\n")
             stream.flush()
 
@@ -58,6 +96,7 @@ if __name__ == "__main__":
     trial.add_argument("model")
     trial.add_argument("corpus", type=Path)
     trial.add_argument("--url", default="http://127.0.0.1:8000")
+    trial.add_argument("--one-letter", action="store_true", help="restrict greedy decoding to one A–J token")
     for parser in (prep, trial):
         parser.add_argument("--out", required=True, type=Path)
     args = cli.parse_args()

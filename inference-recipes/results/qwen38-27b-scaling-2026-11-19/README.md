@@ -26,6 +26,14 @@ Keeping the original BF16 weights gave **8.35 output tok/s for one client** and 
 
 The BF16 pair used **9.64 GPU J/output token at one client** and **2.25 at four**. Both PCI-domain functions on each connected port carried unicast RDMA payload, verified by hardware counter deltas from after weight loading began until the benchmark completed. [Energy by rank and trial](qbf16-tp2-energy.jsonl) · [Raw energy samples](qbf16-tp2-energy.csv.gz) · [RDMA byte deltas](bf16-pair-rdma.csv)
 
+## Repeating the single-Spark run
+
+After a fresh server launch on the same Spark A, mixed precision delivered 12.19 output tok/s at one client and 44.88 at four, within 2% of its first run. NVML measured **2.78 GPU J/output token** and **0.74 J/output token** respectively. Four Spark ranks over TCP consumed about 3.8× and 4.5× as many GPU joules per delivered token at these loads. Trials used the same 12 prose prompts per concurrency. [Single-Spark timings](controls/tp1/trials.jsonl) · [Request records](controls/tp1/requests.jsonl.gz) · [Integrated energy](controls/tp1/energy.jsonl) · [Raw counters](controls/tp1/energy.csv.gz) · [Settings](controls/tp1/settings.jsonl)
+
+The greedy free-response score on the same GPU changed from **74/112 to 78/112** across launches. Five previously incorrect verdicts became correct and one changed the other way, with identical prompts, answer keys and input token counts. This establishes that changing machines is unnecessary to observe score variation on this setup. [Single-Spark repeat answers](controls/tp1/quality.jsonl.gz) · [First run](../qwen38-27b-precision-2026-11-19/)
+
+We then kept the 112 prompts fixed and restricted the server's greedy decoder to one of ten uppercase letter tokens. The score changed from **78 to 80**, with two newly correct answers and every previously correct answer retained. Generated tokens fell from **294 to 112**. This comparison applies to callers that require a single multiple-choice letter. It does not measure open-ended reasoning. To reproduce, add `--one-letter` to the [MMLU-Pro probe](../../mmlu_probe.py) run command. [Constrained outputs and token IDs](controls/tp1/one-letter.jsonl.gz)
+
 ## Reproduce
 
 Prepare the same pinned checkpoint on each participating Spark. Launch `qwen38-27b-nvfp4` on one GPU, with `--nodes 2` on the direct pair, or with `--nodes 4 --transport tcp --interface fabric0` on the routed ring. Use one rank per host. On rank zero run the same three prose trials at concurrency one and four and the same 112-item quality probe. Use the default seed 42, greedy decoding and thinking off. The context is 8,192 tokens with four scheduler slots, a 2,048-token batch cap, BF16 KV cache and disabled prefix caching. [Distributed launch instructions](../../README.md#one-endpoint-on-multiple-sparks) · [Exact timing and scoring commands](../qwen38-27b-precision-2026-11-19/#reproduce)
