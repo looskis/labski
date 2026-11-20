@@ -73,13 +73,19 @@ curl -fsS http://127.0.0.1:8000/v1/chat/completions \
   -d '{"model":"qwen3-0.6b","messages":[{"role":"user","content":"Name one primary color."}],"temperature":0,"max_tokens":128,"chat_template_kwargs":{"enable_thinking":false}}'
 ```
 
-`prepare` pulls the ARM64 image and downloads the pinned target and any separate draft checkpoint to the local Hugging Face cache. Set `HF_HUB_CACHE` before both commands to use a larger volume. Allow space for the full checkpoint on **each** participating machine, plus the image and runtime scratch space. GLM needs roughly 177 GB of target shards per node, MiniMax roughly 250 GB per node before its draft. Downloads resume through the Hub cache. `serve` uses the cached snapshot paths with the weight mount read-only. Stop the foreground container with Ctrl-C or run `docker stop labski-qwen3-0.6b` in another terminal.
+`prepare` pulls the ARM64 image and downloads the pinned target and any separate draft checkpoint to the local Hugging Face cache. Set `HF_HUB_CACHE` before both commands to use a larger Spark volume. Downloads resume through the Hub cache. `serve` uses the cached snapshot paths with the weight mount read-only. Stop the foreground container with Ctrl-C or run `docker stop labski-qwen3-0.6b` in another terminal.
+
+### Stage weights for a fleet run
+
+Choose a Spark with space for the missing weights and the recipe’s temporary files. Check its existing target and draft snapshots against the pinned revision and digests. Run the download on that Spark. The management workstation can launch it over SSH and collect the small result files.
+
+For a full-copy runtime, each participating Spark needs its own complete target snapshot. Transfer the missing files from the source Spark over ConnectX, keeping Hugging Face blob symlinks resolvable on the receiver. For a runtime with a verified rank-local or remote-weight loader, follow its placement instructions. Step-5 and Inkling use only the expert rows assigned to each rank. K2 Horizon 375B can build a compact shard from upstream byte ranges directly on its destination Spark. Preserve verified shards and partial downloads across retries. Schedule checkpoint traffic outside measured serving intervals on the same machines and links. [Step-5 compact weights](experiments/step5-rank-weights/) · [Inkling sparse weights](experiments/inkling2-sparse-weights/) · [K2 per-rank downloader](experiments/k2-moe-weights/#download-one-expert-partition-directly-to-a-spark)
 
 ## One endpoint on multiple Sparks
 
 Set up the dedicated ConnectX fabric and verify all participating ranks can communicate over RoCE. The two-node example uses a direct pair. On the four-node cable ring, give each pair of neighbors a separate link subnet and give each rank a routed address for rendezvous. Stock NCCL can then carry tensor-parallel payloads over RoCE between adjacent peers. The independent-replica experiment used the management network for requests. Use the management LAN for SSH. On each Spark, `ip -br -4 addr` and `ibdev2netdev` identify its local address, interface and HCA names. Use NCCL all-reduce tests across the intended nodes before interpreting scaling results. [NVIDIA cluster setup](https://build.nvidia.com/playbooks/connect-multiple-sparks) · [NVIDIA multi-Spark vLLM playbook](https://github.com/NVIDIA/dgx-spark-playbooks/tree/main/nvidia/playbook-vllm-cluster)
 
-Copy this scope to the same revision on every node. Run `python3 spark.py prepare minimax31-flash-tp4` on each of the four. Then set these values in a terminal on **each** node. The addresses and interface names below are examples.
+Copy this scope at the same revision to every node. For the MiniMax example, run `python3 spark.py prepare minimax31-flash-tp4` on the source Spark. Stage the full target and draft snapshots on the other three Sparks over ConnectX. Set these values in a terminal on **each** node. The addresses and interface names below are examples.
 
 ```sh
 # Rank 0 uses the head's address. On ranks 1, 2 and 3 set their own RANK and NODE_IP.
