@@ -16,11 +16,12 @@ The streaming receipt records the arrival time and token count of each output ch
 The pinned ARM64 vLLM 0.33.0 image lacks Arctic Inference. Its suffix proposer imports the CPU suffix-tree package. On a Spark, build that extension from the verified 0.1.1 source archive using the serving image’s Python. The build container is disposable. From this experiment directory run:
 
 ```sh
-mkdir -p "$PWD/arctic-build"
+ARCTIC_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/labski/arctic-0.1.1"
+mkdir -p "$ARCTIC_DIR"
 IMAGE=$(python3 -c 'import json; print(json.load(open("../../images.json"))["vllm-0.33.0"])')
-docker run --rm --cpus 4 --memory 6g --volume "$PWD/arctic-build:/experiment" \
+docker run --rm --cpus 4 --memory 6g --volume "$ARCTIC_DIR:/experiment" \
   --volume "$PWD/build_suffix.sh:/build_suffix.sh:ro" --entrypoint sh "$IMAGE" /build_suffix.sh
-python3 serve_drafting.py suffix32 --extension "$PWD/arctic-build/python"
+python3 serve_drafting.py suffix32 --extension "$ARCTIC_DIR/python"
 ```
 
 Prepare `qwen38-27b-nvfp4` with the main launcher first. Modes `none`, `ngram`, `suffix0` and `suffix32` all use the same target weights, 8K context, four scheduler slots and disabled prefix caching. N-gram lookup considers lengths 2–5. Both suffix modes use depth 16. Each proposer can offer up to five tokens. Zero or 32 completed requests may contribute suffix history. Pass the matching served name, such as `qwen27-draft-suffix32`, to the replay. [Build](build_suffix.sh) · [Serving commands](serve_drafting.py) · [Upstream configuration](https://docs.vllm.ai/en/v0.33.0/features/speculative_decoding/suffix/)
