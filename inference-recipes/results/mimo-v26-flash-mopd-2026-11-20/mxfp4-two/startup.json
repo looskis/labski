@@ -1,0 +1,68 @@
+{
+  "runtime": "11459 (f498f864f) with GNU 13.3.0 for Linux aarch64",
+  "launcher_sha256": "2065681e298d542f37102a8dc4fc485f25c16ab39d038057afe97f69d6c464af",
+  "model_file_type": "MXFP4 MoE",
+  "model_file_size": "155.87 GiB (4.34 BPW)",
+  "layers": 48,
+  "experts_per_layer": 256,
+  "experts_per_token": 8,
+  "offloaded_layers": [
+    "49/49"
+  ],
+  "model_buffers": [
+    {
+      "device": "rank0",
+      "MiB": 81000.87
+    },
+    {
+      "device": "host_staging",
+      "MiB": 633.25
+    },
+    {
+      "device": "rank1",
+      "MiB": 77976.14
+    }
+  ],
+  "kv_buffers": [
+    {
+      "device": "rank0",
+      "MiB": 400.0
+    },
+    {
+      "device": "rank1",
+      "MiB": 320.0
+    },
+    {
+      "device": "rank0",
+      "MiB": 200.0
+    },
+    {
+      "device": "rank1",
+      "MiB": 190.0
+    }
+  ],
+  "compute_buffers": [
+    {
+      "device": "rank0",
+      "MiB": 149.04
+    },
+    {
+      "device": "rank1",
+      "MiB": 97.04
+    },
+    {
+      "device": "host_staging",
+      "MiB": 57.05
+    }
+  ],
+  "worker_transport": [
+    {
+      "rank": 1,
+      "mode": "RoCEv2",
+      "rdma_activation_log_entries": 12
+    }
+  ],
+  "total_context_tokens": [
+    32768
+  ]
+}

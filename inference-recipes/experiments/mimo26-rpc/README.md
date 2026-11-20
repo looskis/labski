@@ -4,8 +4,7 @@ The one-Spark Flash deployment uses the Q2_K_S text checkpoint and can load a se
 
 The lab served the 418.77 GB MOPD Q2_K conversion on four Sparks at 5.85 / 11.74 output tok/s for one / four clients. It scored 17/28 free and 20/28 constrained, with 8/8 exact lookups. [Measurements and reproduction](../../results/mimo-v26-pro-mopd-rpc-2026-11-20/)
 
-
-The lab’s Flash measurements include the 105.86 GB target on one Spark. [Flash timings, quality and placement](../../results/mimo-v26-flash-mopd-2026-11-20/)
+The lab measured Q2_K_S on one and two Sparks and compared the 167.37 GB MXFP4 conversion on the same pair. [Flash timings, quality and placement](../../results/mimo-v26-flash-mopd-2026-11-20/)
 
 ## Runtime qualification
 
