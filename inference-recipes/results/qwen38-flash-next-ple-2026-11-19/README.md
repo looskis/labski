@@ -39,3 +39,18 @@ Physical read volume fell by 91.0% and 79.1% on edits and by 23.8% and 19.2% on 
 Across 48 matched edit requests the cache and stock engine generated identical token IDs. Each passed 20/24 expected Python syntax trees at one client and 22/24 at four. On prose the paired token sequences matched on 22/24 requests at one client and 7/24 at four. Stock against itself repeated 11/12 and 6/12 sequences respectively. The byte oracle verifies the row substitution itself. These prose measurements capture variability across repeated serving runs and have no independent correctness labels.
 
 Use the standard FP4-Local recipe for the measured serving baseline. For workloads where SSD traffic matters, the experimental launcher accepts `--retain-rows` to enable a 64 MiB payload limit. A bounded Python index and per-gather scratch require additional host memory. The prototype’s throughput and GPU energy were close to stock on the measured workloads. [Serving launcher](../../experiments/qwen-replay/serve_ple.py) · [One-Spark baseline](../qwen38-flash-next-2026-11-19/)
+
+## Longer prompts and time inside the native reader
+
+We repeated the live comparison using 3,864-token inventory prompts. Each asked for one six-digit value from 256 bins. Four documents were queried at three different positions in the repeated condition. The fresh condition generated different values for each document while retaining the numeric table format. All 240 requests, including the separate verification pass, returned the exact value. The verification pass compared 2,979,072 packed row positions with the full native reader and found no byte differences. [Reproducible inventory prompts](../../experiments/qwen-replay/bench_ple_prefill.py) · [Raw requests](prefill/turns.jsonl.gz)
+
+| Documents | Clients | First visible text in s, stock → cache | NVMe MB per 12 requests, stock → cache | Native reader s per 12 requests, stock → cache | GPU J/request, stock → cache |
+| --- | ---: | --- | --- | --- | --- |
+| Repeated | 1 | 1.904 → 1.883 | 1,470.64 → 104.97 | 0.715 → 0.260 | 102.21 → 102.25 |
+| Fresh | 1 | 1.904 → 1.892 | 1,462.69 → 105.98 | 0.728 → 0.355 | 102.46 → 102.41 |
+| Repeated | 4 | 5.616 → 5.582 | 1,450.33 → 104.96 | 0.689 → 0.264 | 99.48 → 99.55 |
+| Fresh | 4 | 5.621 → 5.580 | 1,447.54 → 106.42 | 0.698 → 0.267 | 99.52 → 100.16 |
+
+The cache removed **92.6–92.9% of physical reads** across these four conditions. End-to-end input tokens per wall second improved **0.65–1.06%**. That metric divides the prompt tokens by the full turn duration, including the short answers. All 96 matched pairs returned the same text. Fresh numeric documents still share many local token patterns, unlike the earlier unrelated prose prompts. [Per-condition summaries](prefill/summary.json)
+
+The native timer covers read planning, io_uring execution and scattering. Its stock totals were just **2.85–3.02% of measured wall time** for a twelve-request block. A separate outer timer includes the CUDA ID-ready wait and Python work. The larger drop in native read volume and time therefore yielded a small change in first-text latency on this machine. The maximum end-of-workload cache payload was 1,157,670 bytes. The cache and stock conditions used the same native four-token draft policy and disabled prefix KV reuse. [Reader and device counters](prefill/readers.json) · [GPU energy samples](prefill/energy.csv.gz)

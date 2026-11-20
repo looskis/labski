@@ -80,7 +80,8 @@ def install(reader_class, directory):
                 inode=stamp, mode=mode, label=label,
                 cache=RetainedRows(reader, 64*1024**2) if mode in ("cache64", "verify64") else None,
                 stats=dict(calls=0, read_bytes=0, read_calls=0, unique_blocks=0,
-                           nanoseconds=0, verified_rows=0, resident_bytes_at_start=rss_bytes()))
+                           nanoseconds=0, execution_seconds=0.0, planning_seconds=0.0,
+                           verified_rows=0, resident_bytes_at_start=rss_bytes()))
         mode = previous["mode"]
         if mode == "idle":
             return original(reader, count)
@@ -96,7 +97,7 @@ def install(reader_class, directory):
             ran = previous["cache"].gather(reader, count)
         if ran:
             counters = reader._native.ple_reader_stats(reader._reader)
-            for key in ("read_bytes", "read_calls", "unique_blocks"):
+            for key in ("read_bytes", "read_calls", "unique_blocks", "execution_seconds", "planning_seconds"):
                 stats[key] += counters[key]
         stats["calls"] += 1
         stats["nanoseconds"] += time.perf_counter_ns() - begin
