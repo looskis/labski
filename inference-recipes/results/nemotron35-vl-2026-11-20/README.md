@@ -5,12 +5,14 @@ The official NVFP4 release stores the 120B-parameter vision-language model in 88
 | Launch recipe | Output tok/s, one / four clients | p95 first streamed delta, ms, one / four | Short answers | Text lookups | Image lookups | WikiText perplexity |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [Ordinary decoding](../../recipes/nemotron35-vl-plain.json) | 18.99 / 57.17 | 229 / 475 | 23/28 | 8/8 | 5/8 | 3.4170 |
+| [Five native MTP proposals](../../recipes/nemotron35-vl-mtp5.json) | 34.36 / 80.19 | 340 / 508 | 22/28 | 8/8 | 4/8 | 3.4148 |
 
 Rates are medians of three trials per client count, with four requests per trial and one excluded warm-up. Each timed request asked for at most 96 output tokens. The short-answer panel used a 32-token cap. Text and image lookups required an exact six-digit answer. The vision panel contains eight synthetic 12-row inventory cards. Each image record includes the expected value, the image SHA-256 and the response hash. [Image fixtures](cards/) · [Vision harness](vision_check.py)
 
 ## Measurements
 
 - **Ordinary decoding**. [Timing](plain/trials.jsonl) · [Settings](plain/settings.jsonl) · [Individual requests](plain/requests.jsonl.gz) · [Short answers](plain/short.jsonl.gz) · [Text lookups](plain/lookup.json) · [Image lookups](plain/vision.jsonl) · [Per-passage likelihoods](plain/wikitext.jsonl)
+- **Five native MTP proposals**. [Timing](mtp5/trials.jsonl) · [Settings](mtp5/settings.jsonl) · [Individual requests](mtp5/requests.jsonl.gz) · [Short answers](mtp5/short.jsonl.gz) · [Text lookups](mtp5/lookup.json) · [Image lookups](mtp5/vision.jsonl) · [Per-passage likelihoods](mtp5/wikitext.jsonl)
 
 ## Reproduce
 

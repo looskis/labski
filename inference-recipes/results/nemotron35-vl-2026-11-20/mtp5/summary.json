@@ -1,0 +1,11 @@
+{
+  "c1_tps": 34.360351845059206,
+  "c1_p95_first_delta_ms": 339.5570939974277,
+  "c4_tps": 80.18684743261397,
+  "c4_p95_first_delta_ms": 507.530246002716,
+  "short_correct": 22,
+  "lookup_correct": 8,
+  "vision_correct": 4,
+  "wikitext_tokens": 30935,
+  "perplexity": 3.4148250515046628
+}
