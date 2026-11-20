@@ -62,6 +62,8 @@ Each rate and latency is a median across three trials. Each trial submitted four
 
 The adaptive run switched draft width. The engine reported 7.00 proposed tokens per block at one client and 3.03 at four. It still allocated 189 GPU blocks and exposed 12,002 KV-token slots, the same as fixed seven. Only two of four requests ran together. At four clients, the adaptive configuration achieved **51.73 tok/s** versus **86.54** for fixed three at the same 3 GiB budget. The schedule preserved single-client speed at 30.71 tok/s, but changing proposal width after startup did not recover the static three-proposal capacity. [Draft counters](7-dynamic73/observed-draft-widths.jsonl) · [Engine settings](7-dynamic73/effective-cache.json)
 
+Explicit BF16 recurrent state offers another option at 3 GiB. On the same Spark it raised the effective block count to 351 and delivered 94.78 tok/s at four clients. One of 28 short-answer correctness verdicts changed. [Recurrent-state precision experiment](../recurrent-state/)
+
 ## Why four clients queue at 3 GiB
 
 The 3 GiB rerun admitted two requests and queued two in all three trials. Its four-client rate was 52.43 tok/s, compared with 48.20 in the original run. The endpoint reported 189 GPU blocks, an 832-token attention block, an 8,192-token recurrent-state block and FP32 recurrent state. vLLM reserves block zero. At one client the pool was 45.21% occupied, or 85 of the 188 usable blocks. The four-client trials peaked at 170 blocks. [Effective runtime configuration](7-kv3-repeat/effective-cache.json) · [Repeated control](7-kv3-repeat/scheduler-trials.jsonl)

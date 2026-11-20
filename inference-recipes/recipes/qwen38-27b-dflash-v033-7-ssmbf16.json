@@ -1,0 +1,37 @@
+{
+  "purpose": "Measure Qwen DFlash2 with a bfloat16 recurrent state and a 3 GiB KV budget on one Spark.",
+  "model": "nvidia/Qwen3.8-27B-NVFP4",
+  "revision": "482ca0f3832238542f8f5295dde86b5f22711d80",
+  "precision": "mixed NVFP4/FP8",
+  "nodes": [
+    1
+  ],
+  "per_node_gb": 128,
+  "image": "vllm-0.33.0",
+  "context": 8192,
+  "sequences": 4,
+  "memory_fraction": 0.6,
+  "options": {
+    "--language-model-only": true,
+    "--dtype": "bfloat16",
+    "--kv-cache-dtype": "auto",
+    "--reasoning-parser": "qwen3",
+    "--no-enable-prefix-caching": true,
+    "--max-num-batched-tokens": 2048,
+    "--kv-cache-memory-bytes": 3221225472,
+    "--speculative-config": {
+      "method": "dflash",
+      "num_speculative_tokens": 7,
+      "draft_sample_method": "probabilistic",
+      "rejection_sample_method": "standard"
+    },
+    "--mamba-ssm-cache-dtype": "bfloat16"
+  },
+  "source": "https://github.com/NVIDIA/local-ai-inference-recipes/tree/bb515086841e7a81e7d51925561338e7dee35023/models/qwen/qwen3.8-27b/dgx-spark/linux/vllm/128gb/nvfp4",
+  "container_memory_gib": 108,
+  "draft": {
+    "model": "z-lab/Qwen3.8-27B-DFlash2",
+    "revision": "50307d4c4cde6860d4eee73e2547cd786fe8e8a4"
+  },
+  "evidence": "results/qwen38-27b-dflash2-2026-11-20/recurrent-state/"
+}
