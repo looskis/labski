@@ -18,7 +18,7 @@ The tokenizer defines three native reasoning delimiters. The low-effort chat tem
 
 On the 3.7B model the stock endpoint reached **97.85 generated tok/s and 0.34 GPU J/token** at four clients, with seven exact streamed lookups. On the 512-token question panel, one returned answer passed strict scoring. Five outputs contained the high-effort closing marker, and counting exact final letters after those delimiters brought the total to four. The 3.7B checkpoint scored 0.7796 bits/byte on the matched text. [3.7B responses](3.7b/effort-low-512.jsonl.gz) · [3.7B throughput](3.7b/trials.jsonl)
 
-A live one-Spark repeat with a parser that accepts all three native K2 closing markers served **7/14, 9/14 and 8/8** on the same two question budgets and streamed lookups. All 16 fresh record values also matched in both API modes with identical generated token IDs. [Corrected 7B recipe and paired outputs](7b-parser/)
+A live one-Spark repeat with a parser that accepts all three native K2 closing markers served **7/14, 9/14 and 8/8** on the same two question budgets and streamed lookups. On 16 fresh values in both API modes, the stock service returned 0/32 exact answers and the plugin returned 32/32. All 32 pairs had identical generated token IDs. [Corrected 7B recipe and paired outputs](7b-parser/)
 
 ## Reproduce
 
