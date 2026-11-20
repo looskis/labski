@@ -17,6 +17,12 @@ Both fresh launches scored **18/28** at the 16-token answer limit. All 28 visibl
 
 The earlier default-FP32 launch reached 52.43 tok/s at four clients and scored 19/28. Relative to that launch the BF16 answers matched on 25/28 questions and lost one correct letter. The subsequent explicit FP32 run reproduced the BF16 answers, so the first comparison alone cannot attribute that lost point to state precision. [Earlier control](../kv-budget/7-kv3-repeat/answers.jsonl.gz) · [Fresh FP32 scheduler samples](fp32/scheduler-trials.jsonl)
 
+## Independent BF16 repeat
+
+A second BF16 launch reached **104.34 aggregate output tok/s at four clients**, with p95 first streamed delta of **269 ms** and **0.390 GPU J/token**. At one client it reached 30.74 tok/s and 1.148 GPU J/token. All three four-client trials showed four requests running at once. None of the 43 within-trial samples showed a request waiting. In the matched FP32 run, the corresponding maxima were two running and two waiting. The repeat hit 97.1% cache occupancy, with the same 351-block configuration as the first BF16 run. [Repeat trials](bf16-repeat/trials.jsonl) · [GPU energy](bf16-repeat/qwen-dflash-7-ssmbf16-r2-energy.jsonl) · [Scheduler observations](bf16-repeat/scheduler-trials.jsonl) · [Individual samples](bf16-repeat/scheduler-rows.jsonl.gz)
+
+Across the two BF16 launches, the four-client rate ranged from 94.78 to 104.34 tok/s, versus 53.73 for the fresh FP32 control. The repeat again matched every short answer (18/28 correct), all 16 correct lookup strings and finish reasons, and all 62 short-passage NLL sums. None of its 24 full prose continuations matched either previous launch byte for byte. [Short answers](bf16-repeat/answers.jsonl.gz) · [Short retrieval](bf16-repeat/lookup.json) · [Long retrieval](bf16-repeat/long-lookup.json) · [Per-passage likelihoods](bf16-repeat/wikitext.jsonl) · [Free-form prose](bf16-repeat/requests.jsonl.gz)
+
 ## Long-context follow-up fixed before scoring
 
 The 512-token passages fit inside one prefill chunk. To test how state precision behaves across chunk boundaries, we fixed eight disjoint 6,144-token WikiText windows before scoring. Each window spans three nominal 2,048-token chunks. The test compares the target token’s log probability at the same 49,144 positions in FP32 and BF16. It also repeats the first window once per launch to measure within-launch variation. Windows and calls run in the same order with one request at a time. [Fixture preparation and scoring](long_likelihood.py)

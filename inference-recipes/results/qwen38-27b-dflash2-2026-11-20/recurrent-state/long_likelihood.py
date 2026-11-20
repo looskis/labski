@@ -63,6 +63,46 @@ def score(model, url, windows, dest):
             out.flush()
 
 
+def read_scores(path):
+    with gzip.open(path, "rt") as src:
+        rows = [json.loads(line) for line in src]
+    offsets = [*STARTS, STARTS[0]]
+    if [r["start"] for r in rows] != offsets or rows[0]["token_ids_sha256"] != rows[-1]["token_ids_sha256"]:
+        raise ValueError(f"unexpected windows in {path}")
+    for i, row in enumerate(rows):
+        values = row["logprobs"]
+        if row["call"] != i or row["repeated"] != (i == len(STARTS)) or len(values) != WIDTH - 1:
+            raise ValueError(f"invalid score record in {path}")
+        if not all(math.isfinite(x) and x <= 0 for x in values):
+            raise ValueError(f"invalid log probability in {path}")
+    return rows
+
+
+def differences(pairs):
+    scores = list(pairs)
+    count = len(scores)
+    delta = [a - b for a, b in scores]
+    return dict(scored_tokens=count, identical=sum(a == b for a, b in scores),
+                control_mean_nll=-math.fsum(a for a, _ in scores) / count,
+                candidate_mean_nll=-math.fsum(b for _, b in scores) / count,
+                candidate_minus_control_mean_nll=math.fsum(delta) / count,
+                max_abs_logprob_delta=max(map(abs, delta)))
+
+
+def compare(control, candidate):
+    a, b = read_scores(control), read_scores(candidate)
+    if [r["token_ids_sha256"] for r in a] != [r["token_ids_sha256"] for r in b]:
+        raise ValueError("input token IDs differ between runs")
+    chunks = []
+    for first, last in ((1, 2047), (2048, 4095), (4096, 6143)):
+        pairs = ((x, y) for orig, test in zip(a[:-1], b[:-1])
+                 for x, y in zip(orig["logprobs"][first - 1:last], test["logprobs"][first - 1:last]))
+        chunks.append(dict(first_position=first, last_position=last, **differences(pairs)))
+    repeats = {label: differences(zip(run[0]["logprobs"], run[-1]["logprobs"]))
+               for label, run in (("control", a), ("candidate", b))}
+    return dict(nominal_chunks=chunks, within_launch_first_window=repeats)
+
+
 if __name__ == "__main__":
     cli = argparse.ArgumentParser(description=__doc__)
     commands = cli.add_subparsers(dest="command", required=True)
@@ -75,7 +115,13 @@ if __name__ == "__main__":
     run.add_argument("windows", type=Path)
     run.add_argument("out", type=Path)
     run.add_argument("--url", default="http://127.0.0.1:8000")
+    paired = commands.add_parser("compare")
+    paired.add_argument("control", type=Path)
+    paired.add_argument("candidate", type=Path)
     args = cli.parse_args()
+    if args.command == "compare":
+        print(json.dumps(compare(args.control, args.candidate), indent=2))
+        sys.exit(0)
     if args.out.exists():
         cli.error(f"output already exists at {args.out}")
     with tempfile.TemporaryDirectory(dir=args.out.parent) as staging:
