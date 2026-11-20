@@ -47,7 +47,7 @@ On the eight 6,144-token windows, **only 19 of 49,144 target-token log probabili
 
 Token-weighted perplexity was **7.1389 for FP32 and 7.1091 for BF16**, a 0.42% decrease on these windows. BF16 had lower mean NLL on four windows and higher mean NLL on four. The windows came from one corpus. The launches also used different attention block sizes as a consequence of the cache setting. This comparison measures the deployed configurations and leaves the source of the numerical differences open. Position 0 in each window has no preceding token and is excluded. The repeated window appears only in the repeatability calculation.
 
-The probability assigned to the observed next token changed by at least a factor of two at **3,080 of 49,144 positions (6.27%)**. BF16 gave that token at least twice as much probability at 1,578 positions, and FP32 did so at 1,502. At a factor of ten, the counts were 169 and 130. These counts describe the probability of the observed token. Determining how often the highest-ranked token changed would require its ID from both runs. [Counts by window and chunk](long-context/comparison.json)
+The probability assigned to the observed next token changed by at least a factor of two at **3,080 of 49,144 positions (6.27%)**. BF16 gave that token at least twice as much probability at 1,578 positions, and FP32 did so at 1,502. At a factor of ten, the counts were 169 and 130. These counts describe the probability of the observed token. The separate next-token test below collects the ID of the highest-ranked token. [Counts by window and chunk](long-context/comparison.json)
 
 The first long window starts with the exact 512 token IDs of one short passage. In the **same BF16 launch**, scoring those first 511 target positions alone gave a summed NLL of 939.0655. Scoring them as the prefix of the 6,144-token request gave 949.5710. FP32 gave 939.0655 and 943.5751 in separate launches. This matched-prefix check shows that request length can change the reported scores even with the state dtype fixed. It does not identify which kernel or cache behavior caused the difference. [Verified prefix IDs and NLL sums](long-context/shared-prefix.json)
 
@@ -65,6 +65,26 @@ We fixed eight prefix lengths per window to test whether the probability changes
 ```sh
 python3 next_token.py "$MODEL" windows.jsonl "$MODEL-next-token.jsonl.gz"
 ```
+
+## Which next tokens actually changed?
+
+Across two fresh launches, FP32 and BF16 state reported the same top next token at **46,000 of 49,144 positions (93.60%)**. Every change occurred past the first nominal 2,048-token prefill chunk. The first changed position in each of the eight windows ranged from 2,113 to 2,141, counting the first token as position zero. Within each launch, repeating the first window reproduced all 6,143 reported choices and all eight directly generated tokens. The API returned one first-ranked ID at every position. [FP32 rankings and greedy outputs](long-context/next-fp32.jsonl.gz) · [BF16 rankings and greedy outputs](long-context/next-bf16.jsonl.gz) · [Matched counts by window, chunk and prefix](long-context/next-comparison.json)
+
+| Target position | Scored | Different top tokens | Share changed |
+| --- | ---: | ---: | ---: |
+| 1–2,047 | 16,376 | 0 | 0.00% |
+| 2,048–4,095 | 16,384 | 1,494 | 9.12% |
+| 4,096–6,143 | 16,384 | 1,650 | 10.07% |
+
+FP32 ranked the observed next token first at **28,269 positions (57.52%)** and BF16 did so at **28,249 (57.48%)**. FP32 alone was correct at 673 positions, BF16 alone at 653. These are results on eight WikiText windows. The earlier likelihood run requested only the observed token’s score. It used separate launches and found numerical differences within the first chunk as well.
+
+The 64 standalone greedy requests agreed **61/64** across precision settings. Each setting predicted the observed token **35/64** times. Of the three disagreements, one favored FP32, one favored BF16, and both predictions missed on the third. They occurred once at a 512-token prefix and twice at 4,097. Within the same state setting, direct generation agreed with the 6,144-token request’s teacher-forced top choice at 60/64 prefixes for FP32 and 61/64 for BF16. A truncated request and its position inside a longer request can produce different choices.
+
+```sh
+python3 compare_next_token.py windows.jsonl long-context/next-fp32.jsonl.gz long-context/next-bf16.jsonl.gz
+```
+
+For the next control, double `--max-num-batched-tokens` to 4,096 in both launch configurations and repeat the identical nine-window sequence and 64 unique direct probes. Compare the first changed token in each window and all positions across both chunk budgets. The current launches also differ in effective attention block size. This control tests whether the location of the first disagreement moves with the configured budget. [Paired analysis](compare_next_token.py)
 
 ## Reproduce
 
