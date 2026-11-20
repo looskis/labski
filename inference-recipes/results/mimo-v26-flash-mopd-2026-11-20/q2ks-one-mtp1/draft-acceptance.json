@@ -1,0 +1,252 @@
+{
+  "source": "llama.cpp slot print_timing per-task draft acceptance",
+  "output_tokens_per_response": 96,
+  "excluded_warmup_tasks": [
+    169,
+    917
+  ],
+  "accepted": 983,
+  "proposed": 1279,
+  "responses": [
+    {
+      "clients": 1,
+      "trial": 1,
+      "server_task": 226,
+      "accepted": 40,
+      "proposed": 54,
+      "reported_fraction_by_position": [
+        0.741
+      ]
+    },
+    {
+      "clients": 1,
+      "trial": 1,
+      "server_task": 284,
+      "accepted": 41,
+      "proposed": 53,
+      "reported_fraction_by_position": [
+        0.774
+      ]
+    },
+    {
+      "clients": 1,
+      "trial": 1,
+      "server_task": 341,
+      "accepted": 41,
+      "proposed": 53,
+      "reported_fraction_by_position": [
+        0.774
+      ]
+    },
+    {
+      "clients": 1,
+      "trial": 1,
+      "server_task": 398,
+      "accepted": 41,
+      "proposed": 53,
+      "reported_fraction_by_position": [
+        0.774
+      ]
+    },
+    {
+      "clients": 1,
+      "trial": 2,
+      "server_task": 455,
+      "accepted": 39,
+      "proposed": 55,
+      "reported_fraction_by_position": [
+        0.709
+      ]
+    },
+    {
+      "clients": 1,
+      "trial": 2,
+      "server_task": 514,
+      "accepted": 39,
+      "proposed": 55,
+      "reported_fraction_by_position": [
+        0.709
+      ]
+    },
+    {
+      "clients": 1,
+      "trial": 2,
+      "server_task": 573,
+      "accepted": 42,
+      "proposed": 52,
+      "reported_fraction_by_position": [
+        0.808
+      ]
+    },
+    {
+      "clients": 1,
+      "trial": 2,
+      "server_task": 629,
+      "accepted": 42,
+      "proposed": 53,
+      "reported_fraction_by_position": [
+        0.792
+      ]
+    },
+    {
+      "clients": 1,
+      "trial": 3,
+      "server_task": 685,
+      "accepted": 41,
+      "proposed": 53,
+      "reported_fraction_by_position": [
+        0.774
+      ]
+    },
+    {
+      "clients": 1,
+      "trial": 3,
+      "server_task": 742,
+      "accepted": 40,
+      "proposed": 55,
+      "reported_fraction_by_position": [
+        0.727
+      ]
+    },
+    {
+      "clients": 1,
+      "trial": 3,
+      "server_task": 800,
+      "accepted": 39,
+      "proposed": 55,
+      "reported_fraction_by_position": [
+        0.709
+      ]
+    },
+    {
+      "clients": 1,
+      "trial": 3,
+      "server_task": 859,
+      "accepted": 40,
+      "proposed": 54,
+      "reported_fraction_by_position": [
+        0.741
+      ]
+    },
+    {
+      "clients": 4,
+      "trial": 1,
+      "server_task": 974,
+      "accepted": 39,
+      "proposed": 56,
+      "reported_fraction_by_position": [
+        0.696
+      ]
+    },
+    {
+      "clients": 4,
+      "trial": 1,
+      "server_task": 976,
+      "accepted": 44,
+      "proposed": 51,
+      "reported_fraction_by_position": [
+        0.863
+      ]
+    },
+    {
+      "clients": 4,
+      "trial": 1,
+      "server_task": 977,
+      "accepted": 42,
+      "proposed": 52,
+      "reported_fraction_by_position": [
+        0.808
+      ]
+    },
+    {
+      "clients": 4,
+      "trial": 1,
+      "server_task": 978,
+      "accepted": 40,
+      "proposed": 54,
+      "reported_fraction_by_position": [
+        0.741
+      ]
+    },
+    {
+      "clients": 4,
+      "trial": 2,
+      "server_task": 1036,
+      "accepted": 44,
+      "proposed": 50,
+      "reported_fraction_by_position": [
+        0.88
+      ]
+    },
+    {
+      "clients": 4,
+      "trial": 2,
+      "server_task": 1037,
+      "accepted": 41,
+      "proposed": 54,
+      "reported_fraction_by_position": [
+        0.759
+      ]
+    },
+    {
+      "clients": 4,
+      "trial": 2,
+      "server_task": 1038,
+      "accepted": 43,
+      "proposed": 52,
+      "reported_fraction_by_position": [
+        0.827
+      ]
+    },
+    {
+      "clients": 4,
+      "trial": 2,
+      "server_task": 1040,
+      "accepted": 42,
+      "proposed": 52,
+      "reported_fraction_by_position": [
+        0.808
+      ]
+    },
+    {
+      "clients": 4,
+      "trial": 3,
+      "server_task": 1096,
+      "accepted": 41,
+      "proposed": 53,
+      "reported_fraction_by_position": [
+        0.774
+      ]
+    },
+    {
+      "clients": 4,
+      "trial": 3,
+      "server_task": 1097,
+      "accepted": 39,
+      "proposed": 55,
+      "reported_fraction_by_position": [
+        0.709
+      ]
+    },
+    {
+      "clients": 4,
+      "trial": 3,
+      "server_task": 1098,
+      "accepted": 40,
+      "proposed": 54,
+      "reported_fraction_by_position": [
+        0.741
+      ]
+    },
+    {
+      "clients": 4,
+      "trial": 3,
+      "server_task": 1100,
+      "accepted": 43,
+      "proposed": 51,
+      "reported_fraction_by_position": [
+        0.843
+      ]
+    }
+  ]
+}

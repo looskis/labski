@@ -1,0 +1,46 @@
+{
+  "runtime": "11459 (f498f864f) with GNU 13.3.0 for Linux aarch64",
+  "launcher_sha256": "89aed7a21aa17247294cba4f4ed794902f63b888dbd7b487729e1cf97630099b",
+  "model_file_type": "MXFP4 MoE",
+  "model_file_size": "98.59 GiB (2.74 BPW)",
+  "layers": 48,
+  "experts_per_layer": 256,
+  "experts_per_token": 8,
+  "offloaded_layers": [
+    "49/49"
+  ],
+  "model_buffers": [
+    {
+      "device": "rank0",
+      "MiB": 100321.01
+    },
+    {
+      "device": "host_staging",
+      "MiB": 633.25
+    }
+  ],
+  "kv_buffers": [
+    {
+      "device": "rank0",
+      "MiB": 720.0
+    },
+    {
+      "device": "rank0",
+      "MiB": 390.0
+    }
+  ],
+  "compute_buffers": [
+    {
+      "device": "rank0",
+      "MiB": 88.26
+    },
+    {
+      "device": "host_staging",
+      "MiB": 20.26
+    }
+  ],
+  "worker_transport": [],
+  "total_context_tokens": [
+    32768
+  ]
+}

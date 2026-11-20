@@ -58,6 +58,16 @@
         "name": "mtp-MiMo-V2.6-Flash-MOPD-Q8_0.gguf",
         "bytes": 2383728960,
         "sha256": "c2189e7130727e698f3b744859dc763da730fd00f4c42a2be2c613fc9d918b97"
+      },
+      {
+        "name": "MiMo-V2.6-Flash-MOPD-MXFP4-00001-of-00002.gguf",
+        "bytes": 5948736,
+        "sha256": "b1cb983931f3b90771a2db88470db49a5294a188de66c8852513e9d8a73894c9"
+      },
+      {
+        "name": "MiMo-V2.6-Flash-MOPD-MXFP4-00002-of-00002.gguf",
+        "bytes": 167363516512,
+        "sha256": "3adf8ea80157dd066945a954428ba0e507c15c0e5a8b6b276ac92df0948698bc"
       }
     ]
   }

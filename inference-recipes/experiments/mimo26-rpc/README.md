@@ -4,6 +4,7 @@ The one-Spark Flash deployment uses the Q2_K_S text checkpoint and can load a se
 
 The lab served the 418.77 GB MOPD Q2_K conversion on four Sparks at 5.85 / 11.74 output tok/s for one / four clients. It scored 17/28 free and 20/28 constrained, with 8/8 exact lookups. [Measurements and reproduction](../../results/mimo-v26-pro-mopd-rpc-2026-11-20/)
 
+
 The lab’s Flash measurements include the 105.86 GB target on one Spark. [Flash timings, quality and placement](../../results/mimo-v26-flash-mopd-2026-11-20/)
 
 ## Runtime qualification
@@ -42,7 +43,7 @@ hf download ggml-org/MiMo-V2.6-Flash-MOPD-GGUF \
 
 ## Launch
 
-On one Spark, the default Flash command below uses ordinary decoding. Append `--mtp "$work/flash/mtp-MiMo-V2.6-Flash-MOPD-Q8_0.gguf"` to request a two-token draft.
+On one Spark, the default Flash command below uses ordinary decoding. Append `--mtp "$work/flash/mtp-MiMo-V2.6-Flash-MOPD-Q8_0.gguf"` to request a two-token draft. With the sidecar loaded, `--draft-tokens 1` and `--draft-tokens 3` select the other tested proposal limits.
 
 ```sh
 python3 launch.py "$work/engine" serve "$work/flash/MiMo-V2.6-Flash-MOPD-Q2_K_S-00001-of-00002.gguf" \
@@ -64,3 +65,20 @@ On the head, supply worker endpoints in layer order. The default uses four equal
 python3 launch.py "$work/engine" serve "$work/pro/MiMo-V2.6-Pro-MOPD-Q2_K-00001-of-00007.gguf" \
   "$ADJACENT_B:50052" "$OPPOSITE_C:50052" "$ADJACENT_D:50052"
 ```
+
+## Compare Flash weight precision on two Sparks
+
+Stage both Flash conversions on the head. The MXFP4 text checkpoint contains 167.37 GB. Start one adjacent worker with the command above. For each run, give the head its two equal layer shares and use the same four slots and 8,192-token context per slot. Stop the head between runs and keep the worker running.
+
+```sh
+hf download ggml-org/MiMo-V2.6-Flash-MOPD-GGUF \
+  --revision c9d8697904d2564708b5197d176543983b9d8db5 \
+  --include 'MiMo-V2.6-Flash-MOPD-MXFP4-*.gguf' --local-dir "$work/flash"
+python3 launch.py "$work/engine" serve "$work/flash/MiMo-V2.6-Flash-MOPD-Q2_K_S-00001-of-00002.gguf" \
+  "$ADJACENT_WORKER:50052" --alias mimo26-flash-mopd-q2ks
+# After completing the Q2_K_S workload, stop the head and start MXFP4.
+python3 launch.py "$work/engine" serve "$work/flash/MiMo-V2.6-Flash-MOPD-MXFP4-00001-of-00002.gguf" \
+  "$ADJACENT_WORKER:50052" --alias mimo26-flash-mopd-mxfp4
+```
+
+Run the prose, lookup and short-answer workloads with each alias. For the longer constrained panel, run `python3 mmlu_probe.py run "$model" /tmp/mmlu-112.jsonl --one-letter-gbnf --out "$out/grammar112.jsonl"` from the inference recipe directory. [Workload and pinned question set](../../results/mimo-v26-flash-mopd-2026-11-20/#reproduce)

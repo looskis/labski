@@ -47,3 +47,33 @@ export LD_LIBRARY_PATH="$lib:${LD_LIBRARY_PATH:-}"
 ```
 
 Each RPC argument is a worker address and port. To reproduce the one-GPU calculation, bind three workers to distinct loopback ports in the same network namespace. Rank 4 in the output denotes the head’s host buffers. The probe reads GGUF headers and reserves graphs without generating any tokens.
+
+## Stage the original model for serving
+
+From this recipe directory, build the pinned Inkling engine on one Spark. A build with six parallel jobs completed on the lab machine. The public launch candidate below uses the Q3_K_M checkpoint on one head and one runtime copy per worker. It selects numeric zero thinking effort, balanced layer shares, four client slots and a unified FP16 KV buffer. [Shared ARM64 builder](../mimo26-rpc/compile.sh) · [Shared RPC launcher](../mimo26-rpc/launch.py)
+
+```sh
+work="$PWD/inkling-build"
+rev=eeac951be2038fc27e89613d8d1158c31d97d732
+base=nvcr.io/nvidia/pytorch:26.07-py3@sha256:7531d90bcbe0e43e1f7363029c7e145ce90eebeb494a7b4695fdba0329d7c3c3
+mkdir -p "$work/src" "$work/engine"
+curl -fsSL "https://codeload.github.com/danielhanchen/llama.cpp/tar.gz/$rev" -o "$work/source.tar.gz"
+tar xzf "$work/source.tar.gz" --strip-components=1 -C "$work/src"
+cp ../mimo26-rpc/compile.sh "$work/"
+docker run --rm --gpus all --ipc=host -v "$work:/work" -e BUILD_JOBS=6 \
+  -e LLAMA_BUILD_NUMBER=0 -e LLAMA_BUILD_COMMIT=eeac951be --entrypoint bash "$base" /work/compile.sh
+tar xzf "$work/runtime.tar.gz" -C "$work/engine"
+hf download DevQuasar/thinkingmachines.Inkling-GGUF --revision c79703c0c9f308b5f097a7082257a8e8603185eb \
+  --include 'Q3_K_M/*.gguf' --local-dir "$work/weights"
+```
+
+Copy and extract the runtime on the three workers. Start each adjacent worker on its private link to the head. The opposite worker uses its reachable routed fabric address. The launcher binds the model server to loopback. The rank order for this split is head, adjacent worker, opposite worker and the other adjacent worker. [Worker commands and transport](../mimo26-rpc/#launch)
+
+```sh
+first="$work/weights/Q3_K_M/thinkingmachines.Inkling.Q3_K_M-00001-of-00033.gguf"
+python3 ../mimo26-rpc/launch.py "$work/engine" serve "$first" \
+  "$ADJACENT_B:50052" "$OPPOSITE_A:50052" "$ADJACENT_D:50052" \
+  --alias inkling-original-q3km --split 35,32,32,35 --kv-unified --template-effort-zero
+```
+
+For the separate-slot Q8-key trial, replace `--kv-unified` with `--q8-keys --ubatch-size 64`. Keep `--template-effort-zero` and check its rendered prompt before comparing outputs.

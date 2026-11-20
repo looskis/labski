@@ -25,7 +25,13 @@ def main():
     head.add_argument("--slots", type=int, default=4)
     head.add_argument("--context", type=int, default=8192, help="tokens per slot")
     head.add_argument("--split", help="relative layer shares for head, then workers")
-    head.add_argument("--mtp", type=Path, help="use a local MTP sidecar to propose two tokens")
+    head.add_argument("--mtp", type=Path, help="use a local MTP draft head")
+    head.add_argument("--draft-tokens", type=int, help="maximum proposed tokens per step with --mtp (default 2)")
+    head.add_argument("--ubatch-size", type=int, default=256, help="physical microbatch size, up to 512")
+    head.add_argument("--kv-unified", action="store_true", help="share one KV buffer across all slots")
+    head.add_argument("--q8-keys", action="store_true", help="store keys in Q8_0 and retain FP16 values")
+    head.add_argument("--template-effort-zero", action="store_true",
+                      help="pass numeric reasoning_effort 0.0 to the chat template")
     args = parser.parse_args()
     engine = args.engine.resolve(strict=True)
     cmd = ["docker", "run", "--rm", "--name", "labski-mimo-" + args.role, "--gpus", "all",
@@ -39,6 +45,8 @@ def main():
         binary = ["/engine/ggml-rpc-server", "--device", "CUDA0", "--host", str(args.host),
                   "--port", str(args.port)]
     else:
+        if args.draft_tokens is not None and (not args.mtp or args.draft_tokens < 1):
+            parser.error("--draft-tokens requires --mtp and a positive token count")
         first = args.first_shard.absolute()
         shard_name = re.fullmatch(r"(.+)-(\d{5})-of-(\d{5})\.gguf", first.name)
         if shard_name:
@@ -50,6 +58,8 @@ def main():
             files = [first]
         if args.slots < 1 or args.context < 1:
             parser.error("slots and context must be positive")
+        if not 1 <= args.ubatch_size <= 512:
+            parser.error("--ubatch-size must be between 1 and 512")
         if len(args.peers) not in (0, 1, 3):
             parser.error("specify zero, one or three worker endpoints")
         # Snapshot symlinks point outside their own directory. Bind every blob
@@ -63,14 +73,20 @@ def main():
                   *rpc, "--device", ",".join(devices),
                   "--split-mode", "layer", "--tensor-split", split, "--gpu-layers", "all",
                   "--fit", "off", "--ctx-size", str(args.slots * args.context), "--parallel", str(args.slots),
-                  "--batch-size", "512", "--ubatch-size", "256", "--jinja", "--reasoning", "off",
+                  "--batch-size", "512", "--ubatch-size", str(args.ubatch_size), "--jinja", "--reasoning", "off",
                   "--no-cache-prompt", "--cache-ram", "0", "--verbosity", "4",
                   "--host", "127.0.0.1", "--port", "8000"]
+        if args.kv_unified:
+            binary += ["--kv-unified"]
+        if args.q8_keys:
+            binary += ["--cache-type-k", "q8_0"]
+        if args.template_effort_zero:
+            binary += ["--chat-template-kwargs", '{"reasoning_effort":0.0}']
         if args.mtp:
             draft = args.mtp.resolve(strict=True)
             cmd += ["-v", f"{draft}:/draft.gguf:ro"]
             binary += ["--spec-type", "draft-mtp", "--spec-draft-model", "/draft.gguf",
-                       "--spec-draft-n-max", "2"]
+                       "--spec-draft-n-max", str(args.draft_tokens or 2)]
     cmd += ["--entrypoint", "sh", IMAGE, "-ec",
             'export LD_LIBRARY_PATH="/engine:${LD_LIBRARY_PATH:-}"; exec "$@"', "sh", *binary]
     os.execvp(cmd[0], cmd)

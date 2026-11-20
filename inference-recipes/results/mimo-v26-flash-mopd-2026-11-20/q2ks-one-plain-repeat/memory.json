@@ -1,0 +1,18 @@
+[
+  {
+    "physical_rank": 0,
+    "unix_ns": 1795173466780304946,
+    "host_bytes": {
+      "MemTotal": 130661072896,
+      "MemAvailable": 16340987904
+    },
+    "cgroup_bytes": {
+      "memory.current": 14150598656,
+      "memory.peak": 15754137600,
+      "memory.max": 124554051584,
+      "anon": 598200320,
+      "file": 13327966208,
+      "unevictable": 0
+    }
+  }
+]

@@ -13,168 +13,264 @@
       "trial": 1,
       "server_task": 206,
       "accepted": 48,
-      "proposed": 91
+      "proposed": 91,
+      "reported_fraction_by_position": [
+        0.696,
+        0.348
+      ]
     },
     {
       "clients": 1,
       "trial": 1,
       "server_task": 256,
       "accepted": 53,
-      "proposed": 84
+      "proposed": 84,
+      "reported_fraction_by_position": [
+        0.833,
+        0.429
+      ]
     },
     {
       "clients": 1,
       "trial": 1,
       "server_task": 301,
       "accepted": 49,
-      "proposed": 90
+      "proposed": 90,
+      "reported_fraction_by_position": [
+        0.756,
+        0.333
+      ]
     },
     {
       "clients": 1,
       "trial": 1,
       "server_task": 350,
       "accepted": 48,
-      "proposed": 93
+      "proposed": 93,
+      "reported_fraction_by_position": [
+        0.723,
+        0.298
+      ]
     },
     {
       "clients": 1,
       "trial": 2,
       "server_task": 400,
       "accepted": 54,
-      "proposed": 82
+      "proposed": 82,
+      "reported_fraction_by_position": [
+        0.854,
+        0.463
+      ]
     },
     {
       "clients": 1,
       "trial": 2,
       "server_task": 444,
       "accepted": 46,
-      "proposed": 96
+      "proposed": 96,
+      "reported_fraction_by_position": [
+        0.688,
+        0.271
+      ]
     },
     {
       "clients": 1,
       "trial": 2,
       "server_task": 496,
       "accepted": 51,
-      "proposed": 87
+      "proposed": 87,
+      "reported_fraction_by_position": [
+        0.795,
+        0.364
+      ]
     },
     {
       "clients": 1,
       "trial": 2,
       "server_task": 543,
       "accepted": 53,
-      "proposed": 83
+      "proposed": 83,
+      "reported_fraction_by_position": [
+        0.857,
+        0.405
+      ]
     },
     {
       "clients": 1,
       "trial": 3,
       "server_task": 588,
       "accepted": 52,
-      "proposed": 84
+      "proposed": 84,
+      "reported_fraction_by_position": [
+        0.905,
+        0.333
+      ]
     },
     {
       "clients": 1,
       "trial": 3,
       "server_task": 634,
       "accepted": 49,
-      "proposed": 90
+      "proposed": 90,
+      "reported_fraction_by_position": [
+        0.8,
+        0.289
+      ]
     },
     {
       "clients": 1,
       "trial": 3,
       "server_task": 683,
       "accepted": 52,
-      "proposed": 84
+      "proposed": 84,
+      "reported_fraction_by_position": [
+        0.833,
+        0.405
+      ]
     },
     {
       "clients": 1,
       "trial": 3,
       "server_task": 729,
       "accepted": 50,
-      "proposed": 90
+      "proposed": 90,
+      "reported_fraction_by_position": [
+        0.733,
+        0.378
+      ]
     },
     {
       "clients": 4,
       "trial": 1,
       "server_task": 824,
       "accepted": 50,
-      "proposed": 89
+      "proposed": 89,
+      "reported_fraction_by_position": [
+        0.667,
+        0.444
+      ]
     },
     {
       "clients": 4,
       "trial": 1,
       "server_task": 825,
       "accepted": 50,
-      "proposed": 89
+      "proposed": 89,
+      "reported_fraction_by_position": [
+        0.778,
+        0.333
+      ]
     },
     {
       "clients": 4,
       "trial": 1,
       "server_task": 826,
       "accepted": 50,
-      "proposed": 89
+      "proposed": 89,
+      "reported_fraction_by_position": [
+        0.844,
+        0.267
+      ]
     },
     {
       "clients": 4,
       "trial": 1,
       "server_task": 828,
       "accepted": 51,
-      "proposed": 86
+      "proposed": 86,
+      "reported_fraction_by_position": [
+        0.767,
+        0.419
+      ]
     },
     {
       "clients": 4,
       "trial": 2,
       "server_task": 876,
       "accepted": 55,
-      "proposed": 79
+      "proposed": 79,
+      "reported_fraction_by_position": [
+        0.95,
+        0.425
+      ]
     },
     {
       "clients": 4,
       "trial": 2,
       "server_task": 877,
       "accepted": 51,
-      "proposed": 86
+      "proposed": 86,
+      "reported_fraction_by_position": [
+        0.814,
+        0.372
+      ]
     },
     {
       "clients": 4,
       "trial": 2,
       "server_task": 879,
       "accepted": 53,
-      "proposed": 83
+      "proposed": 83,
+      "reported_fraction_by_position": [
+        0.833,
+        0.429
+      ]
     },
     {
       "clients": 4,
       "trial": 2,
       "server_task": 880,
       "accepted": 49,
-      "proposed": 90
+      "proposed": 90,
+      "reported_fraction_by_position": [
+        0.756,
+        0.333
+      ]
     },
     {
       "clients": 4,
       "trial": 3,
       "server_task": 929,
       "accepted": 51,
-      "proposed": 86
+      "proposed": 86,
+      "reported_fraction_by_position": [
+        0.837,
+        0.349
+      ]
     },
     {
       "clients": 4,
       "trial": 3,
       "server_task": 930,
       "accepted": 49,
-      "proposed": 90
+      "proposed": 90,
+      "reported_fraction_by_position": [
+        0.778,
+        0.311
+      ]
     },
     {
       "clients": 4,
       "trial": 3,
       "server_task": 932,
       "accepted": 52,
-      "proposed": 85
+      "proposed": 85,
+      "reported_fraction_by_position": [
+        0.814,
+        0.395
+      ]
     },
     {
       "clients": 4,
       "trial": 3,
       "server_task": 933,
       "accepted": 46,
-      "proposed": 96
+      "proposed": 96,
+      "reported_fraction_by_position": [
+        0.688,
+        0.271
+      ]
     }
   ]
 }

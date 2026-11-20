@@ -5,7 +5,10 @@ The 309B model served four 8,192-token slots on one 128 GB Spark from a **105.86
 | Configuration | Output tok/s, 1 / 4 clients | First streamed delta, ms, 1 / 4 | GPU J/output token, 1 / 4 | Free / constrained out of 28 | Exact lookups |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | [One Spark, Q2_K_S](q2ks-one/) | 20.23 / 38.72 | 419 / 1,071 | 2.59 / 1.50 | 17 / 19 | 8/8 |
+| [One Spark, Q2_K_S + MTP1](q2ks-one-mtp1/) | 22.44 / 43.22 | 433 / 1,229 | 2.26 / 1.52 | 17 / 19 | 8/8 |
 | [One Spark, Q2_K_S + MTP2](q2ks-one-mtp2/) | 22.37 / 43.32 | 434 / 1,248 | 2.49 / 1.46 | 17 / 19 | 8/8 |
+| [One Spark, Q2_K_S + MTP3](q2ks-one-mtp3/) | 19.12 / 39.92 | 435 / 1,181 | 2.94 / 1.62 | 17 / 19 | 8/8 |
+| [One Spark, ordinary repeat](q2ks-one-plain-repeat/) | 20.47 / 41.53 | 418 / 1,276 | 2.59 / 1.47 | 17 / 19 | 8/8 |
 
 Each rate is the median of three end-to-end trials. Each trial generated four 96-token prose responses, with an excluded warm-up at each concurrency. One client ran first and four clients followed. GPU energy sums NVML counters on participating ranks over the timed request windows. Each configuration used greedy sampling with reasoning and prompt caching disabled. The checks use a fixed 28-question MMLU-Pro subset, a 16-token free-answer budget, a one-token GBNF letter constraint, and eight 32-record inventory lookups. [Request workload](../../bench.py) · [Answer scoring](../../mmlu_probe.py)
 
@@ -20,6 +23,20 @@ The second launch added the 2.38 GB Q8_0 draft head to the same Q2_K_S target. E
 All 28 free-answer correctness verdicts matched. For each configuration independently, we also compared the 12 matched prose prompts across concurrency levels. Identical answers occurred on 0/12 for ordinary decoding and 0/12 for MTP. The short-answer scores therefore do not establish greedy text equivalence.
 
 The server accepted 1,212 of 2,102 proposed tokens across the 24 timed prose responses (57.7%). [Per-response draft counts](q2ks-one-mtp2/draft-acceptance.json)
+
+## How far to draft
+
+The hardware ran ordinary decoding, then MTP2, MTP1 and MTP3. Each draft launch used the same 2.38 GB head. The table counts proposals on the 24 timed prose requests and excludes both warm-ups.
+
+| Draft tokens | Accepted / proposed | Accepted | Correctness verdicts matching ordinary, free / constrained | Identical prose responses to ordinary |
+| ---: | ---: | ---: | ---: | ---: |
+| [1](q2ks-one-mtp1/draft-acceptance.json) | 983 / 1,279 | 76.9% | 28/28 · 28/28 | 2/24 |
+| [2](q2ks-one-mtp2/draft-acceptance.json) | 1,212 / 2,102 | 57.7% | 28/28 · 28/28 | 1/24 |
+| [3](q2ks-one-mtp3/draft-acceptance.json) | 1,256 / 3,007 | 41.8% | 28/28 · 28/28 | 0/24 |
+
+One- and two-token proposals delivered nearly identical throughput at both client counts in these trials. Three-token proposals delivered less throughput and used more GPU joules per token than either shorter setting.
+
+We repeated the ordinary launch after MTP3. It reached 20.47 / 41.53 tok/s. The repeat reproduced 12/12 single-client and 3/12 four-client prose responses exactly. Against this second baseline, MTP2 was 9.3% faster at one client and 4.3% faster at four. [Repeated baseline outputs](q2ks-one-plain-repeat/requests.jsonl.gz)
 
 ## Reproduce
 
