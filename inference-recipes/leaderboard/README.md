@@ -37,4 +37,25 @@ On one Spark the lab built llama.cpp at `6aee50801d091f78b3baacd505f5e95d8e8f683
 
 To repeat against a local shared-library build, compile the probe with `c++ -std=c++17 -I "$src/include" -I "$src/ggml/include" gguf_loader_probe.cpp -L "$lib" -lllama -lggml -lggml-base -o probe`. Set `LD_LIBRARY_PATH` to include the build's library directory. Run `./probe header SHARD PREFIX_BYTES` for each staged shard, then `./probe model FIRST_SHARD`. The lab fetched up to 16 MiB of each first or standalone file and 256 KiB of each subsequent shard. Retain the original shard names together in one directory.
 
+## GGUF graph memory on two and four ranks
+
+On a GB10 we used llama.cpp’s allocation-free context initialization to plan five quantized checkpoints. For four 8K slots, changing the layer split reduced the largest projected allocation for DeepSeek V4 Pro 0813 IQ1_M from 98.60 to 91.96 GiB. For the two-rank Muse IQ1_M it fell from 104.74 to 101.77 GiB. The table includes model, context and compute buffers, with host buffers charged to the head. Actual serving peaks also include operating-system and CUDA allocations. [Thirty graph reservations with per-rank bytes](gguf-graph-2026-11-20.jsonl) · [Checkpoint manifests](gguf-2026-11-20.csv)
+
+| Checkpoint | Ranks | Candidate tensor split | Equal split, 4 × 8K peak GiB | Candidate, 4 × 8K peak GiB | Candidate, 4 × 16K peak GiB |
+| --- | ---: | --- | ---: | ---: | ---: |
+| Mistral Large 4 Q2_K | 4 | `37,36,36,37` | 91.41 | 91.41 | 93.20 |
+| Mistral Large 4 UD-IQ3_XXS | 4 | `35,36,36,39` | 106.78 | 101.92 | 103.91 |
+| Muse Spark Open UD-IQ1_M | 2 | `61,65` | 104.74 | 101.77 | 105.78 |
+| Muse Spark Open UD-Q3_K_XL | 4 | `29,32,32,33` | 99.83 | 97.95 | 100.08 |
+| DeepSeek V4 Pro 0813 IQ1_M | 4 | `27,32,32,33` | 98.60 | 91.96 | 94.60 |
+
+We summed bytes per transformer block, charged input embeddings to the head, and used the remaining non-block weights as an initial estimate for the final block. Among contiguous cuts we selected the one minimizing the largest estimated weight allocation. The engine then supplied the buffer counts in the table. All runs used 512 batch tokens, microbatch 256, a unified FP16 KV cache, and one physical GB10 with one or three loopback CUDA RPC workers. We previously cross-checked loopback against four physical Sparks for Inkling. Token generation and application accuracy on these five checkpoints remain to be tested. [Probe source](../experiments/inkling-original/reserve.cpp) · [Physical Inkling comparison](../experiments/inkling-original/)
+
+Use upstream llama.cpp revision `6aee50801d091f78b3baacd505f5e95d8e8f6838` with CUDA and RPC enabled. Compile the probe against that checkout’s `include`, `ggml/include`, `src`, and `ggml/src` headers. Pass `--pair` for two devices, then the first shard, slot count, context per slot, one share per rank, and one address per worker. [Pinned source](https://github.com/ggml-org/llama.cpp/tree/6aee50801d091f78b3baacd505f5e95d8e8f6838)
+
+```sh
+./reserve --pair "$MUSE_IQ1_FIRST" 4 8192 61 65 "$RPC1" f16 256 unified
+./reserve "$DEEPSEEK_IQ1" 4 8192 27 32 32 33 "$RPC1" "$RPC2" "$RPC3" f16 256 unified
+```
+
 Refresh the scores with `python3 snapshot.py > YYYY-MM-DD.csv`. Use the linked manifests to recheck byte counts at the recorded checkpoints. Record successful configurations and measured limitations alongside the [inference results](../results/).
