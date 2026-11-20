@@ -1,0 +1,52 @@
+[
+  {
+    "counter": "spec_decode_num_drafts_total",
+    "value": 763.0,
+    "position": null
+  },
+  {
+    "counter": "spec_decode_num_draft_tokens_total",
+    "value": 5341.0,
+    "position": null
+  },
+  {
+    "counter": "spec_decode_num_accepted_tokens_total",
+    "value": 1908.0,
+    "position": null
+  },
+  {
+    "counter": "spec_decode_num_accepted_tokens_per_pos_total",
+    "value": 632.0,
+    "position": "0"
+  },
+  {
+    "counter": "spec_decode_num_accepted_tokens_per_pos_total",
+    "value": 459.0,
+    "position": "1"
+  },
+  {
+    "counter": "spec_decode_num_accepted_tokens_per_pos_total",
+    "value": 295.0,
+    "position": "2"
+  },
+  {
+    "counter": "spec_decode_num_accepted_tokens_per_pos_total",
+    "value": 182.0,
+    "position": "3"
+  },
+  {
+    "counter": "spec_decode_num_accepted_tokens_per_pos_total",
+    "value": 144.0,
+    "position": "4"
+  },
+  {
+    "counter": "spec_decode_num_accepted_tokens_per_pos_total",
+    "value": 113.0,
+    "position": "5"
+  },
+  {
+    "counter": "spec_decode_num_accepted_tokens_per_pos_total",
+    "value": 83.0,
+    "position": "6"
+  }
+]
