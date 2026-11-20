@@ -1,0 +1,155 @@
+[
+  {
+    "api_index": 0,
+    "cache_tokens": 220013,
+    "max_context": 8192,
+    "max_context_concurrency": 26.86,
+    "attention_block_tokens": 784,
+    "samples": [
+      {
+        "utc": "2026-11-20T12:08:07+00:00",
+        "clients": 1,
+        "repeat": 1,
+        "running": 1,
+        "waiting": 0,
+        "kv_used_percent": 1.1
+      },
+      {
+        "utc": "2026-11-20T12:08:17+00:00",
+        "clients": 1,
+        "repeat": 1,
+        "running": 1,
+        "waiting": 0,
+        "kv_used_percent": 1.1
+      },
+      {
+        "utc": "2026-11-20T12:08:27+00:00",
+        "clients": 1,
+        "repeat": 2,
+        "running": 1,
+        "waiting": 0,
+        "kv_used_percent": 1.1
+      },
+      {
+        "utc": "2026-11-20T12:08:37+00:00",
+        "clients": 1,
+        "repeat": 2,
+        "running": 1,
+        "waiting": 0,
+        "kv_used_percent": 1.1
+      },
+      {
+        "utc": "2026-11-20T12:08:47+00:00",
+        "clients": 1,
+        "repeat": 3,
+        "running": 1,
+        "waiting": 0,
+        "kv_used_percent": 1.1
+      },
+      {
+        "utc": "2026-11-20T12:08:57+00:00",
+        "clients": 1,
+        "repeat": 3,
+        "running": 1,
+        "waiting": 0,
+        "kv_used_percent": 1.1
+      },
+      {
+        "utc": "2026-11-20T12:09:07+00:00",
+        "clients": 4,
+        "repeat": 1,
+        "running": 4,
+        "waiting": 0,
+        "kv_used_percent": 4.3
+      },
+      {
+        "utc": "2026-11-20T12:09:37+00:00",
+        "clients": 8,
+        "repeat": 2,
+        "running": 8,
+        "waiting": 0,
+        "kv_used_percent": 8.5
+      },
+      {
+        "utc": "2026-11-20T12:09:57+00:00",
+        "clients": 16,
+        "repeat": 2,
+        "running": 16,
+        "waiting": 0,
+        "kv_used_percent": 17.1
+      },
+      {
+        "utc": "2026-11-20T12:10:07+00:00",
+        "clients": 16,
+        "repeat": 3,
+        "running": 16,
+        "waiting": 0,
+        "kv_used_percent": 17.1
+      },
+      {
+        "utc": "2026-11-20T12:10:17+00:00",
+        "clients": 32,
+        "repeat": 1,
+        "running": 32,
+        "waiting": 0,
+        "kv_used_percent": 34.1
+      },
+      {
+        "utc": "2026-11-20T12:10:27+00:00",
+        "clients": 32,
+        "repeat": 2,
+        "running": 32,
+        "waiting": 0,
+        "kv_used_percent": 34.1
+      },
+      {
+        "utc": "2026-11-20T12:10:37+00:00",
+        "clients": 32,
+        "repeat": 3,
+        "running": 32,
+        "waiting": 0,
+        "kv_used_percent": 34.1
+      },
+      {
+        "utc": "2026-11-20T12:10:47+00:00",
+        "clients": 64,
+        "repeat": 1,
+        "running": 32,
+        "waiting": 32,
+        "kv_used_percent": 34.1
+      },
+      {
+        "utc": "2026-11-20T12:10:57+00:00",
+        "clients": 64,
+        "repeat": 1,
+        "running": 32,
+        "waiting": 0,
+        "kv_used_percent": 34.1
+      },
+      {
+        "utc": "2026-11-20T12:11:07+00:00",
+        "clients": 64,
+        "repeat": 2,
+        "running": 32,
+        "waiting": 32,
+        "kv_used_percent": 34.1
+      },
+      {
+        "utc": "2026-11-20T12:11:17+00:00",
+        "clients": 64,
+        "repeat": 2,
+        "running": 32,
+        "waiting": 0,
+        "kv_used_percent": 34.1
+      },
+      {
+        "utc": "2026-11-20T12:11:27+00:00",
+        "clients": 64,
+        "repeat": 3,
+        "running": 32,
+        "waiting": 32,
+        "kv_used_percent": 34.1
+      }
+    ]
+  }
+]
