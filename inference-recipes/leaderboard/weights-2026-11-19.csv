@@ -23,6 +23,8 @@ rank,checkpoint,revision,root_safetensors_files,root_safetensors_bytes,minimum_n
 13,meta-models/Muse-Spark-Open-816B-A42B-NVFP4,75271573ed1e94a216d2e69a988c3354a4b69208,127,533011023472,>4,https://huggingface.co/meta-models/Muse-Spark-Open-816B-A42B-NVFP4/tree/75271573ed1e94a216d2e69a988c3354a4b69208
 14,deepseek-ai/DeepSeek-V4-Pro-0813,72e1d3230f6c080a530b0a1d46f8eb4602340597,66,892744322880,>4,https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813/tree/72e1d3230f6c080a530b0a1d46f8eb4602340597
 15,Nanbeige/Nanbeige4.3-33B,df919e1e2cf077a22204c78b6c826bf3db18bc08,14,66238009168,1,https://huggingface.co/Nanbeige/Nanbeige4.3-33B/tree/df919e1e2cf077a22204c78b6c826bf3db18bc08
+15,Nanbeige/Nanbeige4.3-33B-FP8,0b1acaa19bae10fec482600ada7c9defcb7c4884,9,35516426560,1,https://huggingface.co/Nanbeige/Nanbeige4.3-33B-FP8/tree/0b1acaa19bae10fec482600ada7c9defcb7c4884
+15,primitive-ai/Nanbeige4.3-33B-NVFP4,5ddf8788ed1fa4bec0c0b6fc74ddb0bef7dc4212,4,22070410112,1,https://huggingface.co/primitive-ai/Nanbeige4.3-33B-NVFP4/tree/5ddf8788ed1fa4bec0c0b6fc74ddb0bef7dc4212
 16,Qwen/Qwen3.8-27B,37561816e66b5b9153b1b64c10968c18c1e6f4a0,18,55563006776,1,https://huggingface.co/Qwen/Qwen3.8-27B/tree/37561816e66b5b9153b1b64c10968c18c1e6f4a0
 16,nvidia/Qwen3.8-27B-NVFP4,482ca0f3832238542f8f5295dde86b5f22711d80,3,21921697280,1,https://huggingface.co/nvidia/Qwen3.8-27B-NVFP4/tree/482ca0f3832238542f8f5295dde86b5f22711d80
 17,MiniMaxAI/MiniMax-M3,8f11016727d9e05be3ca12d45ce8ad88ccb2bafe,59,854176398808,>4,https://huggingface.co/MiniMaxAI/MiniMax-M3/tree/8f11016727d9e05be3ca12d45ce8ad88ccb2bafe

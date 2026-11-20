@@ -23,7 +23,7 @@ Additional catalog entries are candidates unless a result is linked. Node counts
 | [GPT-OSS 20B](recipes/gpt-oss-20b.json) | 1 × 64 GB or larger | Native MXFP4 experts | Small reasoning service with up to eight active sequences |
 | [Nemotron 3.5 Lightning 30B A3B](recipes/nemotron35-lightning.json) | 1 × 64 GB or larger | Mixed NVFP4 | DSpark drafting with a hybrid attention/Mamba cache |
 | [Qwen3 Coder 30B A3B](recipes/qwen3-coder-30b.json) | 1 × 128 GB | BF16 | Sparse coding model with tool calling |
-| Nanbeige4.3-33B precision candidates | 1 × 128 GB | [Official BF16](recipes/nanbeige43-33b-bf16.json), [official FP8](recipes/nanbeige43-33b-fp8.json), [community NVFP4](recipes/nanbeige43-33b-nvfp4.json) | Matched 8K context, four slots and 3 GiB BF16 KV |
+| Nanbeige4.3-33B precision sweep | 1 × 128 GB | [Official BF16](recipes/nanbeige43-33b-bf16.json), [official FP8](recipes/nanbeige43-33b-fp8.json), [community NVFP4](recipes/nanbeige43-33b-nvfp4.json) | At four clients, 14.10 / 24.14 / 43.50 tok/s and 63 / 63 / 60 free answers out of 112. [Measurements](results/nanbeige43-33b-2026-11-19/) |
 | [Qwen3.8 27B control](recipes/qwen38-27b-bf16.json) | 1, 2 or 4 × 128 GB | BF16 | 83/112 with identical verdicts at every topology, up to 13.92 tok/s C1 and 54.33 aggregate at C4 |
 | [Qwen3.8 27B precision and scaling](recipes/qwen38-27b-nvfp4.json) | 1, 2 or 4 × 128 GB | Mixed NVFP4/FP8 | Same scheduler, KV dtype and context as the BF16 control |
 | [Qwen3.8 27B DFlash2](recipes/qwen38-27b-dflash.json) | 1 × 128 GB | Mixed NVFP4/FP8 | Seven-token draft, FP8 KV cache, GB10 dynamic linear backend |
