@@ -92,3 +92,15 @@ done
 docker run --rm -e OPENBLAS_NUM_THREADS=4 -v "$work/probe:/probe:ro" -v "$work/experts:/experts:ro" \
   --entrypoint python3 "$base" /probe/check_expert.py /experts /probe/output-1.f32
 ```
+
+## Full-model request measurement
+
+The native streaming API supplies visible text and an end marker. It writes prompt and generation token counts to the server log. The serial request probe joins each stream with its timing line and records first-delta time, first visible text, total request time, exact answer, process physical reads and whole-device reads. The pinned server runs its own one-token warm-up before listening. Repeated prompts can benefit from both expert residency and prompt reuse. [Request probe and fixed prompts](serve_probe.py) · [Pinned server implementation](https://github.com/argonautlabsai/argodrive-ds4-kimi-k3.1/blob/4673fc5ea0649371842f551eaffedd8da50380f1/ds4_k3_serve.c)
+
+On the Linux serving host, set `server_pid` to the host PID of the native engine and `server_log` to its combined output file. Use an exclusive local endpoint during the measurement so each response corresponds to one native timing line. Supply the block device containing the expert files and a new results path. The example issues three questions twice each.
+
+```sh
+python3 serve_probe.py --url http://127.0.0.1:8000 --pid "$server_pid" \
+  --server-log "$server_log" --device nvme0n1 --max-tokens 16 \
+  --order sum sum city city lookup lookup --out requests.jsonl
+```
