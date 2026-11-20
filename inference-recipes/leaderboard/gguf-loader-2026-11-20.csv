@@ -1,0 +1,8 @@
+rank,variant,revision,shards_checked,tensor_headers,header_bytes,loader_result,layers,parameters
+12,Mistral-Large-4-1T-A52B-Q2_K,7d4f13b81e55e1223b3c125a58af4c19bb1ddf6a,8,1602,14337344,accepted,72,1049357365536
+12,Mistral-Large-4-1T-A52B-UD-IQ3_XXS,1eb4373d37e76f6e7b4b8efa20e1b1ca40b3b964,10,1602,14337986,accepted,72,1049357365536
+13,Muse-Spark-Open-816B-A42B-UD-IQ1_M,c00670568b6ce5e56a247f67091247984df2a01e,6,1429,13169656,accepted,62,819991575808
+13,Muse-Spark-Open-816B-A42B-UD-Q3_K_XL,c00670568b6ce5e56a247f67091247984df2a01e,10,1429,13170168,accepted,62,819991575808
+14,DeepSeek-V4-Pro-0813-IQ1_M,655792861f699a46cf7d3a5ffae83f6dab7201d5,1,1894,5371520,accepted,61,1572999528803
+23,thinkingmachines.Inkling.Q2_K,c79703c0c9f308b5f097a7082257a8e8603185eb,24,1512,13069696,unknown architecture: inkling,,
+23,thinkingmachines.Inkling.Q3_K_M,c79703c0c9f308b5f097a7082257a8e8603185eb,33,1512,13071072,unknown architecture: inkling,,
