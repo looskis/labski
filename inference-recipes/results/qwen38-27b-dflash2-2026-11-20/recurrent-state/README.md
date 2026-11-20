@@ -17,6 +17,17 @@ Both fresh launches scored **18/28** at the 16-token answer limit. All 28 visibl
 
 The earlier default-FP32 launch reached 52.43 tok/s at four clients and scored 19/28. Relative to that launch the BF16 answers matched on 25/28 questions and lost one correct letter. The subsequent explicit FP32 run reproduced the BF16 answers, so the first comparison alone cannot attribute that lost point to state precision. [Earlier control](../kv-budget/7-kv3-repeat/answers.jsonl.gz) · [Fresh FP32 scheduler samples](fp32/scheduler-trials.jsonl)
 
+## Long-context follow-up fixed before scoring
+
+The 512-token passages fit inside one prefill chunk. To test how state precision behaves across chunk boundaries, we fixed eight disjoint 6,144-token WikiText windows before scoring. Each window spans three nominal 2,048-token chunks. The test compares the target token’s log probability at the same 49,144 positions in FP32 and BF16. It also repeats the first window once per launch to measure within-launch variation. Windows and calls run in the same order with one request at a time. [Fixture preparation and scoring](long_likelihood.py)
+
+Prepare the 62-article corpus with the shared WikiText script and obtain `tokenizer.json` from the pinned Qwen target. From this directory, run the following for each state setting, with `MODEL` set to the active served name. Both files supplied to the preparation command have pinned SHA-256 digests. [WikiText source and preparation](../../../experiments/glm53-nvfp4-scales/#reproduce) · [Qwen tokenizer](https://huggingface.co/nvidia/Qwen3.8-27B-NVFP4/blob/482ca0f3832238542f8f5295dde86b5f22711d80/tokenizer.json)
+
+```sh
+uv run --with tokenizers python long_likelihood.py prepare articles.jsonl tokenizer.json windows.jsonl
+python3 long_likelihood.py score "$MODEL" windows.jsonl "$MODEL-long.jsonl.gz"
+```
+
 ## Reproduce
 
 From `inference-recipes/` on the Spark, prepare and serve the BF16 configuration. The parent experiment gives the matched throughput and short-answer commands. For the long inventory, use `bench.py` with `--thinking off --workload lookup --records 512 --requests 8 --concurrency 4 --max-tokens 48 --repeats 1`. [Matched benchmark commands](../) · [Recorded settings](bf16/settings.jsonl)
