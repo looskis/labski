@@ -28,6 +28,7 @@ int main(int argc, char ** argv) {
     llama_backend_init();
     auto params = llama_model_default_params();
     params.no_alloc = true;
+    params.load_mode = LLAMA_LOAD_MODE_NONE;
     params.n_gpu_layers = 0;
     auto * model = llama_model_load_from_file(argv[2], params);
     if (model) {
