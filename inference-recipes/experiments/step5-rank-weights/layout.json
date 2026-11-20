@@ -1,0 +1,2471 @@
+{
+  "revision": "51a46a7f62eee1225d124170da903bba23d04a26",
+  "world_size": 4,
+  "experts_per_rank": 88,
+  "files": [
+    {
+      "rank": 0,
+      "file": "exl3/experts/L03.safetensors",
+      "tensors": 1056,
+      "bytes": 833562384,
+      "sha256": "12e02438114bb5c9a0308478a69a2982af34651a5251ceb44a379a0ba42436fc"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L03.safetensors",
+      "tensors": 1056,
+      "bytes": 833563416,
+      "sha256": "3680b778bdb1b65c31bb4e714723ece99fcb017b1e77cd41366040778515a1e7"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L03.safetensors",
+      "tensors": 1056,
+      "bytes": 833563560,
+      "sha256": "c6cc8b47b03cda1226f8687a10084d0d03239da04082f6523e9b6cebc54eb506"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L03.safetensors",
+      "tensors": 1056,
+      "bytes": 833563560,
+      "sha256": "ae9727169716f2c0ff09256bea7d951202816c2e87f72b8cd91a3e33d52ef23f"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L04.safetensors",
+      "tensors": 1056,
+      "bytes": 833562384,
+      "sha256": "83bab43500c7a6e2f9800c2c4a8e43ed89cee66e3c580f95b114eb5086b6ed7e"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L04.safetensors",
+      "tensors": 1056,
+      "bytes": 833563416,
+      "sha256": "6791826ce61411c1a4772fe4824ef54f16ffb8325c28e8b60f5340a00dbdbf59"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L04.safetensors",
+      "tensors": 1056,
+      "bytes": 833563560,
+      "sha256": "b88b7aac00be3e4a0bf2fe8fee74f8dca880e9602769b0a19c20ec205ed27c14"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L04.safetensors",
+      "tensors": 1056,
+      "bytes": 833563560,
+      "sha256": "a545fe07bf13490eab3de1c41ed3c1f8c7ef16b4f5f4635a1b2025260d9bead3"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L05.safetensors",
+      "tensors": 1056,
+      "bytes": 833562384,
+      "sha256": "05fee63e1c6f7ee7f447fd0679369892bad6cd91ee979ebf4804a59df419d001"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L05.safetensors",
+      "tensors": 1056,
+      "bytes": 833563416,
+      "sha256": "e260b9e97418fe73e3f289b1157ef15a0ee7a2c223f339fc3429678005639b2d"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L05.safetensors",
+      "tensors": 1056,
+      "bytes": 833563560,
+      "sha256": "77d8e0bb4b0013dbd16e4dc7281026b5b2829c23760cec34a7aafcdf99bece53"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L05.safetensors",
+      "tensors": 1056,
+      "bytes": 833563560,
+      "sha256": "76be840e38494b1050168cdc96315ba6740571171cb9bc28792ce43a6f644b07"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L06.safetensors",
+      "tensors": 1056,
+      "bytes": 833562384,
+      "sha256": "29a76980e74a0884a2d3d47591729a77aadcb81860cb5deb29d96ef3db2fc02d"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L06.safetensors",
+      "tensors": 1056,
+      "bytes": 833563416,
+      "sha256": "b3a72d8041289d1bfe3ba2e7d6dff9910721154462a236fd4e7c1686da05a1c6"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L06.safetensors",
+      "tensors": 1056,
+      "bytes": 833563560,
+      "sha256": "7272d73e16e303173219fc58b78d451a372ad54ce55fde7c366bd98efa59b5b4"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L06.safetensors",
+      "tensors": 1056,
+      "bytes": 833563560,
+      "sha256": "9dc7b7cdd1e838faffe0c285e5da9cfed0e428a481f3cd88bf077ecd3b0ad414"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L07.safetensors",
+      "tensors": 1056,
+      "bytes": 833562384,
+      "sha256": "5b6dbf061cb3c96eaaf3f6e871027a97d6de5ff77b3031109dbfa648b2537da7"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L07.safetensors",
+      "tensors": 1056,
+      "bytes": 833563416,
+      "sha256": "21f0df6952a1c3e448168b6081920f4ad4703e8074b2a82fc3bac927b59d5e46"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L07.safetensors",
+      "tensors": 1056,
+      "bytes": 833563560,
+      "sha256": "cedaaaed5912d8429c6baebaa59028f52ca45e62be67b9c7268094254db73055"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L07.safetensors",
+      "tensors": 1056,
+      "bytes": 833563560,
+      "sha256": "b3edfe1be3bfa7f9db4a4933a5df22833521fb121f34d61bfabbd314ca0a7402"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L08.safetensors",
+      "tensors": 1056,
+      "bytes": 833562384,
+      "sha256": "948a125f8d9794508ebda7ca55a2f44e352dcf7064dbb0fc3261386c39adf1e5"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L08.safetensors",
+      "tensors": 1056,
+      "bytes": 833563416,
+      "sha256": "59590ab76a5b33e11f123ec872c7bb377a71dc04fe9a274e50aaad56d24b1b05"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L08.safetensors",
+      "tensors": 1056,
+      "bytes": 833563560,
+      "sha256": "7897b7811fda8b6316d74ec6a80e8747af970da836c567add773640179b993a4"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L08.safetensors",
+      "tensors": 1056,
+      "bytes": 833563560,
+      "sha256": "1136522b00a05bb8b23f551285bde471fbec9f137a68090725c68752c2212ea9"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L09.safetensors",
+      "tensors": 1056,
+      "bytes": 833562384,
+      "sha256": "fd39392c580d23c0810f585a5b4ef3db1388b3936e0cb6878e32aac8400b3eb3"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L09.safetensors",
+      "tensors": 1056,
+      "bytes": 833563416,
+      "sha256": "86af6c1ab091a2548caabb242dd4d4cb8c1a37b4dca9c8f10e823a580c28214e"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L09.safetensors",
+      "tensors": 1056,
+      "bytes": 833563560,
+      "sha256": "12c74a9bd898e83df5d350adeec79825a4f8d2a7334ca81afc8b44daf6b84fe5"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L09.safetensors",
+      "tensors": 1056,
+      "bytes": 833563560,
+      "sha256": "a5bbafa73a81780d1eee711b193948e926ca170e7900aab1be34aee785aee6c6"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L10.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "90aa9842f4abd4be9e37b428e40a809045f26ef54895e2bab7db32b97401d429"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L10.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "a1d816929bb0be956c8b955a2aa93d2be579079809424910926c5caf46ae419e"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L10.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "b55711b80149fdd1641129b1f41313fdc0860c5ccb55caeca66d500db82bbff2"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L10.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "a2e7bb649ebd51aadea775d4b8e1287e74f6dbd64cd71f1f033307995730402e"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L11.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "85ebe26b1b4363d52e75d4fd349bf1a0df250bee3436287f8e6609517e68607f"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L11.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "c27ffaf8051c0b1376a5582a78405d8f77b192db5e266c94c2a3e97d177eaac1"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L11.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "da7d38db178fd497dd16f92c504faf66fb2f93aa09cc5bf2d27b022316e9b518"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L11.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "673c9d7897a0fd8998c451083a787b060600d35c9291e6be2f4e99a07ce66584"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L12.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "940706f0bce6c7cdecba584e34e495d5645bc4ecfc32dc97b9cfe2e2351717a3"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L12.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "8378b030bc67d8898b7255692ecb329fde239754ab0fb1f0cc012f07aa71cd20"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L12.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "e7bff1eff3123e3d36705f91e40f560971c6699055ac2ca2b7096444a19418e4"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L12.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "25461d0a569273c44fc887632d51c312c066c7ea24e3c009dd13fe44f84a5e40"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L13.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "93e67625d7bc0901c5a7888fcdc0905ffdfe1c3c3670682b88cf4d0fea04831d"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L13.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "8ded76137638935e3b3de4ee5702f3393e27231989f0c16030b2cfc1146fccfc"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L13.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "c3db955cd93ee55dd370dcb0da587028c7f76f1fe3a2fdf4df4f71e868f5896e"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L13.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "998703b8ad400bd04ed3d64fb930fa2a873efcbbc7bff4472a14be2c90b9c58e"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L14.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "fb33f4d148dc0ab6598c83d32954295e6eeb6951931b0a102d8d1ffc62b14e6c"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L14.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "e4cf44c501326cf341706b396b3c464498fada09d2d21e574b690f5a00b398c0"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L14.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "af438f8ae05e9c9aa6a98a05a192a2dfd335c177dc2140e075c2470311ed86c2"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L14.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "6bebfefa31ba36a0512318e252a3f1599d074f0f3426db0d06df82854bfd75e1"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L15.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "a244ed5282f829bb4ca70b161092b492a695b7e79aa39cb279f03c6226a2da72"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L15.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "cbe07496c9248a01173a9e2d6f7edd15af39d745473865ec7d440613f5bab322"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L15.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "b1ec92e5e67877850f58737ef1e51ef849b72bda1aaaef73c89950f21daae379"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L15.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "a1a8db79d299363e57a0aed8dba8fd9d2d14ccc22d3d5f6ed242747162e68a3f"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L16.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "a80a135046cfd204028876a2f8790ae463cc86c10865fbd24edc179df35e3ccd"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L16.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "17e0d3729c5d22cf5370fe8d896dfabb711b0f635768bbd7b6fe057462212725"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L16.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "6095e22489e7bf81524ee2bc837103339f304e80db492879d258f0dae33ad05d"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L16.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "a82c11296f859e37cc48dc4716a440e46b773e17b95206dbc79627eae2c053e6"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L17.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "4b99e632b9c377c83037496ff9bfd03010f36081ef3fbb7edb316d75aa584b1e"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L17.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "099f8dedb864293f8c95a76fd1b8f4893b7be264b692c7e8a6550658b4ea7bee"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L17.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "85b79aadd3cd0d21693be0bc471e7192b33ee626c8e2381eb066dc539c58db78"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L17.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "31474ac1faae1edaa6b4865d6e70ef4cdbc5c153bff05d07df7762d759872583"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L18.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "9762198320d4a99a52bb424cdfd961e236893b3ea7156e3954adb1c712296896"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L18.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "437722847df7e4a83c63ddafab28ddcde03d6e10730c44ac900c5883b5439cc7"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L18.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "a5dce3fac365a1559248b352d6bebd55f26c3aee7fa9081a0520be1d86034497"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L18.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "c9542bce79ddefa63600d1aa40731d504d897956b32c2245ae57d254dc3ce729"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L19.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "782e2d17fea4c53dabf73adc0e09447c83cf6d3c6af93dbc0617a5ec6a3d7562"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L19.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "7afdc19aa23c6dba3b35950323dcbf4483e4c36d7c52f76dd6c48239eda26d8d"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L19.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "1ff9a9ad479bc865d79d74261121b5b2abf90a275465a1a2fddcb91e0cfdd658"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L19.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "33186ed561759cea5b8ec0f8a6ef100b59464cf1dd75cd1750e3b9fcf21670df"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L20.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "b9f75277f7f6238fbd7d6707c90e9a9491f93fda498870b759d89bfc3cbe3056"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L20.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "2f2dbfe4e624eb693e9333a3b823a87e0435a5c09eaa6446d41b4e2fbac13c8a"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L20.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "60ddee59431e080503b39d12932b5a78e13904d9d6b47a961e14cc2f49c9943e"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L20.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "771953f9d9806c3641a5c2050ad92799529c1a9f83fca5621cd85a26d0302c8c"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L21.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "37ed84cc2f592fbb1319e73cf305522819a49dbc3e83318f37e3647f08370bb5"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L21.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "628cb4cb600760ab188f9c33a09e15b99c5b1378d381186306e1f6be9c2e8bfd"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L21.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "0af88cd525273f427120b001859e7169935f87bf6f4aac9bc53d74470d1baca5"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L21.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "8ee356477fb40530ab6c82326786c5f26316c4c9438d185abc4435a30a1b97d0"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L22.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "0761ddeac8fa28b19d300b349f38e9f09a378afcf68a977a4123bb2436a95f0a"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L22.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "fa4aa37dcdfceee410d62abd2a0f4c7bdf17b8afad07b237880054a57f5dca44"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L22.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "8c5c101f0cf0cc6bb4e88757cf1c81425d26500f7591d869b42c4a42479d15b4"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L22.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "2383bd4656278c5380c5488a234376794187b323ca8de7fccb40e9060eba1194"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L23.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "1e3feb4e28c719cf3580bc6a79f1e3b8b79d12a454f93a3397f42859cef77076"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L23.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "e1f70a2895f670671b2f63246f7d6960c42977cc4a6e5f63abfa252db29645c0"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L23.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "a9e3675ea4d4bc0eb5b1dbb4937969490cabb4b89e6a2a6e22517a69b3eefb9d"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L23.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "804d7a90ea2d76cd7bc078db25a3edc27be745eac196580dba76e43687756435"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L24.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "3399e451907ceb74d7030d37e852ab5fe118c725fae2aa0797dabe72b0806ec3"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L24.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "8a8f7ffd77ca8f2a7488f05a37d2c4059967eccda7ee77406775a45921417ef7"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L24.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "1660fd4ee9f3713206c698303e4e799c0dd1a97d2afca635add9abeeff6f3187"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L24.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "20765ec024fe692d35085e87d173540e089d768164905888eaf8999bff7815a5"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L25.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "a72db84d17b4b6d3be7796b1f2867fe2ed714942b8f04d7da21b9fc512c0f609"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L25.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "3fa385f71a3f870ad458a07a6ed0ff459c3a7c121f2edbe306ff0eb289846232"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L25.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "b9313b503e098767ecd9f0caf9dc72526fa25223b7596656e1ae99b94dc67074"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L25.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "e10c5de33997c84d90d82e5dfaa2f71c5b06190cc5525cf7b8becd4098f59e24"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L26.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "931fe14c513c5b920e3a5b6331b1d2c76b6c647f6fd98434f9d1d8e99a152d3c"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L26.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "188bfda7f7ea6ca39ecd11dc8b9ffe148b85beb1a5170fe3ccf24c4d16f6ae38"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L26.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "523ebe8e94dd37da87cf42b4b2cbe4543040f86e85e682ddbf6a4a3a4283c3e2"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L26.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "b3836d588ff4c5154b300d8eb2954cda2b2bf313a237267ab2d5319627521737"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L27.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "1b613f7fd006c2fd25d13ab73e396b2aebe309ac56952a253e321f6a6cb16ddc"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L27.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "667a0c8e72cf257650bcc2b7ba43352c546aee0df6ad0425d2bf7173f07d2be7"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L27.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "947e361c7594e85bd83ebc68febbb4a5ff06cf7b0b928241cf772234037aa9f1"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L27.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "93800de8373eb8186f515fed6b6a164b475458f85b4d1ec50230c49d8324ed3a"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L28.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "4f4296b831f4e6d83f9f6d59c40c069e9878fc14fda8d2118951068c895237fa"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L28.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "3a7c8c3b36839724341f6764e8673825eaf519d71b56a5e865cec549d18e40bb"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L28.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "ef43813e9eed5b1b581fd478b6f2748c37506dd99697529292126e71cd7c719a"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L28.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "a344a3d4ac34ca3d469588642c9c4e5ec895b0f93de9d8b83b1a983b86b8ed53"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L29.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "4e9fd87d40681666cd89369bd98f8f854026509712cfd8abbd2bcb09943b899b"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L29.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "6bc23bcb2189068239dc600660b2a947e6a786c41cea22c6ac9f9e1d6895b2f9"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L29.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "0fa9cf494d3057996ae30bfc31a15804e9134e7127ddacb0a88df16697645ec3"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L29.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "dd532ba2b3a21314a1801859bff8748097564c0f4ab22bc38040cc61a8496e03"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L30.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "ca6a808a69a974c0f13d731d473735856a76f3b8bb04d8049bd17ac1e18ec46e"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L30.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "68e3cc8780a2cb6e48b32f561a6c12b98f17c4f6ae5595f9a44bf63d49a3d9cc"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L30.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "aac7555e538b702e6684b6a0ea1fd54b476b84d04d83a43a7a8aa3448ea58431"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L30.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "fe5ff9d29dadb1669105607e811307d3e1874ed68cd6603c3bd72ce79937188e"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L31.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "6c2ed54426c2288dfe6723738027e8d26ab8645cb0630c3bf3acaaab46b8fa66"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L31.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "9a8c0a5ed1f9d2c7fbb01db7142ae66d8bf51a1fc276f471e37aab2952d42b46"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L31.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "0a361709a636faa34d2a8cb44f9d096dd3739fc04f72d3d62f2fbee578b722c6"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L31.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "7981fc20f2f1169cea6ff658b1d34c9134be9a2de7a251a9fdf985f4d52e386f"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L32.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "68828a555889960de4ca7d271e20f319291840671a7b031d262629d21cfda075"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L32.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "969123cfcb5ff3ca6de5e43a73a352dc1e5d39b84e4f72beb413baf13d74c4d7"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L32.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "601282930c6fae77fb2f162830bcfd526d3b30a218fe98bc287f9b0a51641551"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L32.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "04c1262c1a30d724d6ffbd2bf65eeb7fdc7aeaa1f882801ff95f97d0fc5e0701"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L33.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "803ceb95c358dcd2b9e786027899d2c165de1725db71a88a585c4caf69ffb961"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L33.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "537d285596cb63bc8f01a27fb2efe29f95e58fe461b6f6051ff7d6dbec0793d5"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L33.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "55b22338710dea6c9049a2db7505038d650ac41251698a948b1811632c261876"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L33.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "24b8984c4cca2b53514bedd10b5be530a68c2d2cd0308c9085474533c294e2ec"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L34.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "2d9d1b3aa63c957667151a1db12e9e266c25ade35d2122ea901241fab3911713"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L34.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "6373d826cfb1eca926d49d14ab674a8ea318bc66f181de43cb5bce0aadb18975"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L34.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "ead4b2481d6e6966f07a4b18107407311264102c27f76c68a5ff28015c76fc59"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L34.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "98f2e580dbd04044e7919b74e4b2c153b19e68a574e981736661aece342c9650"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L35.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "0c1a65507098e21218c2241b1e32d170be46334b78f4eb220ce15927988320b6"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L35.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "87fe227f6d55e002faa40652045d221997fcfbde7733d607f976908e9b5a70fd"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L35.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "2b2f140a8a03c6cd94fef48d969f259752677ecbe409a4c608e70bf54325fa2f"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L35.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "f1646f8af6423b02c836635934d846863e2599e7b9d558e3cbd3df71a85a6aba"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L36.safetensors",
+      "tensors": 1056,
+      "bytes": 833563440,
+      "sha256": "9d1e388fd4ef6f2f223a4878e05a12cbd77561474d7c968653a8e501036ba79c"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L36.safetensors",
+      "tensors": 1056,
+      "bytes": 833564472,
+      "sha256": "80f1ce52f4cbbfcfa62db9c51b6d8bae5ca32dfb9da439fe2215460de015a665"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L36.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "298dc20da214fdc0b6fa660d7dc163db0d94ba172cb44c80b602e7a4e65ba114"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L36.safetensors",
+      "tensors": 1056,
+      "bytes": 833564616,
+      "sha256": "8c272abc5a64e90ab0239bdd9f8e13eabeea56d988f2bdc14a638d23dc876ec7"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L37.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "359e1b0e5f5ebbee211be959b599d7841ef73dc0b04cbeb1da5c39c1cd4eabf7"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L37.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "b6dd17e80e384b42a52614e022648f0f4d8f2eafc0f485c4fce203be443fd028"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L37.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "1126c74aed4007089e7e905ad5433239ec9fd49999615229b0bdf503714bf3a5"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L37.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "5400ab8ddbe3b300292b2825db289f97a5148905da22bf15f1cac639f13e3ae6"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L38.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "0b153143e9b980cff30f3aa8f95f7a029bb97251a768f0900480c52f48249730"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L38.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "8ec7eed21d928004580c8428cecd911b44894489a775e185cd2f3494c5ddd832"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L38.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "facf68aabfb82da08dbf4b3a8a9715e862eff9b3c1e643b418d7b270a52b0e46"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L38.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "8f97ec78281a0763978c0f7792caa0362c66767f6baab143cc6522a969b236c3"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L39.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "f2838bd84a50e0e6004ae993e6d8420daa12ebf421cda5bb57d04897e8e958ee"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L39.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "18337c37759f3cd9c7fbff95651e8cb5319271309f5db59e387eaa463248c824"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L39.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "5d70bf0379f8f29dbc4bca7e7bb13823bed159b7a608086bdd54d19a1ee8f45a"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L39.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "c47aae8be65affa4c66452a337d52806254052a6eb72191f683aaa9bf0108b00"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L40.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "1ae1624210ffce4e0a8c51059e261c7598b4617c39a45a388008899fdec99fed"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L40.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "dec795e43beda852b39fef96854a4411c1e222ce9fe2e7c2b26c1c00fb1a2b5c"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L40.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "5691bdc6cee47604b649e69d0884db95d6857c31438fd21648ce574effdd5bef"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L40.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "6bcb7d994c1313d88b14c6ec97d2f190506ff6b88fb1e2a083f8e4f665ad5ead"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L41.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "ebf5ba85be7ee112ec1065230c722f8d38b6ea8b62562d70bd234edc6583c44b"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L41.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "bb0f147dc96dc6055c94cf431f8267ff7fa63558a4e297efed276fd8cf005fba"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L41.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "72d2b5c356fa9f5a3c158a5c9a2eb2e413de1abbead648b97ffbc346c625ba1f"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L41.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "14dd6f5814e6d49cec2e61cec2ab4970191b0f28c11114039b2c4ceb47461a36"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L42.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "709514c9d0d2aa1f0e0f5f68f822fcead91306d35d495a9f615cec6add3ba106"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L42.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "0cfcf425cbce727abfd92c056089713922a11832e2922f51b01e0e1318bc2a2e"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L42.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "87036a3fbb97880af5818d519135fc442a5f3cc887eb3ae92f366e7de49cd29c"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L42.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "3c161c599cc032be347efe885989fbc33afbce02850d3425392e91036c876b3e"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L43.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "098ea21290b42420d4468da254e35909e8a8d55bb87313eb799f576819bbc6c2"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L43.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "4ad90f338154ebb99e09d1135fcbedfe9958c9d7ae8e3c820ebd4089ad340b9f"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L43.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "3e7546562bdd60d714d9a996e70f0610005504df642823470ce10dd58b0739d6"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L43.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "c62bb31b02cb76f039dbab5350d6702f5ad1872080307a18dd721a59af9e909e"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L44.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "79e6bbea6ccaf70516744dc30cb81e6d8dbd0bf2aa391d1db7b138b682db1fc8"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L44.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "67014b4fb00dae96db890957966051e1993cd0b52476e0d9a70ff9072ebd638a"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L44.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "ca3020978d9fc6c3da8f081525a7a441fe8c9b2c0d545bcef0ffa0f5d322dec9"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L44.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "7ba0e9f388eb9aea5a09e033ca1c5cc6f55a85627fd63c3602802d204163e17e"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L45.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "ac9c096c2474e383a906bd502e6e8c96043aeabb8178568c43d9b1711fa69ac9"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L45.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "56039d712bba57868d3af3a35a3306038bbbe4b0405e0e7e0200143e9ffdf09b"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L45.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "3a0218fcae592b0c03675e35703573609b8dc9d04f80caf989859e08e7eb5bcd"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L45.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "050b459293c562f74d162ec0f996c4aca65cd97e95cdad719647820d8080161d"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L46.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "600c4ead8dba0a851f5c8cbc4325eeaa1227668fa43cfd60e9da71b2e418eea5"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L46.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "2559a8d16b90e3d929a7ed1aada98ffac933fcfb8a4f1bc9a5467f50e9af7c5f"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L46.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "148a28f3e077b3153a161f81fed2027e5a042e21af6cb7d6cbf87bcaacd4141a"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L46.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "237729c3164d1314cf24146290b923f0e0a67575d0a1185ec9f2b6007ab7c2fa"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L47.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "48de5ce50ad322496cd62cd72ec9880c2e65a5470058afba97779a9dad7d22ab"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L47.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "4f3267a93659887ce684091f1657e8dc6537559ad244295e4978496aa72e1cc8"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L47.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "773b1d62f1150ed4ff6c368edb60275e056316ec416bd67094cf5dcbd0165575"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L47.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "81103d971592bfea5862ed2ed1d7b53403304a417fd8e9b4cfcb51e8878445f2"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L48.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "f63835fe1ad7aaaffc4f6ae5e56c59aad49651439d37849d0359791598c0279e"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L48.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "9dba1b315d66b2116f17e3203fe4771221d1631be15c1face7322b10383f78f7"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L48.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "22d8b797255c5eaf3d70c3a50b12c19066e74e49fa257aba77f7ac62c221d0c1"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L48.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "583e6e47e7f50580098ef24dafb54fa44c44e841eeb9d7ae9f2d387fd3fbda63"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L49.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "512b117ebe6b52b17bcd854ad81b51c8e02046fa2a22ae02ba6326a17b4c5b51"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L49.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "e62356f365f985350d1261dd0fd6fb68a9a9fd09f188c6c5361cc20a7a0c0649"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L49.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "bb4c5a686aa9ff5df4849b067e515bdfb44f33dcdffc324000704c10b3f136c1"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L49.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "2352d2ab4bf86b50217929369a0549da34c5345bed3c92706c3d175670fa6ae7"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L50.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "79f540b8f495c08d3557619cfb420338367952c558cfacc2e3cd9c6ba14f268c"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L50.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "e4e6e0739ffecf772001574a467c4ab36305b93c60341870e8a7f66f63465d83"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L50.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "20d7cee3fad563b3517064a11e209d134b9d43a7067be1f13fdf64f9dc5cb231"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L50.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "94e6a2df5055527d79b5ed01fd35bc9248b06fb2a157da46f2a9caab9f61e059"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L51.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "689a6623dd378a53508a262dbccd197ab8a06d97db99f210110320e6151eef68"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L51.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "bca35f35edfa43a3771937dbdc2b747b34d419a96b24ba09ebe1299b4b1dbc0f"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L51.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "748099b332fda2bcd7a8ce2cb3fa1fed7784873efedc9403500ab125c4307ffe"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L51.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "242ca733f44a55a2ab65fa57f3a59dd010b65a906b8ce59a288ed97f75e057d0"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L52.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "4ef5d5c47b36297ec302840b3dbd0a96c562da87e3b9eaea0c2bda0a4b34c6d8"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L52.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "ec9683493ee9c0772b07b5443ad1ac777a448956875e862deb169c313afe614a"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L52.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "23b990f3d180fc42ca174d85fe515ebe0f5468a9880f81bb16128dbb51b3af1b"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L52.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "4453eb3b3dba6533a17e339d259a451d77185244f634eff4f507d1c13d8f409d"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L53.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "fa8856622ceba2de86b09480959ceb16f346bee23819cadc2c1702812487ac2b"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L53.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "13b798a4fc3f596fe057e7e17ae1e74822cce87ef0f7cf4c8d125addd70b0379"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L53.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "121bc45324bc1d2d3de60ec2005c37d12932834f5a9c7440a795a08057c1ce15"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L53.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "f1893871f7f567e4fdbed1504f5d927393db61b83111bf647d1c63b08da911f7"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L54.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "b4b206d87a85b277f7bbdb0b311986ed932717db39ac832747632634813cb809"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L54.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "aeaf2d6d00fa070e598c918db3f91f24973b0d4cae53afa4b2bc2ee8925200c0"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L54.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "122824c40198abf62b9305aeccab7ae7194a8aa7bbefa444be6b403666d2d51f"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L54.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "4aab0805c0087648b0a9357be4506eefa77535ca3dfc67b489735867126c39db"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L55.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "133520e5111e06e0c7f30f6c0c405b856b007d53f2c4109603147832e4ebfe06"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L55.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "afdfb4cce4e8fad293f63319dbf4dcd7d748c4cbcf0d61189595406b30e1e53c"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L55.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "6bbf97f6c9473009045f20b3d975b372989aabfb93d5777f4c44fd86666fc446"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L55.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "7606335290a4d662488a62acf753ed9da6609c6336af782b0c22458b88d8bb23"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L56.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "f4335c9f4473ee82a9d7a77ac8f8cf68ae35469e51030a1cab3c0bed01cfd6df"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L56.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "11fefe95f5c7406070ef174bc4752b239c33472716b24135476edd263c4903d0"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L56.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "072e63ac42ed3176cd522de96a546760f5caf2f789a84cc49d362e3a034ed881"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L56.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "808519b40aaec54cfb8b3bc20856d9ebdba888544f420948ba984eb4e9019c13"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L57.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "37b3932d13fc49f1d133b03a3b2f125e65990d6176bcdfb04d66c3185b9bbb65"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L57.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "30fd59ecbfa831a88f7c68474e18dc235ab9a5a2b615d627bd669ffeb7bcabf2"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L57.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "dc6d2bbb66192e55c6b666ea57cdf5db3727ab0cfd178e134576a8548ce185cf"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L57.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "962d398f883098ecf627eb3f5cf3fcacbee4cfbb8d56b65f04faf789b74f9ced"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L58.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "9e15dc94d8d38a115ebbde34df752ef43a66fe044e82d06c2eb91d1483ac0ba1"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L58.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "315d6514fd581c5a1139a2875fcebdc8b5bc73773f257255e0a4e619106ab810"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L58.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "0fa1462d31057f9ed8e3234cb1e14a7654661518d533bb433a154a12aa1d8aa3"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L58.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "609e8f6c24c94c472c8ef95e9b71ea0a6a6f77cd771f12445c7c461325d632d6"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L59.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "807e8b26f63eafaa16a074df08809b9b10fcde87b29b3280b0630cb7a164e26b"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L59.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "98dc7b188d604eac59f4456fe91ed9cf1dfbf53b71686f6d649070e3bbf1ba81"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L59.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "c981520aca611ae55f7b3634f4b57cf79c896862ba6d51a015fa5d925a05ad59"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L59.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "164c0966408d4b202eaea47c0aa78f048a0a1943125f870620cccece54239465"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L60.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "aedfc00ac631ab9dc493b8788a26f330b4fc246d468fa413152fe1360c65a65a"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L60.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "6861e396be98e043cc038a9adec4bf2f6664db78b457eb03a0aadfc1aed102d5"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L60.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "58f90991d9145b0f69f16ceae0907aac1b25a662a2d612a1103dfc20ffa20a26"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L60.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "44f22b94569d114fc5257c681ea58b7d3cfc3199a39fcdd58385c6a9de7044fb"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L61.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "c7c193eca79dceb7c538dc8b0efe214c3402f76bf4f5508c3f8b98e5f846b7af"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L61.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "eabd7f076deddcf11615c83670e721347466be8e23a77ebcb4c3e49f16f465af"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L61.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "d0c9a59cadc12d9d0718056bbf7cf3eab6b63720a74512a78d8ce1b883352a73"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L61.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "a3a87dbbe6976da96bcab0a2cba62b8c70bee1f7eff9d86d58d06a7b1e57a204"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L62.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "432f721c93738403a1c0265f95a30e696c5870a06b6003202f9ee85533cc65bf"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L62.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "7c0ff672df66848913772230fbef694cad5a50c7cd5083dd6f8b4f6f6635a0d6"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L62.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "92a6df002a16673105ada34680a8c5183dfe4621b78136ef486903f507943d21"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L62.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "af42ee42eeef1db6a3f4015abd9d2b68aa957536717b158bfb840d747118e7fb"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L63.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "fefa78627681d29d5450a41f1c9ef872b49483c738ecfbcd2d85c8c41625dc23"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L63.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "5d2e69a83cde0d9798bf9ef9ab3c4e66a80889c7a20d56e9e19b490e194e52e9"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L63.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "6b077cb57987dfeb1a3816572d1e6bf66cf0773e54e50795a44c855098cf5649"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L63.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "86374fe6da5abde5b9899acc7944f1c86dacef9feb7b645cc6b3c1a083a84106"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L64.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "d3eae17642c90baa3f5fb583b295b507b8f23ca8b922f5bf5c0d8ef14cacaf58"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L64.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "8b5a60ca100e8db880171b8e7e48fdea73eb41cc9dd30d91aabf46f2c7c28c72"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L64.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "d7fa36d3df03898df76fc841af66bfc92e690eefc1d7d72706037a122cef4bd7"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L64.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "5c67a1c25227cc9774260ef3fd8d5c25e4c32fa7c28c2c6960080eb9abd0bb1e"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L65.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "fd9748d527e3292469dba5c5cdbc9af613b080247567f51914e37ade4724a470"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L65.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "9afedaa61bd27836ed0b71efa245ec51f3944ead63f6a3d757e3b52480a741a9"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L65.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "28b409150be45e561f9eff710bea40af15eb05add56ae283e876fe987206a7d0"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L65.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "4a9ee1c946c58277378733b654ec7e70a5760244f98c74b79268c504482ddea7"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L66.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "d276aac5bba38575c85318787e06bf7d66c37ab3b880172757e18e0a9ba744c2"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L66.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "e9df8cb3937c96437e61fc35723a2d0738beef6b958fbae77e3e44e09f471d69"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L66.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "f35e6c7d7843dd64dad635e1b892dff7c141c3ba0fdd50347f7efccb79880f1d"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L66.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "7485945e945776605e8240eea175a773a6b3d27aba2a40d4534ca3b1fe3cc523"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L67.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "eabf03e6e617bff7778c267b401ba4bed174e6fecb46168b2bf843a4c4fd5899"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L67.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "678e4358966afda92525242af3aef371c2dbbda3c9390cbdcecdfacdf3aaf30c"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L67.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "8639d325bdcbf0d7cddd548cd790d84fcfe7e3b4b3e0ac96498bf857c863f85d"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L67.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "9a23f5379f7ca80bff8c4039cf4cb4d66d4b5dda8c081f8adac47274854b0354"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L68.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "b1a2964f367b392262c9e8c2103e2d431441ab3abf276f03f37da5636c17c1f2"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L68.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "a414359a0f3234f7f3e987e8320ab098f0d0ddeb81586b76e37383e0a4692136"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L68.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "936b87bf8cdae47bcd7dd802e2c9fa7255fdf435c75e5b2e6d6e558d61936c2d"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L68.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "efe549abb061a6d2b83d7b76accec434a142ba5d6811b90dbd67936d08be7fa3"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L69.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "5fd56b1fb32428a044faa9cee725402dbf204fe61503a8454d7fcdfcb46eec63"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L69.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "676d1986a8a75f1f3467f11e3fa7a9169e67ca9e749c0144cbb60a23a8f2f85f"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L69.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "288c9e2c455d1405b80b57aa034d9f72f51df7d86ab20831d05d77b13946fa97"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L69.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "53f8a6eccdc9998549c8f049ee2c7bea6a4ccef35d38a35bb4380866b932d50d"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L70.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "57d0f3ee91e0bdf5f37c8a80aed6887d7dffea9f9a14cca95801c8404f3eeb8b"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L70.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "8f3fb66a09212e6bd2c702c6396471d698dab7aa8b0e515fe9f4a7c335a32c79"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L70.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "1cb1682aa80ce38d6a045f139b035b5cb6accbfbc0eeda154372346af3efc672"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L70.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "8ec1319578c6dc1ae81de35ef695bae43c5bbec19318ef263f29b77e0e553dff"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L71.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "06b0830f3b3203f31e566c1e7b9bfaaac65d031efeae7d08f760253a8ac07f08"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L71.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "10622acd3ffb680cf640d976775669210656c04926dbce6ea904710fc3563189"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L71.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "0642558ffb4abdb72d1a5540b4cd70e26c4a28f64ca9566c0e945882fce767dd"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L71.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "eda352ffb618c57d6be70d73d7ebe38e1682f084927acfe6cdc399a36c7a59bb"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L72.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "f2a27db6183f271d59229e6af366a3b0b44bb8203b37c24b54ad0fa8043fdc76"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L72.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "1a4d3f7e26f347cfc7331f57e5e5038a1d89e3f44d019f9cd7cb045c17916fce"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L72.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "e17972117ad8b905db2d977bb251cbc054b84357eb6690000f1af921b77b9579"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L72.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "e24f05b3bde3627763ab4c75b37ee5858269eac3237e0ef65a4570ef824dc000"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L73.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "4b31f53fce630aaf291fc6a88cc902da875f7c3cb30eef00de6c1e1f18d0280a"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L73.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "1551497b53afe5ff6091835fcd26a954adcc0c6e899fc8dd78198f490bf5c5a6"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L73.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "111c75ecf13367fea52feddcd161c90f55c4a0a1fbfdcb2e0a8d6bab8e0dec99"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L73.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "ea1d89ca8c88390d7602d60cfa76c898f91b4a55e2694f686e13ae9f9b73be58"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L74.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "8c15af732e6359d234c96361619c8a46054e13432290cfc2a6bad79466089ca7"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L74.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "d018d91182224453d717f5ca71bbeafa07201f9c22e45cd14e4dd44c99cd55f2"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L74.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "ca4337ecdd05ba3831f343e3b0c19a1f3adec7b4b14a480937798c0b98f5d436"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L74.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "64e4f1d6c39fd54880574661e3994be6f4537074fd970b0034e1eeffdf37aed5"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L75.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "4004df3b3d58fbba99cc4ad260b94dad0b79f4e756f068b58e988d93da02cd08"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L75.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "dee15ba0d52343ed8b664b2b41238dddd29f923c85984027ed143e80913749c2"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L75.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "6e7f6af334b0225b59eb813bb12543007246dcf70948cd0ad84bb7ed06494402"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L75.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "26dd1d99bfada6b86e496dfc9b8a81d17a87020d3d3fce7fb806a584729bf48f"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L76.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "560b884a62ce0cf8ba3992aa4742ca588a3d48579cafb2b5b76f173e07c96f93"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L76.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "b89825d6ad7e3496844d15209e8d4509eaa2a14eee65accbf0ebf8f56d9166c1"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L76.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "2a148193a0af2707fd7acb57e6c7a0b2d86d265a973b9ef68ab506e818fdc1b9"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L76.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "b695d8fa79edcde6a395ac74e6fedec248d4306a6414c1a278bf1268594831f1"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L77.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "cf5bf52928f52cf632df94015790f215399f309643f74a192997c3a288b9f83d"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L77.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "3a2719d9d685bf678b1523da64c3194de6612d09c7e4de5557808f5882d1d634"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L77.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "6d2c628aea7f0fd1b1f4a0c63af71473a2b978424d02a362d801509b1792230f"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L77.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "c532d7263a1c5f7fa2b07ceb1064cc630e24f929bac07270c6b6db7157e1fd4a"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L78.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "bd252d3887c60ad76f194b3e43f15dd69ecbf97b6e143d3a32dd5186373d9739"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L78.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "b2ed8a75d93069b59241c05bc086be35af5a03cf1f3c2c6d95df7d42698cabb3"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L78.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "15fd255e6935c07c816af61c9c19fef549f91c8c5efcb745cc146103547ea2e7"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L78.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "38c294082cabc1962c048350a1bc3d41701b712759825eb996547bd13fea6383"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L79.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "bcde060dc80e22dd8d9bdcf1db18d176135e93ae0a40461ca86ca18638f76561"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L79.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "8e5a2869c3144dbe32dd874141b17f6f23055787a2ca867988bf41663bfeb36a"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L79.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "a125c57283e90705c8e3cb60de86568a3ca9c1c6185fe4f00b07ccdcf9fe70c5"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L79.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "1aa695f3afe44ba1fdc4398a454f5f231f397896d62f222517c761d5a287bd0e"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L80.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "f3bd0fe7f825067967692518138c39fc9bac36abc41da7abc5914f8bc65ea613"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L80.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "1ca513506ca6ceaa59c43dd77844c3ecf65b618ec4d572c238850c6e7f3aa7a1"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L80.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "b0a687b969b4d4deca57aac2c39b90375df35c99f07c56d01109c519ebd24765"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L80.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "ad9fe54d99753c2666185bf3ed31cbf87080ec031dfe467d775c9edd1a7d0706"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L81.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "3d719a6fa2c975d1d9caaae80a08620435e0179920ce4ff7f173dcf3927d0359"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L81.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "215432e85690c08c5256f3d78469cd8f414093aa9d8db28c70b748d63a7d5501"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L81.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "df64c9f1262640dcc298c44234ca17c3b1ccf4d81339c408eb0e4c87ad13da73"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L81.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "368b4d01bea9597e6025f54dc61ed830093c575d80c2675894a1dbb6cf6be4c3"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L82.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "6f965b3968903b9e36e84a0c6500c8d6780e29878c533e8db227705a1589c0de"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L82.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "841dc974eab8c7f11e4c6d861e82a72ef48ac96f3cbc510e1dc0be6e9e594252"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L82.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "cae89552e8f4962e79e990608812b8e621dcf9d68640c9ec3c64cba249f7432d"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L82.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "071f8d36d488a120c13f19b4e2de3b79a7ddc3ca49320c25eadcc6b6e2bb9d9d"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L83.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "9f957224642abf1f71995120924f98b8cb95ddd8a111064bcdd8f646b334f4d5"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L83.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "d0786305ee90060c1a74e9b3944aec97583de67668842ddb801b23c998862181"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L83.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "ca4deb350b31e470a9c28e74769da1d4f25aec0cfcdb89155652940e4bc058fa"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L83.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "b53211d0e3c9b32f5b4b08514545349d16fce88f71c3aee7b116e04027da7b04"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L84.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "63db795654711f694f27227ef0f9479bac4aae70598a9db7a71d97f40f0499fa"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L84.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "7d5d7619e4cd59314781215dc6c2be9c654bc2988e84ede1e16859ae27137d53"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L84.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "67bdbbbd87122858ddfdd69a77311e38aaecd34c175f9c3fd701e862a63968d9"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L84.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "7c8861005dc8ba2229ee38c03ef6e0ce3baf8b464603c3765564ffaa3d59de1b"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L85.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "825b3bf573ac6299dc156223f44f5534de19e84a785496a88eaac373edddcbc4"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L85.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "083294d973de0be48d3cf4fa3864b780eec57d2968595737508ff30058a14571"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L85.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "998342c786fce54da43fe4e53ff18a1efca6ccaa9e1553b4867a19248488f8c1"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L85.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "2fe982ea18ced133dbf38774f8b1778b94a62c6447fc05ba0d469cba356ff6b0"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L86.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "e2a2bd23bd5197661b19819b9804d181f6a039dbfa5fc99e7d7414dd4236b7c5"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L86.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "54752c30136e20f6db9824486e06d2c3678112bfeae645c054f58ac70113aa4d"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L86.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "6236678e365bd0d7e77ce0f25224d68e389e1b98308cd5dfc39c57a9cd71cfe0"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L86.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "b669a5ea9f5cf5105bca2a84d4a47f2a9c49f15c673534ccc3c9e94f9eaf6f35"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L87.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "43c305221919b8a2ae7d2cf4c39cfd4e943b451682123bc9676f74698ce2c07c"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L87.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "17879acc28f6b06b2be08a0d6f0821def4ec9abd9f637f5365791f58b87b0709"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L87.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "6f49bf55fd69f31cc38fce0e47ed6ff313665f324660a296d207483283abdfc8"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L87.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "cccdf359e0448ff188209012924c88ef1ab3ce82150d85e1039cfd6cf4998cb0"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L88.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "1d0f0c1a7e3691b56d656df860bc4455aa2b00028d1d4a29ee5220b3211dcc75"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L88.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "b50a6ee13c588705563b02a2a12578e2ccef0476a026dedb2359ca10ffdf6a93"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L88.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "91215a67755898b3664ddf69f2e6057641d167b01d7829d51eb33845e9629f0d"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L88.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "4019d1a8fcf3c551295600a327f0a25bfa3e5cb258cdf6911b4bdf1ee2833b75"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L89.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "edb6ceeba035d7e45ea5512454671d38b6aac72f68bcbac766b1dc5df1b61fd6"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L89.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "74184204c9f33d902b1642ccab05d4adad27b670c6331ee0cc8bcf0a3d82c13e"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L89.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "2b9bbeb05de37b8b4d25de7192a77f383291f4f7322c0dbb3e8d102b75c32360"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L89.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "c908243b3d0c9796959f7e83031d380106d84ae9f1db1373c1f33bea083412ae"
+    },
+    {
+      "rank": 0,
+      "file": "exl3/experts/L90.safetensors",
+      "tensors": 1056,
+      "bytes": 833567568,
+      "sha256": "bd0ebc2780dc8e71c9a8c8c6c79f386f633b1ba90e30f111bd3c837dac982786"
+    },
+    {
+      "rank": 1,
+      "file": "exl3/experts/L90.safetensors",
+      "tensors": 1056,
+      "bytes": 833568600,
+      "sha256": "1074942e1a0ea8f24cca316a0629ce1b3d2ef2912562487b91f0ffeb3a4b8cda"
+    },
+    {
+      "rank": 2,
+      "file": "exl3/experts/L90.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "bb8520ce206eb6b1f364ace8f791eaaf6e9af3b1d5ac9e6a5b8a5da51f904783"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L90.safetensors",
+      "tensors": 1056,
+      "bytes": 833568744,
+      "sha256": "d3f317329b47276335853eb5eab83007149d0e1f68e234b26d4ed593bbc94f2a"
+    }
+  ]
+}
