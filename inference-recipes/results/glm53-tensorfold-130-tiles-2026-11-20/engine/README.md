@@ -49,3 +49,15 @@ sha256sum "$work/out/native/bin/tensorfold-native"
 ```
 
 Mount the executable at `/opt/tensorfold/native/bin/tensorfold-native` in the compatible TensorFold runtime container on both ranks. Set `TF_GLM_Q8_PROMPT_TRACE=1` on both and compare `TF_GLM_Q8_PROMPT_TILES=0` with `TF_GLM_Q8_PROMPT_TILES=1`. The trace records the first dispatch per measured row count per calling thread. The original path logs `tuned_tile=0`. Tuned rows log `128` or `256`. [Lab patch](0014-labski-q8-prompt-tiles.patch) · [TensorFold notice](upstream-NOTICE.txt) · [Apache 2.0 license](upstream-LICENSE.txt) · [Retained MIT notice](upstream-MIT.txt)
+
+## Launch on two Sparks
+
+Use the standard EXL3 4 bpw checkpoint at revision `76c0b5173166d2795dd48860f45d8224817f894c` and the DFlash2 checkpoint at `bf582e4eacc1810f76656d1811693ff6c6737d2a`. The lab checked the draft weight SHA-256 on each Spark before launch. It was `b038e1d9d1e7833fa3880c2c0135ba9b673013f03da1b29fb831931584759dac`. Prepare a compatible runtime on both nodes with the pinned Mia recipe’s `scripts/prepare.sh --image`. The executable built above replaces the image’s engine at launch. [Target weights](https://huggingface.co/Mia-AiLab/GLM-5.3-Flash-EXL3-4bpw-TensorFold/tree/76c0b5173166d2795dd48860f45d8224817f894c) · [Draft weights](https://huggingface.co/incoai/GLM-5.3-Flash-DFlash2/tree/bf582e4eacc1810f76656d1811693ff6c6737d2a) · [Runtime preparation](https://github.com/MiaAI-Lab/GLM-5.3-Flash-DGX-Sparks-1104/tree/d8a7439e8c5aac8645c423ccd24189690359ab69)
+
+On each node export its `RANK`, local ConnectX interface `IFACE` and comma-separated `HCAS`, plus the common `HEAD_IP`. Set `TF_NATIVE_BINARY`, `MODEL_DIR`, `DRAFT_DIR` and `STATE_DIR` to absolute paths. Set `RUNTIME_IMAGE` to the prepared local Docker image. Run the following command on rank 1 first, then on rank 0. The head serves a loopback API on port 18220. [Complete launch arguments](serve-rank.sh)
+
+```sh
+PROMPT_TILES=1 ./serve-rank.sh
+```
+
+For the control, remove the experiment container on each rank after stopping it and relaunch with `PROMPT_TILES=0`. Both modes use one scheduler slot, 65,536 tokens of context, a 4,096-token solo prefill chunk, FP8 KV and a disabled prompt cache.

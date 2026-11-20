@@ -1,0 +1,79 @@
+[
+  {
+    "input_tokens": 1024,
+    "control_input_tokens_per_s": 1252.8680841390026,
+    "tuned_input_tokens_per_s": 1284.3321196670734,
+    "pooled_percent": 2.5113606074252948,
+    "pair_percent": [
+      2.019786013274394,
+      3.003048564509636
+    ],
+    "matched_first_token": 4
+  },
+  {
+    "input_tokens": 2048,
+    "control_input_tokens_per_s": 1414.5086875422417,
+    "tuned_input_tokens_per_s": 1458.995137915088,
+    "pooled_percent": 3.145010756359734,
+    "pair_percent": [
+      2.8556317706865286,
+      3.4345481886564944
+    ],
+    "matched_first_token": 4
+  },
+  {
+    "input_tokens": 2560,
+    "control_input_tokens_per_s": 1357.8130446888492,
+    "tuned_input_tokens_per_s": 1394.5139045661813,
+    "pooled_percent": 2.7029391138116754,
+    "pair_percent": [
+      2.3990706908966652,
+      3.0073813166252794
+    ],
+    "matched_first_token": 2
+  },
+  {
+    "input_tokens": 3072,
+    "control_input_tokens_per_s": 1340.7478639648675,
+    "tuned_input_tokens_per_s": 1363.6641618830886,
+    "pooled_percent": 1.7092175594039638,
+    "pair_percent": [
+      1.3685857802782753,
+      2.050385663925458
+    ],
+    "matched_first_token": 2
+  },
+  {
+    "input_tokens": 4096,
+    "control_input_tokens_per_s": 1297.5624047626793,
+    "tuned_input_tokens_per_s": 1320.4579962685748,
+    "pooled_percent": 1.7645079282397225,
+    "pair_percent": [
+      1.5626312816306331,
+      1.966602453294053
+    ],
+    "matched_first_token": 3
+  },
+  {
+    "input_tokens": 8192,
+    "control_input_tokens_per_s": 1367.2321836725189,
+    "tuned_input_tokens_per_s": 1391.8559559667217,
+    "pooled_percent": 1.8009941974932886,
+    "pair_percent": [
+      1.6243403657245636,
+      1.9778268608310556
+    ],
+    "matched_first_token": 3
+  },
+  {
+    "input_tokens": 32768,
+    "control_input_tokens_per_s": 1424.2872229041736,
+    "tuned_input_tokens_per_s": 1450.4167545501614,
+    "pooled_percent": 1.8345689848083158,
+    "pair_percent": [
+      1.5323594946534458,
+      2.137161877229765
+    ],
+    "matched_first_token": 4
+  }
+]
