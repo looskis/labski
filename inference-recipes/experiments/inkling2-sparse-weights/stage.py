@@ -103,13 +103,37 @@ def project(source, rank, destination=None, expected=None):
         return result
 
 
+def copy_assets(snapshot, destination):
+    assets = json.loads(Path(__file__).with_name("assets.json").read_bytes())
+    for asset in assets:
+        name = asset["file"]
+        target = destination / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        if target.exists():
+            raise FileExistsError(target)
+        size = asset["bytes"]
+        digest = hashlib.sha256() if "sha256" in asset else hashlib.sha1(f"blob {size}\0".encode())
+        with (snapshot / name).open("rb") as source, tempfile.NamedTemporaryFile(dir=target.parent) as tmp:
+            for chunk in iter(lambda: source.read(CHUNK), b""):
+                tmp.write(chunk)
+                digest.update(chunk)
+            if tmp.tell() != size or digest.hexdigest() != asset.get("sha256", asset.get("git_blob_sha1")):
+                raise ValueError(f"{name} differs from the pinned snapshot")
+            tmp.flush()
+            os.link(tmp.name, target)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("snapshot", type=Path)
     parser.add_argument("--rank", type=int, choices=range(RANKS), required=True)
     parser.add_argument("--file", help="limit the operation to one indexed shard")
     parser.add_argument("--out", type=Path, help="write sparse shards into a new rank directory")
+    parser.add_argument("--with-assets", action="store_true",
+                        help="also copy the tokenizer, model metadata and auxiliary draft for a full rank")
     args = parser.parse_args()
+    if args.with_assets and (args.out is None or args.file):
+        parser.error("--with-assets requires --out and a full 24-shard run")
     index = json.loads((args.snapshot / "model.safetensors.index.json").read_bytes())
     files = sorted(set(index["weight_map"].values()))
     plan = json.loads(Path(__file__).with_name("plan.json").read_bytes())[args.rank]
@@ -135,6 +159,8 @@ def main():
     for name in [args.file] if args.file else files:
         result = project(args.snapshot / name, args.rank, args.out / name if args.out else None, by_name[name])
         print(json.dumps(result), flush=True)
+    if args.with_assets:
+        copy_assets(args.snapshot, args.out)
 
 
 if __name__ == "__main__":

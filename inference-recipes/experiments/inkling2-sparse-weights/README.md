@@ -4,6 +4,8 @@ The four-Spark serving image requires each packed expert tensor to have its orig
 
 The 24 shards in the model index occupy **390.06 GB** and contain 1,770 tensors. Expert rows account for 376.09 GB. The byte-range plan retains **107.99 GB per node**, or **431.95 GB across four ranks**, versus 1,560.23 GB for four copies of the indexed shards. This is a 72.31% reduction in indexed weight bytes. Filesystem block rounding, tokenizer files and the separate draft checkpoint are additional. [Per-shard byte ranges and header hashes](plan.json)
 
+We staged all four rank layouts on a Spark’s ext4 NVMe. The 96 sparse files occupied **431,957,938,176 allocated bytes** (431.96 GB) while retaining 1,560.23 GB of logical file length. Each retained byte range was hashed during the copy. The measurements exclude the ten serving assets, which add 3.45 GB per standalone snapshot. [96 file allocations and SHA-256 digests](staged-shards.jsonl) · [Pinned serving assets](assets.json)
+
 On a Spark running ext4, we staged rank 3 of shard 22, which contains both NVFP4 and MXFP8 experts. The sparse file retained its **19,893,058,608-byte logical size** and occupied **5,273,714,688 physical bytes**. We compared all 54 rank-visible tensors against the original, including ten expert tensors. All **5,273,672,456 tensor bytes** matched. The test used the installed SGLang loader's shape and dtype checks, rank slicing and copy on CPU, before its device-specific scale swizzle. A complete four-rank serving comparison with the sparse files is pending. [Exact per-tensor checksums and allocation](rank3-shard22.json) · [Verification program](verify.py)
 
 ## Reproduce the file check
@@ -26,4 +28,15 @@ docker run --rm --network none --cpus 2 --memory 12g --memory-swap 12g \
   "$image" verify.py "/hub/$SNAP_REL/$shard" "rank3/$shard" --rank 3
 ```
 
-Omit `--file` to stage all 24 indexed shards for a rank. Omit `--out` to print the plan without writing weights. Use a sparse-aware copy for staged files, such as `rsync -S`. [Stager](stage.py) · [Four-rank serving configuration](../../recipes/inkling2-small-native-c2.json)
+## Stage a complete rank for serving
+
+Repeat on each node, with `RANK` set to its expert rank (0 through 3). Set `SNAPSHOT` to the original pinned snapshot. Use a separate cache directory for the rank layout. This command also copies the tokenizer, configuration and auxiliary draft, checking their published digests. All ten staged assets were independently rehashed on a Spark.
+
+```sh
+revision=4d564489295e30e9341a9822a8046f0c9ded1a7b
+rel="models--thinkingmachines--Inkling-2-Small/snapshots/$revision"
+export HF_HUB_CACHE="$PWD/inkling-rank-$RANK"
+python3 stage.py "$SNAPSHOT" --rank "$RANK" --out "$HF_HUB_CACHE/$rel" --with-assets
+```
+
+Use this `HF_HUB_CACHE` when launching `inkling2-small-native-c2` from `inference-recipes/`. The launcher checks the marker against the model revision, rank and expert-parallel size, and checks that the indexed shards exist. When transferring sparse files, use a sparse-aware copy such as `rsync -S`. Omit `--out` to print the plan without writing weights. [Stager](stage.py) · [Four-rank serving configuration](../../recipes/inkling2-small-native-c2.json)

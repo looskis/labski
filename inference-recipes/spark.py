@@ -53,6 +53,16 @@ def serve_command(args, recipe, cache):
     nodes = recipe["nodes"][0] if args.nodes is None else args.nodes
     if nodes not in recipe["nodes"] or not 0 <= args.rank < nodes:
         raise ValueError(f"choose nodes from {recipe['nodes']} and a rank from 0 to nodes - 1")
+    root = cache / snapshot(recipe)
+    marker = root / "labski-rank.json"
+    if marker.is_file():
+        expected = dict(model=recipe["model"], revision=recipe["revision"], rank=args.rank, ranks=nodes)
+        if json.loads(marker.read_bytes()) != expected or recipe["options"].get("--ep-size") != nodes:
+            raise ValueError("rank-local snapshot does not match the requested model and expert rank")
+        index = json.loads((root / "model.safetensors.index.json").read_bytes())
+        if not index["weight_map"] or any(Path(name).name != name or not (root / name).is_file()
+                                          for name in set(index["weight_map"].values())):
+            raise ValueError("rank-local snapshot is missing indexed weight shards")
     if not 0 < args.port < 65536:
         raise ValueError("API port must be between 1 and 65535")
 

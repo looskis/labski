@@ -1,0 +1,52 @@
+[
+  {
+    "file": "chat_template.jinja",
+    "bytes": 6657,
+    "git_blob_sha1": "85258f99ecae6ed8d915eab923945e5d5a851e38"
+  },
+  {
+    "file": "config.json",
+    "bytes": 2767,
+    "git_blob_sha1": "ea6a123a6bf2b0e78515b18aa2a7632444fd2007"
+  },
+  {
+    "file": "hf_quant_config.json",
+    "bytes": 88917,
+    "git_blob_sha1": "1ab93314f309e37aa60396d39eeb113be9f74886"
+  },
+  {
+    "file": "model.safetensors.index.json",
+    "bytes": 153240,
+    "git_blob_sha1": "b556ac21358790198ebf22465bbc3a2c97ef2124"
+  },
+  {
+    "file": "mtp.safetensors",
+    "bytes": 3423429800,
+    "sha256": "3b265640ec84ba66e928a2844c4c022c94be731336b0f63755a20a247bfd2a36"
+  },
+  {
+    "file": "processor_config.json",
+    "bytes": 394,
+    "git_blob_sha1": "b26765bfb2af51c902bc0222d1282075aff65466"
+  },
+  {
+    "file": "special_tokens_map.json",
+    "bytes": 448,
+    "git_blob_sha1": "3d7a60d8099239a65f0bb660849d1fc636b7c734"
+  },
+  {
+    "file": "tiktoken/tokenizer.model",
+    "bytes": 3386494,
+    "sha256": "f170372dd655728909228220d77cf6b8104a59f38a91262a7d2c4027906ec0d8"
+  },
+  {
+    "file": "tokenizer.json",
+    "bytes": 26178678,
+    "sha256": "7f332727f9a3f093dd452a39cc978e6757627e5dad1b0673aa4e75174f236dd6"
+  },
+  {
+    "file": "tokenizer_config.json",
+    "bytes": 13154,
+    "git_blob_sha1": "75062c6c6b0bcc80f1b68ed85f50e2e3b057a9b0"
+  }
+]

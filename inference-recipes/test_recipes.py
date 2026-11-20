@@ -13,6 +13,29 @@ import spark
 
 
 class RecipeTests(unittest.TestCase):
+    def test_sparse_inkling_snapshot_requires_its_assigned_expert_rank(self):
+        name = "inkling2-small-native-c2"
+        recipe = json.loads(spark.RECIPES[name].read_text())
+        args = SimpleNamespace(recipe=name, nodes=4, rank=1, port=8000, master_port=29501,
+                               head="192.0.2.1", node_ip="192.0.2.2", interface="cx0",
+                               hcas="rdma0,rdma1", transport=None)
+        with TemporaryDirectory() as tmp:
+            cache = Path(tmp)
+            root = cache / spark.snapshot(recipe)
+            root.mkdir(parents=True)
+            marker = dict(model=recipe["model"], revision=recipe["revision"], rank=0, ranks=4)
+            (root / "labski-rank.json").write_text(json.dumps(marker))
+            with self.assertRaisesRegex(ValueError, "expert rank"):
+                spark.serve_command(args, recipe, cache)
+            marker["rank"] = 1
+            (root / "labski-rank.json").write_text(json.dumps(marker))
+            index = {"weight_map": {"tensor": "example.safetensors"}}
+            (root / "model.safetensors.index.json").write_text(json.dumps(index))
+            with self.assertRaisesRegex(ValueError, "missing indexed"):
+                spark.serve_command(args, recipe, cache)
+            (root / "example.safetensors").touch()
+            self.assertIn("labski-" + name, spark.serve_command(args, recipe, cache))
+
     def test_one_letter_regex_records_the_enforced_constraint(self):
         args = SimpleNamespace(model="ling", url="http://localhost", one_letter_regex=True)
         reply = {"choices": [{"message": {"content": "C"}, "finish_reason": "length"}],
