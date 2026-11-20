@@ -46,5 +46,17 @@
     "repeated_payload_ranges": 0,
     "verified_retry_skipped": true,
     "final_assembly_from_metadata_only": true
+  },
+  "spark_public_downloader": {
+    "file": "model-00011-of-00012.safetensors",
+    "rank": 0,
+    "compact_file_bytes": 11077141648,
+    "source_file_bytes": 20001527648,
+    "planned_response_bytes": 11077881536,
+    "planned_ranges": 238,
+    "compact_sha256": "0d692304ec3e96a21c7df85fa7501a6c06f4a758775d63ba0c89a5be5b379c06",
+    "restart_skipped_verified_file": true,
+    "machine": "aarch64",
+    "fetch_shard_sha256": "6d1403adaa8742ca32fa5c8ad9b201205c540d92651c4ad98cc43876f9b1f0fe"
   }
 }
