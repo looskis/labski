@@ -4,6 +4,8 @@ The 7B and 3.7B tokenizers reproduced the 32B model’s exact token-ID hashes fo
 
 The 32B BF16 baseline assigned **0.5692 bits/byte** to 139,378 continuation bytes. The 32B FP8 and NVFP4 releases assigned **0.5723** and **0.5936 bits/byte** to the same bytes. All three values come from archived full-model log probabilities on one Spark. Lower values mean the model assigned more probability to the observed text. [BF16 article scores](reference/bf16.jsonl) · [NVFP4 article scores](reference/nvfp4.jsonl) · [One-Spark serving results](../../results/k2-horizon-32b-2026-11-20/) [FP8 article scores](reference/fp8.jsonl)
 
+The 7B BF16 model reached 55.00 generated tok/s at four clients and 0.7140 bits/byte. Its stock low-effort parser returned no strictly correct open answers. Reading the final letters behind the emitted closing markers recovered 9/14 at the 512-token budget. [Size, precision and parser measurements](../../results/k2-horizon-family-2026-11-20/)
+
 ## How the comparison works
 
 1. Reconstruct the original 32B window for each article from its recorded token-ID and source-text hashes. Use the text of its first token as the unscored context.
