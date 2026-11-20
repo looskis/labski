@@ -8,7 +8,9 @@ rank,checkpoint,revision,root_safetensors_files,root_safetensors_bytes,minimum_n
 4,thinkingmachines/Inkling-2-Small-MXFP8,1c94d07d2f9eede7389d3dbe8ed9a019e190d4d6,49,622803514224,>4,https://huggingface.co/thinkingmachines/Inkling-2-Small-MXFP8/tree/1c94d07d2f9eede7389d3dbe8ed9a019e190d4d6
 5,XiaomiMiMo/MiMo-V2.6-Pro-RL,a066ba0057192126bd5d255f37138265fc1a435e,130,566048103896,>4,https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-RL/tree/a066ba0057192126bd5d255f37138265fc1a435e
 5,XiaomiMiMo/MiMo-V2.6-Pro-MOPD,da71ee15e76a8849bd1a9610195c452007a79678,130,566048103896,>4,https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Pro-MOPD/tree/da71ee15e76a8849bd1a9610195c452007a79678
+5,MikeRoz/MiMo-V2.6-Pro-MOPD-2.53bpw-h6-exl3,aeef6125c321453ecaf3b1de58ed4ff802bf9253,69,327894305341,4,https://huggingface.co/MikeRoz/MiMo-V2.6-Pro-MOPD-2.53bpw-h6-exl3/tree/aeef6125c321453ecaf3b1de58ed4ff802bf9253
 6,inclusionAI/Ling-3.1-flash-1019,2109a6863fb14361eecc346ef98b3db88b8cdaee,54,573781078249,>4,https://huggingface.co/inclusionAI/Ling-3.1-flash-1019/tree/2109a6863fb14361eecc346ef98b3db88b8cdaee
+6,auryn-macmillan/Ling-3.1-flash-1019-EXL3-1.5-1.0bpw,5da2462decd55ba876f2331b462105650f6b31ac,13,100805781294,1,https://huggingface.co/auryn-macmillan/Ling-3.1-flash-1019-EXL3-1.5-1.0bpw/tree/5da2462decd55ba876f2331b462105650f6b31ac
 7,MiniMaxAI/MiniMax-M3.1-Flash,ce7f4df87d2e05262f5775f373dac4772f134041,48,250116419880,4,https://huggingface.co/MiniMaxAI/MiniMax-M3.1-Flash/tree/ce7f4df87d2e05262f5775f373dac4772f134041
 8,Qwen/Qwen3.8-Flash-Next,812d96e10a0dd82b69d749e68693698cf6c36daa,131,360000192888,4,https://huggingface.co/Qwen/Qwen3.8-Flash-Next/tree/812d96e10a0dd82b69d749e68693698cf6c36daa
 8,nvidia/Qwen3.8-Flash-Next-NVFP4,fc694b54fb0174e0913e6adf86691ef85a4ead47,11,132680249378,2,https://huggingface.co/nvidia/Qwen3.8-Flash-Next-NVFP4/tree/fc694b54fb0174e0913e6adf86691ef85a4ead47
