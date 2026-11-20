@@ -34,6 +34,25 @@ uv run --with tokenizers python long_likelihood.py prepare articles.jsonl tokeni
 python3 long_likelihood.py score "$MODEL" windows.jsonl "$MODEL-long.jsonl.gz"
 ```
 
+## Long-context results
+
+On the eight 6,144-token windows, **only 19 of 49,144 target-token log probabilities were exactly equal** across FP32 and BF16 state. Differences appeared within the first nominal 2,048-token chunk as well as in later chunks. Inside each launch, repeating the first window reproduced all 6,143 log probabilities exactly. The 62 short-passage NLL matches therefore do not extend to these longer inputs. [FP32 per-position scores](long-context/fp32.jsonl.gz) · [BF16 per-position scores](long-context/bf16.jsonl.gz) · [Paired results by window and position](long-context/comparison.json)
+
+| Token position, zero-based | Positions scored | Numerically identical | FP32 mean NLL | BF16 mean NLL |
+| --- | ---: | ---: | ---: | ---: |
+| 1–2,047 | 16,376 | 12 | 1.92489 | 1.91570 |
+| 2,048–4,095 | 16,384 | 3 | 1.93305 | 1.93438 |
+| 4,096–6,143 | 16,384 | 4 | 2.03872 | 2.03401 |
+| All scored positions | 49,144 | 19 | 1.96556 | 1.96137 |
+
+Token-weighted perplexity was **7.1389 for FP32 and 7.1091 for BF16**, a 0.42% decrease on these windows. BF16 had lower mean NLL on four windows and higher mean NLL on four. The windows came from one corpus. The launches also used different attention block sizes as a consequence of the cache setting. This comparison measures the deployed configurations and leaves the source of the numerical differences open. Position 0 in each window has no preceding token and is excluded. The repeated window appears only in the repeatability calculation.
+
+The BF16 scores came from the second BF16 launch, after the timing, retrieval and short-passage measurements. A fresh FP32 launch on the same Spark scored the identical window token IDs in the same order. Both used the seven-proposal recipe and disabled prefix caching. To recompute the tables from this directory, run the following.
+
+```sh
+python3 long_likelihood.py compare long-context/fp32.jsonl.gz long-context/bf16.jsonl.gz
+```
+
 ## Reproduce
 
 From `inference-recipes/` on the Spark, prepare and serve the BF16 configuration. The parent experiment gives the matched throughput and short-answer commands. For the long inventory, use `bench.py` with `--thinking off --workload lookup --records 512 --requests 8 --concurrency 4 --max-tokens 48 --repeats 1`. [Matched benchmark commands](../) · [Recorded settings](bf16/settings.jsonl)

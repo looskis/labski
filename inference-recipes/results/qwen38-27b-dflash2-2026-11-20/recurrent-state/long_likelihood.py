@@ -100,7 +100,11 @@ def compare(control, candidate):
         chunks.append(dict(first_position=first, last_position=last, **differences(pairs)))
     repeats = {label: differences(zip(run[0]["logprobs"], run[-1]["logprobs"]))
                for label, run in (("control", a), ("candidate", b))}
-    return dict(nominal_chunks=chunks, within_launch_first_window=repeats)
+    windows = [dict(start=orig["start"], **differences(zip(orig["logprobs"], test["logprobs"])))
+               for orig, test in zip(a[:-1], b[:-1])]
+    overall = differences((x, y) for orig, test in zip(a[:-1], b[:-1])
+                          for x, y in zip(orig["logprobs"], test["logprobs"]))
+    return dict(overall=overall, windows=windows, nominal_chunks=chunks, within_launch_first_window=repeats)
 
 
 if __name__ == "__main__":

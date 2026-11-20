@@ -1,0 +1,134 @@
+{
+  "overall": {
+    "scored_tokens": 49144,
+    "identical": 19,
+    "control_mean_nll": 1.9655615169104064,
+    "candidate_mean_nll": 1.9613691714255979,
+    "candidate_minus_control_mean_nll": -0.004192345484808544,
+    "max_abs_logprob_delta": 25.72329890727997
+  },
+  "windows": [
+    {
+      "start": 0,
+      "scored_tokens": 6143,
+      "identical": 6,
+      "control_mean_nll": 1.9246910894025107,
+      "candidate_mean_nll": 1.8866917920732211,
+      "candidate_minus_control_mean_nll": -0.03799929732928923,
+      "max_abs_logprob_delta": 18.436401069164276
+    },
+    {
+      "start": 12288,
+      "scored_tokens": 6143,
+      "identical": 0,
+      "control_mean_nll": 2.133352059990305,
+      "candidate_mean_nll": 2.127757065756319,
+      "candidate_minus_control_mean_nll": -0.005594994233986218,
+      "max_abs_logprob_delta": 20.935609579086304
+    },
+    {
+      "start": 24576,
+      "scored_tokens": 6143,
+      "identical": 1,
+      "control_mean_nll": 2.015437435931091,
+      "candidate_mean_nll": 1.9669408651447744,
+      "candidate_minus_control_mean_nll": -0.048496570786316855,
+      "max_abs_logprob_delta": 25.72329890727997
+    },
+    {
+      "start": 36864,
+      "scored_tokens": 6143,
+      "identical": 2,
+      "control_mean_nll": 1.9565957197358281,
+      "candidate_mean_nll": 1.96738435927878,
+      "candidate_minus_control_mean_nll": 0.01078863954295191,
+      "max_abs_logprob_delta": 17.83621120452881
+    },
+    {
+      "start": 49152,
+      "scored_tokens": 6143,
+      "identical": 2,
+      "control_mean_nll": 1.870868629821173,
+      "candidate_mean_nll": 1.892578037609465,
+      "candidate_minus_control_mean_nll": 0.02170940778829198,
+      "max_abs_logprob_delta": 3.99727725982666
+    },
+    {
+      "start": 61440,
+      "scored_tokens": 6143,
+      "identical": 5,
+      "control_mean_nll": 1.9418240636953656,
+      "candidate_mean_nll": 1.9589266087118204,
+      "candidate_minus_control_mean_nll": 0.017102545016455056,
+      "max_abs_logprob_delta": 8.539674758911133
+    },
+    {
+      "start": 73728,
+      "scored_tokens": 6143,
+      "identical": 2,
+      "control_mean_nll": 1.9483832929302825,
+      "candidate_mean_nll": 1.9227935170412835,
+      "candidate_minus_control_mean_nll": -0.02558977588899895,
+      "max_abs_logprob_delta": 16.015700235962868
+    },
+    {
+      "start": 86016,
+      "scored_tokens": 6143,
+      "identical": 1,
+      "control_mean_nll": 1.933339843776696,
+      "candidate_mean_nll": 1.96788112578912,
+      "candidate_minus_control_mean_nll": 0.03454128201242395,
+      "max_abs_logprob_delta": 12.558048486709595
+    }
+  ],
+  "nominal_chunks": [
+    {
+      "first_position": 1,
+      "last_position": 2047,
+      "scored_tokens": 16376,
+      "identical": 12,
+      "control_mean_nll": 1.924891827633362,
+      "candidate_mean_nll": 1.9156994909506435,
+      "candidate_minus_control_mean_nll": -0.009192336682718509,
+      "max_abs_logprob_delta": 19.62403462966904
+    },
+    {
+      "first_position": 2048,
+      "last_position": 4095,
+      "scored_tokens": 16384,
+      "identical": 3,
+      "control_mean_nll": 1.9330538789295553,
+      "candidate_mean_nll": 1.9343780573883127,
+      "candidate_minus_control_mean_nll": 0.0013241784587574006,
+      "max_abs_logprob_delta": 18.436401069164276
+    },
+    {
+      "first_position": 4096,
+      "last_position": 6143,
+      "scored_tokens": 16384,
+      "identical": 4,
+      "control_mean_nll": 2.038718985921585,
+      "candidate_mean_nll": 2.0340076662891686,
+      "candidate_minus_control_mean_nll": -0.00471131963241663,
+      "max_abs_logprob_delta": 25.72329890727997
+    }
+  ],
+  "within_launch_first_window": {
+    "control": {
+      "scored_tokens": 6143,
+      "identical": 6143,
+      "control_mean_nll": 1.9246910894025107,
+      "candidate_mean_nll": 1.9246910894025107,
+      "candidate_minus_control_mean_nll": 0.0,
+      "max_abs_logprob_delta": 0.0
+    },
+    "candidate": {
+      "scored_tokens": 6143,
+      "identical": 6143,
+      "control_mean_nll": 1.8866917920732211,
+      "candidate_mean_nll": 1.8866917920732211,
+      "candidate_minus_control_mean_nll": 0.0,
+      "max_abs_logprob_delta": 0.0
+    }
+  }
+}
