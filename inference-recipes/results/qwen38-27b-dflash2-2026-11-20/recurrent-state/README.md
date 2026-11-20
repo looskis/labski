@@ -58,6 +58,14 @@ python3 long_likelihood.py compare long-context/fp32.jsonl.gz long-context/bf16.
 python3 long_likelihood.py prefix windows.jsonl bf16-repeat/wikitext.jsonl long-context/bf16.jsonl.gz
 ```
 
+## Next-token agreement test
+
+We fixed eight prefix lengths per window to test whether the probability changes also change the preferred next token. The follow-up collects vLLM’s first-ranked token IDs at all 49,144 positions. It separately asks for one greedy output token with the prompt cut at 512, 2,047, 2,048, 2,049, 4,095, 4,096, 4,097 and 6,143 tokens. This gives 64 direct decoding comparisons. The first window and its eight prefixes repeat once in each launch. Returned ties are retained. [Test program](next_token.py) · [vLLM log probability ranks](https://docs.vllm.ai/en/v0.33.0/api/vllm/logprobs/)
+
+```sh
+python3 next_token.py "$MODEL" windows.jsonl "$MODEL-next-token.jsonl.gz"
+```
+
 ## Reproduce
 
 From `inference-recipes/` on the Spark, prepare and serve the BF16 configuration. The parent experiment gives the matched throughput and short-answer commands. For the long inventory, use `bench.py` with `--thinking off --workload lookup --records 512 --requests 8 --concurrency 4 --max-tokens 48 --repeats 1`. [Matched benchmark commands](../) · [Recorded settings](bf16/settings.jsonl)
