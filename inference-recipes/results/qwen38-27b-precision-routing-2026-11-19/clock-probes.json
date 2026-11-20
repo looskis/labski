@@ -1,0 +1,326 @@
+[
+  [
+    {
+      "rank": 0,
+      "probes": [
+        {
+          "local_mid_ns": 1795159847850905000,
+          "remote_minus_local_ns": 128443069,
+          "rtt_ns": 207378000
+        },
+        {
+          "local_mid_ns": 1795159847962246000,
+          "remote_minus_local_ns": 23300341,
+          "rtt_ns": 15294000
+        },
+        {
+          "local_mid_ns": 1795159847974686000,
+          "remote_minus_local_ns": 26553660,
+          "rtt_ns": 9578000
+        },
+        {
+          "local_mid_ns": 1795159847982644500,
+          "remote_minus_local_ns": 27352529,
+          "rtt_ns": 6335000
+        },
+        {
+          "local_mid_ns": 1795159847988430000,
+          "remote_minus_local_ns": 27485174,
+          "rtt_ns": 5232000
+        },
+        {
+          "local_mid_ns": 1795159847994599000,
+          "remote_minus_local_ns": 27075855,
+          "rtt_ns": 7106000
+        },
+        {
+          "local_mid_ns": 1795159848003059000,
+          "remote_minus_local_ns": 27261864,
+          "rtt_ns": 9812000
+        },
+        {
+          "local_mid_ns": 1795159848011749500,
+          "remote_minus_local_ns": 28702170,
+          "rtt_ns": 7559000
+        },
+        {
+          "local_mid_ns": 1795159848020730000,
+          "remote_minus_local_ns": 27445634,
+          "rtt_ns": 10400000
+        },
+        {
+          "local_mid_ns": 1795159848030228500,
+          "remote_minus_local_ns": 29571392,
+          "rtt_ns": 8593000
+        },
+        {
+          "local_mid_ns": 1795159848039666500,
+          "remote_minus_local_ns": 25257187,
+          "rtt_ns": 10279000
+        },
+        {
+          "local_mid_ns": 1795159848048262500,
+          "remote_minus_local_ns": 27379079,
+          "rtt_ns": 6911000
+        },
+        {
+          "local_mid_ns": 1795159848056561500,
+          "remote_minus_local_ns": 28052375,
+          "rtt_ns": 9685000
+        },
+        {
+          "local_mid_ns": 1795159848065225500,
+          "remote_minus_local_ns": 26945508,
+          "rtt_ns": 7643000
+        },
+        {
+          "local_mid_ns": 1795159848071681500,
+          "remote_minus_local_ns": 26461780,
+          "rtt_ns": 5267000
+        }
+      ]
+    },
+    {
+      "rank": 1,
+      "probes": [
+        {
+          "local_mid_ns": 1795159847865579500,
+          "remote_minus_local_ns": 153582356,
+          "rtt_ns": 236037000
+        },
+        {
+          "local_mid_ns": 1795159847987310000,
+          "remote_minus_local_ns": 38015777,
+          "rtt_ns": 7422000
+        },
+        {
+          "local_mid_ns": 1795159847994572000,
+          "remote_minus_local_ns": 38284224,
+          "rtt_ns": 7098000
+        },
+        {
+          "local_mid_ns": 1795159848003021500,
+          "remote_minus_local_ns": 38322813,
+          "rtt_ns": 9799000
+        },
+        {
+          "local_mid_ns": 1795159848011731500,
+          "remote_minus_local_ns": 37702321,
+          "rtt_ns": 7619000
+        },
+        {
+          "local_mid_ns": 1795159848023043500,
+          "remote_minus_local_ns": 39148487,
+          "rtt_ns": 15001000
+        },
+        {
+          "local_mid_ns": 1795159848034695000,
+          "remote_minus_local_ns": 39336343,
+          "rtt_ns": 8298000
+        },
+        {
+          "local_mid_ns": 1795159848044790000,
+          "remote_minus_local_ns": 39837326,
+          "rtt_ns": 11888000
+        },
+        {
+          "local_mid_ns": 1795159848059901000,
+          "remote_minus_local_ns": 40102855,
+          "rtt_ns": 18332000
+        },
+        {
+          "local_mid_ns": 1795159848071685000,
+          "remote_minus_local_ns": 39262985,
+          "rtt_ns": 5232000
+        },
+        {
+          "local_mid_ns": 1795159848076253500,
+          "remote_minus_local_ns": 38583438,
+          "rtt_ns": 3903000
+        },
+        {
+          "local_mid_ns": 1795159848080637000,
+          "remote_minus_local_ns": 38922787,
+          "rtt_ns": 4860000
+        },
+        {
+          "local_mid_ns": 1795159848086119500,
+          "remote_minus_local_ns": 39641872,
+          "rtt_ns": 6101000
+        },
+        {
+          "local_mid_ns": 1795159848094209500,
+          "remote_minus_local_ns": 37834258,
+          "rtt_ns": 10075000
+        },
+        {
+          "local_mid_ns": 1795159848101502000,
+          "remote_minus_local_ns": 38878325,
+          "rtt_ns": 4498000
+        }
+      ]
+    }
+  ],
+  [
+    {
+      "rank": 0,
+      "probes": [
+        {
+          "local_mid_ns": 1795160251420522000,
+          "remote_minus_local_ns": 214217345,
+          "rtt_ns": 262064000
+        },
+        {
+          "local_mid_ns": 1795160251554118500,
+          "remote_minus_local_ns": 86116318,
+          "rtt_ns": 5119000
+        },
+        {
+          "local_mid_ns": 1795160251560104500,
+          "remote_minus_local_ns": 86107087,
+          "rtt_ns": 6849000
+        },
+        {
+          "local_mid_ns": 1795160251567238500,
+          "remote_minus_local_ns": 85801840,
+          "rtt_ns": 7415000
+        },
+        {
+          "local_mid_ns": 1795160251573839000,
+          "remote_minus_local_ns": 86763117,
+          "rtt_ns": 5784000
+        },
+        {
+          "local_mid_ns": 1795160251581922000,
+          "remote_minus_local_ns": 83789830,
+          "rtt_ns": 10374000
+        },
+        {
+          "local_mid_ns": 1795160251590552000,
+          "remote_minus_local_ns": 87467864,
+          "rtt_ns": 6884000
+        },
+        {
+          "local_mid_ns": 1795160251598999500,
+          "remote_minus_local_ns": 86145373,
+          "rtt_ns": 10005000
+        },
+        {
+          "local_mid_ns": 1795160251606484500,
+          "remote_minus_local_ns": 86372918,
+          "rtt_ns": 4959000
+        },
+        {
+          "local_mid_ns": 1795160251611152000,
+          "remote_minus_local_ns": 86545147,
+          "rtt_ns": 4374000
+        },
+        {
+          "local_mid_ns": 1795160251616986000,
+          "remote_minus_local_ns": 85900284,
+          "rtt_ns": 7292000
+        },
+        {
+          "local_mid_ns": 1795160251629302500,
+          "remote_minus_local_ns": 87647274,
+          "rtt_ns": 17335000
+        },
+        {
+          "local_mid_ns": 1795160251639995500,
+          "remote_minus_local_ns": 86613476,
+          "rtt_ns": 4047000
+        },
+        {
+          "local_mid_ns": 1795160251646897000,
+          "remote_minus_local_ns": 85554601,
+          "rtt_ns": 9754000
+        },
+        {
+          "local_mid_ns": 1795160251654315000,
+          "remote_minus_local_ns": 85926170,
+          "rtt_ns": 5078000
+        }
+      ]
+    },
+    {
+      "rank": 1,
+      "probes": [
+        {
+          "local_mid_ns": 1795160251447015500,
+          "remote_minus_local_ns": 248905116,
+          "rtt_ns": 314017000
+        },
+        {
+          "local_mid_ns": 1795160251608676500,
+          "remote_minus_local_ns": 98397059,
+          "rtt_ns": 9303000
+        },
+        {
+          "local_mid_ns": 1795160251616966000,
+          "remote_minus_local_ns": 97354900,
+          "rtt_ns": 7276000
+        },
+        {
+          "local_mid_ns": 1795160251623645000,
+          "remote_minus_local_ns": 96510376,
+          "rtt_ns": 6078000
+        },
+        {
+          "local_mid_ns": 1795160251632338500,
+          "remote_minus_local_ns": 94788165,
+          "rtt_ns": 11307000
+        },
+        {
+          "local_mid_ns": 1795160251642002500,
+          "remote_minus_local_ns": 97611608,
+          "rtt_ns": 8019000
+        },
+        {
+          "local_mid_ns": 1795160251650245000,
+          "remote_minus_local_ns": 96494615,
+          "rtt_ns": 8462000
+        },
+        {
+          "local_mid_ns": 1795160251657400500,
+          "remote_minus_local_ns": 97520830,
+          "rtt_ns": 5847000
+        },
+        {
+          "local_mid_ns": 1795160251663963000,
+          "remote_minus_local_ns": 97502886,
+          "rtt_ns": 7276000
+        },
+        {
+          "local_mid_ns": 1795160251670749500,
+          "remote_minus_local_ns": 97085014,
+          "rtt_ns": 6295000
+        },
+        {
+          "local_mid_ns": 1795160251676460500,
+          "remote_minus_local_ns": 97480446,
+          "rtt_ns": 5123000
+        },
+        {
+          "local_mid_ns": 1795160251681850500,
+          "remote_minus_local_ns": 97646678,
+          "rtt_ns": 5655000
+        },
+        {
+          "local_mid_ns": 1795160251686983500,
+          "remote_minus_local_ns": 97028917,
+          "rtt_ns": 4609000
+        },
+        {
+          "local_mid_ns": 1795160251691920000,
+          "remote_minus_local_ns": 97204621,
+          "rtt_ns": 5262000
+        },
+        {
+          "local_mid_ns": 1795160251699174000,
+          "remote_minus_local_ns": 96930150,
+          "rtt_ns": 9244000
+        }
+      ]
+    }
+  ]
+]

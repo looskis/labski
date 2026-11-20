@@ -1,5 +1,7 @@
 # Can low-confidence Qwen FP4 answers benefit from BF16?
 
+The live policy reproduced all 112 held-out BF16 answer letters with 42 BF16 calls. [Measured outcome](../../results/qwen38-27b-precision-routing-2026-11-19/)
+
 The existing Qwen3.8 27B crossover measured a throughput advantage and some changed correctness verdicts with the mixed checkpoint. This experiment asks whether the mixed model's first-token confidence can identify which questions merit the cost of a second inference. It tests a one-token, ten-choice workload. [Original precision comparison](../../results/qwen38-27b-precision-2026-11-19/)
 
 ## Fixed policy and held-out evaluation

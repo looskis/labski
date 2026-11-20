@@ -1,0 +1,15 @@
+# Conditional BF16 for Qwen3.8 27B on two Sparks
+
+**The mixed-first policy reproduced all 112 held-out BF16 answer letters while sending only 42 questions to BF16.** It finished the live workload in 33.50 seconds against 46.09 for always using BF16, and consumed 19.47 versus 24.78 fleet GPU joules per question. That is **27.3% less wall time and 21.4% less GPU energy** with both checkpoints resident. On this test the mixed model alone was fastest and answered one more question correctly. [Fixed rule and reproduction](../../experiments/qwen-precision-routing/) · [Held-out live requests](live-heldout.jsonl.gz)
+
+| Policy on the 112 held-out questions | Correct | Mixed / BF16 calls | Total wall s | Median request ms | Two-Spark GPU J/request |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Always mixed FP4/FP8 | 73 | 112 / 0 | 17.93 | 147 | 10.91 |
+| Always BF16 | 72 | 0 / 112 | 46.09 | 367 | 24.78 |
+| Mixed first, BF16 below a 1.0-nat margin | 72 | 112 / 42 | 33.50 | 188 | 19.47 |
+
+The mixed checkpoint served on one Spark and BF16 on a second. For every prompt the model had to choose one of ten allowed letter token IDs. We requested all ten first-token log probabilities. When the top two mixed log probabilities differed by less than one natural-log unit, the live policy asked BF16 to answer the same prompt. The margin and held-out split were fixed before either score file was collected. Every paired request had identical rendered input token IDs across the two checkpoints. [Mixed scores](nvfp4-scores.jsonl.gz) · [BF16 scores](bf16-scores.jsonl.gz)
+
+On the original 112 questions the score files gave 79 correct for mixed, 83 for BF16 and 81 for the rule. The rule escalated 40 questions, gained five correct answers over mixed and lost three. On the **next eight questions per subject**, all four mixed errors BF16 could fix and all five mixed successes BF16 would lose fell below the threshold. The 70 confident mixed answers matched BF16, including 13 mistakes shared by both models. A confident model can still give a wrong answer. The one-letter score measures a different response contract from the earlier free-response test. [Original free-response precision study](../qwen38-27b-precision-2026-11-19/)
+
+All three policies actually ran on every held-out question. Each produced the same answer as its earlier batch-score counterpart on 112/112. One client sent requests sequentially over persistent SSH workers. Seven groups of sixteen shuffled questions cycled the policy order. Timings include transport and any second forward pass. GPU energy sums both resident Sparks in every policy, including the idle endpoint. It interpolates NVML counters at each group boundary and corrects coordinator-to-Spark clock offsets using before/after, minimum-round-trip samples. The measurements cover single-token multiple choice on two resident services. Applying this rule to free-form generation would require a separate test. [Live timings and per-rank joules](live-heldout.jsonl.gz) · [Mixed Spark counters](rank0-energy.csv.gz) · [BF16 Spark counters](rank1-energy.csv.gz) · [Clock measurements](clock-probes.json)
