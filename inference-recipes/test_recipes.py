@@ -4,6 +4,7 @@ import json
 from pathlib import Path
 from types import SimpleNamespace
 import unittest
+from tempfile import TemporaryDirectory
 from unittest.mock import patch
 
 import bench
@@ -26,6 +27,15 @@ class RecipeTests(unittest.TestCase):
                                                interface="cx0" if n > 1 else None, hcas="rdma0,rdma1" if n > 1 else None,
                                                transport=None)
                         cmd = spark.serve_command(args, r, Path("/tmp/test cache"))
+                        if r.get("engine") == "tensorfold-glm53":
+                            self.assertIn("RANK=" + str(rank), cmd)
+                            self.assertIn("PARALLEL=4", cmd)
+                            self.assertIn("DRAFTER=mtp", cmd)
+                            self.assertIn("MASTER=192.0.2.1:29501", cmd)
+                            self.assertIn("TF_GLM53_ROCE=0", cmd)
+                            self.assertIn("--host 127.0.0.1", cmd[-1])
+                            self.assertIn(":/model:ro", cmd[cmd.index("--volume") + 1])
+                            continue
                         self.assertEqual(cmd[cmd.index("--tensor-parallel-size") + 1], str(n))
                         self.assertEqual("--headless" in cmd, rank > 0 and r.get("engine") != "sglang")
                         self.assertEqual("--host" in cmd, rank == 0 or r.get("engine") == "sglang")
@@ -70,6 +80,26 @@ class RecipeTests(unittest.TestCase):
                        {"nodes": 2, "rank": 1}, {"transport": "roce"}):
             with self.subTest(change=change), self.assertRaises(ValueError):
                 spark.serve_command(SimpleNamespace(**{**vars(args), **change}), recipe, Path("/tmp/cache"))
+
+    def test_sglang_nccl_override(self):
+        name = "inkling2-small-native"
+        recipe = json.loads(spark.RECIPES[name].read_text())
+        with TemporaryDirectory() as folder:
+            library = Path(folder) / "libnccl.so.2"
+            library.touch()
+            args = SimpleNamespace(recipe=name, nodes=4, rank=0, port=8000, master_port=29501,
+                                   head="198.51.100.1", node_ip="198.51.100.1", interface="fabric0",
+                                   transport="ring-roce", hcas="rdma0,rdma1", fabric_range="192.0.2.0/28",
+                                   ring_nccl=library, ring_only_init=False)
+            cmd = spark.serve_command(args, recipe, Path(folder))
+            self.assertIn(f"{library}:/labski/libnccl.so.2:ro", cmd)
+            self.assertIn("SGLANG_NCCL_SO_PATH=/labski/libnccl.so.2", cmd)
+            self.assertNotIn("NCCL_SWITCHLESS_RING_ONLY=1", cmd)
+            args.ring_only_init = True
+            self.assertIn("NCCL_SWITCHLESS_RING_ONLY=1", spark.serve_command(args, recipe, Path(folder)))
+            args.ring_nccl = None
+            with self.assertRaises(ValueError):
+                spark.serve_command(args, recipe, Path(folder))
 
 
 class StreamingTests(unittest.TestCase):

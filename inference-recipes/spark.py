@@ -30,6 +30,7 @@ def checkpoints(recipe):
 
 def prepare(recipe, cache, dry_run):
     image = IMAGES[recipe["image"]]
+    download_image = IMAGES[recipe.get("prepare_image", recipe["image"])]
     commands = [["docker", "pull", "--platform", "linux/arm64", image]]
     if not dry_run:
         cache.mkdir(parents=True, exist_ok=True)
@@ -37,7 +38,7 @@ def prepare(recipe, cache, dry_run):
         cmd = ["docker", "run", "--rm", "--platform", "linux/arm64", "--network", "host",
                "--user", f"{os.getuid()}:{os.getgid()}", "--env", "HF_TOKEN",
                "--env", "HF_HOME=/tmp/huggingface", "--volume", f"{cache}:{CONTAINER_CACHE}",
-               "--entrypoint", "hf", image, "download", ckpt["model"],
+               "--entrypoint", "hf", download_image, "download", ckpt["model"],
                "--revision", ckpt["revision"], "--cache-dir", str(CONTAINER_CACHE)]
         if ckpt.get("exclude"):
             cmd += ["--exclude", *ckpt["exclude"]]
@@ -55,10 +56,12 @@ def serve_command(args, recipe, cache):
     if not 0 < args.port < 65536:
         raise ValueError("API port must be between 1 and 65535")
 
+    engine = recipe.get("engine", "vllm")
+    volume = f"{cache / snapshot(recipe)}:/model:ro" if engine == "tensorfold-glm53" else f"{cache}:{CONTAINER_CACHE}:ro"
     cmd = ["docker", "run", "--rm", "--name", "labski-" + args.recipe,
            "--platform", "linux/arm64", "--gpus", "all", "--network", "host",
            "--ipc", "host", "--ulimit", "memlock=-1", "--ulimit", "stack=67108864",
-           "--volume", f"{cache}:{CONTAINER_CACHE}:ro",
+           "--volume", volume,
            "--label", f"labski.nodes={nodes}", "--label", f"labski.rank={args.rank}"]
     env = {"HF_HUB_OFFLINE": "1", "HF_HUB_CACHE": str(CONTAINER_CACHE), **recipe.get("env", {})}
     if "container_memory_gib" in recipe:
@@ -69,6 +72,22 @@ def serve_command(args, recipe, cache):
     link_prefix = getattr(args, "link_prefix", None)
     if (fabric_range is not None or link_prefix is not None) and args.transport != "ring-roce":
         raise ValueError("--fabric-range and --link-prefix apply to a four-node RoCE ring")
+    ring_nccl = getattr(args, "ring_nccl", None)
+    ring_only_init = getattr(args, "ring_only_init", False)
+    if ring_only_init and ring_nccl is None:
+        raise ValueError("--ring-only-init requires the ring-specific --ring-nccl library")
+    if ring_nccl is not None:
+        if args.transport != "ring-roce" or engine not in ("sglang", "tensorfold-glm53"):
+            raise ValueError("--ring-nccl requires a four-node SGLang or TensorFold RoCE ring")
+        if not ring_nccl.is_absolute() or not ring_nccl.is_file():
+            raise ValueError("--ring-nccl must be an absolute path to a local library file")
+        container_library = "/labski/libnccl.so.2"
+        cmd += ["--volume", f"{ring_nccl}:{container_library}:ro"]
+        env["LD_PRELOAD"] = container_library
+        loader = "SGLANG_NCCL_SO_PATH" if engine == "sglang" else "TF_GLM53_NCCL_LIB"
+        env[loader] = container_library
+        if ring_only_init:
+            env["NCCL_SWITCHLESS_RING_ONLY"] = "1"
     if nodes > 1:
         transport = args.transport or "roce"
         if not all((args.head, args.node_ip, args.interface)):
@@ -105,7 +124,16 @@ def serve_command(args, recipe, cache):
             env.update(NCCL_IB_DISABLE="1", NCCL_NET="Socket")
     elif args.head or args.node_ip or args.interface or args.hcas or args.transport:
         raise ValueError("fabric settings require a distributed recipe")
-    if recipe.get("engine", "vllm") == "sglang":
+    if engine == "tensorfold-glm53":
+        entrypoint = "/bin/bash"
+        env.update(RANK=str(args.rank), MASTER=f"{args.head}:{args.master_port}",
+                   CONTEXT=str(recipe["context"]), PARALLEL=str(recipe["sequences"]), PORT=str(args.port))
+        # Keep the image's pinned rank-specific entrypoint and bind its API to loopback.
+        digest = "e3096824c387c47b4196d8382ca3bd321e0c3ef83f63f880e20b6e1239c0e597"
+        serve = ["-c", f"set -eu; echo '{digest}  /opt/keys-glm53/serve' | sha256sum -c -; "
+                 "sed 's/--host 0[.]0[.]0[.]0/--host 127.0.0.1/g' /opt/keys-glm53/serve > /tmp/labski-serve; "
+                 "exec /bin/bash /tmp/labski-serve"]
+    elif engine == "sglang":
         entrypoint = "python3"
         serve = ["-m", "sglang.launch_server", "--model-path", model_path,
                  "--served-model-name", args.recipe, "--tensor-parallel-size", str(nodes),
@@ -156,7 +184,8 @@ def check_host(recipe, cache):
     if int(mem.split()[1]) * 1024 < 0.9 * recipe["per_node_gb"] * 10**9:
         raise ValueError(f"this recipe targets {recipe['per_node_gb']} GB per node")
     for ckpt in checkpoints(recipe):
-        if not (cache / snapshot(ckpt) / "config.json").is_file():
+        if any(not (cache / snapshot(ckpt) / filename).is_file()
+               for filename in ("config.json", *ckpt.get("required_files", []))):
             raise ValueError(f"missing {ckpt['model']} snapshot on this node; run prepare")
 
 
@@ -179,6 +208,8 @@ def main():
     cli.add_argument("--transport", choices=("roce", "tcp", "ring-roce"), help="distributed NCCL transport (default: roce)")
     cli.add_argument("--fabric-range", help="IPv4 CIDR covering the point-to-point RoCE ring links")
     cli.add_argument("--link-prefix", type=int, help="IPv4 prefix length of each RoCE ring edge (default: 30)")
+    cli.add_argument("--ring-nccl", type=Path, help="local replacement NCCL shared library for a SGLang or TensorFold RoCE ring")
+    cli.add_argument("--ring-only-init", action="store_true", help="enable the Sparkring library’s ring-only setup")
     args = parser.parse_args()
     if args.action == "list":
         for name, file in RECIPES.items():

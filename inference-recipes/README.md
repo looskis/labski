@@ -22,7 +22,7 @@ Additional catalog entries are candidates unless a result is linked. Node counts
 | [GPT-OSS 20B](recipes/gpt-oss-20b.json) | 1 × 64 GB or larger | Native MXFP4 experts | Small reasoning service with up to eight active sequences |
 | [Nemotron 3.5 Lightning 30B A3B](recipes/nemotron35-lightning.json) | 1 × 64 GB or larger | Mixed NVFP4 | DSpark drafting with a hybrid attention/Mamba cache |
 | [Qwen3 Coder 30B A3B](recipes/qwen3-coder-30b.json) | 1 × 128 GB | BF16 | Sparse coding model with tool calling |
-| [Qwen3.8 27B control](recipes/qwen38-27b-bf16.json) | 1 or 2 × 128 GB | BF16 | Measured native BF16 quality and throughput on one Spark and a direct pair |
+| [Qwen3.8 27B control](recipes/qwen38-27b-bf16.json) | 1, 2 or 4 × 128 GB | BF16 | 83/112 with identical verdicts at every topology, up to 13.92 tok/s C1 and 54.33 aggregate at C4 |
 | [Qwen3.8 27B precision and scaling](recipes/qwen38-27b-nvfp4.json) | 1, 2 or 4 × 128 GB | Mixed NVFP4/FP8 | Same scheduler, KV dtype and context as the BF16 control |
 | [Qwen3.8 27B DFlash2](recipes/qwen38-27b-dflash.json) | 1 × 128 GB | Mixed NVFP4/FP8 | Seven-token draft, FP8 KV cache, GB10 dynamic linear backend |
 | [Gemma 4 31B IT](recipes/gemma4-31b-nvfp4.json) | 1 × 128 GB | NVFP4 | Tool calling with an assistant drafter |
@@ -32,6 +32,7 @@ Additional catalog entries are candidates unless a result is linked. Node counts
 | [GLM 5.3 Flash 4K chunk control](recipes/glm53-chunk4096.json) | 2 × 128 GB | NVFP4 | Same image and runtime settings as the 8K recipe, with [one parameter varied](results/glm53-prefill-2026-11-18/#isolating-prefill-chunk-size) |
 | [Qwen3.8 Flash-Next, four clients](recipes/qwen38-flash-next-kv2g-c4.json) | 2 × 128 GB | Mixed NVFP4/FP8/BF16 | Tuned 8K service with 2 GiB KV per rank and four scheduler slots |
 | [Qwen3.8 Flash-Next, small KV pool](recipes/qwen38-flash-next-kv2g-c1.json) | 2 × 128 GB | Mixed NVFP4/FP8/BF16 | 2 GiB BF16 KV per rank and 21.80 output tok/s at one client |
+| [Full GLM-5.3](recipes/full-glm53.json) | 4 × 128 GB | TensorFold EXL3 2.75 bpw | Four-rank 32K candidate with the native MTP layer and the 6-bit output head |
 | [GLM 5.3 Flash chat](recipes/glm53-flash-fp4.json) | 2 × 128 GB | Mixed FP4-Local | 320B MoE, B12X loader, MTP and 64K context |
 | [MiniMax M3.1 Flash](recipes/minimax31-flash-tp4.json) | 4 × 128 GB | NVFP4 experts + MXFP8 | One large endpoint using all four Sparks and the bundled DSpark head |
 

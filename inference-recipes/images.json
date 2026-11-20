@@ -4,5 +4,6 @@
   "b12x-20261015": "eugr/spark-vllm-b12x:nightly-20261015@sha256:03a956544e9f9b4b7ba91690469fbe7848bdbef29a7d2e0f5788368467bb3595",
   "minimax-m31": "vllm/vllm-openai:minimax-m31-flash@sha256:86f582dae25ea92802353727164ae4eb03b37b18baf9119b805ffaec2a7ef07c",
   "vllm-0.33.0": "vllm/vllm-openai:v0.33.0@sha256:d825baf9ce4b1b6bfc5ecc7b79880c7e6748c65a72d697ce3d47607aafa84c6e",
-  "inkling2-gb10": "aidendle94/sparkrun-sglang-inkling2-gb10:experimental-1.0@sha256:fdcbdcf0b4aa686610985daac7caa3a5e9e3d0f3a74436e49b0c2db036818fc2"
+  "inkling2-gb10": "aidendle94/sparkrun-sglang-inkling2-gb10:experimental-1.0@sha256:fdcbdcf0b4aa686610985daac7caa3a5e9e3d0f3a74436e49b0c2db036818fc2",
+  "tensorfold-glm53-tp4": "ghcr.io/drowzeys/keys-tensorfold-glm53-tp4-dgx-spark@sha256:6290c15f1596347468fa63c35f9e5ebc37212294fd283fc1c7165fddbcb9b34d"
 }

@@ -1,9 +1,9 @@
 {
-  "purpose": "Compare native BF16 on one Spark and a direct pair against the matched mixed-precision checkpoint.",
+  "purpose": "Compare native BF16 on one, two and four Sparks against the matched mixed-precision checkpoint.",
   "model": "Qwen/Qwen3.8-27B",
   "revision": "37561816e66b5b9153b1b64c10968c18c1e6f4a0",
   "precision": "BF16",
-  "nodes": [1, 2],
+  "nodes": [1, 2, 4],
   "per_node_gb": 128,
   "image": "vllm-0.33.0",
   "context": 8192,

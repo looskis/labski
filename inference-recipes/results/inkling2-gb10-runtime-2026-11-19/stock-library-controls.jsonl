@@ -1,0 +1,8 @@
+{"runtime":"sglang","variant":"sglang-stock","rank":0,"nccl":"2.30.7+cuda13.3","queue_pair_timeout":true,"distributed_backend_error":true,"completed_message_sizes":0}
+{"runtime":"sglang","variant":"sglang-stock","rank":1,"nccl":"2.30.7+cuda13.3","queue_pair_timeout":true,"distributed_backend_error":true,"completed_message_sizes":0}
+{"runtime":"sglang","variant":"sglang-stock","rank":2,"nccl":"2.30.7+cuda13.3","queue_pair_timeout":true,"distributed_backend_error":true,"completed_message_sizes":0}
+{"runtime":"sglang","variant":"sglang-stock","rank":3,"nccl":"2.30.7+cuda13.3","queue_pair_timeout":true,"distributed_backend_error":true,"completed_message_sizes":0}
+{"runtime":"sglang","variant":"sglang-2312","rank":0,"nccl":"2.31.2+cuda13.3","queue_pair_timeout":true,"distributed_backend_error":true,"completed_message_sizes":0}
+{"runtime":"sglang","variant":"sglang-2312","rank":1,"nccl":"2.31.2+cuda13.3","queue_pair_timeout":true,"distributed_backend_error":true,"completed_message_sizes":0}
+{"runtime":"sglang","variant":"sglang-2312","rank":2,"nccl":"2.31.2+cuda13.3","queue_pair_timeout":true,"distributed_backend_error":true,"completed_message_sizes":0}
+{"runtime":"sglang","variant":"sglang-2312","rank":3,"nccl":"2.31.2+cuda13.3","queue_pair_timeout":true,"distributed_backend_error":true,"completed_message_sizes":0}

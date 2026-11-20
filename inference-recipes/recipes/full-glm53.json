@@ -1,0 +1,23 @@
+{
+  "purpose": "Test the full GLM-5.3 EXL3 checkpoint on a switchless four-Spark ring with its own MTP layer.",
+  "model": "drowzeys/keys-GLM-5.3-EXL3-2.75BPW",
+  "revision": "ae7b69671a94cf130fd1360a3b9213539ef3446f",
+  "precision": "EXL3 2.75 bits per weight with the auxiliary 6-bit output head",
+  "nodes": [4],
+  "per_node_gb": 128,
+  "engine": "tensorfold-glm53",
+  "image": "tensorfold-glm53-tp4",
+  "prepare_image": "vllm-0.33.0",
+  "context": 32768,
+  "sequences": 4,
+  "container_memory_gib": 110,
+  "required_files": ["lm_head-6bit/lm_head-6bit.safetensors"],
+  "env": {
+    "DRAFTER": "mtp",
+    "TF_GLM53_ROCE": "0",
+    "TF_GLM53_PROMPT_REUSE": "0",
+    "NCCL_CUMEM_ENABLE": "0"
+  },
+  "options": {},
+  "source": "https://github.com/drowzeys/keys-TensorFold-GLM-5.3-TP4-4x-DGX-Spark/tree/ea05ec696d1c408268a3d1de39b090b154c1ebff"
+}
