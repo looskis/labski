@@ -34,6 +34,26 @@ python3 assemble.py "$SNAPSHOT" "$RANK0_SNAPSHOT" --rank 0
 python3 assemble.py "$SNAPSHOT" "$RANK1_SNAPSHOT" --rank 1
 ```
 
+## Download one expert partition directly to a Spark
+
+A physical Spark rebuilt rank 0 of shard 9 from **10.299 GB of response bodies** across 242 successful HTTP ranges. The original shard was 19.961 GB, so the requests saved **48.4%** of the source bytes. The resulting 10.298 GB file had the same SHA-256 as the compact file built independently from the complete source. Response-body counts include the source header and the small gaps between nearby tensors. They exclude HTTP headers, redirects and retry traffic. [Spark receipt](direct-ranges.json) · [Downloader](fetch_shard.py)
+
+Run the following on each Spark from this directory. Set `RANK` to 0 or 1 and choose separate directories for the small upstream metadata and this Spark’s compact weights. `fetch_shard.py` uses the Python standard library and a local filesystem that supports hard links and sparse files. During a shard build, allow temporary disk for both the fetched ranges and the compact file.
+
+```sh
+set -eu
+: "${RANK:?set RANK to 0 or 1}" "${METADATA:?choose a metadata directory}" "${DEST:?choose a rank directory}"
+hf download IFM/K2-Horizon-375B-A23B-NVFP4 \
+  --revision d3a6e26e4d59243ed6e569e39ca6facf4da84c05 \
+  --include '*.json' '*.jinja' '*.py' --local-dir "$METADATA"
+for shard in $(python3 -c 'import json; print(*sorted({r["file"] for r in json.load(open("two-rank-parity.json"))["shards"]}))'); do
+  python3 fetch_shard.py "$shard" "$DEST" --rank "$RANK"
+done
+python3 assemble.py "$METADATA" "$DEST" --rank "$RANK"
+```
+
+We also interrupted the public downloader after two completed payload ranges on rank 1 of shard 12, using reads from the verified upstream file to simulate the HTTP response bodies. It resumed without rereading either payload range, reproduced the independently verified **6,079,636,016-byte** compact file, and verified and skipped the file on a further invocation. The final assembler reproduced the complete rank 1 index using only the eight metadata files and the twelve compact shards. [Recovery and final assembly check](direct-ranges.json)
+
 ## Reproduce
 
 Run the inventory against the pinned snapshot. It reads the 12 headers and index, checks tensor offsets and the header SHA-256 values, and prints the rank totals for gap limits from zero through one MiB. The calculation assumes whole-expert placement and no extra expert replicas. [Inventory program](inventory.py)
