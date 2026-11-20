@@ -66,6 +66,10 @@ At two clients the second configuration delivered **71% more aggregate throughpu
 
 With the two-slot configuration the six consecutive inventory requests all returned the exact number at 519, 2,058 and 3,597 input tokens. The two longest requests took 2.01 and 2.00 seconds without a cache flush. At low reasoning effort, this launch scored 8/28 under the fixed 256-token limit against 7/28 with one slot. One item changed from incorrect to correct. Twenty responses hit the budget versus 21 with one slot. These are single passes. To launch this version, substitute `inkling2-small-native-c2` for the recipe and model name in the four-rank commands above. [Retrieval trials](native/two-slot-context.jsonl) · [Matched low-effort responses](native/c2-low-quality.jsonl.gz)
 
+## Serving from rank-local weight files
+
+The same two-slot recipe loaded 96 sparse shards with 431.96 GB of physical storage across four expert ranks. The replay matched the original final-answer bytes and finish reasons on every paired request. At the 768-token limit both runs scored 13/14 and all 14 answers were nonempty. [Serving results and limits](rank-local/) · [Stage the files](../../experiments/inkling2-sparse-weights/)
+
 ## Reasoning effort at a 256-token limit
 
 On the same 28 MMLU-Pro questions, with greedy decoding and one scheduler slot, requested effort `none` gave **14/28 exact answers** while `low` gave **7/28**. The run at low effort generated 6,531 tokens, compared with 3,404 at none. Low effort exhausted the budget on 21 items and none exhausted it on 11. Moving to low gained two correct items and lost nine. The native chat template added two prompt tokens at low on every question. The score requires a stopped response containing just the correct letter. At none, three stopped responses included additional text. This measures short-answer delivery under a fixed budget. [None-effort items](native/none-quality.jsonl.gz) · [Low-effort items](native/low-quality.jsonl.gz) · [Probe command](../../measurement.md#score-native-chat-reasoning-effort)

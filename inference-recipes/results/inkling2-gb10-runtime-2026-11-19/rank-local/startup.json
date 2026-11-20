@@ -1,0 +1,95 @@
+{
+  "mount_before": [
+    {
+      "rank": 0,
+      "bytes": 725367,
+      "transfers": 4,
+      "checks": 0,
+      "errors": 0,
+      "totalBytes": 725367
+    },
+    {
+      "rank": 1,
+      "bytes": 733559,
+      "transfers": 4,
+      "checks": 0,
+      "errors": 0,
+      "totalBytes": 733559
+    },
+    {
+      "rank": 2,
+      "local_storage": true
+    },
+    {
+      "rank": 3,
+      "bytes": 728487,
+      "transfers": 4,
+      "checks": 0,
+      "errors": 0,
+      "totalBytes": 728487
+    }
+  ],
+  "start_unix_ns": 1795188338235966000,
+  "ready_unix_ns": 1795188928220219000,
+  "mount_after_ready": [
+    {
+      "rank": 0,
+      "bytes": 100497444820,
+      "transfers": 165,
+      "checks": 0,
+      "errors": 0,
+      "totalBytes": 100497444820
+    },
+    {
+      "rank": 1,
+      "bytes": 100336150773,
+      "transfers": 106,
+      "checks": 0,
+      "errors": 0,
+      "totalBytes": 100336150773
+    },
+    {
+      "rank": 2,
+      "local_storage": true
+    },
+    {
+      "rank": 3,
+      "bytes": 100164893861,
+      "transfers": 100,
+      "checks": 0,
+      "errors": 0,
+      "totalBytes": 100164893861
+    }
+  ],
+  "mount_after_requests": [
+    {
+      "rank": 0,
+      "bytes": 100497444820,
+      "transfers": 165,
+      "checks": 0,
+      "errors": 0,
+      "totalBytes": 100497444820
+    },
+    {
+      "rank": 1,
+      "bytes": 100336150773,
+      "transfers": 106,
+      "checks": 0,
+      "errors": 0,
+      "totalBytes": 100336150773
+    },
+    {
+      "rank": 2,
+      "local_storage": true
+    },
+    {
+      "rank": 3,
+      "bytes": 100164893861,
+      "transfers": 100,
+      "checks": 0,
+      "errors": 0,
+      "totalBytes": 100164893861
+    }
+  ],
+  "end_unix_ns": 1795190260469948000
+}

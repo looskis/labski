@@ -1,0 +1,28 @@
+{
+  "prose": {
+    "paired": 24,
+    "byte_equal": 24,
+    "same_finish": 24
+  },
+  "low256": {
+    "paired": 28,
+    "byte_equal": 28,
+    "same_finish": 28,
+    "original_correct": 8,
+    "sparse_correct": 8
+  },
+  "low768": {
+    "paired": 14,
+    "byte_equal": 14,
+    "same_finish": 14,
+    "original_correct": 13,
+    "sparse_correct": 13
+  },
+  "lookup": {
+    "paired": 6,
+    "byte_equal": 6,
+    "same_finish": 6,
+    "original_exact": 6,
+    "sparse_exact": 6
+  }
+}

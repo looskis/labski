@@ -1,0 +1,38 @@
+[
+  {
+    "rank": 0,
+    "files": {
+      "model-00022-of-00024.safetensors": {
+        "sample_sha256": "c817863a02f78c63833782029ecfe56546077e03c2bf1e4b57185f51f6450c8f",
+        "tensors": 54
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "files": {
+      "model-00022-of-00024.safetensors": {
+        "sample_sha256": "27ff5a916314c0d29734f84011acf304c368cca4af440311658ce624b369f740",
+        "tensors": 54
+      }
+    }
+  },
+  {
+    "rank": 2,
+    "files": {
+      "model-00022-of-00024.safetensors": {
+        "sample_sha256": "6786a6789dcb379de602cdfa24886a038b4299b479192efe9779cf780694af7f",
+        "tensors": 54
+      }
+    }
+  },
+  {
+    "rank": 3,
+    "files": {
+      "model-00022-of-00024.safetensors": {
+        "sample_sha256": "146b0af05d56106cdb7b3ca298999e1583c804cfe85bcdac1ec7a3dc8827b5de",
+        "tensors": 54
+      }
+    }
+  }
+]
