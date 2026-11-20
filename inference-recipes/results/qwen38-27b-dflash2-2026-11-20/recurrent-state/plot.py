@@ -2,6 +2,7 @@
 
 import gzip
 import json
+import math
 from pathlib import Path
 from statistics import median
 
@@ -21,16 +22,15 @@ def trials(folder):
     return values
 
 
-def direct_rankings(dtype):
-    with gzip.open(HERE / 'long-context' / f'next-{dtype}.jsonl.gz', 'rt') as scores:
+def direct_rankings(directory, dtype):
+    with gzip.open(directory / f'next-{dtype}.jsonl.gz', 'rt') as scores:
         return [r for r in map(json.loads, scores) if not r['repeated']]
 
 
-def main():
-    fp32, bf16 = direct_rankings('fp32'), direct_rankings('bf16')
+def disagreements(directory, edges):
+    fp32, bf16 = direct_rankings(directory, 'fp32'), direct_rankings(directory, 'bf16')
     if len(fp32) != 8 or [r['token_ids_sha256'] for r in fp32] != [r['token_ids_sha256'] for r in bf16]:
         raise ValueError('unmatched long-context runs')
-    edges = list(range(0, 6145, 256))
     fractions = []
     for left, right in zip(edges, edges[1:]):
         # top_ids[0] is the prediction of target position 1. Position 0 is unscored.
@@ -38,6 +38,13 @@ def main():
         choices = [x != y for a, b in zip(fp32, bf16) for x, y in zip(a['top_ids'][section], b['top_ids'][section])]
         fractions.append(sum(choices) / len(choices))
 
+    return fractions
+
+
+def main():
+    edges = list(range(0, 6145, 256))
+    low = disagreements(HERE / 'long-context', edges)
+    high = disagreements(HERE / 'long-context' / 'prefill-4096', edges)
     fg, guide, control, candidate, changed = '#21333c', '#dce3e6', '#586c79', '#08745e', '#9c520d'
     fig, (speed, agreement) = plt.subplots(1, 2, figsize=(11, 4.65), gridspec_kw={'width_ratios': [1, 1.45]})
     fig.subplots_adjust(left=.123, right=.97, bottom=.235, top=.72, wspace=.31)
@@ -62,11 +69,15 @@ def main():
     agreement.grid(axis='y', color=guide, lw=.8)
     for boundary in (2048, 4096):
         agreement.axvline(boundary, color=control, lw=.85, ls='--')
-    agreement.stairs(fractions, edges, baseline=None, color=changed, lw=2.3)
-    agreement.set(xlim=(0, 6144), ylim=(-.005, .125), xticks=[0, 2048, 4096, 6144], yticks=[0, .03, .06, .09, .12], xlabel='Target token position')
+    agreement.stairs(low, edges, baseline=None, color=changed, lw=2.2, label='2,048-token budget')
+    agreement.stairs(high, edges, baseline=None, color='#22687d', lw=2, linestyle='--', label='4,096-token budget')
+    ceiling = max(4, math.ceil(max(max(low), max(high)) / .03))
+    agreement.set(xlim=(0, 6144), ylim=(-.005, ceiling * .03 + .007), xticks=[0, 2048, 4096, 6144],
+                  yticks=[i * .03 for i in range(ceiling + 1)], xlabel='Target token position')
+    agreement.legend(loc='upper left', frameon=True, facecolor='white', edgecolor='none', framealpha=1, fontsize=8.3, labelcolor=fg)
     agreement.yaxis.set_major_formatter(PercentFormatter(xmax=1, decimals=0))
     agreement.xaxis.set_major_formatter(StrMethodFormatter('{x:,.0f}'))
-    fig.text(.045, .063, 'Left shows the median and range of three trials per launch. Right pools eight 6,144-token windows in 256-position bins.', fontsize=9, color=control)
+    fig.text(.045, .063, 'Left shows three-trial medians and ranges at the 2,048-token budget. Right pools eight windows in 256-position bins.', fontsize=9, color=control)
     fig.savefig(HERE / 'recurrent-state.png', dpi=165, facecolor='white')
     plt.close(fig)
 

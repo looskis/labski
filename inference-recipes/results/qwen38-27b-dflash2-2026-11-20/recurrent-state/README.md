@@ -2,7 +2,7 @@
 
 At a fixed 3 GiB cache budget, changing the recurrent state from FP32 to BF16 raised four-client throughput from **53.73 to 94.78 generated tokens/s** (+76.4%) and cut GPU energy from **0.67 to 0.42 J/output token** (−37.5%). Fresh FP32 and BF16 launches returned the same 28 short answers and the same 16 lookup answers. Both runs used NVIDIA’s mixed NVFP4/FP8 target, the same DFlash2 draft with seven proposals, an 8,192-token request limit and four configured slots. [BF16 recipe](../../../recipes/qwen38-27b-dflash-v033-7-ssmbf16.json) · [FP32 control recipe](../../../recipes/qwen38-27b-dflash-v033-7.json)
 
-![One-Spark throughput rose from 53.73 to 94.78 and 104.34 tokens per second across the two BF16 launches. The share of positions with different FP32 and BF16 top tokens rose after the first 2,048 positions.](recurrent-state.png)
+![One-Spark throughput rose from 53.73 to 94.78 and 104.34 tokens per second across the two BF16 launches. Top-token disagreement begins after position 2,048 at the smaller prefill budget and after position 4,096 at the larger budget.](recurrent-state.png)
 
 | Effective recurrent state | Client count | Aggregate output tok/s | p95 first text delta, ms | GPU J/output token |
 | --- | ---: | ---: | ---: | ---: |
@@ -86,7 +86,26 @@ The 64 standalone greedy requests agreed **61/64** across precision settings. Ea
 python3 compare_next_token.py windows.jsonl long-context/next-fp32.jsonl.gz long-context/next-bf16.jsonl.gz
 ```
 
-For the next control, double `--max-num-batched-tokens` to 4,096 in both launch configurations and repeat the identical nine-window sequence and 64 unique direct probes. Compare the first changed token in each window and all positions across both chunk budgets. The current launches also differ in effective attention block size. This control tests whether the location of the first disagreement moves with the configured budget. [Paired analysis](compare_next_token.py) · [Figure source](plot.py)
+## Doubling the prefill budget moved the first disagreement
+
+We repeated both precision settings on the same Spark with `--max-num-batched-tokens 4096`, using the same eight windows, token IDs, fixed prefixes and within-launch repeat. This time BF16 ran first, reversing the order of the 2,048-token launches. With a 4,096-token prefill budget, the first FP32/BF16 top-choice disagreement in each window moved to positions **4,097–4,116**. There were **zero disagreements in 32,760 scored positions before 4,096** and **1,630 in the remaining 16,384 positions (9.95%)**. The share after the first nominal chunk was similar at the smaller budget, 3,144 of 32,768 (9.59%). [FP32 raw results](long-context/prefill-4096/next-fp32.jsonl.gz) · [BF16 raw results](long-context/prefill-4096/next-bf16.jsonl.gz) · [Per-window and direct comparisons](long-context/prefill-4096/next-comparison.json)
+
+| Configured prefill budget | First changed position across the eight windows | Different reported top tokens | Same directly generated token | Observed token ranked first, FP32 / BF16 |
+| ---: | ---: | ---: | ---: | ---: |
+| 2,048 | 2,113–2,141 | 3,144 / 49,144 (6.40%) | 61 / 64 | 28,269 / 28,249 |
+| 4,096 | 4,097–4,116 | 1,630 / 49,144 (3.32%) | 62 / 64 | 28,327 / 28,303 |
+
+Changing the prefill budget **with the state precision held fixed** also changed the predictions. FP32 changed its reported top token at 4,907 positions and its direct greedy choice on 9/64 requests. BF16 changed at 4,847 positions and on 10/64 direct requests. In each dtype the first cross-budget disagreement appeared at positions 1–11 across the eight windows. Only 711 positions had a precision disagreement at both budgets. For reproducibility, record the prefill budget alongside recurrent-state precision. [Paired four-launch comparison](long-context/prefill-4096/budget-comparison.json)
+
+The 4,096-token launches again reproduced all 6,143 rankings and all eight direct tokens on the repeated first window. On the 64 direct probes, FP32 generated the observed token 35 times and BF16 did so 36 times. The measured attention block sizes remained 832 for FP32 and 448 for BF16, with 189 and 351 GPU blocks respectively. vLLM’s cache-capacity estimates fell from 12,002 to 11,818 tokens for FP32 and from 16,815 to 16,337 for BF16. The speed measurements at the top of this page use the 2,048-token budget. The larger-budget experiment measured token choices. These four launches establish the boundary shift on this corpus and leave its kernel-level cause open. [FP32 effective cache](long-context/prefill-4096/fp32-cache.json) · [BF16 effective cache](long-context/prefill-4096/bf16-cache.json) · [Figure source](plot.py)
+
+To reproduce, use the same explicit FP32 and BF16 options and change `--max-num-batched-tokens` in both recipe JSON files to 4,096. Run `next_token.py` once per served configuration. To compare all four saved runs from this directory, use the following command. [Paired analysis](compare_prefill_budgets.py)
+
+```sh
+python3 compare_prefill_budgets.py windows.jsonl \
+  long-context/next-fp32.jsonl.gz long-context/next-bf16.jsonl.gz \
+  long-context/prefill-4096/next-fp32.jsonl.gz long-context/prefill-4096/next-bf16.jsonl.gz
+```
 
 ## Reproduce
 

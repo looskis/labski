@@ -51,11 +51,16 @@ def paired(fp32, bf16, cases):
                 bf16_direct_in_reported_top=sum(b in top for _, b, _, _, top in probes))
 
 
-def compare(windows, fp32, bf16):
+def read_cases(windows):
     cases = [json.loads(line) for line in windows.read_text().splitlines()]
     if ([c['start'] for c in cases] != list(STARTS) or
             any(len(c['ids']) != WIDTH or ids_digest(c['ids']) != c['token_ids_sha256'] for c in cases)):
         raise ValueError('invalid input windows')
+    return cases
+
+
+def compare(windows, fp32, bf16):
+    cases = read_cases(windows)
     a, b = read_run(fp32, cases), read_run(bf16, cases)
     repeats = {}
     for dtype, run in [('fp32', a), ('bf16', b)]:

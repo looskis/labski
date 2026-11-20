@@ -1,0 +1,274 @@
+{
+  "overall": {
+    "scored": 49144,
+    "same_reported_top": 47514,
+    "fp32_top_with_multiple_ids": 0,
+    "bf16_top_with_multiple_ids": 0,
+    "both_correct": 27957,
+    "neither_correct": 20471,
+    "fp32_only_correct": 370,
+    "bf16_only_correct": 346,
+    "direct_probes": 64,
+    "same_direct": 62,
+    "fp32_direct_correct": 35,
+    "bf16_direct_correct": 36,
+    "fp32_only_direct_correct": 0,
+    "bf16_only_direct_correct": 1,
+    "fp32_direct_in_reported_top": 61,
+    "bf16_direct_in_reported_top": 62
+  },
+  "first_window_repeat": {
+    "fp32": {
+      "scored": 6143,
+      "same_reported_top": 6143,
+      "direct_probes": 8,
+      "same_direct": 8
+    },
+    "bf16": {
+      "scored": 6143,
+      "same_reported_top": 6143,
+      "direct_probes": 8,
+      "same_direct": 8
+    }
+  },
+  "nominal_chunks": [
+    {
+      "first_position": 1,
+      "last_position": 2047,
+      "scored": 16376,
+      "same_reported_top": 16376
+    },
+    {
+      "first_position": 2048,
+      "last_position": 4095,
+      "scored": 16384,
+      "same_reported_top": 16384
+    },
+    {
+      "first_position": 4096,
+      "last_position": 6143,
+      "scored": 16384,
+      "same_reported_top": 14754
+    }
+  ],
+  "direct_by_prefix_length": [
+    {
+      "prefix_tokens": 512,
+      "direct_probes": 8,
+      "same_direct": 7,
+      "fp32_direct_correct": 5,
+      "bf16_direct_correct": 6
+    },
+    {
+      "prefix_tokens": 2047,
+      "direct_probes": 8,
+      "same_direct": 8,
+      "fp32_direct_correct": 4,
+      "bf16_direct_correct": 4
+    },
+    {
+      "prefix_tokens": 2048,
+      "direct_probes": 8,
+      "same_direct": 8,
+      "fp32_direct_correct": 7,
+      "bf16_direct_correct": 7
+    },
+    {
+      "prefix_tokens": 2049,
+      "direct_probes": 8,
+      "same_direct": 7,
+      "fp32_direct_correct": 3,
+      "bf16_direct_correct": 3
+    },
+    {
+      "prefix_tokens": 4095,
+      "direct_probes": 8,
+      "same_direct": 8,
+      "fp32_direct_correct": 3,
+      "bf16_direct_correct": 3
+    },
+    {
+      "prefix_tokens": 4096,
+      "direct_probes": 8,
+      "same_direct": 8,
+      "fp32_direct_correct": 5,
+      "bf16_direct_correct": 5
+    },
+    {
+      "prefix_tokens": 4097,
+      "direct_probes": 8,
+      "same_direct": 8,
+      "fp32_direct_correct": 2,
+      "bf16_direct_correct": 2
+    },
+    {
+      "prefix_tokens": 6143,
+      "direct_probes": 8,
+      "same_direct": 8,
+      "fp32_direct_correct": 6,
+      "bf16_direct_correct": 6
+    }
+  ],
+  "windows": [
+    {
+      "start": 0,
+      "first_changed_target_position": 4103,
+      "scored": 6143,
+      "same_reported_top": 5935,
+      "fp32_top_with_multiple_ids": 0,
+      "bf16_top_with_multiple_ids": 0,
+      "both_correct": 3609,
+      "neither_correct": 2421,
+      "fp32_only_correct": 54,
+      "bf16_only_correct": 59,
+      "direct_probes": 8,
+      "same_direct": 8,
+      "fp32_direct_correct": 6,
+      "bf16_direct_correct": 6,
+      "fp32_only_direct_correct": 0,
+      "bf16_only_direct_correct": 0,
+      "fp32_direct_in_reported_top": 8,
+      "bf16_direct_in_reported_top": 8
+    },
+    {
+      "start": 12288,
+      "first_changed_target_position": 4116,
+      "scored": 6143,
+      "same_reported_top": 5924,
+      "fp32_top_with_multiple_ids": 0,
+      "bf16_top_with_multiple_ids": 0,
+      "both_correct": 3392,
+      "neither_correct": 2661,
+      "fp32_only_correct": 41,
+      "bf16_only_correct": 49,
+      "direct_probes": 8,
+      "same_direct": 7,
+      "fp32_direct_correct": 3,
+      "bf16_direct_correct": 4,
+      "fp32_only_direct_correct": 0,
+      "bf16_only_direct_correct": 1,
+      "fp32_direct_in_reported_top": 7,
+      "bf16_direct_in_reported_top": 8
+    },
+    {
+      "start": 24576,
+      "first_changed_target_position": 4108,
+      "scored": 6143,
+      "same_reported_top": 5905,
+      "fp32_top_with_multiple_ids": 0,
+      "bf16_top_with_multiple_ids": 0,
+      "both_correct": 3519,
+      "neither_correct": 2525,
+      "fp32_only_correct": 51,
+      "bf16_only_correct": 48,
+      "direct_probes": 8,
+      "same_direct": 8,
+      "fp32_direct_correct": 4,
+      "bf16_direct_correct": 4,
+      "fp32_only_direct_correct": 0,
+      "bf16_only_direct_correct": 0,
+      "fp32_direct_in_reported_top": 7,
+      "bf16_direct_in_reported_top": 7
+    },
+    {
+      "start": 36864,
+      "first_changed_target_position": 4104,
+      "scored": 6143,
+      "same_reported_top": 5949,
+      "fp32_top_with_multiple_ids": 0,
+      "bf16_top_with_multiple_ids": 0,
+      "both_correct": 3487,
+      "neither_correct": 2562,
+      "fp32_only_correct": 50,
+      "bf16_only_correct": 44,
+      "direct_probes": 8,
+      "same_direct": 8,
+      "fp32_direct_correct": 6,
+      "bf16_direct_correct": 6,
+      "fp32_only_direct_correct": 0,
+      "bf16_only_direct_correct": 0,
+      "fp32_direct_in_reported_top": 8,
+      "bf16_direct_in_reported_top": 8
+    },
+    {
+      "start": 49152,
+      "first_changed_target_position": 4097,
+      "scored": 6143,
+      "same_reported_top": 5952,
+      "fp32_top_with_multiple_ids": 0,
+      "bf16_top_with_multiple_ids": 0,
+      "both_correct": 3488,
+      "neither_correct": 2571,
+      "fp32_only_correct": 43,
+      "bf16_only_correct": 41,
+      "direct_probes": 8,
+      "same_direct": 8,
+      "fp32_direct_correct": 4,
+      "bf16_direct_correct": 4,
+      "fp32_only_direct_correct": 0,
+      "bf16_only_direct_correct": 0,
+      "fp32_direct_in_reported_top": 7,
+      "bf16_direct_in_reported_top": 8
+    },
+    {
+      "start": 61440,
+      "first_changed_target_position": 4098,
+      "scored": 6143,
+      "same_reported_top": 5912,
+      "fp32_top_with_multiple_ids": 0,
+      "bf16_top_with_multiple_ids": 0,
+      "both_correct": 3432,
+      "neither_correct": 2605,
+      "fp32_only_correct": 57,
+      "bf16_only_correct": 49,
+      "direct_probes": 8,
+      "same_direct": 8,
+      "fp32_direct_correct": 3,
+      "bf16_direct_correct": 3,
+      "fp32_only_direct_correct": 0,
+      "bf16_only_direct_correct": 0,
+      "fp32_direct_in_reported_top": 8,
+      "bf16_direct_in_reported_top": 8
+    },
+    {
+      "start": 73728,
+      "first_changed_target_position": 4099,
+      "scored": 6143,
+      "same_reported_top": 5947,
+      "fp32_top_with_multiple_ids": 0,
+      "bf16_top_with_multiple_ids": 0,
+      "both_correct": 3513,
+      "neither_correct": 2561,
+      "fp32_only_correct": 41,
+      "bf16_only_correct": 28,
+      "direct_probes": 8,
+      "same_direct": 7,
+      "fp32_direct_correct": 4,
+      "bf16_direct_correct": 4,
+      "fp32_only_direct_correct": 0,
+      "bf16_only_direct_correct": 0,
+      "fp32_direct_in_reported_top": 8,
+      "bf16_direct_in_reported_top": 7
+    },
+    {
+      "start": 86016,
+      "first_changed_target_position": 4104,
+      "scored": 6143,
+      "same_reported_top": 5990,
+      "fp32_top_with_multiple_ids": 0,
+      "bf16_top_with_multiple_ids": 0,
+      "both_correct": 3517,
+      "neither_correct": 2565,
+      "fp32_only_correct": 33,
+      "bf16_only_correct": 28,
+      "direct_probes": 8,
+      "same_direct": 8,
+      "fp32_direct_correct": 5,
+      "bf16_direct_correct": 5,
+      "fp32_only_direct_correct": 0,
+      "bf16_only_direct_correct": 0,
+      "fp32_direct_in_reported_top": 8,
+      "bf16_direct_in_reported_top": 8
+    }
+  ]
+}
