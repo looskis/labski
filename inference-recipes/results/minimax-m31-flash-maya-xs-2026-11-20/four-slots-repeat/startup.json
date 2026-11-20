@@ -1,0 +1,39 @@
+{
+  "engine_commit": "e75b3ef7c5f725ef50fafe8ae74b16f77982f85e",
+  "binary_sha256": "1aeea0f8308afe83202f36c373dbc5db9fd462f05ba9ee168009c76a70f1972c",
+  "checkpoint": "peasantsmith/MiniMax-M3.1-Flash-Maya-GGUF",
+  "checkpoint_revision": "0ac574071c3322f02b540f3547f9ef1bc48eb494",
+  "weight_files": [
+    {
+      "name": "MiniMax-M3.1-Flash-Maya-XS-IQ1_S-00001-of-00002.gguf",
+      "bytes": 47846435136
+    },
+    {
+      "name": "MiniMax-M3.1-Flash-Maya-XS-IQ1_S-00002-of-00002.gguf",
+      "bytes": 45138103520
+    },
+    {
+      "name": "MiniMax-M3.1-Flash-Maya-XS-maya-indexers.bin",
+      "bytes": 12538080
+    }
+  ],
+  "cuda_layer_range": [
+    0,
+    59
+  ],
+  "routed_layer_expert_pairs": 7296,
+  "cuda_experts_resident": 7012,
+  "staging_slots": 48,
+  "reported_free_cuda_MB": 766,
+  "quantization": "GGUF MiniMax-M3.1-Flash-Maya-XS (dense Q4_K,Q5_K,Q6_K,Q8_0, experts IQ1_Sx151,IQ2_XXSx20)",
+  "cpu_lane_threads": 18,
+  "kv": "K bf16, V bf16, 120 KB a position, 4 conversations at once (--parallel): a cache of 8192 positions each",
+  "cpu_lane_calibration": "an expert 0.59 ms on the CPU lane (+0.28 ms each more), 0.20 ms to copy - 4 such experts: 3 staged",
+  "host_arithmetic_check": {
+    "dot_shapes": 13,
+    "dot_max_abs_error_vs_fp64": 1.25006761e-06,
+    "rms_outputs": 3072,
+    "rms_max_abs_error_vs_fp64": 1.23785269e-07,
+    "sum_outputs_exact": 6144
+  }
+}

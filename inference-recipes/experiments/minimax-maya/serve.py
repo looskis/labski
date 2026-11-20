@@ -18,6 +18,8 @@ def launch(args):
                   args=["--pack","/job/pack","--max-context","8192","--parallel",str(args.slots),
                         "--kv-cache","bf16","--kv-streaming","off","--dspark","off",
                         "--vision","off","--suffix-draft","0"])
+    if args.resident_cap is not None:
+        config["args"].extend(["--resident-cap", str(args.resident_cap)])
     target = work / f"labski-serve-{args.port}.json"
     target.write_text(json.dumps(config, indent=2)+"\n")
     image = json.loads((Path(__file__).resolve().parents[2] / "images.json").read_text())["vllm-0.33.0"]
@@ -35,7 +37,10 @@ if __name__ == "__main__":
     cli.add_argument("directory", type=Path)
     cli.add_argument("--slots", type=int, choices=(1,4), default=4)
     cli.add_argument("--port", type=int, default=8000)
+    cli.add_argument("--resident-cap", type=int, help="cap GPU-resident routed experts per MoE layer (0–128)")
     args = cli.parse_args()
     if not 0 < args.port < 65536:
         cli.error("--port must be in 1..65535")
+    if args.resident_cap is not None and not 0 <= args.resident_cap <= 128:
+        cli.error("--resident-cap must be in 0..128")
     launch(args)
