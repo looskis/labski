@@ -37,7 +37,12 @@ class RecipeTests(unittest.TestCase):
                             self.assertIn("--host 127.0.0.1", cmd[-1])
                             args.output_head = "bf16"
                             self.assertIn("HEAD_Q=off", spark.serve_command(args, r, Path("/tmp/test cache")))
-                            self.assertIn(":/model:ro", cmd[cmd.index("--volume") + 1])
+                            model_path = spark.CONTAINER_CACHE / spark.snapshot(r)
+                            self.assertIn(f"MODEL={model_path}", cmd)
+                            self.assertEqual(cmd[cmd.index("--volume") + 1], "/tmp/test cache:/weights:ro")
+                            args.output_head = "q6"
+                            self.assertIn(f"HEAD_Q={model_path}/lm_head-6bit/lm_head-6bit.safetensors",
+                                          spark.serve_command(args, r, Path("/tmp/test cache")))
                             continue
                         self.assertEqual(cmd[cmd.index("--tensor-parallel-size") + 1], str(n))
                         self.assertEqual("--headless" in cmd, rank > 0 and r.get("engine") != "sglang")

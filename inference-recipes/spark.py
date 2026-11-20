@@ -57,11 +57,10 @@ def serve_command(args, recipe, cache):
         raise ValueError("API port must be between 1 and 65535")
 
     engine = recipe.get("engine", "vllm")
-    volume = f"{cache / snapshot(recipe)}:/model:ro" if engine == "tensorfold-glm53" else f"{cache}:{CONTAINER_CACHE}:ro"
     cmd = ["docker", "run", "--rm", "--name", "labski-" + args.recipe,
            "--platform", "linux/arm64", "--gpus", "all", "--network", "host",
            "--ipc", "host", "--ulimit", "memlock=-1", "--ulimit", "stack=67108864",
-           "--volume", volume,
+           "--volume", f"{cache}:{CONTAINER_CACHE}:ro",
            "--label", f"labski.nodes={nodes}", "--label", f"labski.rank={args.rank}"]
     env = {"HF_HUB_OFFLINE": "1", "HF_HUB_CACHE": str(CONTAINER_CACHE), **recipe.get("env", {})}
     if "container_memory_gib" in recipe:
@@ -72,7 +71,7 @@ def serve_command(args, recipe, cache):
     if output_head is not None:
         if engine != "tensorfold-glm53":
             raise ValueError("--output-head applies to the full GLM-5.3 TensorFold checkpoint")
-        env["HEAD_Q"] = "off" if output_head == "bf16" else "/model/lm_head-6bit/lm_head-6bit.safetensors"
+        env["HEAD_Q"] = "off" if output_head == "bf16" else f"{model_path}/lm_head-6bit/lm_head-6bit.safetensors"
     fabric_range = getattr(args, "fabric_range", None)
     link_prefix = getattr(args, "link_prefix", None)
     if (fabric_range is not None or link_prefix is not None) and args.transport != "ring-roce":
@@ -131,7 +130,7 @@ def serve_command(args, recipe, cache):
         raise ValueError("fabric settings require a distributed recipe")
     if engine == "tensorfold-glm53":
         entrypoint = "/bin/bash"
-        env.update(RANK=str(args.rank), MASTER=f"{args.head}:{args.master_port}",
+        env.update(MODEL=model_path, RANK=str(args.rank), MASTER=f"{args.head}:{args.master_port}",
                    CONTEXT=str(recipe["context"]), PARALLEL=str(recipe["sequences"]), PORT=str(args.port))
         # Keep the image's pinned rank-specific entrypoint and bind its API to loopback.
         digest = "7ab8ff9e55eb2ee6052ea51a2066e571967f9b294af17d0804caa4f9267eaa32"
