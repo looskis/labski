@@ -5,6 +5,7 @@ Four 128 GB Sparks served the 341.38 GB hybrid EXL3/BF16 checkpoint with two MTP
 | INT8 GEMV | Generated tok/s, 1 / 4 clients | Fleet GPU J/token, 1 / 4 | First streamed delta, ms, 1 / 4 | Final answers / 28 | Capped / 28 | Forced letters / 112 | Exact final lookups / 8 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
 | [On](gemv1/) | 20.37 / 57.88 | 6.58 / 2.62 | 287 / 490 | 7 | 21 | 30 | 8 |
+| [Off](gemv0/) | 20.68 / 54.02 | 6.53 / 2.74 | 289 / 491 | 8 | 20 | 31 | 8 |
 
 Each throughput cell is the median of three trials with four matched prose requests and a 96-token limit, following an excluded warm-up at each concurrency. The first-delta timer stops on the first generated text, which can be reasoning. Energy integrates NVML readings on all four GB10s. The four-rank runs used eager execution, a 2,048-token prefill batch limit and the lab's ring-only NCCL 2.31.2 build. [Fabric and NCCL setup](../../transport/nccl-switchless/)
 
@@ -15,6 +16,10 @@ The four full snapshots occupied 1,365.52 GB of safetensors across the fleet. Ke
 The pinned template opens a reasoning block for every new answer. The benchmark’s `enable_thinking=false` hint does not close it. The measured endpoint returned reasoning and final text in a single content field with a literal `</think>` boundary. For the free-answer and lookup tests we require a normal stop and an exact match after the first closing delimiter. The archive contains the final answer, original-field SHA-256, completion length and finish reason. [Checkpoint template](https://huggingface.co/0xSero/Step-5-Preview-Spark/blob/51a46a7f62eee1225d124170da903bba23d04a26/chat_template.jinja)
 
 With INT8 GEMV, seven questions returned a complete final letter within 128 tokens, and all seven were correct. The other 21 hit the cap. All eight lookup values were exact after the delimiter. Matching the entire raw field would score zero on both tests. The 112-item diagnostic constrains the first token to one of ten letters before the model can reason. The upstream interactive launcher supplies the `step3p5` reasoning parser.
+
+With the same weights and draft depth, enabling INT8 GEMV changed one-client throughput by -1.5% and four-client throughput by +7.2%. The change gained 0 and lost 1 correct first-token letters.
+
+With low reasoning effort and a 384-token budget, preclosing the reasoning block lowered lookup energy from 320.3 to 158.7 GPU J/request. The native prompt returned eight bare correct values. The preclosed prompt returned two bare values and six correct key/value pairs. The same change reduced exact question answers from 9/14 to 7/14. [Paired completion and energy measurements](reasoning-384/)
 
 ## Reproduce
 
