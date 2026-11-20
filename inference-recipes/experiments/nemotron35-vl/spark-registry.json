@@ -1,0 +1,23 @@
+{
+  "vllm": "0.33.0",
+  "machine": "aarch64",
+  "registry_sha256": "b0b2221e740dd40f7e9f7532b92cf764458fd188b77ff16859a4dc529e78154c",
+  "mappings": {
+    "NemotronHForCausalLM": {
+      "module": "nemotron_h",
+      "cls": "NemotronHForCausalLM",
+      "module_sha256": "14aab4f5455458e54999c70cb4fe6e95985171d6320ec82b90a482d9d7921006"
+    },
+    "NemotronH_Omni_Reasoning_V3": {
+      "module": "nano_nemotron_vl",
+      "cls": "NemotronH_Nano_VL_V2",
+      "module_sha256": "654c18e9548b749e1f330a43a3110141fa120f27b183d5be5291394c51a487c9"
+    },
+    "LiLiCorrDraftModel": {
+      "module": "lilicorr",
+      "cls": "LiLiCorrForCausalLM",
+      "module_sha256": "915d76bb4eb9c3318eec87a78059b77956e02c545c229c436d490e48816ba800"
+    }
+  },
+  "image": "vllm/vllm-openai:v0.33.0@sha256:d825baf9ce4b1b6bfc5ecc7b79880c7e6748c65a72d697ce3d47607aafa84c6e"
+}
