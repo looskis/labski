@@ -1,5 +1,5 @@
 {
-  "purpose": "Test the 102 GB FP4-Local checkpoint on one Spark at the same 8K context and four-slot target as the measured pair.",
+  "purpose": "Serve the 102 GB FP4-Local checkpoint on one Spark at the same 8K context and four-slot target as the measured pair.",
   "model": "nvidia/Qwen3.8-Flash-Next-FP4-Local",
   "revision": "b9ce18a6887e18c089fdea8509a33e63429a3300",
   "precision": "ModelOpt mixed FP4-Local, FP8 KV, four-token native MTP",

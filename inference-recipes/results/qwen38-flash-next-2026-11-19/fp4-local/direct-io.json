@@ -1,0 +1,15 @@
+[
+  {
+    "file_descriptors": 7,
+    "direct_io_descriptors": 7,
+    "direct_io_checkpoint_files": [
+      "tensors/model-00015-of-00021.safetensors",
+      "tensors/model-00016-of-00021.safetensors",
+      "tensors/model-00017-of-00021.safetensors",
+      "tensors/model-00018-of-00021.safetensors",
+      "tensors/model-00019-of-00021.safetensors",
+      "tensors/model-00020-of-00021.safetensors",
+      "tensors/model-00021-of-00021.safetensors"
+    ]
+  }
+]

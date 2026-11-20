@@ -1,0 +1,11 @@
+{
+  "routed_shards": 21,
+  "selected_gb": 71.41,
+  "reported_load_read_gb": 72.38,
+  "weight_loading_s": 132.91,
+  "profile_cache_warmup_s": 473.13,
+  "reported_kv_tokens": 120498,
+  "context": 8192,
+  "slots": 4,
+  "mtp_tokens": 4
+}
