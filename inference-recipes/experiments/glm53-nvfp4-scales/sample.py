@@ -45,6 +45,7 @@ def main():
     cli.add_argument("out", type=Path)
     cli.add_argument("--nvfp4", type=Path, help="use a local pinned NVFP4 snapshot in place of Hub ranges")
     cli.add_argument("--rows", type=int, default=64, help="contiguous output rows per projection")
+    cli.add_argument("--dense-prefix", action="store_true", help="read the nine complete dense MLP matrices in layers 0–2")
     args = cli.parse_args()
     if args.rows < 1 or 2048 % args.rows:
         cli.error("--rows must be a positive divisor of 2048")
@@ -64,12 +65,14 @@ def main():
                for base in (BF16, FP4)}
     panels = []
     tensors = set()
-    for layer in (3, 24, 44):
+    for layer in ((0, 1, 2) if args.dense_prefix else (3, 24, 44)):
         def order(i):
             return digest(f"labski-glm53-scales-v1/{layer}/{i}".encode())
-        for expert in sorted(range(288), key=order)[:2]:
+        experts = [None] if args.dense_prefix else sorted(range(288), key=order)[:2]
+        for expert in experts:
             for proj in ("gate_proj", "up_proj", "down_proj"):
-                prefix = f"model.language_model.layers.{layer}.mlp.experts.{expert}.{proj}."
+                mlp = f"model.language_model.layers.{layer}.mlp."
+                prefix = mlp + ("" if expert is None else f"experts.{expert}.") + proj + "."
                 panels.append((layer, expert, proj, prefix))
                 tensors.add((BF16, weights[BF16][prefix + "weight"]))
                 for name in ("weight", "weight_scale", "weight_scale_2", "input_scale"):
@@ -88,9 +91,10 @@ def main():
     def sample(panel):
         layer, expert, proj, prefix = panel
         paths = {}
-        expected_shape = (4096, 2048) if proj == "down_proj" else (2048, 4096)
-        rows, width = expected_shape
-        start = (int(digest(prefix.encode())[:8], 16) % (rows // args.rows)) * args.rows
+        intermediate = 12288 if expert is None else 2048
+        rows, width = (4096, intermediate) if proj == "down_proj" else (intermediate, 4096)
+        count = rows if args.dense_prefix else args.rows
+        start = (int(digest(prefix.encode())[:8], 16) % (rows // count)) * count
         for base, name, label, dtype, shape, size in [
                 (BF16, "weight", "reference", "BF16", [rows, width], 2),
                 (FP4, "weight", "packed", "U8", [rows, width // 2], 1),
@@ -113,13 +117,13 @@ def main():
                 if hi - lo != shape[0] * stride:
                     raise ValueError(f"{key} has inconsistent dimensions")
                 lo += start * stride
-                length = args.rows * stride
+                length = count * stride
             data = get(base, shard, offset + lo, length)
             filename = f"layer-{layer}-expert-{expert}-{proj}-{label}.bin"
             (args.out / filename).write_bytes(data)
             paths[label] = dict(file=filename, sha256=digest(data), shard=shard, offset=offset+lo, bytes=length)
         return dict(layer=layer, expert=expert, projection=proj, start_row=start,
-                    rows=args.rows, width=width, tensors=paths)
+                    rows=count, width=width, tensors=paths)
 
     with ThreadPoolExecutor(max_workers=4) as pool:
         records = list(pool.map(sample, panels))
