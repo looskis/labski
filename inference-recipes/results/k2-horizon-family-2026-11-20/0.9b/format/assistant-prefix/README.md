@@ -21,3 +21,16 @@ Run the following from `inference-recipes/` against the one-Spark service. Omit 
 python3 experiments/k2-horizon-family/lookup_format.py \
   k2-horizon-0.9b-bf16 fresh-prefix.jsonl --seed 4100 --assistant-prefix
 ```
+
+## Return the six digits directly
+
+On a third set of 64 new inventories, adding `"stop": ["**"]` to the prefilled completions request made the endpoint return **64/64 exact bare values**. Leaving the stop out gave 0/64 bare values and 64/64 correct values followed by two asterisks. Both arms used identical input token IDs and the 0.9B BF16 model. SHA-256 checks confirmed the complete visible response bytes for every query. The free-completion median fell from 5 to **3 output tokens** and from 91 to **73 ms**. Tokenization and prefix construction are outside those timings. [Fresh stop requests](held-out-stop.jsonl.gz) · [Matched open-ended requests](held-out-open.jsonl.gz)
+
+The stop condition also returned 64/64 bare values when we replayed the previous 64 inventories. On both sets the six-digit regex produced the same output bytes as unconstrained generation. The stop was chosen from the previous set and then held fixed for seeds 5100–5163. [Previous inputs with the stop](repeat-stop.jsonl.gz)
+
+From `inference-recipes/`, repeat the fresh test with the served 0.9B model. Run the same command without `--stop-markdown` and with a new output path for the matched control.
+
+```sh
+python3 experiments/k2-horizon-family/lookup_format.py \
+  k2-horizon-0.9b-bf16 stop.jsonl --assistant-prefix --stop-markdown --seed 5100
+```
