@@ -1,6 +1,7 @@
 """Simulate a cold cross-step LRU on one ordered, single-reader PLE trace."""
 import argparse
 from collections import OrderedDict
+import gzip
 import json
 from pathlib import Path
 
@@ -12,7 +13,7 @@ def simulate(path, budgets):
                   unique_blocks=0, read_calls=0, reader_nanoseconds=0, repeated_rows_compared=0,
                   byte_mismatches=0)
     payload = None
-    with path.open() as stream:
+    with (gzip.open(path, "rt") if path.suffix == ".gz" else path.open()) as stream:
         for line in stream:
             row = json.loads(line)
             size = row["weight_bytes"] + row["scale_bytes"]
