@@ -1,0 +1,105 @@
+diff --git a/src/mm3/mm3_cpu.cpp b/src/mm3/mm3_cpu.cpp
+index 415cd92..fb34bc8 100644
+--- a/src/mm3/mm3_cpu.cpp
++++ b/src/mm3/mm3_cpu.cpp
+@@ -19,7 +19,7 @@
+ #include <cstdlib>
+ #include <thread>
+
+-#include <immintrin.h>
++#include "strata/platform/cpu_relax.hpp"
+
+ #include "mm3_os.hpp"
+ #include "mm3_env.hpp"
+@@ -74,7 +74,7 @@ struct CpuLane::Impl {
+             while (gen.load(std::memory_order_acquire) == seen) {
+                 if (stop.load()) return;
+                 if (++spins < 200000) {
+-                    _mm_pause();
++                    strata_cpu_pause();
+                 } else {   // idle a while: sleep until the next call
+                     std::unique_lock<std::mutex> lk(mu);
+                     ++sleepers;
+@@ -115,7 +115,7 @@ struct CpuLane::Impl {
+         gen.store(g, std::memory_order_release);
+         if (sleepers.load()) cv.notify_all();
+         work(g);
+-        while (done.load(std::memory_order_acquire) < n) _mm_pause();
++        while (done.load(std::memory_order_acquire) < n) strata_cpu_pause();
+     }
+ };
+
+@@ -423,7 +423,7 @@ void CpuLane::run_multi(const std::vector<CpuExpert>& ex, const std::vector<std:
+                     idle = 0;
+                     continue;
+                 }
+-                for (int i = 0; i < (1 << std::min(idle++, 6)); ++i) _mm_pause();   // (nothing ready: back off)
++                for (int i = 0; i < (1 << std::min(idle++, 6)); ++i) strata_cpu_pause();   // (nothing ready: back off)
+             }
+         };
+         I.parallel((int) I.th.size() + 1, loop);
+diff --git a/src/mm3/mm3_host.cpp b/src/mm3/mm3_host.cpp
+index 2feb4e0..f2ffa82 100644
+--- a/src/mm3/mm3_host.cpp
++++ b/src/mm3/mm3_host.cpp
+@@ -4,10 +4,12 @@
+ #include <cmath>
+ #include <cstddef>
+
+-#include <immintrin.h>
++#include "strata/platform/cpu_relax.hpp"
+
+ namespace mm3::host {
+
++#if defined(STRATA_X86)
++
+ #if defined(__GNUC__) || defined(__clang__)
+ __attribute__((target("avx2,fma")))
+ #endif
+@@ -53,6 +55,45 @@ void sum_into(float* h, const float* const* p, int np, const float* extra, size_
+     }
+ }
+
+-void pause() { _mm_pause(); }
++#else
++
++float dot(const float* a, const float* b, int n) {
++    // Match the four eight-lane accumulators and reduction order of the AVX2 path.
++    float lanes[4][8] = {};
++    int i = 0;
++    for (; i + 32 <= n; i += 32) {
++        for (int group = 0; group < 4; ++group)
++            for (int lane = 0; lane < 8; ++lane) {
++                const int pos = i + group*8 + lane;
++                lanes[group][lane] = std::fma(a[pos], b[pos], lanes[group][lane]);
++            }
++    }
++    float l[8];
++    for (int lane = 0; lane < 8; ++lane)
++        l[lane] = (lanes[0][lane] + lanes[1][lane]) + (lanes[2][lane] + lanes[3][lane]);
++    float s = ((l[0] + l[1]) + (l[2] + l[3])) + ((l[4] + l[5]) + (l[6] + l[7]));
++    for (; i < n; ++i) s += a[i] * b[i];
++    return s;
++}
++
++void rms_rows(const float* x, const float* w, int rows, int D, float eps, float* y) {
++    for (int r = 0; r < rows; ++r) {
++        const size_t start = (size_t)r * D;
++        const float k = 1.0f / std::sqrt(dot(x + start, x + start, D) / (float)D + eps);
++        for (int i = 0; i < D; ++i) y[start+i] = (x[start+i] * k) * w[i];
++    }
++}
++
++void sum_into(float* h, const float* const* p, int np, const float* extra, size_t n) {
++    for (size_t i = 0; i < n; ++i) {
++        float sum = p[0][i];
++        for (int j = 1; j < np; ++j) sum += p[j][i];
++        if (extra) sum += extra[i];
++        h[i] += sum;
++    }
++}
++#endif
++
++void pause() { strata_cpu_pause(); }
+
+ }  // namespace mm3::host
