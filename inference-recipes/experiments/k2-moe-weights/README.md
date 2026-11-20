@@ -62,6 +62,8 @@ We also interrupted the public downloader after two completed payload ranges on 
 
 The two 126.15 GB expert-rank snapshots share **22,686,951,168 bytes of common tensors**. If a Spark already has one compact rank for a shard, it can use those bytes to build the other rank. `reuse_rank.py` checks the complete cached file against its published SHA-256, maps its tensors back to the original shard offsets, and reads missing ranges from the pinned upstream shard. The destination must match the independent compact-file SHA-256. The ordinary range downloader’s sparse progress file also works with this method. [Tensor inventory](375b-nvfp4.json) · [Opposite-rank downloader](reuse_rank.py)
 
+On a Spark, rank 1 of shard 3 took **9.075 GB from upstream** and **1.223 GB from the existing rank 0 file**. That saved 11.88% of the ordinary rank-only downloader’s planned response bytes. The 10.297 GB file matched the independent compact SHA-256. A container on the second Spark then opened the finished file through a read-only ConnectX mount. Three requested 1 MiB samples at the start, midpoint and end matched the source Spark. These checks measure data placement and integrity. [Spark reconstruction and container reads](spark-rank-reuse.json)
+
 For example, run this on a Spark with a verified rank 0 file and room for the new rank 1 shard and its temporary sparse file. The receipt records completed upstream response bytes and bytes supplied by the local compact file. The `planned_response_bytes` field gives the full range plan before local reuse. On a resumed run, the two measured counters cover the current invocation. They exclude HTTP redirects and unsuccessful transfers.
 
 ```sh

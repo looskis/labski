@@ -1,0 +1,27 @@
+{
+  "revision": "d3a6e26e4d59243ed6e569e39ca6facf4da84c05",
+  "spark_reconstruction": {
+    "file": "model-00003-of-00012.safetensors",
+    "rank": 1,
+    "compact_file_bytes": 10296746744,
+    "source_file_bytes": 19996711056,
+    "planned_response_bytes": 10297546896,
+    "planned_ranges": 212,
+    "compact_sha256": "cf7fc57d448ea85c466dd496d59407c4709b94cc1950051700c775cdca059256",
+    "sibling_rank": 0,
+    "upstream_response_bytes": 9074520336,
+    "successful_http_ranges": 195,
+    "cached_compact_bytes_read": 1223026560
+  },
+  "connectx_read_only_container_probe": {
+    "file": "model-00003-of-00012.safetensors",
+    "size": 10296746744,
+    "offsets": [
+      0,
+      5148373372,
+      10295698168
+    ],
+    "bytes_sampled": 3145728,
+    "sample_sha256": "cb2427c2c3f7d015e1f6f962453dc93ce91834776793b4ef498b1b513f7d97a4"
+  }
+}
