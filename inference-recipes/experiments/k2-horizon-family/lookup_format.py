@@ -19,21 +19,10 @@ def lookup_value(text, finish):
     return values[0] if finish == "stop" and len(values) == 1 else None
 
 
-def response_prefix(prompt):
-    match = re.match(r"Case [0-9a-f]{8}\. Return only the value of (bin-[0-9]{4})\.\n", prompt)
-    if not match:
-        raise ValueError("missing lookup key")
-    return f"\nThe value of **{match[1]}** is:\n\n**"
-
-
-def request(url, model, seed, records, constrained, prefill=False):
+def request(url, model, seed, records, constrained):
     prompt, expected = workload("lookup", seed, records)
     body = dict(model=model, messages=[dict(role="user", content=prompt)],
                 temperature=0, max_tokens=128, chat_template_kwargs={"reasoning_effort": "low"})
-    prefix = response_prefix(prompt) if prefill else ""
-    if prefill:
-        body["messages"].append({"role": "assistant", "content": prefix})
-        body.update(add_generation_prompt=False, continue_final_message=True)
     if constrained:
         body["structured_outputs"] = {"regex": "[0-9]{6}"}
     call = urllib.request.Request(url.rstrip("/") + "/v1/chat/completions",
@@ -48,7 +37,6 @@ def request(url, model, seed, records, constrained, prefill=False):
     values = re.findall(r"(?<![0-9])[0-9]{6}(?![0-9])", text)
     stopped = choice["finish_reason"] == "stop"
     return dict(seed=seed, records=records, regex=constrained, expected=expected,
-                assistant_prefix=prefix,
                 prompt_sha256=hashlib.sha256(prompt.encode()).hexdigest(),
                 finish=choice["finish_reason"], input_tokens=response["usage"]["prompt_tokens"],
                 output_tokens=response["usage"]["completion_tokens"], elapsed_s=elapsed,
@@ -66,8 +54,6 @@ if __name__ == "__main__":
     parser.add_argument("--seed", type=int, default=3000)
     parser.add_argument("--count", type=int, default=32, help="fresh prompts for each record count")
     parser.add_argument("--records", type=int, nargs="+", default=[32, 128])
-    parser.add_argument("--assistant-prefix", action="store_true",
-                        help="continue an assistant turn naming the requested bin before its value")
     args = parser.parse_args()
     if args.count < 1 or not all(n > 0 for n in args.records):
         parser.error("count and records must be positive")
@@ -77,6 +63,6 @@ if __name__ == "__main__":
             for records in sizes:
                 seed = args.seed + index + args.records.index(records) * args.count
                 for constrained in ((False, True) if seed % 2 == 0 else (True, False)):
-                    out.write(json.dumps(request(args.url, args.model, seed, records, constrained, args.assistant_prefix),
+                    out.write(json.dumps(request(args.url, args.model, seed, records, constrained),
                                          separators=(",", ":")) + "\n")
                     out.flush()
