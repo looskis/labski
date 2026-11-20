@@ -19,6 +19,21 @@ A physical ARM64 DGX Spark independently opened all 12 pinned headers with SafeT
 
 For the first 20.00 GB source shard, we wrote a regular SafeTensors file containing only rank 1 of a two-rank expert placement. This source shard also contains dense weights, so the compact file was **14.58 GB**. An independent CPU read matched all **3,519 tensor names, shapes and dtypes**, then compared all **14,584,549,248 payload bytes** against the original. This included 3,456 routed tensors and 63 common tensors. The complete source file matched IFM’s LFS SHA-256. This pilot ran on the preparation machine. A multi-Spark server has yet to load the compact K2 checkpoint. [Source and payload hashes](rank1-shard01.json) · [Writer and byte comparison](slice_shard.py)
 
+## Two complete rank layouts
+
+The lab built both rank directories from all **229.60 GB** of official NVFP4 shards. Each compact directory contains **126.15 GB** of weights. Together they use **252.29 GB**, 45.06% less disk than two complete copies (459.21 GB). Rank 0 owns experts 0–95, rank 1 owns 96–191, and both retain the 668 common tensors.
+
+Each of the 12 complete source files matched its publisher LFS SHA-256. An independent SafeTensors reader compared the name, shape, dtype and complete payload of every tensor in the 24 compact shards against the full sources. It compared **252,274,991,616 payload bytes** across **134,968 tensor instances**, counting common tensors on both ranks. Both ranks contain the same number of payload bytes. Their serialized headers differ by 69,224 bytes. [Per-shard source and output hashes, per-rank indexes and asset digests](two-rank-parity.json)
+
+On a physical ARM64 Spark, vLLM 0.33.0’s native linear expert-placement function selected the same 66,816 routed tensor names and all 668 common names as each compact index. This checks rank ownership through the installed runtime. Two-Spark weight residency, generation and accuracy remain unmeasured. [Native placement check](check_placement.py) · [Spark result](spark-expert-placement.json)
+
+From this directory, set `SNAPSHOT` to the pinned official source, and write each rank into its own destination. The assembler checks every compact shard’s SHA-256, the seven runtime assets and the final rank-specific index. It can resume from previously verified shards. The source and compact output require independent paths. [Assembler](assemble.py)
+
+```sh
+python3 assemble.py "$SNAPSHOT" "$RANK0_SNAPSHOT" --rank 0
+python3 assemble.py "$SNAPSHOT" "$RANK1_SNAPSHOT" --rank 1
+```
+
 ## Reproduce
 
 Run the inventory against the pinned snapshot. It reads the 12 headers and index, checks tensor offsets and the header SHA-256 values, and prints the rank totals for gap limits from zero through one MiB. The calculation assumes whole-expert placement and no extra expert replicas. [Inventory program](inventory.py)

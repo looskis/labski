@@ -1,0 +1,28 @@
+{
+  "revision": "d3a6e26e4d59243ed6e569e39ca6facf4da84c05",
+  "vllm": "0.33.0",
+  "machine": "aarch64",
+  "ranks": [
+    {
+      "rank": 0,
+      "first_global_expert": 0,
+      "last_global_expert": 95,
+      "local_experts": 96,
+      "routed_layers": 58,
+      "routed_tensors": 66816,
+      "common_tensors": 668,
+      "index_sha256": "ae1ec945a93720e397321278c05b970fd5ad111038faf8cdea0d0bd67d419646"
+    },
+    {
+      "rank": 1,
+      "first_global_expert": 96,
+      "last_global_expert": 191,
+      "local_experts": 96,
+      "routed_layers": 58,
+      "routed_tensors": 66816,
+      "common_tensors": 668,
+      "index_sha256": "019a44592580ce6be29229073b226f7a65cfb39dcb30a23575243829390f330d"
+    }
+  ],
+  "placement_module_sha256": "c00b240b4ff48894f653a24c3a24c14cb72ed45b6292c1e975077fa4c02de382"
+}
