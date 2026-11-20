@@ -65,32 +65,52 @@ def serve_command(args, recipe, cache):
         limit = f"{recipe['container_memory_gib']}g"
         cmd += ["--memory", limit, "--memory-swap", limit]
     model_path = str(CONTAINER_CACHE / snapshot(recipe))
-    serve = ["serve", model_path, "--served-model-name", args.recipe,
-             "--tensor-parallel-size", str(nodes), "--max-model-len", str(recipe["context"]),
-             "--max-num-seqs", str(recipe["sequences"]),
-             "--gpu-memory-utilization", str(recipe["memory_fraction"])]
     if nodes > 1:
-        if not all((args.head, args.node_ip, args.interface, args.hcas)):
-            raise ValueError("distributed serving needs --head, --node-ip, --interface and --hcas")
+        transport = args.transport or "roce"
+        if not all((args.head, args.node_ip, args.interface)):
+            raise ValueError("distributed serving needs --head, --node-ip and --interface")
+        if (transport == "roce") != bool(args.hcas):
+            raise ValueError("supply --hcas for RoCE; omit it for TCP")
         for addr in (args.head, args.node_ip):
             ipaddress.IPv4Address(addr)
         if (args.head == args.node_ip) != (args.rank == 0):
             raise ValueError("only rank 0 uses the head IP as its node IP")
         if not 0 < args.master_port < 65536 or args.master_port == args.port:
             raise ValueError("choose a valid rendezvous port distinct from the API port")
-        cmd += ["--device", "/dev/infiniband", "--cap-add", "IPC_LOCK"]
         env.update(VLLM_HOST_IP=args.node_ip, NCCL_SOCKET_IFNAME="=" + args.interface,
-                   GLOO_SOCKET_IFNAME=args.interface, NCCL_IB_HCA="=" + args.hcas,
-                   NCCL_IB_DISABLE="0", TP_SOCKET_IFNAME=args.interface)
-        serve += ["--distributed-executor-backend", "mp", "--nnodes", str(nodes),
-                  "--node-rank", str(args.rank), "--master-addr", args.head,
-                  "--master-port", str(args.master_port)]
-    elif args.head or args.node_ip or args.interface or args.hcas:
+                   GLOO_SOCKET_IFNAME=args.interface, TP_SOCKET_IFNAME=args.interface)
+        if transport == "roce":
+            cmd += ["--device", "/dev/infiniband", "--cap-add", "IPC_LOCK"]
+            env.update(NCCL_IB_HCA="=" + args.hcas, NCCL_IB_DISABLE="0")
+        else:
+            env.update(NCCL_IB_DISABLE="1", NCCL_NET="Socket")
+    elif args.head or args.node_ip or args.interface or args.hcas or args.transport:
         raise ValueError("fabric settings require a distributed recipe")
-    if args.rank == 0:
-        serve += ["--host", "127.0.0.1", "--port", str(args.port)]
+    if recipe.get("engine", "vllm") == "sglang":
+        entrypoint = "python3"
+        serve = ["-m", "sglang.launch_server", "--model-path", model_path,
+                 "--served-model-name", args.recipe, "--tensor-parallel-size", str(nodes),
+                 "--context-length", str(recipe["context"]), "--max-running-requests", str(recipe["sequences"]),
+                 "--mem-fraction-static", str(recipe["memory_fraction"]), "--host", "127.0.0.1",
+                 "--port", str(args.port)]
+        if nodes > 1:
+            env["HOST_IP"] = args.node_ip
+            serve += ["--nnodes", str(nodes), "--node-rank", str(args.rank),
+                      "--dist-init-addr", f"{args.head}:{args.master_port}"]
     else:
-        serve.append("--headless")
+        entrypoint = "vllm"
+        serve = ["serve", model_path, "--served-model-name", args.recipe,
+                 "--tensor-parallel-size", str(nodes), "--max-model-len", str(recipe["context"]),
+                 "--max-num-seqs", str(recipe["sequences"]),
+                 "--gpu-memory-utilization", str(recipe["memory_fraction"])]
+        if nodes > 1:
+            serve += ["--distributed-executor-backend", "mp", "--nnodes", str(nodes),
+                      "--node-rank", str(args.rank), "--master-addr", args.head,
+                      "--master-port", str(args.master_port)]
+        if args.rank == 0:
+            serve += ["--host", "127.0.0.1", "--port", str(args.port)]
+        else:
+            serve.append("--headless")
     for flag, value in recipe["options"].items():
         serve.append(flag)
         if flag == "--speculative-config" and "draft" in recipe:
@@ -101,7 +121,7 @@ def serve_command(args, recipe, cache):
             serve.append(str(value))
     for key, value in env.items():
         cmd += ["--env", f"{key}={value}"]
-    return cmd + ["--entrypoint", "vllm", IMAGES[recipe["image"]], *serve]
+    return cmd + ["--entrypoint", entrypoint, IMAGES[recipe["image"]], *serve]
 
 
 def check_host(recipe, cache):
@@ -137,6 +157,7 @@ def main():
     cli.add_argument("--node-ip", help="this rank's ConnectX IPv4 address")
     cli.add_argument("--interface", help="local ConnectX Ethernet interface")
     cli.add_argument("--hcas", help="comma-separated local RoCE HCA names")
+    cli.add_argument("--transport", choices=("roce", "tcp"), help="distributed NCCL transport (default: roce)")
     args = parser.parse_args()
     if args.action == "list":
         for name, file in RECIPES.items():

@@ -26,7 +26,7 @@ Additional catalog entries are candidates unless a result is linked. Node counts
 | [Gemma 4 31B IT](recipes/gemma4-31b-nvfp4.json) | 1 × 128 GB | NVFP4 | Tool calling with an assistant drafter |
 | [GLM 5.3 Flash measured prefill](recipes/glm53-nvfp4-prefill.json) | 2 × 128 GB | NVFP4 | 8K prefill chunks, C1, [archived measurements](results/glm53-prefill-2026-11-18/) |
 | [Qwen3.8 Flash-Next](recipes/qwen38-flash-next-nvfp4.json) | 2 × 128 GB | Mixed NVFP4/FP8/BF16 | Text-only fit trial with a 133 GB checkpoint |
-| [Inkling 2 Small](recipes/inkling2-small-native.json) | 4 × 128 GB | Native NVFP4/MXFP8 experts | Four-node text-only fit trial with the Inkling 2 ARM64 image |
+| [Inkling 2 Small](recipes/inkling2-small-native.json) | 4 × 128 GB | Native NVFP4/MXFP8 experts | Four-node text fit trial with the SGLang GB10 hooks and BF16 KV |
 | [GLM 5.3 Flash 4K chunk control](recipes/glm53-chunk4096.json) | 2 × 128 GB | NVFP4 | Same image and runtime settings as the 8K recipe, with [one parameter varied](results/glm53-prefill-2026-11-18/#isolating-prefill-chunk-size) |
 | [GLM 5.3 Flash chat](recipes/glm53-flash-fp4.json) | 2 × 128 GB | Mixed FP4-Local | 320B MoE, B12X loader, MTP and 64K context |
 | [MiniMax M3.1 Flash](recipes/minimax31-flash-tp4.json) | 4 × 128 GB | NVFP4 experts + MXFP8 | One large endpoint using all four Sparks and the bundled DSpark head |
@@ -66,6 +66,19 @@ export HEAD_IP=192.0.2.1 CX_IF=enp1s0f0np0 CX_HCAS=rocep1s0f0,roceP2p1s0f0
 
 python3 spark.py serve minimax31-flash-tp4 --nodes 4 --rank "$RANK" \
   --head "$HEAD_IP" --node-ip "$NODE_IP" --interface "$CX_IF" --hcas "$CX_HCAS"
+```
+
+For a routed TCP reference, supply `--transport tcp --interface fabric0` in place of the RoCE interface and HCA arguments on every rank. Each node's `--node-ip` must be local to that interface. All four addresses must route to each other over ConnectX. This selects NCCL Socket and disables IB transport. Verify the interface selection in the NCCL initialization logs and retain the transport with the result.
+
+To test collectives before loading weights, run the following from this directory on every rank, with the same rendezvous address and port, and its own `RANK`. Set `CX_IF` to the interface on the routed ConnectX fabric. Each rank checks the exact all-reduce of rank-specific values at three payload sizes. Eight calls at each size include one warm-up.
+
+```sh
+IMAGE=$(python3 -c 'import json; print(json.load(open("images.json"))["vllm-0.33.0"])')
+docker run --rm -i --gpus all --network host --ipc host \
+  -e RANK="$RANK" -e WORLD_SIZE=4 -e MASTER_ADDR="$HEAD_IP" -e MASTER_PORT=29522 \
+  -e NCCL_NET=Socket -e NCCL_IB_DISABLE=1 -e NCCL_SOCKET_IFNAME="=$CX_IF" \
+  -e GLOO_SOCKET_IFNAME="$CX_IF" -e NCCL_DEBUG=INFO -e NCCL_DEBUG_SUBSYS=INIT,NET \
+  --entrypoint python3 "$IMAGE" - < fabric_probe.py
 ```
 
 Start ranks 1–3 in separate terminals, then rank 0. The workers wait for rendezvous on port 29501. Only rank 0 serves the loopback API. Use `--master-port` on every rank and `--port` on the head if needed. Stop the container on **every** rank after the run. For two Sparks, use `glm53-flash-fp4 --nodes 2` and ranks 0–1. For a scaling comparison, use `qwen38-27b-nvfp4` at one, two and four nodes. GPU memory budgets apply to each rank and include KV cache and workspace in addition to its share of the weights.

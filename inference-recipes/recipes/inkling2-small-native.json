@@ -3,21 +3,36 @@
   "model": "thinkingmachines/Inkling-2-Small",
   "revision": "4d564489295e30e9341a9822a8046f0c9ded1a7b",
   "precision": "native mixed NVFP4/MXFP8 routed experts",
-  "nodes": [4],
+  "nodes": [
+    4
+  ],
   "per_node_gb": 128,
-  "image": "inkling2-small",
+  "image": "inkling2-gb10",
   "context": 4096,
   "sequences": 1,
-  "memory_fraction": 0.89,
+  "memory_fraction": 0.9,
   "container_memory_gib": 112,
   "options": {
-    "--language-model-only": true,
-    "--dtype": "bfloat16",
+    "--ep-size": 4,
+    "--attention-backend": "fa4",
+    "--chunked-prefill-size": 1024,
+    "--max-total-tokens": 8192,
     "--kv-cache-dtype": "auto",
-    "--max-num-batched-tokens": 1024,
-    "--no-enable-prefix-caching": true,
-    "--enforce-eager": true,
-    "--reasoning-parser": "inkling"
+    "--cuda-graph-backend-prefill": "disabled",
+    "--watchdog-timeout": 1800,
+    "--enable-metrics": true,
+    "--cuda-graph-max-bs-decode": 1,
+    "--cuda-graph-max-bs-prefill": 1
   },
-  "source": "https://recipes.vllm.ai/thinkingmachines/Inkling-2-Small"
+  "source": "https://github.com/aidendle94/sparkrun-recipes/tree/3d7e798cfaecf1298576b79c945455bb5a75ac46/recipes/inkling-2-small/sglang",
+  "engine": "sglang",
+  "env": {
+    "SPARK_FI_MOE": "1",
+    "SPARK_ROCE_AR": "0",
+    "SPARK_PAGED_DECODE": "1",
+    "NCCL_CUMEM_ENABLE": "0",
+    "NCCL_DEBUG": "INFO",
+    "NCCL_DEBUG_SUBSYS": "INIT,NET",
+    "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:False"
+  }
 }
