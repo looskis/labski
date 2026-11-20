@@ -11,6 +11,20 @@ python3 replay.py "$MODEL" --workload prose --clients 4 --out prose-c4.jsonl
 
 The streaming receipt records the arrival time and token count of each output chunk. `first_token_s` measures first returned token ID. `mean_token_interval_s` divides the interval between the first and last token-bearing chunks by output tokens minus one. Speculative verification can deliver several tokens together. The receipt also records vLLM's draft and acceptance counter deltas, wall-clock trial boundaries and aggregate output tokens per second. [GPU energy integration](../../measurement.md#measure-energy-on-gb10)
 
+## Build and select a Qwen 27B draft policy
+
+The pinned ARM64 vLLM 0.33.0 image lacks Arctic Inference. Its suffix proposer imports the CPU suffix-tree package. On a Spark, build that extension from the verified 0.1.1 source archive using the serving image’s Python. The build container is disposable. From this experiment directory run:
+
+```sh
+mkdir -p "$PWD/arctic-build"
+IMAGE=$(python3 -c 'import json; print(json.load(open("../../images.json"))["vllm-0.33.0"])')
+docker run --rm --cpus 4 --memory 6g --volume "$PWD/arctic-build:/experiment" \
+  --volume "$PWD/build_suffix.sh:/build_suffix.sh:ro" --entrypoint sh "$IMAGE" /build_suffix.sh
+python3 serve_drafting.py suffix32 --extension "$PWD/arctic-build/python"
+```
+
+Prepare `qwen38-27b-nvfp4` with the main launcher first. Modes `none`, `ngram`, `suffix0` and `suffix32` all use the same target weights, 8K context, four scheduler slots and disabled prefix caching. N-gram lookup considers lengths 2–5. Both suffix modes use depth 16. Each proposer can offer up to five tokens. Zero or 32 completed requests may contribute suffix history. Pass the matching served name, such as `qwen27-draft-suffix32`, to the replay. [Build](build_suffix.sh) · [Serving commands](serve_drafting.py) · [Upstream configuration](https://docs.vllm.ai/en/v0.33.0/features/speculative_decoding/suffix/)
+
 ## Flash-Next PLE trace
 
 In the pinned FP4-Local image, vLLM uses FlashInfer 0.7.1. Its disk-table Python module has SHA-256 `601348d52d488057911b5a0b22d36f0e922d80cb956c2658901bee56e63e7c9a` and its native io_uring reader source has SHA-256 `36bcce65d3e131a02749a21105eda1771f80ca0e55686f84c576240fa783f585`. The planner opens the registered files with `O_DIRECT`. It coalesces aligned fragments within a gather, while the native reader resets its byte and block counters at each call. The Python wrapper waits for IDs to be ready and passes the packed weight and scale destinations to the reader. [Pinned image](../../images.json) · [Public reader implementation](https://github.com/flashinfer-ai/flashinfer/blob/601cb12713fd73f1744b15fdea6f9ddaaf2b4ec3/flashinfer/experimental/b12x/loader/_ple_reader.c)
