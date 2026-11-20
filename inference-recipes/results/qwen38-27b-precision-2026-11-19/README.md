@@ -9,6 +9,8 @@ NVIDIA's mixed NVFP4/FP8 checkpoint delivered **12.84 output tokens/s at one cli
 
 The smaller checkpoint cut stored weight bytes by 60.5%. Batch throughput increased 2.88× at C1 and 2.70× at C4. Each cell is the median of three trials with four matched prose requests and an excluded warm-up. Every timed request hit the 96-token output budget. The checkpoints ran on separate GB10 units in this first pass. Each used ARM64 vLLM 0.33.0, driver 580.178.04, BF16 KV, an 8,192-token context, up to four active sequences, disabled prefix caching and the same 2,048-token batch limit. The benchmark measures client-observed throughput including prompt processing. [Per-trial timings](trials.jsonl)
 
+**Same-device crossover.** After the first pass the lab swapped checkpoints. At one client, Spark A delivered 4.46 tok/s in BF16 and 12.40 in mixed precision (2.78×). Spark B delivered 4.61 and 12.84 (2.79×) with the run order reversed. These ratios compare each physical machine against itself. Each rate is the median of three four-request trials. [Crossover medians](crossover-c1.csv)
+
 **Quality.** The paired outcome was 74 both correct, 25 both incorrect, nine BF16-only correct and four mixed-only correct. The observed difference is −4.5 percentage points on this sample. The two-sided exact McNemar test on the 13 discordant answers gives p = 0.267. This sample cannot establish a population-wide loss or equivalence. Each question had one vote, including truncations and formatting failures. [Per-question answers, prompt hashes and finish reasons](quality.jsonl.gz)
 
 ## Reproduce
