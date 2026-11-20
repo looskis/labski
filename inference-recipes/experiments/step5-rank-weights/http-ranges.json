@@ -1,0 +1,55 @@
+{
+  "revision": "51a46a7f62eee1225d124170da903bba23d04a26",
+  "merge_gap": 1048576,
+  "header_prefix": 1048576,
+  "full_run_plan": [
+    {
+      "rank": 0,
+      "files": 88,
+      "range_requests": 2552,
+      "range_body_bytes": 74149199872,
+      "full_expert_bytes": 293415264560
+    },
+    {
+      "rank": 1,
+      "files": 88,
+      "range_requests": 1144,
+      "range_body_bytes": 73418260784,
+      "full_expert_bytes": 293415264560
+    },
+    {
+      "rank": 2,
+      "files": 88,
+      "range_requests": 1056,
+      "range_body_bytes": 73465249792,
+      "full_expert_bytes": 293415264560
+    },
+    {
+      "rank": 3,
+      "files": 88,
+      "range_requests": 1056,
+      "range_body_bytes": 73465249792,
+      "full_expert_bytes": 293415264560
+    }
+  ],
+  "verified_hub_downloads": [
+    {
+      "rank": 0,
+      "file": "exl3/experts/L03.safetensors",
+      "requests": 29,
+      "source_file_bytes": 3334257944,
+      "range_body_bytes": 842604544,
+      "output_file_bytes": 833562384,
+      "sha256": "12e02438114bb5c9a0308478a69a2982af34651a5251ceb44a379a0ba42436fc"
+    },
+    {
+      "rank": 3,
+      "file": "exl3/experts/L90.safetensors",
+      "requests": 12,
+      "source_file_bytes": 3334266304,
+      "range_body_bytes": 834832384,
+      "output_file_bytes": 833568744,
+      "sha256": "d3f317329b47276335853eb5eab83007149d0e1f68e234b26d4ed593bbc94f2a"
+    }
+  ]
+}

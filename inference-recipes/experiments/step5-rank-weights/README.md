@@ -14,6 +14,32 @@ The partitioner rewrote only the 88 expert-file headers and copied the selected 
 
 The published four-Spark performance measurements used the full snapshot on each node. The smaller layout has a separate full-model replay in the lab queue. [Serving measurements](../../results/step5-preview-exl3-2026-11-20/)
 
+## Download one rank directly from the Hub
+
+A fresh Spark can fetch the shared weights and only the ranges needed for its own experts. In two live downloads, rank 0 built layer 3 from 842.60 MB of response bodies in 29 ranges, and rank 3 built layer 90 from 834.83 MB in 12 ranges. Each original file was 3.33 GB. Both outputs matched the locally partitioned files byte for byte. The downloader verifies each completed file against the published layout and skips verified files when restarted.
+
+Across all 88 layers the range plan calls for 73.42–74.15 GB of expert payload downloads per rank. Including shared safetensors, the four-rank plan totals **486.35 GB of response bodies**, 64.38% below downloading four complete sets of weights. The total is calculated from all original tensor headers. The two layer measurements above exercised the public Hub. HTTP headers, retries and non-weight files are additional. [Per-rank plan and measured range requests](http-ranges.json)
+
+Use a fresh local cache on each Spark. Set `RANK` to its rank and `HF_HUB_CACHE` to the cache directory used by the launcher. The staging directory below lives on the same volume. Run these commands from this experiment directory.
+
+```sh
+revision=51a46a7f62eee1225d124170da903bba23d04a26
+staging="$HF_HUB_CACHE/step5-rank-staging"
+snapshot="$HF_HUB_CACHE/models--0xSero--Step-5-Preview-Spark/snapshots/$revision"
+python3 fetch_rank.py "$staging" --rank "$RANK"
+hf download 0xSero/Step-5-Preview-Spark --revision "$revision" \
+  --local-dir "$staging/rank$RANK" --exclude 'exl3/experts/*'
+(
+  cd "$staging/rank$RANK" &&
+  echo 'a427f0ae33b2158f7550d21caa5e508a93b1e859283e0fcddf9ce7973b69f3c8  sha256-manifest.txt' | sha256sum -c - &&
+  awk '$2 !~ /^exl3\/experts\//' sha256-manifest.txt | sha256sum -c -
+) &&
+mkdir -p "$(dirname "$snapshot")" &&
+test ! -e "$snapshot" && mv "$staging/rank$RANK" "$snapshot"
+```
+
+Keep the original publisher manifest as a record of the source revision. The generated expert files use the SHA-256 values in `layout.json`. Start the served model directly from this cache using the four-rank recipe.
+
 ## Partition one source copy
 
 Set `SOURCE` to the full checkpoint at revision `51a46a7f62eee1225d124170da903bba23d04a26`. Use a fresh output path on a volume with space for 293.42 GB of expert files. From this directory, run the following.
