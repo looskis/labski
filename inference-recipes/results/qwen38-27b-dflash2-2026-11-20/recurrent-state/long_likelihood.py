@@ -82,11 +82,16 @@ def differences(pairs):
     scores = list(pairs)
     count = len(scores)
     delta = [a - b for a, b in scores]
+    ratios = {}
+    for factor in (2, 10):
+        threshold = math.log(factor)
+        ratios[str(factor)] = dict(candidate_higher=sum(d <= -threshold for d in delta),
+                                   control_higher=sum(d >= threshold for d in delta))
     return dict(scored_tokens=count, identical=sum(a == b for a, b in scores),
                 control_mean_nll=-math.fsum(a for a, _ in scores) / count,
                 candidate_mean_nll=-math.fsum(b for _, b in scores) / count,
                 candidate_minus_control_mean_nll=math.fsum(delta) / count,
-                max_abs_logprob_delta=max(map(abs, delta)))
+                max_abs_logprob_delta=max(map(abs, delta)), target_probability_factor_counts=ratios)
 
 
 def compare(control, candidate):
