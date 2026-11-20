@@ -1,0 +1,9 @@
+rank,neighbor,tx_unicast_rdma_bytes,rx_unicast_rdma_bytes
+0,previous,126062,16121266
+0,next,16118988,123722
+1,previous,123722,16118988
+1,next,16123668,128402
+2,previous,128402,16123668
+2,next,15472558,117736
+3,previous,117736,15472558
+3,next,16121266,126062
