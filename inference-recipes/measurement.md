@@ -63,3 +63,16 @@ docker exec "labski-$MODEL" vllm --version
 ```
 
 Capture memory on every rank during warm-up and steady load. On GB10, the OS and GPU share memory. Compare minimum observed system MemAvailable and swap alongside the runtime’s KV allocation. Include the sample interval for any peak estimate. Publish the command, raw trial records, exact-match counts, failures and limitations under `results/`, then link the recorded result from the catalog. Local scratch output lives in the ignored `runs/` directory.
+
+## GLM reasoning effort and answer budgets
+
+GLM‑5.3‑Flash's official template accepts `reasoning_effort` values `low`, `high` and `max`. It defaults to `max` and ends the rendered generation prompt with `<think>`. The template does not read Qwen's `enable_thinking` flag. On the lab's NVFP4 endpoint, a 32-token lookup with the Qwen flag returned reasoning and a literal `</think>` before the correct value. Across eight approximately 17K-token lookups this produced zero exact-format passes and four length-limited responses. Those eight outcomes describe that endpoint and budget. A raw exact-format failure alone cannot distinguish retrieval, formatting and reasoning-budget effects. [Pinned GLM template](https://huggingface.co/nvidia/GLM-5.3-Flash-NVFP4/blob/1d00738646cbb0c6d0a9eb403dac5f366f1473a7/chat_template.jinja)
+
+Use the [MMLU-Pro preparation command](results/qwen38-27b-precision-2026-11-19/#reproduce) to create the same source questions, then run the following on the GLM API host. The probe tokenizes with the checkpoint's native effort, submits those exact IDs to completions, and scores the final option after the reasoning delimiter. The comparison fixes the budget at 256 generated tokens, selects two items per subject, and records whether a final answer was reached. Retain truncations in the denominator. Scores at this budget do not estimate maximum-effort capability with an unrestricted budget. [Effort probe](glm_effort.py)
+
+```sh
+for effort in low max; do
+  python3 glm_effort.py glm53-chunk4096 /tmp/mmlu-112.jsonl \
+    --effort "$effort" --per-subject 2 --max-tokens 256 --out "glm-$effort.jsonl"
+done
+```
