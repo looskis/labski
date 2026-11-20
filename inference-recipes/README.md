@@ -1,6 +1,6 @@
 # Inference recipes for DGX Spark
 
-The lab has four 128 GB NVIDIA DGX Sparks cabled in a ConnectX‑7 ring. Each reports one GB10 and approximately 121 GiB of system memory. Start with one for interactive serving, use a pair for GLM, or shard MiniMax across all four. The matched Qwen recipes let you measure what an extra Spark or a lower-precision checkpoint buys on the same workload.
+The lab has four 128 GB NVIDIA DGX Sparks cabled in a ConnectX‑7 ring. Each reports one GB10 and approximately 121 GiB of system memory. One Spark serves Qwen3.8 27B in BF16 or mixed precision. A direct pair serves GLM-5.3-Flash and Qwen3.8 Flash-Next. The lab also measured a single Qwen endpoint sharded across all four Sparks. Each result records its transport and workload.
 
 [Open-weight leaderboard and Spark fit inventory](leaderboard/)
 
@@ -22,12 +22,12 @@ Additional catalog entries are candidates unless a result is linked. Node counts
 | [GPT-OSS 20B](recipes/gpt-oss-20b.json) | 1 × 64 GB or larger | Native MXFP4 experts | Small reasoning service with up to eight active sequences |
 | [Nemotron 3.5 Lightning 30B A3B](recipes/nemotron35-lightning.json) | 1 × 64 GB or larger | Mixed NVFP4 | DSpark drafting with a hybrid attention/Mamba cache |
 | [Qwen3 Coder 30B A3B](recipes/qwen3-coder-30b.json) | 1 × 128 GB | BF16 | Sparse coding model with tool calling |
-| [Qwen3.8 27B control](recipes/qwen38-27b-bf16.json) | 1 or 2 × 128 GB | BF16 | Measured single-Spark quality reference and direct-pair scaling trial |
+| [Qwen3.8 27B control](recipes/qwen38-27b-bf16.json) | 1 or 2 × 128 GB | BF16 | Measured native BF16 quality and throughput on one Spark and a direct pair |
 | [Qwen3.8 27B precision and scaling](recipes/qwen38-27b-nvfp4.json) | 1, 2 or 4 × 128 GB | Mixed NVFP4/FP8 | Same scheduler, KV dtype and context as the BF16 control |
 | [Qwen3.8 27B DFlash2](recipes/qwen38-27b-dflash.json) | 1 × 128 GB | Mixed NVFP4/FP8 | Seven-token draft, FP8 KV cache, GB10 dynamic linear backend |
 | [Gemma 4 31B IT](recipes/gemma4-31b-nvfp4.json) | 1 × 128 GB | NVFP4 | Tool calling with an assistant drafter |
 | [GLM 5.3 Flash measured prefill](recipes/glm53-nvfp4-prefill.json) | 2 × 128 GB | NVFP4 | 8K prefill chunks, C1, [archived measurements](results/glm53-prefill-2026-11-18/) |
-| [Qwen3.8 Flash-Next](recipes/qwen38-flash-next-nvfp4.json) | 2 × 128 GB | Mixed NVFP4/FP8/BF16 | Text-only fit trial with a 133 GB checkpoint |
+| [Qwen3.8 Flash-Next](recipes/qwen38-flash-next-nvfp4.json) | 2 × 128 GB | Mixed NVFP4/FP8/BF16 | Measured text-only service at 8K context with a 133 GB checkpoint |
 | [Inkling 2 Small](recipes/inkling2-small-native.json) | 4 × 128 GB | Native NVFP4/MXFP8 experts | Four-node text fit trial with the SGLang GB10 hooks and BF16 KV |
 | [GLM 5.3 Flash 4K chunk control](recipes/glm53-chunk4096.json) | 2 × 128 GB | NVFP4 | Same image and runtime settings as the 8K recipe, with [one parameter varied](results/glm53-prefill-2026-11-18/#isolating-prefill-chunk-size) |
 | [GLM 5.3 Flash chat](recipes/glm53-flash-fp4.json) | 2 × 128 GB | Mixed FP4-Local | 320B MoE, B12X loader, MTP and 64K context |
