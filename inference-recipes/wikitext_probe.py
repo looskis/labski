@@ -5,9 +5,9 @@ import json
 import math
 from pathlib import Path
 import re
+import random
 import urllib.request
 
-REVISION = "b08601e04326c79dfdd32d625aee71d232d685c3"
 PARQUET_SHA256 = "5f1bea067869d04849c0f975a2b29c4ff47d867f484f5010ea5e861eab246d91"
 ARTICLE_COUNT = 62
 WINDOW = 512
@@ -79,6 +79,41 @@ def score(model, url, corpus, dest):
                           perplexity=math.exp(mean))))
 
 
+def compare(control, candidate):
+    def read(path):
+        rows = [json.loads(line) for line in path.read_text().splitlines()]
+        indexed = {row["article_row"]: row for row in rows}
+        if len(indexed) != ARTICLE_COUNT or len(rows) != ARTICLE_COUNT:
+            raise ValueError("expected one observation per article")
+        return indexed
+
+    base, trial = read(control), read(candidate)
+    if base.keys() != trial.keys():
+        raise ValueError("article IDs differ")
+    paired = []
+    for index in sorted(base):
+        a, b = base[index], trial[index]
+        fields = ("passage_sha256", "token_ids_sha256", "scored_tokens")
+        if any(a[k] != b[k] for k in fields):
+            raise ValueError(f"unmatched text, tokens or positions at article row {index}")
+        if not 0 < a["scored_tokens"] < WINDOW or not all(
+                math.isfinite(v["nll_sum"]) and v["nll_sum"] >= 0 for v in (a, b)):
+            raise ValueError(f"invalid likelihood record at article row {index}")
+        paired.append((b["nll_sum"] - a["nll_sum"], a["scored_tokens"]))
+
+    def weighted_delta(sample):
+        return math.fsum(delta for delta, _ in sample) / sum(count for _, count in sample)
+
+    # Keep each article and its token count together in every paired bootstrap draw.
+    rng = random.Random(170521)
+    draws = sorted(weighted_delta(rng.choices(paired, k=len(paired))) for _ in range(20000))
+    delta = weighted_delta(paired)
+    return dict(articles=len(paired), scored_tokens=sum(n for _, n in paired),
+                articles_lower_nll=sum(d < 0 for d, _ in paired), mean_nll_delta=delta,
+                perplexity_ratio=math.exp(delta),
+                paired_article_bootstrap_95=[draws[499], draws[19499]])
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     cmds = parser.add_subparsers(dest="action", required=True)
@@ -90,8 +125,13 @@ if __name__ == "__main__":
     run.add_argument("corpus", type=Path)
     run.add_argument("dest", type=Path)
     run.add_argument("--url", default="http://127.0.0.1:18200")
+    paired = cmds.add_parser("compare")
+    paired.add_argument("control", type=Path)
+    paired.add_argument("candidate", type=Path)
     args = parser.parse_args()
     if args.action == "prepare":
         prepare(args.source, args.dest)
+    elif args.action == "compare":
+        print(json.dumps(compare(args.control, args.candidate)))
     else:
         score(args.model, args.url, args.corpus, args.dest)

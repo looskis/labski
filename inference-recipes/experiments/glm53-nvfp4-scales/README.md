@@ -39,4 +39,4 @@ uv run --with pyarrow python ../../wikitext_probe.py prepare test.parquet articl
 python3 ../../wikitext_probe.py score glm53-nvfp4-prefill articles.jsonl published-nll.jsonl
 ```
 
-Run the scoring command against each refit after starting it, using a separate output file each time.
+Run the scoring command against each refit after starting it, using a separate output file each time. With both files available, `python3 ../../wikitext_probe.py compare published-nll.jsonl refit-nll.jsonl` computes the candidate’s mean NLL change and perplexity ratio. Its 95% percentile interval resamples the 62 paired article prefixes 20,000 times, retaining each article’s token count.

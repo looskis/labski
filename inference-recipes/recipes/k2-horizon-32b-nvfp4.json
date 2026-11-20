@@ -25,5 +25,6 @@
       "reasoning_effort": "low"
     }
   },
-  "source": "https://huggingface.co/IFM/K2-Horizon-32B-NVFP4/tree/e068c42317b0fa708d3b9167071e386f098144ee"
+  "source": "https://huggingface.co/IFM/K2-Horizon-32B-NVFP4/tree/e068c42317b0fa708d3b9167071e386f098144ee",
+  "evidence": "results/k2-horizon-32b-2026-11-20/"
 }
