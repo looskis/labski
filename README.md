@@ -8,7 +8,7 @@ labski publishes reproducible experiments on local AI hardware. Each research sc
 
 ## Measured on DGX Spark
 
-- **Full GLM-5.3 on four Sparks.** The 753B model with a 6-bit output head delivered 32.85 generated tok/s for one client and 63.33 aggregate for four. Eight of eight retrieval checks returned the exact number. [Recipe and measurements](inference-recipes/results/glm53-full-tp4-2026-11-19/)
+- **Full GLM-5.3 on four Sparks.** The 753B model with a 6-bit output head delivered 32.85 generated tok/s for one client and 63.33 aggregate for four. Both it and the BF16 output head scored 21/28, with one item gained and one lost. [Recipe and measurements](inference-recipes/results/glm53-full-tp4-2026-11-19/)
 - **Thinking Machines Inkling 2 Small on four Sparks.** The native 393.48 GB checkpoint delivered 39.34 generated tokens/s across two clients and 2.98 GPU J/output token on the switchless ring. Six inventory lookups were exact up to 3,597 input tokens. [Reproduce the run](inference-recipes/results/inkling2-gb10-runtime-2026-11-19/)
 - **Qwen3.8 Flash-Next on two Sparks.** Four scheduler slots and 2 GiB of KV per rank reached 64.96 aggregate output tok/s for four clients, 2.90× the one-slot control with 61% lower GPU energy per token. [Recipe, timings and paired quality](inference-recipes/results/qwen38-flash-next-2026-11-19/)
 - **Qwen3.8 27B on one Spark.** Mixed FP4 delivered 2.78–2.79× the BF16 throughput on the same machines at one client. BF16 scored 83/112 on a short-answer diagnostic and mixed FP4 scored 74/112 and 78/112 on the two machines. [Timing, paired answers and recipes](inference-recipes/results/qwen38-27b-precision-2026-11-19/)

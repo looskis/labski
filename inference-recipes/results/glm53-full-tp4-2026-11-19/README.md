@@ -13,6 +13,21 @@ The test ran four prose prompts per trial, with an excluded warm-up at each conc
 
 On a fixed 28-item MMLU-Pro short-answer diagnostic, the endpoint scored **21/28**. Three replies reached the 128-token limit. The client sent top-level `enable_thinking=false`, but the server logged `thinking=true` and 18 responses included reasoning. The rubric requires a stopped response containing exactly the correct final letter. These results describe that request shape and budget. The arithmetic smoke test returned exactly 42 in 0.61 s. [Item-level results](q6-quality.jsonl.gz) · [Arithmetic](q6-first.json)
 
+## Output-head trade-off
+
+| Output head on the same EXL3 model | One client, tok/s | Four clients, aggregate tok/s | One client, GPU J/token | Four clients, GPU J/token | Short answers | Inventory lookup |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| BF16 | 31.65 | 62.09 | 6.33 | 3.64 | 21/28 | 8/8 |
+| 6-bit | 32.85 | 63.33 | 6.12 | 3.60 | 21/28 | 8/8 |
+
+The 6-bit head measured **3.8% faster at one client and 2.0% faster at four**. Its median GPU joules/token fell 3.3% and 1.2%, respectively. All 24 measured requests matched across heads on prompt, input length and 128-token output count. The six-bit launch ran first. Rates declined over the three trials within each of the four blocks, so this ordered pair leaves run order as a possible contributor to these small differences. BF16's three single-client rates were 32.24, 31.65 and 30.62 tok/s. The corresponding four-client rates were 64.85, 62.09 and 59.89. [BF16 settings](bf16-settings.jsonl) · [Trials](bf16-trials.jsonl) · [Individual requests](bf16-requests.jsonl.gz) · [Energy](full-glm53-bf16-energy.jsonl) · [Raw counters](full-glm53-bf16-energy.csv.gz)
+
+Both heads returned the exact answer on eight lookups and both scored 21/28 on MMLU-Pro, with three length-limited responses each. Switching from BF16 to the 6-bit head gained one correct item and lost one. The visible final answers matched on the other 26 items. The six-bit run generated 1,080 tokens over the 28 items and BF16 generated 1,204. The BF16 ranks reported 64.6 GiB of device weights at the final layer milestone, versus 64.4 GiB with the six-bit head. To reproduce BF16, use `--output-head bf16` on all four ranks and fresh client output paths. [BF16 item data](bf16-quality.jsonl.gz) · [Retrieval](bf16-lookup.json) · [Arithmetic](bf16-first.json) · [Rank setup](bf16-startup.jsonl) · [RDMA counters](bf16-rdma.csv)
+
+### Does the API disable reasoning?
+
+On the BF16-head endpoint, two questions that had emitted reasoning in the six-bit run were replayed with five request shapes. The server logged `thinking=true` and returned a nonempty reasoning field on all ten requests, including top-level and template-level `enable_thinking=false`, the two together, and `reasoning_effort="none"`. One question returned the correct letter on every run. The other exhausted 128 tokens on every run. This behavior is specific to the pinned mlx-serve bridge. To repeat the check, run `python3 reasoning_fields.py "$MODEL" labski-mmlu-112.jsonl --out fields.jsonl` from a directory containing the corpus and script. [Fields sent and replay order](reasoning_fields.py) · [Per-request results and server flags](bf16-reasoning-fields.jsonl)
+
 ## Runtime and reproduction
 
 The pinned checkpoint contains 276.93 GB of SafeTensors including the auxiliary head. Each rank loaded all 78 layers, reported 64.4 GiB of device weights at the final layer-loading milestone, then reported four 32,768-token stream caches at 2.95 GiB each and 312 captured decode graphs. The container's version file identifies TensorFold `7765bda0` and mlx-serve `a2072091`. The rank logs confirm a 6.0-bit output projection split across the four GPUs. Both neighbor ports on each Spark recorded unicast RDMA transmit and receive traffic during the requests. [Per-rank startup](q6-startup.jsonl) · [NIC counters](q6-rdma.csv) · [Checkpoint files](https://huggingface.co/drowzeys/keys-GLM-5.3-EXL3-2.75BPW/tree/ae7b69671a94cf130fd1360a3b9213539ef3446f)
