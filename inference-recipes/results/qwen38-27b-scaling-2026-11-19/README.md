@@ -1,16 +1,23 @@
 # How many Sparks for Qwen3.8 27B?
 
-Two Sparks sharding the same 21.92 GB mixed NVFP4/FP8 checkpoint delivered **1.65× the single-client throughput** and **1.59× the four-client throughput** of one Spark. On the four-rank routed TCP ring the same model delivered **8.03 output tok/s at one client**. Among these three configurations the direct pair was fastest and one Spark delivered the most tokens per second per device. For an interactive user, the pair generated the same 96-token response budget in about 4.7 seconds per request, compared with 7.7 seconds on one Spark. [Checkpoint and runtime settings](../../recipes/qwen38-27b-nvfp4.json)
+On one, two and four Sparks, the same 21.92 GB mixed NVFP4/FP8 checkpoint delivered **12.40, 20.46 and 33.94 output tok/s for one client**. At four clients the end-to-end aggregate reached **45.74, 72.63 and 110.77 tok/s**. The four-rank result uses stock NCCL 2.31.2 over the switchless ConnectX-7 RoCE ring. Four ranks over routed TCP on the same cables delivered 8.03 and 25.72 tok/s. One Spark gave the highest throughput per device and the lowest measured GPU energy per token. [Checkpoint and runtime settings](../../recipes/qwen38-27b-nvfp4.json)
 
 | Sparks per endpoint | Interconnect | One client, output tok/s | Four clients, aggregate output tok/s | Four-client output tok/s per Spark | Correct / 112 |
 | ---: | --- | ---: | ---: | ---: | ---: |
 | 1 | Local | 12.40 | 45.74 | 45.74 | 74 |
 | 2 | Direct ConnectX pair, NCCL configured for both RoCE rails | 20.46 | 72.63 | 36.32 | 77 |
+| 4 | Switchless ConnectX ring, stock NCCL RoCE | 33.94 | 110.77 | 27.69 | 77 |
 | 4 | Switchless ConnectX ring, routed NCCL Socket | 8.03 | 25.72 | 6.43 | 74 |
 
 All deployments used Spark A as the API host. The pair added Spark B as the second tensor-parallel rank. Each cell is the median of three four-request trials with an excluded warm-up. All timed requests generated 96 tokens. Wall time includes prefill and scheduling. The comparison uses 12 distinct prose prompts per concurrency, matched by hash, case and input length across deployments. The direct pair logged NCCL 2.31.2 and the PyNCCL all-reduce backend. [Per-trial measurements](trials.jsonl) · [Per-request timings and answers](requests.jsonl.gz) · [Runtime and benchmark settings](settings.jsonl)
 
-On the matched MMLU-Pro diagnostic, five questions switched from incorrect to correct on the pair and two switched from correct to incorrect. Both deployments hit the 16-token limit four times. The four-rank run scored 74/112 with three truncations. Six answers correct on A alone became incorrect on four ranks and six changed in the other direction. A separate single-Spark run on B scored 78/112. One greedy pass per deployment cannot establish an accuracy advantage for a topology. [Paired answers and finish reasons](quality.jsonl.gz) · [Single-Spark crossover](../qwen38-27b-precision-2026-11-19/)
+On the matched MMLU-Pro diagnostic, five questions switched from incorrect to correct on the pair and two switched from correct to incorrect. Both deployments hit the 16-token limit four times. The four-rank TCP run scored 74/112 with three truncations. Six answers correct on A alone became incorrect on four ranks and six changed in the other direction. A separate single-Spark run on B scored 78/112. One greedy pass per deployment cannot establish an accuracy advantage for a topology. [Paired answers and finish reasons](quality.jsonl.gz) · [Single-Spark crossover](../qwen38-27b-precision-2026-11-19/)
+
+## Four-Spark RoCE with stock NCCL
+
+Changing the four ranks from routed TCP to the built-in IB transport on the same ring increased median throughput **4.23× at one client and 4.31× at four**. The RoCE single-client trials were 33.94, 32.92 and 34.05 tok/s. Four-client totals were 106.78, 110.90 and 110.77 tok/s. All 24 requests generated exactly 96 tokens. The original TCP single-client trial varied from 5.47 to 10.10 tok/s, so the ratio depends on the baseline run. RoCE scored 77/112 on the matched diagnostic, with five responses reaching its 16-token budget. [Stock ring launcher and counter verification](../../ring-tcp.md#use-roce-on-the-same-four-cables) · [Trials](controls/tp4-roce/trials.jsonl) · [Outputs](controls/tp4-roce/requests.jsonl.gz) · [Quality](controls/tp4-roce/quality.jsonl.gz) · [Settings](controls/tp4-roce/settings.jsonl)
+
+At one client the four GPUs together used **3.38 J per generated token**, slightly below the direct pair’s 3.61 J at the same load. At four clients the four GPUs used **1.10 J/token**, slightly above the direct pair’s 0.99 J. The single Spark remained the lowest-energy option at both loads. The four-node RoCE trials averaged 114–122 W of combined GPU power. [Integrated energy by rank and trial](controls/tp4-roce/qtp4-roce-stock-energy.jsonl) · [Raw counters](controls/tp4-roce/qtp4-roce-stock-energy.csv.gz)
 
 ## What the four-rank TCP result measures
 
@@ -33,9 +40,10 @@ The BF16 pair used **9.64 GPU J/output token at one client** and **2.25 at four*
 | Single Spark, repeat | 12.19 | 2.78 | 44.88 | 0.74 |
 | Two Sparks, direct RoCE configuration, repeat | 20.45 | 3.61 | 72.68 | 0.99 |
 | Same two Sparks, TCP over their direct ConnectX cable | 8.88 | 5.99 | 27.68 | 1.86 |
+| Four Sparks, switchless RoCE | 33.94 | 3.38 | 110.77 | 1.10 |
 | Four Sparks, routed TCP | 8.03 | 10.43 | 25.72 | 3.33 |
 
-The direct pair saved time for an interactive request at about 30% more GPU energy per output token than the single Spark. At four clients its aggregate throughput grew by 62% and GPU energy per token grew by 33%. Use one Spark when minimizing measured GPU joules per token at these loads, or the direct pair when one user needs the shorter wait. The fresh pair launch delivered 20.45 and 72.68 tok/s, within 0.1% of its original two throughput measurements. It scored 75/112 free-response and 76/112 when constrained to a single letter. [Pair trials](controls/tp2/trials.jsonl) · [Pair energy](controls/tp2/energy.jsonl) · [Raw counters](controls/tp2/energy.csv.gz) · [Free responses](controls/tp2/quality.jsonl.gz) · [Constrained responses](controls/tp2/one-letter.jsonl.gz)
+The direct pair saved time for an interactive request at about 30% more GPU energy per output token than the single Spark. At four clients its aggregate throughput grew by 62% and GPU energy per token grew by 33%. Use one Spark when minimizing measured GPU joules per token at these loads, or four Sparks on RoCE for the fastest single endpoint in these trials. The fresh pair launch delivered 20.45 and 72.68 tok/s, within 0.1% of its original two throughput measurements. It scored 75/112 free-response and 76/112 when constrained to a single letter. [Pair trials](controls/tp2/trials.jsonl) · [Pair energy](controls/tp2/energy.jsonl) · [Raw counters](controls/tp2/energy.csv.gz) · [Free responses](controls/tp2/quality.jsonl.gz) · [Constrained responses](controls/tp2/one-letter.jsonl.gz)
 
 ### Holding the pair fixed and changing the transport
 
@@ -51,4 +59,4 @@ We then kept the 112 prompts fixed and restricted the server's greedy decoder to
 
 ## Reproduce
 
-Prepare the same pinned checkpoint on each participating Spark. Launch `qwen38-27b-nvfp4` on one GPU, with `--nodes 2` on the direct pair, or with `--nodes 4 --transport tcp --interface fabric0` on the routed ring. Use one rank per host. On rank zero run the same three prose trials at concurrency one and four and the same 112-item quality probe. Use the default seed 42, greedy decoding and thinking off. The context is 8,192 tokens with four scheduler slots, a 2,048-token batch cap, BF16 KV cache and disabled prefix caching. [Distributed launch instructions](../../README.md#one-endpoint-on-multiple-sparks) · [Exact timing and scoring commands](../qwen38-27b-precision-2026-11-19/#reproduce)
+Prepare the same pinned checkpoint on each participating Spark. Launch `qwen38-27b-nvfp4` on one GPU, with `--nodes 2` on the direct pair, or with `--nodes 4 --transport ring-roce` and the address and HCA settings in the ring instructions. For the TCP baseline use `--nodes 4 --transport tcp --interface fabric0`. Use one rank per host. On rank zero run the same three prose trials at concurrency one and four and the same 112-item quality probe. Use the default seed 42, greedy decoding and thinking off. The context is 8,192 tokens with four scheduler slots, a 2,048-token batch cap, BF16 KV cache and disabled prefix caching. [Distributed launch instructions](../../README.md#one-endpoint-on-multiple-sparks) · [Exact timing and scoring commands](../qwen38-27b-precision-2026-11-19/#reproduce)

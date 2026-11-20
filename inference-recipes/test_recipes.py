@@ -54,6 +54,23 @@ class RecipeTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             spark.serve_command(args, recipe, Path("/tmp/cache"))
 
+    def test_switchless_roce_ring(self):
+        name = "qwen38-27b-nvfp4"
+        recipe = json.loads(spark.RECIPES[name].read_text())
+        args = SimpleNamespace(recipe=name, nodes=4, rank=2, port=8000, master_port=29501,
+                               head="198.51.100.1", node_ip="198.51.100.3", interface="fabric0",
+                               transport="ring-roce", hcas="rdma0,rdma1",
+                               fabric_range="192.0.2.0/28", link_prefix=30)
+        cmd = spark.serve_command(args, recipe, Path("/tmp/cache"))
+        for value in ("NCCL_NET=IB", "NCCL_ALGO=Ring", "NCCL_IB_ADDR_RANGE=192.0.2.0/28",
+                      "NCCL_IB_SUBNET_PREFIX_LEN=30", "NCCL_IB_HCA==rdma0,rdma1",
+                      "NCCL_IB_SUBNET_AWARE_ROUTING=1", "NCCL_IB_MERGE_NICS=0", "/dev/infiniband"):
+            self.assertIn(value, cmd)
+        for change in ({"hcas": "rdma0,rdma0"}, {"link_prefix": 27}, {"fabric_range": None},
+                       {"nodes": 2, "rank": 1}, {"transport": "roce"}):
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                spark.serve_command(SimpleNamespace(**{**vars(args), **change}), recipe, Path("/tmp/cache"))
+
 
 class StreamingTests(unittest.TestCase):
     def response(self, done=True, usage=True):

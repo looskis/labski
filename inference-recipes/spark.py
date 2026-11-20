@@ -65,11 +65,15 @@ def serve_command(args, recipe, cache):
         limit = f"{recipe['container_memory_gib']}g"
         cmd += ["--memory", limit, "--memory-swap", limit]
     model_path = str(CONTAINER_CACHE / snapshot(recipe))
+    fabric_range = getattr(args, "fabric_range", None)
+    link_prefix = getattr(args, "link_prefix", None)
+    if (fabric_range is not None or link_prefix is not None) and args.transport != "ring-roce":
+        raise ValueError("--fabric-range and --link-prefix apply to a four-node RoCE ring")
     if nodes > 1:
         transport = args.transport or "roce"
         if not all((args.head, args.node_ip, args.interface)):
             raise ValueError("distributed serving needs --head, --node-ip and --interface")
-        if (transport == "roce") != bool(args.hcas):
+        if (transport in ("roce", "ring-roce")) != bool(args.hcas):
             raise ValueError("supply --hcas for RoCE; omit it for TCP")
         for addr in (args.head, args.node_ip):
             ipaddress.IPv4Address(addr)
@@ -79,9 +83,24 @@ def serve_command(args, recipe, cache):
             raise ValueError("choose a valid rendezvous port distinct from the API port")
         env.update(VLLM_HOST_IP=args.node_ip, NCCL_SOCKET_IFNAME="=" + args.interface,
                    GLOO_SOCKET_IFNAME=args.interface, TP_SOCKET_IFNAME=args.interface)
-        if transport == "roce":
+        if transport in ("roce", "ring-roce"):
             cmd += ["--device", "/dev/infiniband", "--cap-add", "IPC_LOCK"]
             env.update(NCCL_IB_HCA="=" + args.hcas, NCCL_IB_DISABLE="0")
+            if transport == "ring-roce":
+                hcas = args.hcas.split(",")
+                if nodes != 4 or len(hcas) != 2 or not all(hcas) or len(set(hcas)) != 2:
+                    raise ValueError("a four-node ring needs two distinct HCAs, one per neighbor")
+                if not fabric_range:
+                    raise ValueError("supply --fabric-range selecting the ring's IPv4 GIDs")
+                network = ipaddress.IPv4Network(fabric_range)
+                bits = 30 if link_prefix is None else link_prefix
+                if not network.prefixlen < bits <= 31:
+                    raise ValueError("--link-prefix must describe a smaller two-host link subnet within --fabric-range")
+                env.update(NCCL_NET="IB", NCCL_ALGO="Ring", NCCL_NET_PLUGIN="none",
+                           NCCL_IB_SUBNET_AWARE_ROUTING="1", NCCL_IB_SUBNET_PREFIX_LEN=str(bits),
+                           NCCL_IB_ADDR_FAMILY="AF_INET", NCCL_IB_ADDR_RANGE=str(network),
+                           NCCL_IB_MERGE_NICS="0", NCCL_CROSS_NIC="1", NCCL_NET_GDR_LEVEL="LOC",
+                           NCCL_DEBUG="INFO", NCCL_DEBUG_SUBSYS="INIT,NET,GRAPH")
         else:
             env.update(NCCL_IB_DISABLE="1", NCCL_NET="Socket")
     elif args.head or args.node_ip or args.interface or args.hcas or args.transport:
@@ -157,7 +176,9 @@ def main():
     cli.add_argument("--node-ip", help="this rank's ConnectX IPv4 address")
     cli.add_argument("--interface", help="local ConnectX Ethernet interface")
     cli.add_argument("--hcas", help="comma-separated local RoCE HCA names")
-    cli.add_argument("--transport", choices=("roce", "tcp"), help="distributed NCCL transport (default: roce)")
+    cli.add_argument("--transport", choices=("roce", "tcp", "ring-roce"), help="distributed NCCL transport (default: roce)")
+    cli.add_argument("--fabric-range", help="IPv4 CIDR covering the point-to-point RoCE ring links")
+    cli.add_argument("--link-prefix", type=int, help="IPv4 prefix length of each RoCE ring edge (default: 30)")
     args = parser.parse_args()
     if args.action == "list":
         for name, file in RECIPES.items():
