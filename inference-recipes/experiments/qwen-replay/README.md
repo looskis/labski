@@ -36,4 +36,19 @@ The diagnostic hook wraps the installed class's `_read_staged` method in a dispo
 python3 replay_lru.py edits-c1-READER_PID.jsonl
 ```
 
+To reproduce the stock-reader trace, run the launcher and benchmark from the next section with `--trace` on both commands. Use a fresh shared directory. The resulting files carry the workload and reader PID.
+
 Offline replay counts hits on distinct row IDs per gather that were resident at the start of that gather. Its cold caches use 0, 64 and 256 MiB of packed weight-plus-scale *payload*. Index and eviction metadata would require additional memory. The recorded read bytes, unique blocks and whole-device NVMe sector counts have different meanings. An offline row hit establishes potential reuse. A serving speedup requires measured changes in the real read path. [LRU simulator](replay_lru.py)
+
+## Compare an exact row cache with stock serving
+
+Prepare the one-Spark FP4-Local checkpoint using the standard launcher. From this experiment directory start the service in one terminal and the replay in another. Both commands take the same fresh directory. Give the benchmark the Linux block statistics path for the drive that holds the checkpoint.
+
+```sh
+python3 serve_ple.py /var/tmp/qwen-ple-experiment
+python3 bench_ple.py /var/tmp/qwen-ple-experiment --device-stat /sys/class/block/nvme0n1/stat
+```
+
+The launcher verifies the installed Python reader against the pinned SHA-256 and mounts the experiment in a disposable container. Prefix KV reuse is off and native four-token MTP stays on. The benchmark first checks every row in four workloads against a second full native read, including the scale plane. It then runs stock, cached, cached and stock serving in one engine process. Before each measured workload the benchmark sends an excluded warm-up in stock mode and starts a fresh cache. Device counters span all three turns of each workload. Reader receipts count native reads made by the measured method and record worker RSS on entry and exit. In verification mode the second full read also contributes to the whole-device counters. [Launcher](serve_ple.py) · [Benchmark](bench_ple.py)
+
+The prototype retains the exact bytes returned by the native reader. It sends distinct uncached IDs through the same io_uring path and restores both output planes in request order, including duplicate IDs. Each reader maintains its own least-recently-used entries under the existing transaction lock. The 64 MiB limit covers retained row payload only. Python entries, the eviction index and temporary gather buffers consume additional host memory. The byte oracle runs separately from timed comparisons. [Implementation](retained_rows.py) · [Eviction and byte-plane checks](test_retained_rows.py)

@@ -121,10 +121,12 @@ def request(args, turn, session, warmup=False):
                 mean_token_interval_s=token_interval, stream_events=events)
 
 
-def run(args):
+def run(args, after_warmup=None):
     # Fail before sending traffic if this receipt already exists.
     with args.out.open("x") as output:
         request(args, 0, 0, warmup=True)
+        if after_warmup is not None:
+            after_warmup()
         with ThreadPoolExecutor(args.clients) as pool:
             for turn in range(3):
                 before = draft_counts(args.url)
