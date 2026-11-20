@@ -1,0 +1,86 @@
+[
+  {
+    "rank": 0,
+    "delta": {
+      "enp1s0f0np0": {
+        "rx_vport_rdma_unicast_bytes": 46608796400,
+        "tx_vport_rdma_unicast_bytes": 2388641374
+      },
+      "enp1s0f1np1": {
+        "rx_vport_rdma_unicast_bytes": 2377717742,
+        "tx_vport_rdma_unicast_bytes": 46596629916
+      },
+      "enP2p1s0f0np0": {
+        "rx_vport_rdma_unicast_bytes": 0,
+        "tx_vport_rdma_unicast_bytes": 0
+      },
+      "enP2p1s0f1np1": {
+        "rx_vport_rdma_unicast_bytes": 0,
+        "tx_vport_rdma_unicast_bytes": 0
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "delta": {
+      "enp1s0f0np0": {
+        "rx_vport_rdma_unicast_bytes": 46596629916,
+        "tx_vport_rdma_unicast_bytes": 2377717742
+      },
+      "enp1s0f1np1": {
+        "rx_vport_rdma_unicast_bytes": 2394017810,
+        "tx_vport_rdma_unicast_bytes": 46613452520
+      },
+      "enP2p1s0f0np0": {
+        "rx_vport_rdma_unicast_bytes": 0,
+        "tx_vport_rdma_unicast_bytes": 0
+      },
+      "enP2p1s0f1np1": {
+        "rx_vport_rdma_unicast_bytes": 0,
+        "tx_vport_rdma_unicast_bytes": 0
+      }
+    }
+  },
+  {
+    "rank": 2,
+    "delta": {
+      "enp1s0f0np0": {
+        "rx_vport_rdma_unicast_bytes": 46613452520,
+        "tx_vport_rdma_unicast_bytes": 2394017810
+      },
+      "enp1s0f1np1": {
+        "rx_vport_rdma_unicast_bytes": 2379733772,
+        "tx_vport_rdma_unicast_bytes": 44877104762
+      },
+      "enP2p1s0f0np0": {
+        "rx_vport_rdma_unicast_bytes": 0,
+        "tx_vport_rdma_unicast_bytes": 0
+      },
+      "enP2p1s0f1np1": {
+        "rx_vport_rdma_unicast_bytes": 0,
+        "tx_vport_rdma_unicast_bytes": 0
+      }
+    }
+  },
+  {
+    "rank": 3,
+    "delta": {
+      "enp1s0f0np0": {
+        "rx_vport_rdma_unicast_bytes": 44877104762,
+        "tx_vport_rdma_unicast_bytes": 2379733772
+      },
+      "enp1s0f1np1": {
+        "rx_vport_rdma_unicast_bytes": 2388641374,
+        "tx_vport_rdma_unicast_bytes": 46608796400
+      },
+      "enP2p1s0f0np0": {
+        "rx_vport_rdma_unicast_bytes": 0,
+        "tx_vport_rdma_unicast_bytes": 0
+      },
+      "enP2p1s0f1np1": {
+        "rx_vport_rdma_unicast_bytes": 0,
+        "tx_vport_rdma_unicast_bytes": 0
+      }
+    }
+  }
+]
