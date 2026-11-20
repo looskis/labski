@@ -18,6 +18,12 @@ Each launch executed one K slice with the underlying TensorFold template. Column
 
 All six kernels produced identical bytes across every output of every tested shape and dtype, including the partial final row block at 2,049. Each test used seeded signed integer inputs stored as BF16, all 256 Q8 codes and per-group FP16 scales in exact multiples of 1/32. An independent FP64 matrix multiply checked sampled output positions, including boundary rows and the last output column. Exactness on this constructed input family leaves model-level parity open.
 
+## Held-out prompt lengths
+
+Before collecting another sweep, we fixed a simple prediction for lengths between the measured points. Use the two-stage 128-row, row-first kernel below 2,816 rows and the two-stage 256-row, column-first kernel from 2,816 rows upward. The boundary is the midpoint between the last observed 128-row choice at 2,560 and the first 256-row choice at 3,072. The serving patch continues to select only its seven measured lengths.
+
+The test uses 2,047, 2,304, 2,688, 2,816, 2,944, 3,071, 3,073, 3,328 and 3,840 rows, both output types, input seed 80411 and order seed 73519. For each length and dtype, compare the predicted layout's median with the published kernel and with the faster of the two candidates. Report every case more than 5% slower than the better candidate. This tests shape generalization on GB10. [Measurement program](measure.py)
+
 ## Reproduce
 
 Check out TensorFold at the pinned revision. Mia’s November 20 recipe selects the same engine commit. Its 13 patches leave the CUDA source and headers used here intact. The lab compiled the pinned sources for ARM64 and SM121a in the following PyTorch image. Set `TF` to the path for a fresh TensorFold checkout and run these commands from this results directory. [Mia recipe revision](https://github.com/MiaAI-Lab/GLM-5.3-Flash-DGX-Sparks-1104/tree/d8a7439e8c5aac8645c423ccd24189690359ab69) · [TensorFold license](https://github.com/ashhart/TensorFold/blob/81de26f649677aa72ae0034d4af6e010cd947038/LICENSE)
