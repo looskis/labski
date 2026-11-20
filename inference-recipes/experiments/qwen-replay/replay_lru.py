@@ -47,5 +47,9 @@ def simulate(path, budgets):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("trace", type=Path)
+    parser.add_argument("--mib", nargs="+", type=float, default=(0, 64, 256),
+                        help="packed payload budgets in MiB, fractional values allowed")
     args = parser.parse_args()
-    print(json.dumps(simulate(args.trace, (0, 64, 256)), indent=2))
+    if any(not 0 <= value < float("inf") for value in args.mib):
+        parser.error("cache budgets must be finite and nonnegative")
+    print(json.dumps(simulate(args.trace, args.mib), indent=2))

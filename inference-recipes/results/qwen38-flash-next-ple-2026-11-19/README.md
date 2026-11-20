@@ -9,12 +9,12 @@
 | Repeated edits | 4 | 37 | 8,888 / 11,344 | 94.05 | 103.74 | 24,536 |
 | Unrelated prose | 4 | 123 | 7,656 / 37,864 | 313.13 | 317.28 | 9,872 |
 
-Each cache hit counts a distinct ID within a gather that appeared in an earlier gather. Repeated-row checks include duplicates within a gather. All 68,512 checks matched the original packed weights and scales byte for byte. The checkpoint uses 90 bytes per row across its two planes. The largest workload saw about 2.6 MiB of distinct row payload. Exploring eviction at higher occupancy needs a longer workload. [One-client editing trace](edits-c1-rows.jsonl.gz) · [Four-client editing trace](edits-c4-rows.jsonl.gz) · [One-client prose trace](prose-c1-rows.jsonl.gz) · [Four-client prose trace](prose-c4-rows.jsonl.gz)
+Each cache hit counts a distinct ID within a gather that appeared in an earlier gather. Repeated-row checks include duplicates within a gather. All 68,512 checks matched the original packed weights and scales byte for byte. The checkpoint uses 90 bytes per row across its two planes. The largest workload saw about 2.6 MiB of distinct row payload. In a separate capacity sweep, 256 KiB of packed payload captured every available cross-gather hit on both editing traces. At 128 KiB the edit hit rates were 83.9% and 66.4%. Prose reached every available hit at 4 MiB. Longer sessions and larger document sets can require different budgets. [Capacity sweep](capacity-sweep.json) [One-client editing trace](edits-c1-rows.jsonl.gz) · [Four-client editing trace](edits-c4-rows.jsonl.gz) · [One-client prose trace](prose-c1-rows.jsonl.gz) · [Four-client prose trace](prose-c4-rows.jsonl.gz)
 
 All four runs used the same 8K FP4-Local service, four-token native MTP and disabled prefix KV caching. The excluded warm-up preceded the trace. The observer retained packed bytes on the Spark and archived row IDs, per-call counters and a digest of the gathered planes. Native bytes and unique blocks are summed over calls. Device bytes multiply the change in the Linux whole-NVMe sectors-read counter by 512, including any other device traffic in that interval. The observer timed the original reader call, which includes waiting for CUDA to finish producing the IDs. That timer does not isolate storage latency. [Edit requests at one](edits-c1-turns.jsonl.gz) · [Edit requests at four](edits-c4-turns.jsonl.gz) · [Prose requests at one](prose-c1-turns.jsonl.gz) · [Prose requests at four](prose-c4-turns.jsonl.gz)
 
 Recompute any cache budget comparison with the archived rows, for example:
 
 ```sh
-python3 ../../experiments/qwen-replay/replay_lru.py edits-c1-rows.jsonl.gz
+python3 ../../experiments/qwen-replay/replay_lru.py edits-c1-rows.jsonl.gz --mib 0 .0625 .125 .25 .5 1 2 4 64 256
 ```
