@@ -6,5 +6,6 @@
   "vllm-0.33.0": "vllm/vllm-openai:v0.33.0@sha256:d825baf9ce4b1b6bfc5ecc7b79880c7e6748c65a72d697ce3d47607aafa84c6e",
   "inkling2-gb10": "aidendle94/sparkrun-sglang-inkling2-gb10:experimental-1.0@sha256:fdcbdcf0b4aa686610985daac7caa3a5e9e3d0f3a74436e49b0c2db036818fc2",
   "tensorfold-glm53-tp4": "ghcr.io/drowzeys/keys-tensorfold-glm53-tp4-dgx-spark@sha256:6290c15f1596347468fa63c35f9e5ebc37212294fd283fc1c7165fddbcb9b34d",
-  "step5-spark": "ghcr.io/0xsero/step-5-preview-spark@sha256:4e28f849a414a483b44be50a09198d76cbc859096b354796dc25ee2159e05a5e"
+  "step5-spark": "ghcr.io/0xsero/step-5-preview-spark@sha256:4e28f849a414a483b44be50a09198d76cbc859096b354796dc25ee2159e05a5e",
+  "mimo26-pro-arvq": "ghcr.io/drowzeys/mimo-v26-pro-arvq-spark@sha256:6c6b6aed088da63452ccc280cc0b88e3931ae7de5c27126053d0332b196769cf"
 }

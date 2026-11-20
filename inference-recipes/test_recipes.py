@@ -59,6 +59,8 @@ class RecipeTests(unittest.TestCase):
                             self.assertIn(f"HEAD_Q={model_path}/lm_head-6bit/lm_head-6bit.safetensors",
                                           spark.serve_command(args, r, Path("/tmp/test cache")))
                             continue
+                        if "vllm_entrypoint" in r:
+                            self.assertEqual(cmd[cmd.index("--entrypoint") + 1], r["vllm_entrypoint"])
                         self.assertEqual(cmd[cmd.index("--tensor-parallel-size") + 1], str(n))
                         self.assertEqual("--headless" in cmd, rank > 0 and r.get("engine") != "sglang")
                         self.assertEqual("--host" in cmd, rank == 0 or r.get("engine") == "sglang")

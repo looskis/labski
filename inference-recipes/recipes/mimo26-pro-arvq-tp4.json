@@ -1,0 +1,74 @@
+{
+  "purpose": "Compare four-rank tensor-parallel ARVQ/NVFP4 inference with the four-Spark Q2_K layer split on the same MOPD release.",
+  "model": "drowzeys/keys-MiMo-V2.6-Pro-MOPD-Jarrelscy-ARVQ-hybrid21",
+  "revision": "bb83094e0075076cb0b553c965412e20b061b9c2",
+  "precision": "MOPD C3 stock ARVQ/NVFP4 hybrid-21",
+  "nodes": [
+    4
+  ],
+  "per_node_gb": 128,
+  "image": "mimo26-pro-arvq",
+  "vllm_entrypoint": "/opt/arvq/entrypoint.sh",
+  "prepare_image": "vllm-0.33.0",
+  "context": 8192,
+  "sequences": 4,
+  "memory_fraction": 0.85,
+  "container_memory_gib": 116,
+  "required_files": [
+    "arvq-layer-001-down.safetensors",
+    "arvq-layer-001-gateup.safetensors",
+    "model.safetensors.index.json",
+    "tokenizer.json"
+  ],
+  "env": {
+    "TRANSFORMERS_OFFLINE": "1",
+    "VLLM_ALLOW_LONG_MAX_MODEL_LEN": "1",
+    "VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS": "0",
+    "VLLM_EXECUTE_MODEL_TIMEOUT_SECONDS": "1800",
+    "TORCH_CUDA_ARCH_LIST": "12.1a",
+    "PYTORCH_CUDA_ALLOC_CONF": "expandable_segments:True",
+    "OMP_NUM_THREADS": "8",
+    "MALLOC_ARENA_MAX": "2",
+    "NCCL_CUMEM_ENABLE": "0",
+    "NCCL_NVLS_ENABLE": "0",
+    "NCCL_IGNORE_CPU_AFFINITY": "1",
+    "NCCL_MIN_NCHANNELS": "2",
+    "NCCL_MAX_NCHANNELS": "2",
+    "PYTHONPATH": "/opt/arvq/runtime",
+    "VLLM_PLUGINS": ""
+  },
+  "options": {
+    "--language-model-only": true,
+    "--trust-remote-code": true,
+    "--tool-call-parser": "mimo",
+    "--enable-auto-tool-choice": true,
+    "--reasoning-parser": "mimo",
+    "--default-chat-template-kwargs": {
+      "enable_thinking": false
+    },
+    "--kv-cache-memory-bytes": 4294967296,
+    "--max-num-batched-tokens": 2048,
+    "--enable-chunked-prefill": true,
+    "--no-enable-prefix-caching": true,
+    "--speculative-config": {
+      "method": "mtp",
+      "num_speculative_tokens": 2
+    },
+    "--compilation-config": {
+      "mode": 3,
+      "cudagraph_mode": "FULL_AND_PIECEWISE",
+      "cudagraph_capture_sizes": [
+        1,
+        2,
+        3,
+        4,
+        6,
+        8,
+        9,
+        12,
+        16
+      ]
+    }
+  },
+  "source": "https://github.com/drowzeys/keys-MiMo-V2.6-Pro-MOPD-C3-Jarrelscy-ARVQ-4-DGX-Sparks-1M-Context/tree/d8a10997f2c6b1b6140b204fc5dddddd247d894b"
+}

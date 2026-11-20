@@ -152,7 +152,7 @@ def serve_command(args, recipe, cache):
             serve += ["--nnodes", str(nodes), "--node-rank", str(args.rank),
                       "--dist-init-addr", f"{args.head}:{args.master_port}"]
     else:
-        entrypoint = "vllm"
+        entrypoint = recipe.get("vllm_entrypoint", "vllm")
         serve = ["serve", model_path, "--served-model-name", args.recipe,
                  "--tensor-parallel-size", str(nodes), "--max-model-len", str(recipe["context"]),
                  "--max-num-seqs", str(recipe["sequences"]),
