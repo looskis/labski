@@ -1,0 +1,40 @@
+{
+  "backend": "Argodrive ds4",
+  "hardware": "NVIDIA DGX Spark GB10",
+  "os_arch": "aarch64",
+  "elf": "ELF64 AArch64",
+  "cuda_target": "sm_121a",
+  "cubin_list_excerpt": [
+    "ELF file    1: ds4_cli-ds4_k3_serve-ds4_help-ds4_prompt_prefix-linenoise-ds4_gpu_args-ds4-ds4_image-ds4_distributed-ds4_tp-ds4_ssd-ds4_cuda-ds4_layer_pack-ds4_engram-ds4_kimi_k3-ds4_ggml_stubs-ds4_mmq-ds4_mmq_d2r-quantize-mmid-mmvq-ds4_repack.sm_121a.cubin",
+    "ELF file    2: ds4_cuda.sm_121a.cubin",
+    "ELF file    3: ds4_ggml_stubs.sm_121a.cubin",
+    "ELF file    4: ds4_mmq.sm_121a.cubin",
+    "ELF file    5: ds4_mmq_d2r.sm_121a.cubin",
+    "ELF file    6: quantize.sm_121a.cubin",
+    "ELF file    7: mmid.sm_121a.cubin",
+    "ELF file    8: mmvq.sm_121a.cubin",
+    "ELF file    9: ds4_repack.sm_121a.cubin"
+  ],
+  "engine_revision": "4673fc5ea0649371842f551eaffedd8da50380f1",
+  "build_base": "nvcr.io/nvidia/pytorch:26.07-py3@sha256:7531d90bcbe0e43e1f7363029c7e145ce90eebeb494a7b4695fdba0329d7c3c3",
+  "binary_sha256": "1cdfbae83a22f2328afe87a24a4dfc6ac6f19c32412711a675d593ccc2076f85",
+  "cli_help_loaded": true,
+  "verified_source_shards": [
+    {
+      "shard": "model-00001-of-000096.safetensors",
+      "source_sha256": "7f60e41909fb16712100c311ca4402cc4e66ecc9dff9dad4ebc06f05106c58a1",
+      "packed_file_manifest_sha256": "ee085441c374b19c43e76d84e977af3d65fa7da19c925725b4481b00e9f45acd",
+      "resident_planes": 23,
+      "expert_files": 0,
+      "source_bytes": 2341216112
+    },
+    {
+      "shard": "model-00002-of-000096.safetensors",
+      "source_sha256": "3896d0f0d987abeb75f90ff0c047b9fb7faf3ff39a6e31cbd49a1358f48b7ffa",
+      "packed_file_manifest_sha256": "7aa54f208fb469541ece28847d46cfdd1a025ff472ba198d407a6c70524bc817",
+      "resident_planes": 28,
+      "expert_files": 896,
+      "source_bytes": 16990911504
+    }
+  ]
+}
