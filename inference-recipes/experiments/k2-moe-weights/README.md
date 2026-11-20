@@ -36,7 +36,7 @@ python3 assemble.py "$SNAPSHOT" "$RANK1_SNAPSHOT" --rank 1
 
 ## Download one expert partition directly to a Spark
 
-A physical Spark rebuilt rank 0 of shard 9 from **10.299 GB of response bodies** across 242 successful HTTP ranges. The original shard was 19.961 GB, so the requests saved **48.4%** of the source bytes. The resulting 10.298 GB file had the same SHA-256 as the compact file built independently from the complete source. Response-body counts include the source header and the small gaps between nearby tensors. They exclude HTTP headers, redirects and retry traffic. [Spark receipt](direct-ranges.json) · [Downloader](fetch_shard.py)
+A physical Spark rebuilt rank 0 of shard 9 from **10.299 GB of response bodies** across 242 successful HTTP ranges. The original shard was 19.961 GB, so the requests saved **48.4%** of the source bytes. The resulting 10.298 GB file had the same SHA-256 as the compact file built independently from the complete source. On a second Spark, rank 1 of shard 2 took 10.143 GB across 220 ranges from a 20.002 GB source, a 49.3% reduction. Its 10.142 GB compact file also matched the independent full-source SHA-256. Response-body counts include the source header and the small gaps between nearby tensors. They exclude HTTP headers, redirects and retry traffic. [Spark receipt](direct-ranges.json) · [Downloader](fetch_shard.py)
 
 Run the following on each Spark from this directory. Set `RANK` to 0 or 1 and choose separate directories for the small upstream metadata and this Spark’s compact weights. `fetch_shard.py` uses the Python standard library and a local filesystem that supports hard links and sparse files. During a shard build, allow temporary disk for both the fetched ranges and the compact file.
 

@@ -15,6 +15,22 @@
       "compact_sha256": "cf66c5ca088d6de571e62d82f8f81fc787488ceed87d91599096904b235065c1",
       "independent_full_source_compact_hash_match": true,
       "machine": "aarch64"
+    },
+    {
+      "revision": "d3a6e26e4d59243ed6e569e39ca6facf4da84c05",
+      "rank": 1,
+      "ranks": 2,
+      "shard": "model-00002-of-00012.safetensors",
+      "original_file_bytes": 20001518344,
+      "retained_compact_file_bytes": 10141900200,
+      "upstream_download_bytes": 10142708416,
+      "http_ranges": 220,
+      "range_gap_bytes": 4096,
+      "maximum_range_bytes": 67108864,
+      "header_sha256": "2f2e6e2ee8c6fa89d628045f1c87f82c7c7510d0e871cd8a6280c596e0f7e13b",
+      "compact_sha256": "6acc5bd8f464aefd35eeaaa396154e82901a81cbc3e7583620161e1f1dd2f965",
+      "independent_full_source_compact_hash_match": true,
+      "machine": "aarch64"
     }
   ],
   "interrupted_local_read": {
