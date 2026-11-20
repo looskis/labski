@@ -1,0 +1,7 @@
+{
+  "seed": 0,
+  "rows": 12,
+  "target": "3452",
+  "expected": "652163",
+  "png_sha256": "a5ece6e6798e680222c3054b9168cfe356dae918f942b565e798428a2bf53c7f"
+}
