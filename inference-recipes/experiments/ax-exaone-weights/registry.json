@@ -1,0 +1,65 @@
+{
+  "machine": "aarch64",
+  "image": "vllm/vllm-openai:v0.33.0@sha256:d825baf9ce4b1b6bfc5ecc7b79880c7e6748c65a72d697ce3d47607aafa84c6e",
+  "registry_sha256": "b0b2221e740dd40f7e9f7532b92cf764458fd188b77ff16859a4dc529e78154c",
+  "mappings": [
+    {
+      "architecture": "AXK2ForCausalLM",
+      "registry_mapping": false
+    },
+    {
+      "architecture": "ExaoneMoeForCausalLM",
+      "module": "exaone_moe",
+      "implementation": "ExaoneMoeForCausalLM",
+      "definitions": [
+        {
+          "path": "model.py",
+          "sha256": "3ac05df11a0ed8843197f3e4203d1183d6c4c7d0e493180a44588ce4d57db50e"
+        }
+      ]
+    },
+    {
+      "architecture": "DSparkDraftModel",
+      "module": "vllm.models.deepseek_v4",
+      "implementation": "DSparkDeepseekV4ForCausalLM",
+      "definitions": [
+        {
+          "path": "amd/dspark.py",
+          "sha256": "70b7a714e62c09da3345c07571164cdc4810fe965e2c989b7281c3533cd2e81a"
+        },
+        {
+          "path": "cpu/dspark.py",
+          "sha256": "ff85663b3cb0d038d2d4774c48fbc8249476b5d8c3eb79f31f7b72775db28ebc"
+        },
+        {
+          "path": "nvidia/dspark.py",
+          "sha256": "6bd2a61ff89f5bbe56f6e4084e20fc4234fdbc5f6ef9b77c3a2ea4d13e006e5e"
+        },
+        {
+          "path": "xpu/dspark.py",
+          "sha256": "0ce39732c0517ebe02c9b7d90fe997a59fec0fdd65e23ce966118dd9b0c52849"
+        }
+      ]
+    }
+  ],
+  "publisher_fork": {
+    "revision": "2146b39e34e1438b1e0b5e5f4aa4163fe95d909a",
+    "registry_sha256": "8cdde1ce2cf6afc450711358d54d7d5aee56f9cb7851b29edbd08d82f262de8b",
+    "mappings": [
+      {
+        "architecture": "AXK2ForCausalLM",
+        "module": "axk2",
+        "implementation": "AXK2ForCausalLM",
+        "module_sha256": "2cf42d9f108bbfa5ae7fdb606e98fa7d99157c15fb273fa41205ef1d80ab9843",
+        "class_defined": true
+      },
+      {
+        "architecture": "DSparkDraftModel",
+        "module": "qwen3_dspark",
+        "implementation": "DSparkQwen3ForCausalLM",
+        "module_sha256": "320536ad36993eae41e79d230736795b179a596646d013bc1b44f0fe3bcdbda6",
+        "class_defined": true
+      }
+    ]
+  }
+}

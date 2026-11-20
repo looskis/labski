@@ -1,0 +1,29 @@
+{
+  "model": "LGAI-EXAONE/K-EXAONE-2.0-750B-A37B-DSpark",
+  "revision": "e42409dbd652ade0bc043fd85ef0c86044f97b46",
+  "architectures": [
+    "ExaoneMoeForCausalLM"
+  ],
+  "indexed_weight_files": 17,
+  "root_weight_bytes": 1502730340226,
+  "inspected_files": [
+    {
+      "file": "model-dspark.safetensors",
+      "file_bytes": 5064791810,
+      "header_bytes": 6912,
+      "header_sha256": "f70fc0aca3c69825781337fdb024ee7ac35ed2818e001faf376bca1cd318a6b1",
+      "tensors": 62,
+      "payload_bytes": {
+        "draft": 5064784898
+      }
+    }
+  ],
+  "group_dtype_bytes": {
+    "draft": {
+      "BF16": 5064784898
+    }
+  },
+  "routed_payload_by_rank": {},
+  "routed_dtype_bytes_by_layer": {},
+  "root_index_tensors": 59443
+}

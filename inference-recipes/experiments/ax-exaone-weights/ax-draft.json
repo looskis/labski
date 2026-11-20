@@ -1,0 +1,31 @@
+{
+  "model": "skt/A.X-K2-DSpark",
+  "revision": "0b278334dfce313dd54dca45b79c5df40f7bf212",
+  "architectures": [
+    "DSparkDraftModel"
+  ],
+  "indexed_weight_files": 1,
+  "root_weight_bytes": 6839374170,
+  "inspected_files": [
+    {
+      "file": "model.safetensors",
+      "file_bytes": 6839374170,
+      "header_bytes": 4632,
+      "header_sha256": "41aeeae65c4fc8b51ca71eafd2e912702ae3579f891d4244aa33c6308476455f",
+      "tensors": 44,
+      "payload_bytes": {
+        "draft": 6839369538
+      }
+    }
+  ],
+  "group_dtype_bytes": {
+    "draft": {
+      "I64": 262144,
+      "BF16": 6838943554,
+      "BOOL": 163840
+    }
+  },
+  "routed_payload_by_rank": {},
+  "routed_dtype_bytes_by_layer": {},
+  "root_index_tensors": null
+}
