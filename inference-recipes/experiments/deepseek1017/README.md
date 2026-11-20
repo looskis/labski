@@ -1,6 +1,6 @@
 # DeepSeek V4.1 Flash 1017 on four DGX Sparks
 
-This candidate uses the native FP8/MXFP4 release, the TensorFold engine and both original Engram shards. The lab built the ARM64 engine, checked the indexer and worker executables, and prepared the launcher for its four-node switchless ring. A served result requires the four ranks to return a completion. [Upstream engine and published benchmark](https://github.com/MiaAI-Lab/DeepSeek-V4.1-Flash-1017-4x-DGX-Sparks-TensorFold/tree/8ffa67d53ef15bab997399135f85e8b0910f30be) · [Original model](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017/tree/08c8657f02291e11b6f6b63e0e16014f8e748518)
+Four DGX Sparks served the original FP8/MXFP4 release with TensorFold and both disk-backed Engram shards. Direct RoCE decode delivered 43.61 output tok/s at one client and 72.21 at four. Its 60 paired outputs matched the NCCL control. [Local timing, energy and quality](../../results/deepseek-v41-flash-1017-2026-11-20/) · [Upstream engine and published benchmark](https://github.com/MiaAI-Lab/DeepSeek-V4.1-Flash-1017-4x-DGX-Sparks-TensorFold/tree/8ffa67d53ef15bab997399135f85e8b0910f30be) · [Original model](https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash-1017/tree/08c8657f02291e11b6f6b63e0e16014f8e748518)
 
 ## Prepare rank-local files
 
@@ -34,3 +34,7 @@ python3 serve.py --rank "$RANK" --head "$HEAD_IP" --address-range "$FABRIC_CIDR"
 ```
 
 The defaults are 8,192 tokens per slot, four slots and a head API on loopback port 8000 under `deepseek1017-native`. The draft scheduler uses the published GB10 costs for rounds of 1–48 rows and a 25 ms draft step. Each rank uses the original Engram lookup, native drafting, two ring channels and the upstream correctness setting `TF_DS_DECODE_DEC=0`. Use `--dry-run` after provisioning a rank to inspect the Docker command and generated graph files. [Launcher](serve.py) · [Upstream scheduler measurements](https://github.com/MiaAI-Lab/DeepSeek-V4.1-Flash-1017-4x-DGX-Sparks-TensorFold/blob/8ffa67d53ef15bab997399135f85e8b0910f30be/scripts/config.sh)
+
+### Select the decode transport
+
+The default uses NCCL over RoCE for both prompt and decode collectives. Passing `--decode-transport verbs` keeps NCCL for the larger collectives and uses TensorFold's direct RoCE rings for decode-size exchanges. The engine pairs ports that share a /30 subnet and relays traffic to the opposite Spark. On the lab ring each selected device had a RoCE v2 IPv4 GID at index 3 that paired with its physical neighbor, so all ranks added `--rdma-gid 3`. Check each port on your own ring with `show_gids`. Omitting the index lets the upstream engine select the first RoCE v2 IPv4 GID per port. The worker log reports the number of lanes to each logical rank, the relay count and the column and row lanes. [Upstream direct ring implementation](https://github.com/MiaAI-Lab/DeepSeek-V4.1-Flash-1017-4x-DGX-Sparks-TensorFold/blob/8ffa67d53ef15bab997399135f85e8b0910f30be/zig/patches/0001-dsv41-native-fp8-mxfp4-and-ring-tp4.patch)

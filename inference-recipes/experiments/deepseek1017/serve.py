@@ -80,6 +80,16 @@ def command(a):
         argv=["tf-dsv41-lanes","/model","/rank-cache",str(rank),"4",head,str(a.master_port),"/kit","--pool",str(pool),
               "--context",str(a.context),"--engram","/engram","--token-map","/token-map.json","--drafts","1","--round-rows","48",
               "--streams",str(a.slots),"--graphs","1","--side","1","--prefetch","1","--aio","1"]
+    if a.decode_transport == "verbs":
+        env["TF_DS_RDMA_PREFIX"] = 30
+        if a.rdma_gid is not None:
+            env["TF_DS_RDMA_GID"] = a.rdma_gid
+        if rank == 0:
+            env["TF_RDMA_DEVICES"] = a.hcas
+        else:
+            argv.extend(["--rdma", a.hcas])
+    elif a.rdma_gid is not None:
+        raise ValueError("--rdma-gid applies to --decode-transport verbs")
     for key,val in env.items():
         cmd.extend(["-e",f"{key}={val}"])
     return cmd+["--entrypoint",argv[0],a.image,*argv[1:]]
@@ -101,10 +111,15 @@ if __name__ == "__main__":
     p.add_argument("--slots",type=int,default=4)
     p.add_argument("--port",type=int,default=8000)
     p.add_argument("--master-port",type=int,default=29917)
+    p.add_argument("--decode-transport", choices=("nccl", "verbs"), default="nccl",
+                   help="use NCCL or TensorFold's direct RoCE rings for decode-size exchanges")
+    p.add_argument("--rdma-gid", type=int, help="common RoCE v2 IPv4 GID index on both selected ports")
     p.add_argument("--dry-run",action="store_true")
     a=p.parse_args()
     if min(a.context,a.slots)<1 or not all(0<n<65536 for n in (a.port,a.master_port)):
         p.error("context, slot count and ports must be positive and ports below 65536")
+    if a.rdma_gid is not None and not 0 <= a.rdma_gid <= 255:
+        p.error("--rdma-gid must be between 0 and 255")
     cmd=command(a)
     print(shlex.join(cmd),flush=True)
     if not a.dry_run:os.execvp(cmd[0],cmd)

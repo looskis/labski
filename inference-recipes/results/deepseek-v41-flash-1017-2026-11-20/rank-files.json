@@ -1,0 +1,38 @@
+[
+  {
+    "physical_rank": 0,
+    "logical_rank": 0,
+    "rank_file": "rank0of4-96381bd5e61fe8f7e484.bin",
+    "file_bytes": 80303105512,
+    "data_bytes": 80291072712,
+    "index_bytes": 12032784,
+    "index_sha256": "96381bd5e61fe8f7e4848635295fc85635faf7e51d8326af8b541c927e269c44"
+  },
+  {
+    "physical_rank": 1,
+    "logical_rank": 1,
+    "rank_file": "rank1of4-51ab0ad4eb82def365bf.bin",
+    "file_bytes": 80303452234,
+    "data_bytes": 80291072712,
+    "index_bytes": 12379506,
+    "index_sha256": "51ab0ad4eb82def365bf5cf3b6769d6f9815ac92dd55bf7de6d2483a59b64a9e"
+  },
+  {
+    "physical_rank": 2,
+    "logical_rank": 3,
+    "rank_file": "rank3of4-6c5a3da0f33bd5fbf361.bin",
+    "file_bytes": 80354729805,
+    "data_bytes": 80342241992,
+    "index_bytes": 12487797,
+    "index_sha256": "6c5a3da0f33bd5fbf3610fb9b7de167c5c7a9c221282ffd2ed3cf25daa69ed2c"
+  },
+  {
+    "physical_rank": 3,
+    "logical_rank": 2,
+    "rank_file": "rank2of4-c5dd450ac2c4f70a9770.bin",
+    "file_bytes": 80354568446,
+    "data_bytes": 80342241992,
+    "index_bytes": 12326438,
+    "index_sha256": "c5dd450ac2c4f70a9770ba792da69026391d572f492e6be1c5133f739aff3923"
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "physical_rank": 0,
+    "unix_ns": 1795162509436852976,
+    "host_bytes": {
+      "MemTotal": 130661068800,
+      "MemAvailable": 36841930752
+    },
+    "cgroup_bytes": {
+      "memory.current": 33600028672,
+      "memory.peak": 60733325312,
+      "memory.max": 120259084288,
+      "anon": 1515294720,
+      "file": 31898796032,
+      "unevictable": 196280320
+    }
+  },
+  {
+    "physical_rank": 1,
+    "unix_ns": 1795162509564155453,
+    "host_bytes": {
+      "MemTotal": 130661068800,
+      "MemAvailable": 38633947136
+    },
+    "cgroup_bytes": {
+      "memory.current": 38281940992,
+      "memory.peak": 50361380864,
+      "memory.max": 120259084288,
+      "anon": 1237860352,
+      "file": 36850417664,
+      "unevictable": 196280320
+    }
+  },
+  {
+    "physical_rank": 2,
+    "unix_ns": 1795162509536089684,
+    "host_bytes": {
+      "MemTotal": 130661072896,
+      "MemAvailable": 37376442368
+    },
+    "cgroup_bytes": {
+      "memory.current": 34834698240,
+      "memory.peak": 48162426880,
+      "memory.max": 120259084288,
+      "anon": 1238122496,
+      "file": 33275170816,
+      "unevictable": 196280320
+    }
+  },
+  {
+    "physical_rank": 3,
+    "unix_ns": 1795162509504493638,
+    "host_bytes": {
+      "MemTotal": 130661068800,
+      "MemAvailable": 37423067136
+    },
+    "cgroup_bytes": {
+      "memory.current": 35404808192,
+      "memory.peak": 45400387584,
+      "memory.max": 120259084288,
+      "anon": 1238011904,
+      "file": 33982808064,
+      "unevictable": 196280320
+    }
+  }
+]

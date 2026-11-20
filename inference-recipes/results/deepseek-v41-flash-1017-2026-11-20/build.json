@@ -1,0 +1,58 @@
+{
+  "engine_commit": "8ffa67d53ef15bab997399135f85e8b0910f30be",
+  "kit_commit": "6033ea48a27004b2715db82190e2a61f33411d92",
+  "checkpoint_commit": "08c8657f02291e11b6f6b63e0e16014f8e748518",
+  "kit_verifier": [
+    "43 tensors, 67192 bytes, sha256 4745da4b5f24c67170ee24e2c95652e45ba13c0ca0abc2be3cc7a2a3545792d0",
+    "DIFFERS (bias): vision/gate_bias_vl.safetensors",
+    "verify_kit: 355 of 356 files match MANIFEST (git 351, rope 4, bias 0); 1 differ, 0 missing"
+  ],
+  "nodes": [
+    {
+      "rank": 0,
+      "image_id": "sha256:4e32b3f83534f2de66d76e445e689e80b9551da995d5d083960a4d982f2e9d9d",
+      "platform": "linux/arm64",
+      "nccl_library_sha256": "9271a924253b2fff89f5ef82a61a7244c455c230b77d33a24ce95a288fd74d3b",
+      "launcher_sha256": "0f7bc9af5cd4e6e19a8f7767dabfff54d0f544df026bd4ed0aad0bb4b92a7882",
+      "labels": {
+        "tf.patches": "cb33eec7d7b8",
+        "tf.ref": "59402086381a42c74d53053443224eec2790b4c5"
+      }
+    },
+    {
+      "rank": 1,
+      "image_id": "sha256:4e32b3f83534f2de66d76e445e689e80b9551da995d5d083960a4d982f2e9d9d",
+      "platform": "linux/arm64",
+      "nccl_library_sha256": "9271a924253b2fff89f5ef82a61a7244c455c230b77d33a24ce95a288fd74d3b",
+      "launcher_sha256": "0f7bc9af5cd4e6e19a8f7767dabfff54d0f544df026bd4ed0aad0bb4b92a7882",
+      "labels": {
+        "tf.patches": "cb33eec7d7b8",
+        "tf.ref": "59402086381a42c74d53053443224eec2790b4c5"
+      }
+    },
+    {
+      "rank": 2,
+      "image_id": "sha256:4e32b3f83534f2de66d76e445e689e80b9551da995d5d083960a4d982f2e9d9d",
+      "platform": "linux/arm64",
+      "nccl_library_sha256": "9271a924253b2fff89f5ef82a61a7244c455c230b77d33a24ce95a288fd74d3b",
+      "launcher_sha256": "0f7bc9af5cd4e6e19a8f7767dabfff54d0f544df026bd4ed0aad0bb4b92a7882",
+      "labels": {
+        "tf.patches": "cb33eec7d7b8",
+        "tf.ref": "59402086381a42c74d53053443224eec2790b4c5"
+      }
+    },
+    {
+      "rank": 3,
+      "image_id": "sha256:4e32b3f83534f2de66d76e445e689e80b9551da995d5d083960a4d982f2e9d9d",
+      "platform": "linux/arm64",
+      "nccl_library_sha256": "9271a924253b2fff89f5ef82a61a7244c455c230b77d33a24ce95a288fd74d3b",
+      "launcher_sha256": "0f7bc9af5cd4e6e19a8f7767dabfff54d0f544df026bd4ed0aad0bb4b92a7882",
+      "labels": {
+        "tf.patches": "cb33eec7d7b8",
+        "tf.ref": "59402086381a42c74d53053443224eec2790b4c5"
+      }
+    }
+  ],
+  "common_artifact": "Both runs used this image, checkpoint, kernel kit and NCCL library. The launcher hash in each node entry identifies the first NCCL run.",
+  "verbs_launcher_sha256": "4582afcee3049960a7700f92d29b4f9c98783dc70efa0637db7843a22aca2763"
+}

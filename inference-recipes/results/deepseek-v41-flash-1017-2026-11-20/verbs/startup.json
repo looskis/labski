@@ -1,0 +1,84 @@
+[
+  {
+    "physical_rank": 0,
+    "logical_rank": 0,
+    "net_ib": true,
+    "context": 8192,
+    "loaded_s": 33.2,
+    "sampling": "greedy",
+    "drafts": true,
+    "direct_decode": true,
+    "lanes_to_logical_ranks": [
+      0,
+      1,
+      1,
+      0
+    ],
+    "relays": 2,
+    "column_lanes": 1,
+    "row_lanes": 1
+  },
+  {
+    "physical_rank": 1,
+    "logical_rank": 1,
+    "net_ib": true,
+    "rank": 1,
+    "loaded_s": 30.7,
+    "pool": 32768,
+    "drafts": true,
+    "arena_used": 3365013448,
+    "arena_reserved": 3555721216,
+    "direct_decode": true,
+    "lanes_to_logical_ranks": [
+      1,
+      0,
+      0,
+      1
+    ],
+    "relays": 2,
+    "column_lanes": 1,
+    "row_lanes": 1
+  },
+  {
+    "physical_rank": 2,
+    "logical_rank": 3,
+    "net_ib": true,
+    "rank": 2,
+    "loaded_s": 30.3,
+    "pool": 32768,
+    "drafts": true,
+    "arena_used": 3364877608,
+    "arena_reserved": 3555721216,
+    "direct_decode": true,
+    "lanes_to_logical_ranks": [
+      0,
+      1,
+      1,
+      0
+    ],
+    "relays": 2,
+    "column_lanes": 1,
+    "row_lanes": 1
+  },
+  {
+    "physical_rank": 3,
+    "logical_rank": 2,
+    "net_ib": true,
+    "rank": 3,
+    "loaded_s": 30.4,
+    "pool": 32768,
+    "drafts": true,
+    "arena_used": 3364877608,
+    "arena_reserved": 3555721216,
+    "direct_decode": true,
+    "lanes_to_logical_ranks": [
+      1,
+      0,
+      0,
+      1
+    ],
+    "relays": 2,
+    "column_lanes": 1,
+    "row_lanes": 1
+  }
+]

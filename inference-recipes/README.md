@@ -1,6 +1,6 @@
 # Inference recipes for DGX Spark
 
-The lab has four 128 GB NVIDIA DGX Sparks cabled in a ConnectX‑7 ring. Each reports one GB10 and approximately 121 GiB of system memory. One Spark serves Qwen3.8 27B in BF16 or mixed precision. Qwen3.8 Flash-Next runs on a single Spark with its disk-backed FP4-Local checkpoint and on a direct pair with the larger checkpoint. A direct pair also serves GLM-5.3-Flash. Four Sparks serve full GLM-5.3 and native Inkling 2 Small. The lab also measured a single Qwen endpoint sharded across all four Sparks. Each result records its transport and workload.
+The lab has four 128 GB NVIDIA DGX Sparks cabled in a ConnectX‑7 ring. Each reports one GB10 and approximately 121 GiB of system memory. One Spark serves Qwen3.8 27B in BF16 or mixed precision. Qwen3.8 Flash-Next runs on a single Spark with its disk-backed FP4-Local checkpoint and on a direct pair with the larger checkpoint. A direct pair also serves GLM-5.3-Flash. Four Sparks serve DeepSeek V4.1 Flash 1017, full GLM-5.3 and native Inkling 2 Small. The lab also measured a single Qwen endpoint sharded across all four Sparks. Each result records its transport and workload.
 
 [Open-weight leaderboard and Spark fit inventory](leaderboard/) · [Experiments suggested by the literature](research-leads.md)
 
@@ -23,6 +23,7 @@ Additional catalog entries are candidates unless a result is linked. Node counts
 | [GPT-OSS 20B](recipes/gpt-oss-20b.json) | 1 × 64 GB or larger | Native MXFP4 experts | Small reasoning service with up to eight active sequences |
 | [Nemotron 3.5 Lightning 30B A3B](recipes/nemotron35-lightning.json) | 1 × 64 GB or larger | Mixed NVFP4 | DSpark drafting with a hybrid attention/Mamba cache |
 | [Qwen3 Coder 30B A3B](recipes/qwen3-coder-30b.json) | 1 × 128 GB | BF16 | Sparse coding model with tool calling |
+| [DeepSeek V4.1 Flash 1017](experiments/deepseek1017/) | 4 × 128 GB | Native FP8/MXFP4 plus disk-backed Engram | Direct RoCE decode reached 43.61 tok/s at one client and 72.21 at four, a 15.9–16.9% gain over NCCL decode. [Paired timing and quality](results/deepseek-v41-flash-1017-2026-11-20/) |
 | Nanbeige4.3-33B precision sweep | 1 × 128 GB | [Official BF16](recipes/nanbeige43-33b-bf16.json), [official FP8](recipes/nanbeige43-33b-fp8.json), [community NVFP4](recipes/nanbeige43-33b-nvfp4.json) | At four clients, 14.10 / 24.14 / 43.50 tok/s and 63 / 63 / 60 free answers out of 112. [Measurements](results/nanbeige43-33b-2026-11-19/) |
 | [Qwen3.8 27B control](recipes/qwen38-27b-bf16.json) | 1, 2 or 4 × 128 GB | BF16 | 83/112 with identical verdicts at every topology, up to 13.92 tok/s C1 and 54.33 aggregate at C4 |
 | [Qwen3.8 27B precision and scaling](recipes/qwen38-27b-nvfp4.json) | 1, 2 or 4 × 128 GB | Mixed NVFP4/FP8 | Same scheduler, KV dtype and context as the BF16 control |
