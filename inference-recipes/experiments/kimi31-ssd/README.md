@@ -69,3 +69,26 @@ cp pack_shard.py finalize.py source.json "$work/"
 docker run --rm -v "$work:/model" --entrypoint python3 "$base" \
   /model/finalize.py /model /model/src/tools/kimi-k3
 ```
+
+## CUDA check with 16 real Kimi experts
+
+The engine's native routed-expert CUDA function processed a fixed 3,584-dimensional input, 16 selected experts from layer 1 and fixed routing weights. Each of three fresh processes first warmed the kernels and reader pools on 16 disjoint experts. The first call on the measured set read 280,756,224 bytes and took a median 27.84 ms. The next five calls per process read zero additional expert bytes and took a median 3.20 ms. All 18 calls returned the same 3,584 float32 values byte for byte. This measures one routed-expert branch with a synthetic input and route. [All calls and reference errors](expert-check.json) · [CUDA harness](expert_probe.c)
+
+An independent NumPy float64 calculation decoded the original E2M1 nibbles and E8M0 scales, applied the gate, up and down projections and combined the same routing weights. Across the output vector, maximum absolute error was 3.08 × 10⁻⁶ and relative L2 error was 3.69 × 10⁻⁶. [Reference implementation](check_expert.py)
+
+After packing the first MoE layer and building the engine, run these commands from the recipe directory. The executable links against the same engine objects as the server. The host-cache setting requests zero GiB, and the runtime retains its internal minimum of 64 host expert slots.
+
+```sh
+mkdir -p "$work/probe"
+cp expert_probe.c expert-probe.mk check_expert.py "$work/probe/"
+docker run --rm --gpus all -v "$work/src:/engine" -v "$work/probe:/probe" -w /engine \
+  --entrypoint make "$base" -f Makefile -f /probe/expert-probe.mk expert-probe CUDA_ARCH=sm_121a
+for run in 1 2 3; do
+  docker run --rm --gpus all --ipc=host --ulimit memlock=-1 --memory 16g --memory-swap 16g \
+    -e DS4_K3_CACHE_RAM_GB=0 -e DS4_K3_CACHE_VRAM_INIT_SLABS=32 \
+    -v "$work/probe:/probe" -v "$work/experts:/experts:ro" --entrypoint /probe/expert-probe \
+    "$base" /experts "/probe/output-$run.f32" > "$work/probe/run-$run.jsonl"
+done
+docker run --rm -e OPENBLAS_NUM_THREADS=4 -v "$work/probe:/probe:ro" -v "$work/experts:/experts:ro" \
+  --entrypoint python3 "$base" /probe/check_expert.py /experts /probe/output-1.f32
+```
