@@ -32,9 +32,14 @@ The BF16 pair used **9.64 GPU J/output token at one client** and **2.25 at four*
 | --- | ---: | ---: | ---: | ---: |
 | Single Spark, repeat | 12.19 | 2.78 | 44.88 | 0.74 |
 | Two Sparks, direct RoCE configuration, repeat | 20.45 | 3.61 | 72.68 | 0.99 |
+| Same two Sparks, TCP over their direct ConnectX cable | 8.88 | 5.99 | 27.68 | 1.86 |
 | Four Sparks, routed TCP | 8.03 | 10.43 | 25.72 | 3.33 |
 
 The direct pair saved time for an interactive request at about 30% more GPU energy per output token than the single Spark. At four clients its aggregate throughput grew by 62% and GPU energy per token grew by 33%. Use one Spark when minimizing measured GPU joules per token at these loads, or the direct pair when one user needs the shorter wait. The fresh pair launch delivered 20.45 and 72.68 tok/s, within 0.1% of its original two throughput measurements. It scored 75/112 free-response and 76/112 when constrained to a single letter. [Pair trials](controls/tp2/trials.jsonl) · [Pair energy](controls/tp2/energy.jsonl) · [Raw counters](controls/tp2/energy.csv.gz) · [Free responses](controls/tp2/quality.jsonl.gz) · [Constrained responses](controls/tp2/one-letter.jsonl.gz)
+
+### Holding the pair fixed and changing the transport
+
+On the same two machines and checkpoint, the direct RoCE configuration was **2.30× faster for one client and 2.63× faster at four clients** than NCCL Socket over ConnectX. At one client, moving from TCP to RoCE reduced combined GPU energy from 5.99 to 3.61 J/output token. The corresponding four-client reduction was 1.86 to 0.99 J/token. The TCP route between these two adjacent ranks was a single physical hop. The RoCE configuration enabled both PCI-domain functions, and TCP used one rail, so these numbers describe the complete transport configurations. The TCP run scored 79/112 with four responses reaching the budget, compared with 75/112 and three in the fresh RoCE run. [TCP trial timings](controls/tp2-tcp/trials.jsonl) · [TCP energy](controls/tp2-tcp/energy.jsonl) · [TCP request records](controls/tp2-tcp/requests.jsonl.gz) · [TCP answers](controls/tp2-tcp/quality.jsonl.gz)
 
 ## Repeating the single-Spark run
 
