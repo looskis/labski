@@ -1,0 +1,32 @@
+[
+  {
+    "counter": "spec_decode_num_drafts_total",
+    "value": 912.0,
+    "position": null
+  },
+  {
+    "counter": "spec_decode_num_draft_tokens_total",
+    "value": 2736.0,
+    "position": null
+  },
+  {
+    "counter": "spec_decode_num_accepted_tokens_total",
+    "value": 1720.0,
+    "position": null
+  },
+  {
+    "counter": "spec_decode_num_accepted_tokens_per_pos_total",
+    "value": 764.0,
+    "position": "0"
+  },
+  {
+    "counter": "spec_decode_num_accepted_tokens_per_pos_total",
+    "value": 569.0,
+    "position": "1"
+  },
+  {
+    "counter": "spec_decode_num_accepted_tokens_per_pos_total",
+    "value": 387.0,
+    "position": "2"
+  }
+]

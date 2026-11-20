@@ -1,0 +1,26 @@
+[
+  {
+    "repeat": 1,
+    "n": 17,
+    "max_running": 4.0,
+    "max_waiting": 0.0,
+    "max_kv_usage": 0.9230769230769231,
+    "fraction_sampled_with_waiting": 0.0
+  },
+  {
+    "repeat": 2,
+    "n": 17,
+    "max_running": 4.0,
+    "max_waiting": 0.0,
+    "max_kv_usage": 0.9230769230769231,
+    "fraction_sampled_with_waiting": 0.0
+  },
+  {
+    "repeat": 3,
+    "n": 17,
+    "max_running": 4.0,
+    "max_waiting": 0.0,
+    "max_kv_usage": 0.9230769230769231,
+    "fraction_sampled_with_waiting": 0.0
+  }
+]

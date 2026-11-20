@@ -1,0 +1,6 @@
+{
+  "kv_cache_memory_bytes": 3221225472,
+  "reported_kv_tokens": 12002,
+  "max_request_tokens": 8192,
+  "reported_max_concurrency": 1.47
+}
