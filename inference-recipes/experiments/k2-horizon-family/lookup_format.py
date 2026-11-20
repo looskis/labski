@@ -33,7 +33,7 @@ def post(url, path, body):
         return json.load(reply)
 
 
-def request(url, model, seed, records, constrained, prefill=False, raw_control=False):
+def request(url, model, seed, records, constrained, prefill=False, raw_control=False, stop_markdown=False):
     prompt, expected = workload("lookup", seed, records)
     body = dict(model=model, messages=[dict(role="user", content=prompt)],
                 temperature=0, max_tokens=128, chat_template_kwargs={"reasoning_effort": "low"})
@@ -49,6 +49,10 @@ def request(url, model, seed, records, constrained, prefill=False, raw_control=F
         body = dict(model=model, prompt=ids, max_tokens=128, temperature=0)
         input_digest = hashlib.sha256(json.dumps(ids, separators=(",", ":")).encode()).hexdigest()
         path = "/v1/completions"
+    if stop_markdown:
+        if not prefill:
+            raise ValueError("a markdown stop requires the assistant prefix")
+        body["stop"] = ["**"]
     if constrained:
         body["structured_outputs"] = {"regex": "[0-9]{6}"}
     start = time.perf_counter()
@@ -59,7 +63,7 @@ def request(url, model, seed, records, constrained, prefill=False, raw_control=F
     values = re.findall(r"(?<![0-9])[0-9]{6}(?![0-9])", text)
     stopped = choice["finish_reason"] == "stop"
     return dict(seed=seed, records=records, regex=constrained, expected=expected,
-                assistant_prefix=prefix, endpoint=path, input_token_ids_sha256=input_digest,
+                assistant_prefix=prefix, stop_markdown=stop_markdown, endpoint=path, input_token_ids_sha256=input_digest,
                 prompt_sha256=hashlib.sha256(prompt.encode()).hexdigest(),
                 finish=choice["finish_reason"], input_tokens=response["usage"]["prompt_tokens"],
                 output_tokens=response["usage"]["completion_tokens"], elapsed_s=elapsed,
@@ -82,7 +86,10 @@ if __name__ == "__main__":
                       help="close the empty low-effort block and prefill an answer naming the requested bin")
     mode.add_argument("--raw-control", action="store_true",
                       help="use the completions endpoint with the unmodified low-effort chat template")
+    parser.add_argument("--stop-markdown", action="store_true", help="stop before the closing bold marker in a prefilled answer")
     args = parser.parse_args()
+    if args.stop_markdown and not args.assistant_prefix:
+        parser.error("--stop-markdown requires --assistant-prefix")
     if args.count < 1 or not all(n > 0 for n in args.records):
         parser.error("count and records must be positive")
     with args.out.open("x") as out:
@@ -92,6 +99,6 @@ if __name__ == "__main__":
                 seed = args.seed + index + args.records.index(records) * args.count
                 for constrained in ((False, True) if seed % 2 == 0 else (True, False)):
                     out.write(json.dumps(request(args.url, args.model, seed, records, constrained,
-                                                 args.assistant_prefix, args.raw_control),
+                                                 args.assistant_prefix, args.raw_control, args.stop_markdown),
                                          separators=(",", ":")) + "\n")
                     out.flush()
