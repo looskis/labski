@@ -1,0 +1,36 @@
+{
+  "calibration": [
+    {
+      "pool_mib": 3072,
+      "total_blocks": 189,
+      "blocks_per_short_request": 85,
+      "peak_running": 2
+    },
+    {
+      "pool_mib": 5632,
+      "total_blocks": 346,
+      "blocks_per_short_request": 85,
+      "peak_running": 4
+    },
+    {
+      "pool_mib": 9216,
+      "total_blocks": 567,
+      "blocks_per_short_request": 85,
+      "peak_running": 4
+    }
+  ],
+  "blocks_per_full_request": 129,
+  "four_request_threshold_gib": [
+    5.404899135446686,
+    5.412698412698413
+  ],
+  "query_mib": 5376,
+  "predicted_total_blocks": [
+    330,
+    331
+  ],
+  "predicted_running_of_four": [
+    3,
+    3
+  ]
+}

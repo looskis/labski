@@ -1,0 +1,5 @@
+{
+  "kv_tokens": 12002,
+  "max_request_tokens": 8192,
+  "estimated_concurrency": 1.47
+}
