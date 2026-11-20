@@ -2,16 +2,21 @@
 
 The Institute of Foundation Models publishes BF16, FP8 and NVFP4 checkpoints of K2 Horizon 32B. The lab used native vLLM 0.33.0 on GB10 with the K2 Horizon reasoning parser, low reasoning effort, four 8,192-token slots and a 3 GiB KV pool. All runs used the same prompts and greedy decoding. [BF16 configuration](../../recipes/k2-horizon-32b-bf16.json) · [FP8 configuration](../../recipes/k2-horizon-32b-fp8.json) · [NVFP4 configuration](../../recipes/k2-horizon-32b-nvfp4.json)
 
+FP8 served four clients at **21.04 tok/s**, 60.0% ahead of BF16, with 43.0% less GPU energy per token. Its perplexity was **0.98% higher** on the matched text sample. Both precisions returned 5/14 exact open answers at the 128-token budget.
+
 With four clients on the same Spark, NVFP4 generated 3.10× as many tokens per second as BF16 and used 66.1% less GPU energy per token. Its perplexity was 8.2% higher on 30,935 matched next-token predictions. NVFP4 answered 7/14 open questions correctly against 5/14 for BF16 at the same 128-token budget.
 
 | Checkpoint | Weights, GB | Output tok/s, 1 / 4 clients | GPU J/token, 1 / 4 | First streamed delta, ms, 1 / 4 | Lookups | WikiText prefix perplexity |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [BF16](bf16/) | 69.56 | 3.36 / 13.15 | 11.49 / 2.62 | 636 / 994 | 8/8 | 6.2684 |
+| [FP8](fp8/) | 37.35 | 5.22 / 21.04 | 5.89 / 1.49 | 380 / 568 | 8/8 | 6.3298 |
 | [NVFP4](nvfp4/) | 23.25 | 9.99 / 40.81 | 3.30 / 0.89 | 262 / 382 | 8/8 | 6.7826 |
 
 Throughput uses three timed trials at each concurrency after a warm-up. Each trial generated four 96-token prose continuations. Time to first delta includes visible content or reasoning. GPU energy integrates the Spark’s NVML counter over each timed trial.
 
 BF16 returned visible prose in 24/24 timed responses. [Requests](bf16/requests.jsonl.gz) · [Trial summaries](bf16/trials.jsonl) · [GPU energy](bf16/horizon32-bf16-energy.jsonl)
+
+FP8 returned visible prose in 24/24 timed responses. [Requests](fp8/requests.jsonl.gz) · [Trial summaries](fp8/trials.jsonl) · [GPU energy](fp8/horizon32-fp8-energy.jsonl)
 
 NVFP4 returned visible prose in 24/24 timed responses. [Requests](nvfp4/requests.jsonl.gz) · [Trial summaries](nvfp4/trials.jsonl) · [GPU energy](nvfp4/horizon32-nvfp4-energy.jsonl)
 
@@ -22,15 +27,20 @@ The open-response diagnostic uses one question from each of the 14 MMLU-Pro subj
 | Checkpoint | Free correct / 14 at 128 / 512 tokens | Capped answers at 128 / 512 | Tokens used at 128 / 512 | Seconds for 14 at 128 / 512 | First-token letters correct / 112 |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | BF16 | 5 / 5 | 3 / 0 | 497 / 1167 | 152.4 / 352.6 | 21 |
+| FP8 | 5 / 5 | 3 / 0 | 497 / 1135 | 96.7 / 215.2 | 22 |
 | NVFP4 | 7 / 7 | 3 / 1 | 505 / 1201 | 52.2 / 122.4 | 26 |
 
 Increasing the BF16 answer budget from 128 to 512 gained 0 correct and lost 0 correct on the same 14 questions. The forced letters appeared in the API’s visible answer on 112/112 items. [128-token answers](bf16/effort-low-128.jsonl.gz) · [512-token answers](bf16/effort-low-512.jsonl.gz) · [Constrained letters](bf16/grammar112.jsonl.gz)
 
+Increasing the FP8 answer budget from 128 to 512 gained 0 correct and lost 0 correct on the same 14 questions. The forced letters appeared in the API’s visible answer on 112/112 items. [128-token answers](fp8/effort-low-128.jsonl.gz) · [512-token answers](fp8/effort-low-512.jsonl.gz) · [Constrained letters](fp8/grammar112.jsonl.gz)
+
 Increasing the NVFP4 answer budget from 128 to 512 gained 0 correct and lost 0 correct on the same 14 questions. The forced letters appeared in the API’s visible answer on 112/112 items. [128-token answers](nvfp4/effort-low-128.jsonl.gz) · [512-token answers](nvfp4/effort-low-512.jsonl.gz) · [Constrained letters](nvfp4/grammar112.jsonl.gz)
 
-The likelihood probe scores up to 511 next-token predictions per article on the opening body text of all 62 WikiText-2 raw test articles. It includes every ground-truth token after the first and archives a token sequence hash per article. BF16 scored 30,935 positions with a mean negative log likelihood of 1.83552 nats/token. [Per-article likelihood](bf16/wikitext.jsonl) NVFP4 scored 30,935 positions with a mean negative log likelihood of 1.91436 nats/token. [Per-article likelihood](nvfp4/wikitext.jsonl)
+The likelihood probe scores up to 511 next-token predictions per article on the opening body text of all 62 WikiText-2 raw test articles. It includes every ground-truth token after the first and archives a token sequence hash per article. BF16 scored 30,935 positions with a mean negative log likelihood of 1.83552 nats/token. [Per-article likelihood](bf16/wikitext.jsonl) FP8 scored 30,935 positions with a mean negative log likelihood of 1.84527 nats/token. [Per-article likelihood](fp8/wikitext.jsonl) NVFP4 scored 30,935 positions with a mean negative log likelihood of 1.91436 nats/token. [Per-article likelihood](nvfp4/wikitext.jsonl)
 
 ## Matched precision differences
+
+Against BF16, FP8 changed aggregate throughput at four clients by +60.0% and GPU energy per token by -43.0%. It gained 4 and lost 3 correct constrained letters. Mean next-token NLL changed by +0.00974 nats/token (95% paired article-bootstrap interval +0.00687 to +0.01275). This interval describes variation across these article prefixes.
 
 Against BF16, NVFP4 changed aggregate throughput at four clients by +210.4% and GPU energy per token by -66.1%. It gained 8 and lost 3 correct constrained letters. Mean next-token NLL changed by +0.07883 nats/token (95% paired article-bootstrap interval +0.06622 to +0.09307). This interval describes variation across these article prefixes.
 

@@ -2,7 +2,7 @@
 
 The 7B and 3.7B tokenizers reproduced the 32B model’s exact token-ID hashes for all 62 WikiText-2 article prefixes in the lab archive. The 0.9B tokenizer matched none. A per-token perplexity comparison across those two tokenizers would change the unit of measurement. This experiment compares the cost, in bits, of predicting the same UTF-8 continuation from the same preceding text.
 
-The 32B BF16 baseline assigned **0.5692 bits/byte** to 139,378 continuation bytes. The 32B NVFP4 release assigned **0.5936 bits/byte** to the same bytes. Both values come from archived full-model log probabilities on one Spark. Lower values mean the model assigned more probability to the observed text. [BF16 article scores](reference/bf16.jsonl) · [NVFP4 article scores](reference/nvfp4.jsonl) · [One-Spark serving results](../../results/k2-horizon-32b-2026-11-20/)
+The 32B BF16 baseline assigned **0.5692 bits/byte** to 139,378 continuation bytes. The 32B FP8 and NVFP4 releases assigned **0.5723** and **0.5936 bits/byte** to the same bytes. All three values come from archived full-model log probabilities on one Spark. Lower values mean the model assigned more probability to the observed text. [BF16 article scores](reference/bf16.jsonl) · [NVFP4 article scores](reference/nvfp4.jsonl) · [One-Spark serving results](../../results/k2-horizon-32b-2026-11-20/) [FP8 article scores](reference/fp8.jsonl)
 
 ## How the comparison works
 
