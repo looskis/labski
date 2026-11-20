@@ -1,0 +1,181 @@
+{
+  "draft_mode": "mtp",
+  "draft_num_tokens": 2,
+  "engine_confirmation": "Using main model MTP component for drafting",
+  "load_seconds": 81.5,
+  "launcher_sha256": "f24367ae3f075a38d717cccbe471b6f61c1501d597b0a4bd283e312f13240628",
+  "warmup_request_ids": [
+    30,
+    43
+  ],
+  "timed_prose_acceptance": [
+    {
+      "server_request": 31,
+      "completion_utc": "08:48:46.360Z",
+      "concurrent_clients": 1,
+      "accepted": 52,
+      "proposed": 88
+    },
+    {
+      "server_request": 32,
+      "completion_utc": "08:48:50.725Z",
+      "concurrent_clients": 1,
+      "accepted": 50,
+      "proposed": 92
+    },
+    {
+      "server_request": 33,
+      "completion_utc": "08:48:54.925Z",
+      "concurrent_clients": 1,
+      "accepted": 52,
+      "proposed": 88
+    },
+    {
+      "server_request": 34,
+      "completion_utc": "08:48:59.108Z",
+      "concurrent_clients": 1,
+      "accepted": 52,
+      "proposed": 88
+    },
+    {
+      "server_request": 35,
+      "completion_utc": "08:49:03.479Z",
+      "concurrent_clients": 1,
+      "accepted": 50,
+      "proposed": 92
+    },
+    {
+      "server_request": 36,
+      "completion_utc": "08:49:07.941Z",
+      "concurrent_clients": 1,
+      "accepted": 49,
+      "proposed": 94
+    },
+    {
+      "server_request": 37,
+      "completion_utc": "08:49:11.854Z",
+      "concurrent_clients": 1,
+      "accepted": 55,
+      "proposed": 82
+    },
+    {
+      "server_request": 38,
+      "completion_utc": "08:49:16.213Z",
+      "concurrent_clients": 1,
+      "accepted": 50,
+      "proposed": 92
+    },
+    {
+      "server_request": 39,
+      "completion_utc": "08:49:20.400Z",
+      "concurrent_clients": 1,
+      "accepted": 52,
+      "proposed": 88
+    },
+    {
+      "server_request": 40,
+      "completion_utc": "08:49:24.319Z",
+      "concurrent_clients": 1,
+      "accepted": 55,
+      "proposed": 82
+    },
+    {
+      "server_request": 41,
+      "completion_utc": "08:49:28.415Z",
+      "concurrent_clients": 1,
+      "accepted": 53,
+      "proposed": 86
+    },
+    {
+      "server_request": 42,
+      "completion_utc": "08:49:32.508Z",
+      "concurrent_clients": 1,
+      "accepted": 53,
+      "proposed": 86
+    },
+    {
+      "server_request": 45,
+      "completion_utc": "08:49:50.206Z",
+      "concurrent_clients": 4,
+      "accepted": 52,
+      "proposed": 88
+    },
+    {
+      "server_request": 44,
+      "completion_utc": "08:49:50.402Z",
+      "concurrent_clients": 4,
+      "accepted": 50,
+      "proposed": 92
+    },
+    {
+      "server_request": 46,
+      "completion_utc": "08:49:50.586Z",
+      "concurrent_clients": 4,
+      "accepted": 48,
+      "proposed": 96
+    },
+    {
+      "server_request": 47,
+      "completion_utc": "08:49:50.587Z",
+      "concurrent_clients": 4,
+      "accepted": 50,
+      "proposed": 92
+    },
+    {
+      "server_request": 50,
+      "completion_utc": "08:49:58.972Z",
+      "concurrent_clients": 4,
+      "accepted": 55,
+      "proposed": 82
+    },
+    {
+      "server_request": 48,
+      "completion_utc": "08:49:59.250Z",
+      "concurrent_clients": 4,
+      "accepted": 51,
+      "proposed": 90
+    },
+    {
+      "server_request": 49,
+      "completion_utc": "08:49:59.423Z",
+      "concurrent_clients": 4,
+      "accepted": 49,
+      "proposed": 94
+    },
+    {
+      "server_request": 51,
+      "completion_utc": "08:49:59.610Z",
+      "concurrent_clients": 4,
+      "accepted": 49,
+      "proposed": 94
+    },
+    {
+      "server_request": 52,
+      "completion_utc": "08:50:07.900Z",
+      "concurrent_clients": 4,
+      "accepted": 53,
+      "proposed": 86
+    },
+    {
+      "server_request": 54,
+      "completion_utc": "08:50:07.988Z",
+      "concurrent_clients": 4,
+      "accepted": 53,
+      "proposed": 86
+    },
+    {
+      "server_request": 53,
+      "completion_utc": "08:50:08.084Z",
+      "concurrent_clients": 4,
+      "accepted": 49,
+      "proposed": 94
+    },
+    {
+      "server_request": 55,
+      "completion_utc": "08:50:08.085Z",
+      "concurrent_clients": 4,
+      "accepted": 53,
+      "proposed": 86
+    }
+  ]
+}
