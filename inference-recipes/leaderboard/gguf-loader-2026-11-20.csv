@@ -7,6 +7,9 @@ ggml-org/llama.cpp,6aee50801d091f78b3baacd505f5e95d8e8f6838,14,DeepSeek-V4-Pro-0
 ggml-org/llama.cpp,6aee50801d091f78b3baacd505f5e95d8e8f6838,17,MiniMax-M3-IQ1_M,2ee48e5fcf21a2522ee2fb9ffaa15592ec5498e6,3,1176,8317792,accepted,60,426174572928
 ggml-org/llama.cpp,6aee50801d091f78b3baacd505f5e95d8e8f6838,17,MiniMax-M3-Q3_K_M,2ee48e5fcf21a2522ee2fb9ffaa15592ec5498e6,5,1176,8318048,accepted,60,426174572928
 ggml-org/llama.cpp,6aee50801d091f78b3baacd505f5e95d8e8f6838,17,MiniMax-M3-Q6_K,2ee48e5fcf21a2522ee2fb9ffaa15592ec5498e6,10,1176,8318656,accepted,60,426174572928
+ggml-org/llama.cpp,6aee50801d091f78b3baacd505f5e95d8e8f6838,19,Beam-1.0-501B-A23B-UD-IQ1_S,4cc80272381734e2b16b34c1af3362c7268a0ebc,4,881,6008612,accepted,52,501267612352
+ggml-org/llama.cpp,6aee50801d091f78b3baacd505f5e95d8e8f6838,19,Beam-1.0-501B-A23B-UD-IQ3_XXS,4cc80272381734e2b16b34c1af3362c7268a0ebc,5,881,6008676,accepted,52,501267612352
+ggml-org/llama.cpp,6aee50801d091f78b3baacd505f5e95d8e8f6838,19,Beam-1.0-501B-A23B-UD-Q5_K_XL,4cc80272381734e2b16b34c1af3362c7268a0ebc,9,881,6009124,accepted,52,501267612352
 ggml-org/llama.cpp,6aee50801d091f78b3baacd505f5e95d8e8f6838,23,thinkingmachines.Inkling.Q2_K,c79703c0c9f308b5f097a7082257a8e8603185eb,24,1512,13069696,unknown architecture: inkling,,
 ggml-org/llama.cpp,6aee50801d091f78b3baacd505f5e95d8e8f6838,23,thinkingmachines.Inkling.Q3_K_M,c79703c0c9f308b5f097a7082257a8e8603185eb,33,1512,13071072,unknown architecture: inkling,,
 danielhanchen/llama.cpp,eeac951be2038fc27e89613d8d1158c31d97d732,23,thinkingmachines.Inkling.Q2_K,c79703c0c9f308b5f097a7082257a8e8603185eb,24,1512,13069696,accepted,66,947025564226
