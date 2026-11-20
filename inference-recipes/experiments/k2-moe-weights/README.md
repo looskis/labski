@@ -58,6 +58,17 @@ python3 assemble.py "$METADATA" "$DEST" --rank "$RANK"
 
 We also interrupted the public downloader after two completed payload ranges on rank 1 of shard 12, using reads from the verified upstream file to simulate the HTTP response bodies. It resumed without rereading either payload range, reproduced the independently verified **6,079,636,016-byte** compact file, and verified and skipped the file on a further invocation. The final assembler reproduced the complete rank 1 index using only the eight metadata files and the twelve compact shards. [Recovery and final assembly check](direct-ranges.json)
 
+## Reuse an existing compact shard when building the opposite rank
+
+The two 126.15 GB expert-rank snapshots share **22,686,951,168 bytes of common tensors**. If a Spark already has one compact rank for a shard, it can use those bytes to build the other rank. `reuse_rank.py` checks the complete cached file against its published SHA-256, maps its tensors back to the original shard offsets, and reads missing ranges from the pinned upstream shard. The destination must match the independent compact-file SHA-256. The ordinary range downloader’s sparse progress file also works with this method. [Tensor inventory](375b-nvfp4.json) · [Opposite-rank downloader](reuse_rank.py)
+
+For example, run this on a Spark with a verified rank 0 file and room for the new rank 1 shard and its temporary sparse file. The receipt records completed upstream response bytes and bytes supplied by the local compact file. The `planned_response_bytes` field gives the full range plan before local reuse. On a resumed run, the two measured counters cover the current invocation. They exclude HTTP redirects and unsuccessful transfers.
+
+```sh
+shard=model-00003-of-00012.safetensors
+python3 reuse_rank.py "$RANK0_SNAPSHOT/$shard" "$RANK1_SNAPSHOT" --rank 1
+```
+
 ## Reproduce
 
 Run the inventory against the pinned snapshot. It reads the 12 headers and index, checks tensor offsets and the header SHA-256 values, and prints the rank totals for gap limits from zero through one MiB. The calculation assumes whole-expert placement and no extra expert replicas. [Inventory program](inventory.py)

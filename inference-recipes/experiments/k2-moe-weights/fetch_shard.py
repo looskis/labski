@@ -57,7 +57,9 @@ def selected_ranges(header, rank):
     return [(offset, min(offset + BLOCK, end)) for start, end in spans for offset in range(start, end, BLOCK)]
 
 
-def download(record, meta, out, work):
+def download(record, meta, out, work, read_range=None):
+    if read_range is None:
+        read_range = get_range
     name, rank = record["file"], record["rank"]
     final = out / name
     source = work / name
@@ -68,7 +70,7 @@ def download(record, meta, out, work):
         state.unlink(missing_ok=True)
         return dict(file=name, rank=rank, already_verified=True)
     size = record["source_bytes"]
-    header = get_range(name, 0, meta["header_bytes"], size)
+    header = read_range(name, 0, meta["header_bytes"], size)
     if hashlib.sha256(header).hexdigest() != meta["header_sha256"]:
         raise ValueError(f"source header mismatch in {name}")
     groups = selected_ranges(header, rank)
@@ -91,7 +93,7 @@ def download(record, meta, out, work):
         for index in range(completed, len(groups)):
             start, end = groups[index]
             fp.seek(start)
-            fp.write(get_range(name, start, end, size))
+            fp.write(read_range(name, start, end, size))
             fp.flush()
             os.fsync(fp.fileno())
             next_state = state.with_suffix(".next")
@@ -116,7 +118,7 @@ def download(record, meta, out, work):
                 compact_sha256=record["packed_file_sha256"])
 
 
-def fetch(name, rank, out):
+def fetch(name, rank, out, read_range=None):
     proof = json.loads((HERE / "two-rank-parity.json").read_bytes())
     catalog = json.loads((HERE / "375b-nvfp4.json").read_bytes())["indexed_files"]
     record = next((r for r in proof["shards"] if r["rank"] == rank and r["file"] == name), None)
@@ -127,7 +129,7 @@ def fetch(name, rank, out):
     work.mkdir(parents=True, exist_ok=True)
     with (work / "lock").open("a") as lock:
         fcntl.flock(lock.fileno(), fcntl.LOCK_EX)
-        return download(record, meta, out, work)
+        return download(record, meta, out, work, read_range)
 
 
 if __name__ == "__main__":
