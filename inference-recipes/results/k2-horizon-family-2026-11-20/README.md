@@ -9,6 +9,7 @@ The 7B BF16 model produced **55.00 generated tokens/s at four clients**, compare
 | [32B NVFP4](../k2-horizon-32b-2026-11-20/nvfp4/) | 9.99 / 40.81 | 3.30 / 0.89 | 0.5936 | 7 / 7 | 26 | 8 |
 | [7B BF16](7b/) | 12.91 / 55.00 | 2.80 / 0.60 | 0.7140 | 0 / 0 | 23 | 0 |
 | [3.7B BF16](3.7b/) | 20.07 / 97.85 | 1.72 / 0.34 | 0.7796 | 1 / 1 | 24 | 7 |
+| [0.9B BF16](0.9b/) | 79.73 / 402.30 | 0.42 / 0.08 | 0.8741 | 2 / 4 | 14 | 0 |
 
 Each endpoint used the same Spark, pinned vLLM 0.33 image, 8K context, 3 GiB KV budget and four slots. Throughput includes reasoning and visible tokens, with four 96-token requests per trial and three trials after warm-up. The 112-question forced choice measures the first token before reasoning. The open-answer score requires a stopped response containing the expected letter in the API content field. The lookup benchmark reads that field from the streamed response. GPU energy uses the cumulative NVML counter. [32B three-precision comparison](../k2-horizon-32b-2026-11-20/)
 
@@ -19,6 +20,8 @@ The tokenizer defines three native reasoning delimiters. The low-effort chat tem
 On the 3.7B model the stock endpoint reached **97.85 generated tok/s and 0.34 GPU J/token** at four clients, with seven exact streamed lookups. On the 512-token question panel, one returned answer passed strict scoring. Five outputs contained the high-effort closing marker, and counting exact final letters after those delimiters brought the total to four. The 3.7B checkpoint scored 0.7796 bits/byte on the matched text. [3.7B responses](3.7b/effort-low-512.jsonl.gz) · [3.7B throughput](3.7b/trials.jsonl)
 
 A live one-Spark repeat with a parser that accepts all three native K2 closing markers served **7/14, 9/14 and 8/8** on the same two question budgets and streamed lookups. On 16 fresh values in both API modes, the stock service returned 0/32 exact answers and the plugin returned 32/32. All 32 pairs had identical generated token IDs. [Corrected 7B recipe and paired outputs](7b-parser/)
+
+The 0.9B BF16 checkpoint reached **79.73 / 402.30 generated tokens/s** at one / four clients. All three four-client trials generated 384 tokens in 0.95–0.96 seconds, so its 0.08 GPU J/token estimate has a short integration window. It scored 0.8741 bits/byte on the matched WikiText, and 14/112 on the forced first token. All eight lookup responses included exactly one standalone six-digit value and that value was correct. Extra text made the strict API score 0/8. This extraction rule was checked after inspecting the original eight results. [0.9B recipe](../../recipes/k2-horizon-0.9b-bf16.json) · [Trial timings](0.9b/trials.jsonl) · [Lookup values and output hashes](0.9b/lookup-values.jsonl)
 
 ## Reproduce
 

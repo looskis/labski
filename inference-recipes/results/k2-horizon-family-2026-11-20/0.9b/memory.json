@@ -1,0 +1,15 @@
+{
+  "unix_ns": 1795187513658361051,
+  "host_bytes": {
+    "MemTotal": 130661068800,
+    "MemAvailable": 116437737472
+  },
+  "cgroup_bytes": {
+    "memory.current": 5117997056,
+    "memory.peak": 5118885888,
+    "memory.max": 118111600640,
+    "anon": 3466256384,
+    "file": 1555222528,
+    "unevictable": 32768
+  }
+}
