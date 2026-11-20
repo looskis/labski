@@ -9,7 +9,7 @@ Four 128 GB Sparks served the 341.38 GB hybrid EXL3/BF16 checkpoint with two MTP
 
 Each throughput cell is the median of three trials with four matched prose requests and a 96-token limit, following an excluded warm-up at each concurrency. The first-delta timer stops on the first generated text, which can be reasoning. Energy integrates NVML readings on all four GB10s. The four-rank runs used eager execution, a 2,048-token prefill batch limit and the lab's ring-only NCCL 2.31.2 build. [Fabric and NCCL setup](../../transport/nccl-switchless/)
 
-The four full snapshots occupied 1,365.52 GB of safetensors across the fleet. Keeping shared weights and each rank’s owned experts takes 485.27 GB, or 121.32 GB per Spark. All 371,712 routed expert tensors matched the source byte for byte. [Partition and verify the rank-local layout](../../experiments/step5-rank-weights/)
+The four full snapshots occupied 1,365.52 GB of safetensors across the fleet. Keeping shared weights and each rank’s owned experts takes 485.27 GB, or 121.32 GB per Spark. All 371,712 routed expert tensors matched the source byte for byte. All four ranks also loaded this compact layout and served chat with the upstream reasoning parser. [Partition and verify the rank-local layout](../../experiments/step5-rank-weights/)
 
 ## Reading Step’s answers
 

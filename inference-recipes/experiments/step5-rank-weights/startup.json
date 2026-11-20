@@ -1,0 +1,70 @@
+[
+  {
+    "rank": 0,
+    "revision": "51a46a7f62eee1225d124170da903bba23d04a26",
+    "weight_file_bytes": 121317299848,
+    "expert_files": 88,
+    "expert_file_bytes": 73353798240,
+    "routed_experts_per_layer": 88,
+    "full": {
+      "model_load_s": 342.50427,
+      "model_memory_gib": 81.47,
+      "gpu_kv_tokens": 74631,
+      "api_startup_complete": true
+    },
+    "compact": {
+      "model_load_s": 556.376144,
+      "model_memory_gib": 81.47,
+      "gpu_kv_tokens": 74631,
+      "api_startup_complete": true
+    }
+  },
+  {
+    "rank": 1,
+    "revision": "51a46a7f62eee1225d124170da903bba23d04a26",
+    "weight_file_bytes": 121317390664,
+    "expert_files": 88,
+    "expert_file_bytes": 73353889056,
+    "routed_experts_per_layer": 88,
+    "full": {
+      "model_load_s": 323.813395,
+      "model_memory_gib": 81.47
+    },
+    "compact": {
+      "model_load_s": 550.471117,
+      "model_memory_gib": 81.47
+    }
+  },
+  {
+    "rank": 2,
+    "revision": "51a46a7f62eee1225d124170da903bba23d04a26",
+    "weight_file_bytes": 121317403336,
+    "expert_files": 88,
+    "expert_file_bytes": 73353901728,
+    "routed_experts_per_layer": 88,
+    "full": {
+      "model_load_s": 312.953048,
+      "model_memory_gib": 81.47
+    },
+    "compact": {
+      "model_load_s": 557.965678,
+      "model_memory_gib": 81.47
+    }
+  },
+  {
+    "rank": 3,
+    "revision": "51a46a7f62eee1225d124170da903bba23d04a26",
+    "weight_file_bytes": 121317403336,
+    "expert_files": 88,
+    "expert_file_bytes": 73353901728,
+    "routed_experts_per_layer": 88,
+    "full": {
+      "model_load_s": 295.272337,
+      "model_memory_gib": 81.47
+    },
+    "compact": {
+      "model_load_s": 555.423517,
+      "model_memory_gib": 81.47
+    }
+  }
+]

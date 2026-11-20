@@ -12,7 +12,7 @@ The default four-rank Step-5-Preview-Spark loader assigns 88 of 352 routed exper
 
 The partitioner rewrote only the 88 expert-file headers and copied the selected packed tensors in their original byte order. All 88 source files passed the pinned publisher SHA-256 manifest. Across the four derived layouts, an independent safetensors reader checked the keys, dtype, shape and complete payload of all **371,712 tensors** against the original. The comparison covered 293,373,324,288 payload bytes. The loader in the serving image has SHA-256 `1a5cecaa5ee896bc7bf09d3d3e4ff958bad5e22e5f341c0679a700b99fadebb4`. This placement requires its whole-expert mode, `STEP5_EXPERT_TP=0` (the default). Expert tensor parallelism uses a slice of every expert on every rank and requires the full expert set. [Exact per-file sizes and hashes](layout.json) · [Independent tensor comparison](tensor-parity.json)
 
-The published four-Spark performance measurements used the full snapshot on each node. The smaller layout has a separate full-model replay in the lab queue. [Serving measurements](../../results/step5-preview-exl3-2026-11-20/)
+All four physical Sparks loaded the smaller layout and the head served chat requests. vLLM reported the same 81.47 GiB of model memory per rank and 74,631 KV tokens for both layouts. The compact launch took 550–558 seconds to load the model per rank, compared with 295–343 seconds for the earlier full-copy run. Each layout had one launch with uncontrolled filesystem cache state. [Per-rank startup records](startup.json) · [Full-copy serving measurements](../../results/step5-preview-exl3-2026-11-20/)
 
 ## Download one rank directly from the Hub
 
@@ -81,4 +81,16 @@ PY
 (cd "$SNAPSHOT" && sha256sum -c -) < rank-experts.sha256
 ```
 
-Use the four-rank serving command in the Step-5 recipe with that cache and the matching rank number. Running the ordinary `prepare` command in this cache would stage the complete upstream checkpoint again. [Four-Spark launch](../../results/step5-preview-exl3-2026-11-20/#reproduce)
+## Serve the compact layout
+
+The compact run used the upstream `step3p5` reasoning parser so clients receive separate reasoning and final-answer fields. After staging, export `HF_HUB_CACHE` on each node. From `inference-recipes/`, generate the parser-enabled recipe on each rank, then start the ranks with the addresses and HCAs from the four-Spark ring procedure. Run the benchmark clients with the same served model name. [Four-rank networking](../../ring-tcp.md#use-roce-on-the-same-four-cables)
+
+```sh
+model=step5-preview-exl3-parsed
+jq '.options["--reasoning-parser"] = "step3p5"' recipes/step5-preview-exl3.json > "recipes/$model.json"
+python3 spark.py serve "$model" --nodes 4 --rank "$RANK" --head "$HEAD_IP" \
+  --node-ip "$NODE_IP" --interface "$CX_IF" --hcas "$HCAS" --transport ring-roce \
+  --fabric-range "$FABRIC_CIDR" --link-prefix 30 --ring-nccl "$RING_NCCL" --ring-only-init
+```
+
+The lab used the original service name with the same parser setting. The ordinary `prepare` command stages the complete upstream checkpoint. Use the staged compact cache directly for this run.
