@@ -1,0 +1,32 @@
+{
+  "trials": [
+    {
+      "completed": 4,
+      "failed": 0,
+      "wall_s": 2.1551431590000902,
+      "output_tokens_per_s": 118.78561242250602,
+      "median_first_delta_ms": 25.837985499947536,
+      "p95_first_delta_ms": 27.16692600006354,
+      "length_limited": 4
+    },
+    {
+      "completed": 4,
+      "failed": 0,
+      "wall_s": 2.1524410319998424,
+      "output_tokens_per_s": 118.93473326056662,
+      "median_first_delta_ms": 25.44981849996475,
+      "p95_first_delta_ms": 26.157456999953865,
+      "length_limited": 4
+    },
+    {
+      "completed": 4,
+      "failed": 0,
+      "wall_s": 2.1502736079996794,
+      "output_tokens_per_s": 119.05461660674308,
+      "median_first_delta_ms": 25.739393499861762,
+      "p95_first_delta_ms": 26.173120000294148,
+      "length_limited": 4
+    }
+  ],
+  "median_output_tokens_per_s": 118.93473326056662
+}

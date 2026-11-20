@@ -1,0 +1,18 @@
+{
+  "purpose": "Run the released MXFP4 expert weights with the Marlin MoE backend on GB10.",
+  "model": "openai/gpt-oss-20b",
+  "revision": "6cee5e81ee83917806bbde320786a8fb61efebee",
+  "precision": "MXFP4 experts",
+  "nodes": [1],
+  "per_node_gb": 64,
+  "image": "vllm-0.33.0",
+  "context": 16384,
+  "sequences": 8,
+  "memory_fraction": 0.6,
+  "options": {
+    "--moe-backend": "marlin",
+    "--max-num-batched-tokens": 2048
+  },
+  "exclude": ["original/*"],
+  "source": "https://github.com/NVIDIA/dgx-spark-playbooks/tree/main/nvidia/vllm"
+}

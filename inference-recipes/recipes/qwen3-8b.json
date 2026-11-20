@@ -1,0 +1,17 @@
+{
+  "purpose": "Measure interactive dense-model latency and throughput with four simultaneous requests.",
+  "model": "Qwen/Qwen3-8B",
+  "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+  "precision": "BF16",
+  "nodes": [1],
+  "per_node_gb": 64,
+  "image": "vllm-0.33.0",
+  "context": 16384,
+  "sequences": 4,
+  "memory_fraction": 0.62,
+  "options": {
+    "--reasoning-parser": "qwen3",
+    "--no-enable-prefix-caching": true
+  },
+  "source": "https://github.com/NVIDIA/dgx-spark-playbooks/tree/main/nvidia/playbook-vllm"
+}

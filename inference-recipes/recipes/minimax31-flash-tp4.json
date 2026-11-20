@@ -1,0 +1,25 @@
+{
+  "purpose": "Serve a checkpoint with about 250 GB of root weight shards across the full fleet and measure one- and two-user latency.",
+  "model": "MiniMaxAI/MiniMax-M3.1-Flash",
+  "revision": "ce7f4df87d2e05262f5775f373dac4772f134041",
+  "precision": "NVFP4 experts + MXFP8",
+  "nodes": [4],
+  "per_node_gb": 128,
+  "image": "minimax-m31",
+  "context": 32768,
+  "sequences": 2,
+  "memory_fraction": 0.8,
+  "options": {
+    "--kv-cache-dtype": "fp8",
+    "--attention-config": {"indexer_kv_dtype": "fp8", "minimax_m3_msa_decode_backend": "cutlass"},
+    "--reasoning-parser": "minimax_m3",
+    "--enable-auto-tool-choice": true,
+    "--tool-call-parser": "minimax_m3",
+    "--load-format": "instanttensor",
+    "--speculative-config": {"method": "dspark", "num_speculative_tokens": 7, "draft_tensor_parallel_size": 4, "kv_cache_dtype": "bfloat16"}
+  },
+  "env": {
+    "NCCL_MAX_CTAS": "8"
+  },
+  "source": "https://github.com/NVIDIA/local-ai-inference-recipes/tree/bb515086841e7a81e7d51925561338e7dee35023/models/minimax/minimax-m3.1-flash/dgx-spark-4gpu/linux/vllm/fp4-fp8-mixed"
+}

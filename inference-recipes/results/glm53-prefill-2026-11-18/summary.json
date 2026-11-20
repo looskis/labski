@@ -1,0 +1,133 @@
+{
+  "completed_utc": "2026-11-18T21:52:58.350603+00:00",
+  "model": "nvidia/GLM-5.3-Flash-NVFP4",
+  "revision": "1d00738646cbb0c6d0a9eb403dac5f366f1473a7",
+  "corpus_sha256": "c7389e1fd02106303564fd399324af462ec24b9d2ebab3d0fa6d5cc568656dba",
+  "image_digest": "sha256:d825baf9ce4b1b6bfc5ecc7b79880c7e6748c65a72d697ce3d47607aafa84c6e",
+  "metric": "Prompt tokens divided by client time to first output token; one request at a time; zero cached tokens",
+  "comparison_scope": "NVFP4/vLLM versus EXL3/TensorFold on the same two GB10 systems. Both quantization and runtime change.",
+  "network": "Both 200-Gb/s ConnectX-7 rails used by NCCL NET/IB; GPU Direct RDMA was not enabled.",
+  "limits": [
+    "Three trials per size and configuration; concurrency one; one output token.",
+    "Model loading, compilation, warmup, quality checks and profiling excluded from timed results.",
+    "Two NVFP4 configurations tested; this is not an exhaustive tuning sweep.",
+    "Chunk size, NCCL budget and CPU thread count changed together; individual gains were not isolated.",
+    "No matched M5 Ultra benchmark was supplied or measured."
+  ],
+  "quality": {
+    "scope": "Tiny sanity sample; not a broad quality evaluation",
+    "short_answer_content_correct": {
+      "exl3-reference": 10,
+      "nvfp4-b12x-4096": 9,
+      "nvfp4-b12x-8192-ctas8": 10,
+      "nvfp4-b12x-8192-ctas8-repeat": 9
+    },
+    "grading_note": "Content correctness only. The correct reversal is yrassecen. Some correct responses violated the letters-only formatting request.",
+    "long_retrieval_correct": {
+      "nvfp4-b12x-8192-ctas8": 2,
+      "nvfp4-b12x-4096": 2,
+      "exl3-reference": 2,
+      "nvfp4-b12x-8192-ctas8-repeat": 2
+    },
+    "mean_nll_206_tokens": {
+      "nvfp4-b12x-8192-ctas8": 0.7671155026449817,
+      "nvfp4-b12x-4096": 0.7773742555949219,
+      "exl3-reference": 0.752643080590998,
+      "nvfp4-b12x-8192-ctas8-repeat": 0.7738823326677753
+    },
+    "finding": "Repeated identical input at temperature 0 and seed 0 produced both correct and incorrect word reversals. Output equivalence and determinism are not established.",
+    "cause": "Not isolated. Quantization and runtime both differ from EXL3; the instability was also observed within one NVFP4 server instance."
+  },
+  "performance": [
+    {
+      "label": "exl3-reference",
+      "prompt_tokens": 4096,
+      "trials": 3,
+      "median_tps": 1657.1806902219596,
+      "min_tps": 1656.144286285522,
+      "max_tps": 1658.3252125736385,
+      "median_ttft_s": 2.4716677090000303,
+      "speedup_vs_exl3": 1.0
+    },
+    {
+      "label": "exl3-reference",
+      "prompt_tokens": 32768,
+      "trials": 3,
+      "median_tps": 1903.3091434733567,
+      "min_tps": 1902.1452337174162,
+      "max_tps": 1906.4195718862122,
+      "median_ttft_s": 17.21633089000011,
+      "speedup_vs_exl3": 1.0
+    },
+    {
+      "label": "exl3-reference",
+      "prompt_tokens": 65536,
+      "trials": 3,
+      "median_tps": 1893.9084710181908,
+      "min_tps": 1892.0207838805266,
+      "max_tps": 1897.443783495088,
+      "median_ttft_s": 34.60357298300005,
+      "speedup_vs_exl3": 1.0
+    },
+    {
+      "label": "nvfp4-b12x-4096",
+      "prompt_tokens": 4096,
+      "trials": 3,
+      "median_tps": 2163.448221582112,
+      "min_tps": 2159.823847297966,
+      "max_tps": 2170.742021146639,
+      "median_ttft_s": 1.8932738759999665,
+      "speedup_vs_exl3": 1.3054992942817503
+    },
+    {
+      "label": "nvfp4-b12x-4096",
+      "prompt_tokens": 32768,
+      "trials": 3,
+      "median_tps": 2224.3359055018054,
+      "min_tps": 2222.662134051361,
+      "max_tps": 2226.6787906509007,
+      "median_ttft_s": 14.731587940000281,
+      "speedup_vs_exl3": 1.1686676928597137
+    },
+    {
+      "label": "nvfp4-b12x-4096",
+      "prompt_tokens": 65536,
+      "trials": 3,
+      "median_tps": 2207.108177916403,
+      "min_tps": 2204.527204708837,
+      "max_tps": 2211.3616469889266,
+      "median_ttft_s": 29.693152630999975,
+      "speedup_vs_exl3": 1.1653721453232804
+    },
+    {
+      "label": "nvfp4-b12x-8192-ctas8",
+      "prompt_tokens": 4096,
+      "trials": 3,
+      "median_tps": 2179.9941982448804,
+      "min_tps": 2175.290667147946,
+      "max_tps": 2186.4943715655268,
+      "median_ttft_s": 1.8789040830006343,
+      "speedup_vs_exl3": 1.315483707424141
+    },
+    {
+      "label": "nvfp4-b12x-8192-ctas8",
+      "prompt_tokens": 32768,
+      "trials": 3,
+      "median_tps": 2491.7668214101786,
+      "min_tps": 2490.8658335321825,
+      "max_tps": 2492.0498501033067,
+      "median_ttft_s": 13.15050819299995,
+      "speedup_vs_exl3": 1.30917608942021
+    },
+    {
+      "label": "nvfp4-b12x-8192-ctas8",
+      "prompt_tokens": 65536,
+      "trials": 3,
+      "median_tps": 2475.6736217301,
+      "min_tps": 2471.2107278846624,
+      "max_tps": 2477.1549245124047,
+      "median_ttft_s": 26.471987027999603,
+      "speedup_vs_exl3": 1.3071770149479
+    }
+  ]
+}

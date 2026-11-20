@@ -1,0 +1,28 @@
+{
+  "request": {
+    "model": "qwen3-0.6b",
+    "messages": [
+      {
+        "role": "user",
+        "content": "What is 17 plus 25? Reply with the number only."
+      }
+    ],
+    "temperature": 0,
+    "max_tokens": 32,
+    "chat_template_kwargs": {
+      "enable_thinking": false
+    }
+  },
+  "model": "qwen3-0.6b",
+  "content": "17 + 25 = 42.",
+  "finish": "stop",
+  "usage": {
+    "prompt_tokens": 28,
+    "total_tokens": 40,
+    "completion_tokens": 12,
+    "prompt_tokens_details": null,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  }
+}

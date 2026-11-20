@@ -1,0 +1,29 @@
+{
+  "purpose": "Test DSpark drafting with the hybrid Mamba/attention model under concurrent chat load.",
+  "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4",
+  "revision": "bee7596271d1495f6992ae224aefde4410e816b8",
+  "precision": "mixed NVFP4",
+  "nodes": [1],
+  "per_node_gb": 64,
+  "image": "spark-20261016",
+  "context": 16384,
+  "sequences": 8,
+  "memory_fraction": 0.8,
+  "options": {
+    "--reasoning-parser": "nemotron_v3",
+    "--moe-backend": "marlin",
+    "--kv-cache-dtype": "fp8",
+    "--mamba-backend": "flashinfer",
+    "--mamba-cache-mode": "align",
+    "--mamba-ssm-cache-dtype": "float16",
+    "--enable-mamba-cache-stochastic-rounding": true,
+    "--mamba-cache-philox-rounds": 5,
+    "--max-num-batched-tokens": 4096,
+    "--speculative-config": {"method": "dspark", "num_speculative_tokens": 7}
+  },
+  "draft": {
+    "model": "nvidia/NVIDIA-Nemotron-3.5-Lightning-30B-A3B-NVFP4-DSpark",
+    "revision": "6d127b50ecd98562cea85d0087680b7d86091fb0"
+  },
+  "source": "https://github.com/NVIDIA/local-ai-inference-recipes/tree/bb515086841e7a81e7d51925561338e7dee35023/models/nvidia/nemotron-3.5-lightning-30b-a3b/dgx-spark/linux/vllm/64gb/nvfp4"
+}

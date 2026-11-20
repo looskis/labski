@@ -1,0 +1,14 @@
+# TensorFold on DGX Spark
+
+Reviewed 2026-11-19. TensorFold publishes an inference engine and a hardware-filtered recipe catalog. The catalog credits Mia’s AI Lab for several Spark deployments. The engine’s family pages identify supported checkpoint formats, kernel paths and hardware qualification. A recipe links the launch command to setup instructions, memory estimates, checkpoint details and benchmark evidence. [Catalog](https://tensorfold.dev/recipes/) · [Versioned engine recipe book](https://github.com/ashhart/TensorFold/blob/v1.2.9/docs/recipes/README.md)
+
+| Published configuration | What to compare on the lab’s Sparks |
+| --- | --- |
+| Qwen3.8 27B has a GB10 CUDA path. TensorFold also covers speculative decoding. [Engine family page](https://github.com/ashhart/TensorFold/blob/v1.2.9/docs/recipes/qwen3.8-27b.md) | Run our BF16 and mixed NVFP4 checkpoints at the same KV precision first. Then test the latency-oriented DFlash2 configuration as a separate deployment. |
+| Mia’s two-Spark GLM‑5.3‑Flash run uses an EXL3 4 bpw checkpoint and DFlash2. At temperature 0.7 with thinking on, the authors report 47.8 output tok/s at one prose stream and 87.3 aggregate tok/s at four. Their cold 32K prefill took 18.4 seconds to first token. [Pinned run and conditions](https://github.com/MiaAI-Lab/GLM-5.3-Flash-DGX-Sparks-1104/blob/80be4d6882837d8e0840827ae2aab6124fd48da3/README.md#performance) | Our two-node GLM uses NVIDIA FP4-Local and MTP. A replay on both stacks can compare complete serving configurations. Attributing a difference specifically to the engine requires matching the checkpoint and drafting settings. |
+| TensorFold links a four-Spark GLM ring with original block-FP8 weights. [Multi-Spark setup guides](https://tensorfold.dev/recipes/) | Use our matched Qwen checkpoint on four independent endpoints and on one TP4 endpoint to measure the effect of network traffic under load. Record the actual fabric topology. |
+| TensorFold’s community board describes greedy chat, a 256-token output budget and the median of five runs. Entries are self-reported and include first-text latency. [Leaderboard methodology](https://tensorfold.dev/benchmarks/) | Retain the underlying request records and actual token counts. For a head-to-head, replay identical prompts, chat templates, thinking settings, sampling, concurrency and cache state. |
+
+EXL3 4 bpw, MXFP4 and NVFP4 are distinct formats. TensorFold’s GLM figures are external comparison points. A labski result needs a run on our hardware with the exact workload and software recorded. A speed comparison using different prompts or thinking settings belongs in separate rows.
+
+The lab also has a matched two-Spark cold-prefill comparison against TensorFold. The archived corpus and raw request timings support a comparison of the two serving stacks at 4K, 32K and 64K. [Lab measurement and replay](results/glm53-prefill-2026-11-18/)

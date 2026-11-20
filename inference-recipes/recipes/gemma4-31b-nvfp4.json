@@ -1,0 +1,24 @@
+{
+  "purpose": "Serve instruction chat with Gemma tool calling and a four-token assistant draft.",
+  "model": "nvidia/Gemma-4-31B-IT-NVFP4",
+  "revision": "4135a98a9b728a548947683219633b25682223ac",
+  "precision": "NVFP4",
+  "nodes": [1],
+  "per_node_gb": 128,
+  "image": "spark-20261016",
+  "context": 32768,
+  "sequences": 8,
+  "memory_fraction": 0.72,
+  "options": {
+    "--reasoning-parser": "gemma4",
+    "--tool-call-parser": "gemma4",
+    "--enable-auto-tool-choice": true,
+    "--max-num-batched-tokens": 4096,
+    "--speculative-config": {"num_speculative_tokens": 4}
+  },
+  "draft": {
+    "model": "google/gemma-4-31B-it-assistant",
+    "revision": "627c5ec1458b9086b841a91e0512fd31fd2fbbf1"
+  },
+  "source": "https://github.com/NVIDIA/local-ai-inference-recipes/tree/bb515086841e7a81e7d51925561338e7dee35023/models/google/gemma-4-31b/dgx-spark/linux/vllm/128gb/nvfp4"
+}

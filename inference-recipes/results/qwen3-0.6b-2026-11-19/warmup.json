@@ -1,0 +1,14 @@
+[
+  {
+    "case": 41,
+    "endpoint_index": 0,
+    "prompt_sha256": "645a70fd4d1e35b09475039a8988543a5ffac5bbdafc5bb71aead5bced562e57",
+    "elapsed_s": 16.105048384999918,
+    "first_delta_s": 15.592829278999943,
+    "first_text_s": null,
+    "finish": "length",
+    "input_tokens": 37,
+    "output_tokens": 64,
+    "answer": ""
+  }
+]
