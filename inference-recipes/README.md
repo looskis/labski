@@ -30,7 +30,8 @@ Additional catalog entries are candidates unless a result is linked. Node counts
 | Nanbeige4.3-33B precision sweep | 1 × 128 GB | [Official BF16](recipes/nanbeige43-33b-bf16.json), [official FP8](recipes/nanbeige43-33b-fp8.json), [community NVFP4](recipes/nanbeige43-33b-nvfp4.json) | At four clients, 14.10 / 24.14 / 43.50 tok/s and 63 / 63 / 60 free answers out of 112. [Measurements](results/nanbeige43-33b-2026-11-19/) |
 | [Qwen3.8 27B control](recipes/qwen38-27b-bf16.json) | 1, 2 or 4 × 128 GB | BF16 | 83/112 with identical verdicts at every topology, up to 13.92 tok/s C1 and 54.33 aggregate at C4 |
 | [Qwen3.8 27B precision and scaling](recipes/qwen38-27b-nvfp4.json) | 1, 2 or 4 × 128 GB | Mixed NVFP4/FP8 | Same scheduler, KV dtype and context as the BF16 control |
-| [Qwen3.8 27B DFlash2](recipes/qwen38-27b-dflash.json) | 1 × 128 GB | Mixed NVFP4/FP8 | Seven-token draft, FP8 KV cache, GB10 dynamic linear backend |
+| [Qwen3.8 27B DFlash2 on vLLM 0.33](recipes/qwen38-27b-dflash-v033-7.json) | 1 × 128 GB | Mixed NVFP4/FP8, BF16 KV | [30.90 / 48.20 tok/s with one / four clients, 19/28 short answers and all eight lookups](results/qwen38-27b-dflash2-2026-11-20/) |
+| [Qwen3.8 27B DFlash2 on NGC](recipes/qwen38-27b-dflash.json) | 1 × 128 GB | Mixed NVFP4/FP8 | Seven-token draft, FP8 KV cache, GB10 dynamic linear backend |
 | [Gemma 4 31B IT](recipes/gemma4-31b-nvfp4.json) | 1 × 128 GB | NVFP4 | Tool calling with an assistant drafter |
 | [GLM 5.3 Flash measured prefill](recipes/glm53-nvfp4-prefill.json) | 2 × 128 GB | NVFP4 | 8K prefill chunks, C1, [archived measurements](results/glm53-prefill-2026-11-18/) |
 | [Qwen3.8 Flash-Next](recipes/qwen38-flash-next-nvfp4.json) | 2 × 128 GB | Mixed NVFP4/FP8/BF16 | Measured text-only service at 8K context with a 133 GB checkpoint |
@@ -48,7 +49,7 @@ For full GLM-5.3, `--output-head q6` selects the pinned auxiliary 6-bit output p
 
 ## First completion on one Spark
 
-From this directory on a GB10 Spark running DGX OS, use Python 3.9+, Docker with NVIDIA GPU support. Use a driver compatible with the selected image. Each recipe's `source` points to its model or platform reference. On the lab’s 580.178.04 driver, the NGC 26.10.pre1 image hit a PTX toolchain error serving Qwen3 0.6B. Its verified bring-up recipe uses vLLM 0.33.0 in eager mode. The DFlash2 candidate still uses the NGC build for its GB10-specific kernel flags and needs a separate driver check. The launcher resolves container tags to the immutable digests in [images.json](images.json).
+From this directory on a GB10 Spark running DGX OS, use Python 3.9+, Docker with NVIDIA GPU support. Use a driver compatible with the selected image. Each recipe's `source` points to its model or platform reference. On the lab’s 580.178.04 driver, the NGC 26.10.pre1 image hit a PTX toolchain error serving Qwen3 0.6B. Its verified bring-up recipe uses vLLM 0.33.0 in eager mode. The NGC DFlash2 candidate uses GB10-specific kernel flags and needs a separate driver check. The measured DFlash2 recipe runs on the same driver with vLLM 0.33.0 and BF16 KV. The launcher resolves container tags to the immutable digests in [images.json](images.json).
 
 ```sh
 python3 spark.py list
