@@ -1,5 +1,7 @@
 # Qwen3.8 Flash-Next on a direct Spark pair
 
+**Recommended for up to four clients at 8K context:** use the 2 GiB KV pool and four scheduler slots. The same pair delivered **64.96 aggregate output tok/s** at four clients and **21.73 tok/s** at one. The one-slot control delivered 22.38 and 21.80 respectively. [Four-client recipe](../../recipes/qwen38-flash-next-kv2g-c4.json)
+
 NVIDIA’s 132.68 GB mixed checkpoint served text on two 128 GB DGX Sparks with upstream vLLM 0.33.0, BF16 KV and no speculative decoding. A single client received **21.34 output tokens/s**. Four concurrent clients received **21.87 aggregate output tokens/s** with one scheduler slot, so the extra requests queued. Both physical RoCE functions on the direct link carried data. [Pinned inference recipe](../../recipes/qwen38-flash-next-nvfp4.json) · [RDMA byte counters](rdma.csv)
 
 | Clients | Median aggregate output tok/s | Trial range | Median combined GPU J/output token |
@@ -24,8 +26,19 @@ The smaller pool freed about 25.8 GiB of configured KV capacity per rank. The ha
 
 **For applications that require one option letter**, constraining the greedy decoder to one uppercase A–J token improved the small-pool score from **76 to 84 out of 112** and reduced total generation from **448 tokens to 112**. Eight responses became correct and every previously correct verdict was retained. Free-response decoding had hit its 16-token limit on 16 questions. Both tests used identical prompts with thinking disabled. The constrained grammar applies to this output contract. [Constrained answers and allowed token IDs](kv2g-c1/one-letter.jsonl.gz) · [Scoring code](../../mmlu_probe.py)
 
+## Letting four clients generate together
+
+On the same C–D pair we changed only the number of active sequences from one to four, retaining the 2 GiB KV cap, checkpoint, context, no drafting and all other server and benchmark settings. With four clients the change **raised median throughput by 2.90×** and **cut GPU joules per output token by 61%**. One-client speed changed by 0.3%. Every timed response reached the same 96-token budget.
+
+| Scheduler slots | One client, output tok/s | Four clients, aggregate output tok/s | Four-client GPU J/output token | Free letter score / 112 | Constrained letter score / 112 |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 1 | 21.80 | 22.38 | 2.47 | 76 | 84 |
+| 4 | 21.73 | 64.96 | 0.97 | 77 | 86 |
+
+The three four-client trial rates with four slots were **50.31, 64.96 and 65.49** output tok/s, in run order after the excluded single-request warm-up. All three exceeded the best one-slot rate of 22.98. The first batched trial was visibly slower. Five of the 112 free-response verdicts changed across server launches, with two correct only at one slot and three correct only at four. The four-slot constrained run recovered ten misses and lost one previously correct answer, with 112 generated tokens versus 462 unconstrained. The quality probes were sequential in both deployments. [Four-slot timing and requests](kv2g-c4/trials.jsonl) · [All request records](kv2g-c4/requests.jsonl.gz) · [Energy](kv2g-c4/flash-next-kv2g-c4-energy.jsonl) · [Free answers](kv2g-c4/quality.jsonl.gz) · [Constrained answers](kv2g-c4/one-letter.jsonl.gz) · [Pinned settings](kv2g-c4/settings.jsonl)
+
 ## Reproduce
 
-Prepare and serve `qwen38-flash-next-nvfp4` on a direct ConnectX pair, with rank zero as the client. Use the pinned ARM64 image, the recipe’s 8,192-token window, one scheduler slot, a 2,048-token batch cap and eager execution. Prepare the 112-item corpus using the Qwen 27B instructions, then run its quality and prose commands with `MODEL=qwen38-flash-next-nvfp4`. For energy, start the NVML sampler on each rank before the first timed trial. [Distributed launcher](../../README.md#one-endpoint-on-multiple-sparks) · [Exact prompts and benchmark commands](../qwen38-27b-precision-2026-11-19/#reproduce) · [Energy capture](../../measurement.md#measure-energy-on-gb10)
+Prepare and serve `qwen38-flash-next-kv2g-c4` for four active clients, `qwen38-flash-next-kv2g-c1` for its single-slot control, or `qwen38-flash-next-nvfp4` for the original automatic-cache baseline on a direct ConnectX pair, with rank zero as the client. Use the pinned ARM64 image, the recipe’s 8,192-token window, the recipe’s scheduler slot count, a 2,048-token batch cap and eager execution. Prepare the 112-item corpus using the Qwen 27B instructions, then run its quality and prose commands with `MODEL` set to the served recipe ID. For energy, start the NVML sampler on each rank before the first timed trial. [Distributed launcher](../../README.md#one-endpoint-on-multiple-sparks) · [Exact prompts and benchmark commands](../qwen38-27b-precision-2026-11-19/#reproduce) · [Energy capture](../../measurement.md#measure-energy-on-gb10)
 
 NVIDIA has also published a one-Spark configuration for a separate 102 GB FP4-Local checkpoint with its PLE table on disk and four-token MTP. Its active-decode benchmark uses different weights, settings and timing boundaries. [NVIDIA single-Spark deployment](https://github.com/NVIDIA/local-ai-inference-recipes/tree/bb515086841e7a81e7d51925561338e7dee35023/models/qwen/qwen3.8-flash-next/dgx-spark/linux/vllm/fp4-local)
