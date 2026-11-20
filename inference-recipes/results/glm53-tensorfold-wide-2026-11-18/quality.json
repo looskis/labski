@@ -1,0 +1,65 @@
+{
+  "wide-control": {
+    "nll": 0.752643080590998,
+    "nll_per_passage": [
+      0.5220781564712524,
+      0.7842230464136878,
+      0.2805961915004401,
+      2.1627894289353313
+    ],
+    "answers": [
+      "69",
+      "Canberra",
+      "s[::-1]",
+      "0.9",
+      "Photosynthesis",
+      "17",
+      "**y-r-a-s-s-e-c-e-n**\n\n\"necessary\" spelled backwards is **yrassecen**.",
+      "A mutex protects against race conditions by ensuring only one thread accesses a shared resource at a time.",
+      "12",
+      "K"
+    ]
+  },
+  "wide": {
+    "nll": 0.752643080590998,
+    "nll_per_passage": [
+      0.5220781564712524,
+      0.7842230464136878,
+      0.2805961915004401,
+      2.1627894289353313
+    ],
+    "answers": [
+      "69",
+      "Canberra",
+      "s[::-1]",
+      "0.9",
+      "Photosynthesis",
+      "17",
+      "**y-r-a-s-s-e-c-e-n**\n\n\"necessary\" spelled backwards is **yrassecen**.",
+      "A mutex protects against race conditions by ensuring only one thread accesses a shared resource at a time.",
+      "12",
+      "K"
+    ]
+  },
+  "a8g64": {
+    "nll": 0.7531756891787631,
+    "nll_per_passage": [
+      0.5439779361089071,
+      0.7726895753727403,
+      0.2647888160046236,
+      2.1873442705939796
+    ],
+    "answers": [
+      "69",
+      "Canberra",
+      "s[::-1]",
+      "0.9",
+      "Photosynthesis",
+      "17",
+      "yranecessen",
+      "A mutex protects against race conditions by ensuring only one thread accesses a shared resource at a time.",
+      "12",
+      "K"
+    ]
+  }
+}

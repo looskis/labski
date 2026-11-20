@@ -1,0 +1,20 @@
+PASS nonfinite cuda glm wide q8 BF16 replacement: 256 non-finite and 256 finite outputs match the float64 classes
+PASS repeat cuda glm wide q8 BF16 replacement: five runs byte-identical (8192 bytes), inputs and guards untouched, no overlap
+PASS shapes cuda glm wide q8 BF16 replacement: 13 shapes bit-equal to the kernel it replaces (worst 0.000 of the bound), 0 edges refused by the kernel
+PASS sums cuda glm wide q8 BF16 replacement: exact sums at k 4096, where fp16 sums would miss by 589x and bf16 by 3955x
+PASS nonfinite cuda glm wide q8 FP32 replacement: 256 non-finite and 256 finite outputs match the float64 classes
+PASS repeat cuda glm wide q8 FP32 replacement: five runs byte-identical (16384 bytes), inputs and guards untouched, no overlap
+PASS shapes cuda glm wide q8 FP32 replacement: 13 shapes bit-equal to the kernel it replaces (worst 0.000 of the bound), 0 edges refused by the kernel
+PASS sums cuda glm wide q8 FP32 replacement: exact sums at k 4096, where fp16 sums would miss by 42020712x and bf16 by 242053205x
+PASS nonfinite cuda glm wide q8 BF16 FP64 reference: 256 non-finite and 256 finite outputs match the float64 classes
+PASS repeat cuda glm wide q8 BF16 FP64 reference: five runs byte-identical (8192 bytes), inputs and guards untouched, no overlap
+PASS shapes cuda glm wide q8 BF16 FP64 reference: 13 shapes within the float64 bound (worst 0.969 of the bound), 0 edges refused by the kernel
+PASS sums cuda glm wide q8 BF16 FP64 reference: exact sums at k 4096, where fp16 sums would miss by 309x and bf16 by 3395x
+PASS nonfinite cuda glm wide q8 FP32 FP64 reference: 256 non-finite and 256 finite outputs match the float64 classes
+PASS repeat cuda glm wide q8 FP32 FP64 reference: five runs byte-identical (16384 bytes), inputs and guards untouched, no overlap
+PASS shapes cuda glm wide q8 FP32 FP64 reference: 13 shapes within the float64 bound (worst 0.004 of the bound), 0 edges refused by the kernel
+PASS sums cuda glm wide q8 FP32 FP64 reference: exact sums at k 4096, where fp16 sums would miss by 27282099x and bf16 by 141928273x
+FAIL shapes control: glm wide tile drops the last row tile: at 257x64x4096 its bytes differ from glm_mm8_128s2, unchanged in this image's from byte 32768
+CONTROL control: glm wide tile drops the last row tile: red at shapes, as planted
+PASS glm wide limits: regs=125 static=0 dynamic=73984 local=0 threads=512 blocks/SM=1
+SUMMARY glm wide focused: 4 kernels, 4 passed, 0 failed; 1/1 planted controls caught; limits=PASS
