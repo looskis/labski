@@ -1,0 +1,41 @@
+{
+  "purpose": "Single-variable control for the 8,192-token GLM prefill chunk experiment on a direct Spark pair.",
+  "model": "nvidia/GLM-5.3-Flash-NVFP4",
+  "revision": "1d00738646cbb0c6d0a9eb403dac5f366f1473a7",
+  "precision": "NVFP4",
+  "nodes": [
+    2
+  ],
+  "per_node_gb": 128,
+  "image": "vllm-0.33.0",
+  "context": 73728,
+  "sequences": 1,
+  "memory_fraction": 0.9,
+  "container_memory_gib": 112,
+  "options": {
+    "--dtype": "bfloat16",
+    "--kv-cache-dtype": "fp8_e4m3",
+    "--kv-cache-memory-bytes": 2147483648,
+    "--max-num-batched-tokens": 4096,
+    "--enable-chunked-prefill": true,
+    "--disable-prefix-caching": true,
+    "--enable-prompt-tokens-details": true,
+    "--language-model-only": true,
+    "--enforce-eager": true,
+    "--generation-config": "vllm",
+    "--moe-backend": "b12x",
+    "--linear-backend": "b12x"
+  },
+  "env": {
+    "OMP_NUM_THREADS": "1",
+    "NCCL_MAX_CTAS": "8",
+    "NCCL_BUFFSIZE": "1048576",
+    "NCCL_DEBUG": "INFO",
+    "NCCL_DEBUG_SUBSYS": "INIT,NET",
+    "MAX_JOBS": "2",
+    "FLASHINFER_NVCC_THREADS": "1",
+    "TOKENIZERS_PARALLELISM": "false"
+  },
+  "source": "https://huggingface.co/nvidia/GLM-5.3-Flash-NVFP4/tree/1d00738646cbb0c6d0a9eb403dac5f366f1473a7",
+  "evidence": "results/glm53-prefill-2026-11-18/"
+}

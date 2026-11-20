@@ -37,3 +37,15 @@ python3 replay.py --model glm53-nvfp4-prefill --out /tmp/glm53-nvfp4-replay.csv
 The replay verifies the SHA-256 of the original [compressed token corpus](corpus.jsonl.gz) after decompression. It checks the actual input and output counts and cold-cache evidence before reporting a timing. Use the same corpus and change the API alias and URL for the reference engine. The archived reference used TensorFold 1.1.9 (engine commit `f350cd3e`) with Mia’s EXL3 weights at `76c0b5173166d2795dd48860f45d8224817f894c`, DFlash2, FP8 KV, eight server slots and prompt caching disabled. The lab enabled its additional wide-prompt patch (`TF_GLM_PROMPT_WIDE=1`, patch SHA-256 `c82d6718216d909f7802735f0c29804ebbcc0bff3f19d7a1d37391a01ddcc88e`). The comparison measures that tuned build. An upstream-only rebuild is a different reference configuration. [Pinned upstream recipe](https://github.com/MiaAI-Lab/GLM-5.3-Flash-DGX-Sparks-1104/tree/80be4d6882837d8e0840827ae2aab6124fd48da3)
 
 The records in this directory come from the lab’s archived experiment. They were checked against the saved request rows during import. The [GLM FP4-Local serving candidate](../../recipes/glm53-flash-fp4.json) uses a different checkpoint, loader and workload.
+
+## Isolating prefill chunk size
+
+A second November 19 run changed only the maximum batched token count from 8,192 to 4,096. It used the same two Sparks, checkpoint, image, dual-rail RoCE transport, greedy one-token responses, 2 GiB FP8 KV allocation, NCCL settings, CPU threads and cold token-ID corpus as the 8K replay above. Each median covers three timed requests after the excluded warm-up. Run order was 8K then 4K in separate server lifetimes. [4K control recipe](../../recipes/glm53-chunk4096.json)
+
+| Input tokens | 4K chunk, input tok/s | 8K chunk, input tok/s | Change with 8K |
+| ---: | ---: | ---: | ---: |
+| 4,096 | 2,199 | 2,188 | −0.5% |
+| 32,768 | 2,263 | 2,507 | +10.8% |
+| 65,536 | 2,248 | 2,481 | +10.4% |
+
+The larger chunk helped once the prompt spanned multiple chunks. The 4K result is within 1% between settings, with three trials per cell. To reproduce the control, run the same replay with `--model glm53-chunk4096`. These timings measure prefill only.

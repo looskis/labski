@@ -27,6 +27,7 @@ Additional catalog entries are candidates unless a result is linked. Node counts
 | [GLM 5.3 Flash measured prefill](recipes/glm53-nvfp4-prefill.json) | 2 × 128 GB | NVFP4 | 8K prefill chunks, C1, [archived measurements](results/glm53-prefill-2026-11-18/) |
 | [Qwen3.8 Flash-Next](recipes/qwen38-flash-next-nvfp4.json) | 2 × 128 GB | Mixed NVFP4/FP8/BF16 | Text-only fit trial with a 133 GB checkpoint |
 | [Inkling 2 Small](recipes/inkling2-small-native.json) | 4 × 128 GB | Native NVFP4/MXFP8 experts | Four-node text-only fit trial with the Inkling 2 ARM64 image |
+| [GLM 5.3 Flash 4K chunk control](recipes/glm53-chunk4096.json) | 2 × 128 GB | NVFP4 | Same image and runtime settings as the 8K recipe, with [one parameter varied](results/glm53-prefill-2026-11-18/#isolating-prefill-chunk-size) |
 | [GLM 5.3 Flash chat](recipes/glm53-flash-fp4.json) | 2 × 128 GB | Mixed FP4-Local | 320B MoE, B12X loader, MTP and 64K context |
 | [MiniMax M3.1 Flash](recipes/minimax31-flash-tp4.json) | 4 × 128 GB | NVFP4 experts + MXFP8 | One large endpoint using all four Sparks and the bundled DSpark head |
 
