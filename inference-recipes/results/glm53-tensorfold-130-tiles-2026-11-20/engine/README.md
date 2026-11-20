@@ -25,13 +25,14 @@ tar -xzf "$work/recipe.tar.gz" -C "$work/recipe" --strip-components=1
     git apply --check "$file" && git apply "$file"
   done
   echo 'a5789718fc8cb986235de1829433c2df474826f557843c4185f27903824212e4  zig/kernels/cuda/glm_mm.cu' | sha256sum -c -
-  echo 'd6ac1cc68da3fc3d49218fba060abd53aaabd5232f6cb2d43981d70dd93ee13d  zig/src/families/glm/cuda_mm.zig' | sha256sum -c -
+  echo 'e213595907209cd9ceb56eea8d822b641b336eb3ec367a80f9677b80c7ff0ac6  zig/src/platform/environment.zig' | sha256sum -c -
+  echo '709f103e0e280e7d4202232b672757e434845f783a36e8ad8f12e6d28960f4cf  zig/src/families/glm/cuda_mm.zig' | sha256sum -c -
 )
 ```
 
 ## Compile and select a dispatch
 
-The lab used the pinned ARM64 vLLM image for its CUDA 13.0.88 compiler, Zig 0.17.0, SM121, and three compile jobs. The binary we installed had SHA-256 `9b9ec35bc5b79e8ca1e1406982efcf7b19cc05c379f859f8cb50adc4fb35ff7a`. Check the digest after copying your build to the second Spark.
+The lab used the pinned ARM64 vLLM image for its CUDA 13.0.88 compiler, Zig 0.17.0, SM121, and three compile jobs. The first full-model launch reached two-rank NCCL initialization and checkpoint verification, then stopped while looking up the unregistered dispatch flag. The revised patch registers both flags in the strict GLM environment table and checks registration during compilation. After rebuilding, the executable on both Sparks had SHA-256 `a2ace4aee215a2293feea522af519b08292fe56164e6b589d72f81742c33a31a`. Check the digest after copying your build to the second Spark.
 
 ```sh
 curl -fL --retry 3 https://ziglang.org/download/0.17.0/zig-aarch64-linux-0.17.0.tar.xz -o "$work/zig.tar.xz"

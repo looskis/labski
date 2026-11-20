@@ -23,7 +23,7 @@ index e082485..c0792e2 100644
  extern "C" __global__ void glm_mm_tile16(const __nv_bfloat16* __restrict__ src, __nv_bfloat16* __restrict__ dst, int N, int K) {
      glm_pdl::enter_weights();
 diff --git a/zig/src/families/glm/cuda_mm.zig b/zig/src/families/glm/cuda_mm.zig
-index d1f8dfe..252f327 100644
+index d1f8dfe..0ff4d9d 100644
 --- a/zig/src/families/glm/cuda_mm.zig
 +++ b/zig/src/families/glm/cuda_mm.zig
 @@ -38,6 +38,9 @@ pub const Packed = struct {
@@ -45,12 +45,18 @@ index d1f8dfe..252f327 100644
      prompt_fixed_k: bool = false, // opt-in prompt experiment; never selected from the number of batched rows
      pdl: bool, // dependent launches: a matmul's weights stream in while the kernel before it finishes
  
-@@ -62,6 +67,15 @@ pub const Kernels = struct {
+@@ -62,6 +67,21 @@ pub const Kernels = struct {
              k.tile_packed[wi] = try m.function(std.fmt.comptimePrint("glm_mm_tile{d}", .{b}));
          }
          try k.prompt.allowDynamicShared(smem(128));
-+        const enable_tiles = @import("sys").environment.value(bool, "TF_GLM_Q8_PROMPT_TILES", @import("profile").lookup("TF_GLM_Q8_PROMPT_TILES"), false) catch false;
-+        k.trace_q8 = @import("sys").environment.value(bool, "TF_GLM_Q8_PROMPT_TRACE", @import("profile").lookup("TF_GLM_Q8_PROMPT_TRACE"), false) catch false;
++        const environment = @import("sys").environment;
++        const profile = @import("profile");
++        comptime {
++            environment.registered("TF_GLM_Q8_PROMPT_TILES");
++            environment.registered("TF_GLM_Q8_PROMPT_TRACE");
++        }
++        const enable_tiles = try environment.value(bool, "TF_GLM_Q8_PROMPT_TILES", profile.lookup("TF_GLM_Q8_PROMPT_TILES"), false);
++        k.trace_q8 = try environment.value(bool, "TF_GLM_Q8_PROMPT_TRACE", profile.lookup("TF_GLM_Q8_PROMPT_TRACE"), false);
 +        if (enable_tiles) {
 +            const rows_first = try m.function("labski_glm_q8_128_rows");
 +            const cols_first = try m.function("labski_glm_q8_256_cols");
@@ -61,7 +67,7 @@ index d1f8dfe..252f327 100644
          k.pdl = cuda_pdl.on();
          return k;
      }
-@@ -83,6 +97,10 @@ pub fn sharedBytes(bits: u8, bm: usize) u32 {
+@@ -83,6 +103,10 @@ pub fn sharedBytes(bits: u8, bm: usize) u32 {
      return @intCast(3 * (bm * 128 + 8 * 32 * wpc * 4 + 128));
  }
  
@@ -72,7 +78,7 @@ index d1f8dfe..252f327 100644
  /// K slices fixed by the shape: column tiles times slices reach the target, each slice at least 4 groups of 64.
  pub fn splitK(n: usize, k: usize) usize {
      const tiles = (n + 63) / 64;
-@@ -124,7 +142,30 @@ pub fn matmul(k: *const Kernels, s: cuda.Stream, x: u64, ldx: usize, w: Tiled, o
+@@ -124,7 +148,30 @@ pub fn matmul(k: *const Kernels, s: cuda.Stream, x: u64, ldx: usize, w: Tiled, o
          a.add(@as(c_int, @intCast(sk)));
          const cols: u32 = @intCast((w.n + 63) / 64);
          const row_blocks: u32 = @intCast((rows + bm - 1) / bm);
@@ -104,3 +110,15 @@ index d1f8dfe..252f327 100644
              try cuda.launch.launch(k.prompt, .{ .grid = .{ .x = row_blocks, .y = cols }, .block = .{ .x = 256 }, .shared = smem(128), .pdl = k.pdl }, s, &a);
          } else { // packed prompts take the 128-row bucket's blocks, one slice
              const f = if (wi == 0) k.by_rows[i] else k.packed_rows[wi - 1][i];
+diff --git a/zig/src/platform/environment.zig b/zig/src/platform/environment.zig
+--- a/zig/src/platform/environment.zig
++++ b/zig/src/platform/environment.zig
+@@ -110,6 +110,8 @@
+     .{ .name = "TF_GLM_PROF", .scope = .glm, .kind = .flag, .forms = "0 or 1" },
+     .{ .name = "TF_GLM_LINK_WAIT", .scope = .glm, .kind = .flag, .forms = "0 or 1" },
+     .{ .name = "TF_GLM_PDL", .scope = .glm, .kind = .flag, .forms = "0 or 1" },
++    .{ .name = "TF_GLM_Q8_PROMPT_TILES", .scope = .glm, .kind = .flag, .forms = "0 or 1" },
++    .{ .name = "TF_GLM_Q8_PROMPT_TRACE", .scope = .glm, .kind = .flag, .forms = "0 or 1" },
+     .{ .name = "TF_GLM_PROMPT_STEPS", .scope = .glm, .kind = .flag, .forms = "0 or 1" },
+     .{ .name = "TF_GLM_SHARED", .scope = .glm, .kind = .flag, .forms = "0 or 1" },
+     .{ .name = "TF_GLM_DSEL", .scope = .glm, .kind = .flag, .forms = "0 or 1" },
