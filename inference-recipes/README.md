@@ -68,7 +68,7 @@ python3 spark.py serve minimax31-flash-tp4 --nodes 4 --rank "$RANK" \
   --head "$HEAD_IP" --node-ip "$NODE_IP" --interface "$CX_IF" --hcas "$CX_HCAS"
 ```
 
-For a routed TCP reference, supply `--transport tcp --interface fabric0` in place of the RoCE interface and HCA arguments on every rank. Each node's `--node-ip` must be local to that interface. All four addresses must route to each other over ConnectX. This selects NCCL Socket and disables IB transport. Verify the interface selection in the NCCL initialization logs and retain the transport with the result.
+The [switchless ring setup](ring-tcp.md) gives a worked four-node IP and routing example. For a routed TCP reference, supply `--transport tcp --interface fabric0` in place of the RoCE interface and HCA arguments on every rank. Each node's `--node-ip` must be local to that interface. All four addresses must route to each other over ConnectX. This selects NCCL Socket and disables IB transport. Verify the interface selection in the NCCL initialization logs and retain the transport with the result.
 
 To test collectives before loading weights, run the following from this directory on every rank, with the same rendezvous address and port, and its own `RANK`. Set `CX_IF` to the interface on the routed ConnectX fabric. Each rank checks the exact all-reduce of rank-specific values at three payload sizes. Eight calls at each size include one warm-up.
 
