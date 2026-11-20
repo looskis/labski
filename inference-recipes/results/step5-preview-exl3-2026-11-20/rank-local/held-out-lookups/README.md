@@ -31,3 +31,15 @@ Run both the complete retry client and a native-reasoning client on 64 new inven
 python3 experiments/step5-reasoning/benchmark_policy.py "$MODEL" live-pairs.jsonl \
   --seed 2000 --count 64 --limit 384
 ```
+
+
+## Live end-to-end result
+
+On **64 fresh inventories**, the live retry client returned **64/64 correct values** with one retry. Mean four-GPU energy fell from **340.9 to 159.6 J/query (53.2%)** and median client latency from **2.004 to 0.875 seconds**. The client included prompt tokenization, checking the response and any fallback generation. The retry policy used less energy and finished sooner on 63/64 paired queries. Both policies ran against the same four-Spark service.
+
+| Client | Correct values | Generation calls | Generated tokens | Mean GPU J/query | Median latency |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Always native reasoning | 64/64 | 64 | 2,547 | 340.9 | 2.004 s |
+| Close reasoning, retry if the reader declines | 64/64 | 65 | 497 | 159.6 | 0.875 s |
+
+All 129 generations stopped before the cap. The one retry, seed 2025, returned the correct value after a second call and took 3.778 seconds end to end. First-use kernel compilation during the service run can affect the opening queries. Excluding the first pair gave a 52.0% energy reduction, and excluding the first four gave 52.1%. Resampling the 64 prompt pairs 10,000 times gave a 48.1–57.4% percentile interval for the reduction on this workload. The energy counters cover the four GPUs. The benchmark measures one fixed inventory format, and a wrong but well-formed value can pass the response check. [Paired measurements and generated-token hashes](live/requests.jsonl.gz) · [Energy samples on all four ranks](live/fleet-energy.csv.gz) · [Totals, sensitivity and interval](live/summary.json)
