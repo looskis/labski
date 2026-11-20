@@ -6,6 +6,7 @@ The lab has four 128 GB NVIDIA DGX Sparks cabled in a ConnectX‑7 ring. Each re
 
 **Measured on the lab fleet**
 
+- **Qwen3.8 27B drafting.** Target-verified suffix drafts from the current request raised single-client exact-edit throughput from 12.07 to 50.74 tok/s. Retaining earlier requests slowed edits but helped the unrelated-prose workload at one client. [Four draft policies on the same GPU](results/qwen38-27b-drafting-2026-11-19/)
 - **Qwen3.8 27B precision.** Mixed FP4 delivered 2.78–2.79× the BF16 throughput at one client in a two-machine crossover. The mixed checkpoint scored 74/112 and 78/112 on the paired short-answer diagnostic against 83/112 on both BF16 runs. [Timing, answers and settings](results/qwen38-27b-precision-2026-11-19/)
 - **Qwen3.8 27B tensor parallelism.** The same mixed checkpoint delivered 12.40, 20.46 and 33.94 output tok/s for one client on one, two and four Sparks. Four-client totals were 45.74, 72.63 and 110.77. The four-Spark switchless ring used stock NCCL over RoCE. Routed TCP on those four machines reached 8.03 and 25.72 tok/s. [Scaling and quality](results/qwen38-27b-scaling-2026-11-19/)
 - **Qwen3.8 Flash-Next.** The one-Spark FP4-Local recipe reached 33.98 and 72.86 output tok/s at one and four clients. On a direct pair, four scheduler slots with 2 GiB of KV per rank delivered 64.96 output tok/s at four clients, 2.90× the one-slot control, at 61% fewer GPU joules per output token. One client delivered 21.73 tok/s. [Quality, timing and energy](results/qwen38-flash-next-2026-11-19/)

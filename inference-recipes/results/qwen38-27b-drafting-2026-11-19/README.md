@@ -27,3 +27,16 @@ Rates are median aggregate output tokens per second across three turns of four r
 With zero previous requests retained, suffix drafting delivered 4.20× ordinary output throughput at one client on edits and 3.48× at four. Each of the 24 edits matched ordinary decoding token for token and passed the syntax-tree check. It accepted the same 435 edit tokens per concurrency as the n-gram proposer while requesting 60 fewer draft tokens. The four-client suffix edit turns ranged from 130.45 to 151.98 tok/s. At one client on prose it was 1.9% faster than ordinary decoding, and at four it was 2.8% slower. All 24 prose sequences differed from the ordinary decoder's. Those small throughput differences come from three turns per condition. [Suffix request and trial records](suffix0-turns.jsonl.gz) · [GPU counters](suffix0-energy.csv.gz)
 
 The ARM64 build used Arctic Inference 0.1.1’s CPU suffix tree, loaded into the same vLLM 0.33.0 serving image. The proposer used depth 16 and up to five draft tokens. The current request’s prompt contains a copy of most of each desired function. The model can therefore achieve high edit acceptance with the cross-request history size set to zero. [Build and serving settings](../../experiments/qwen-replay/)
+
+## Does retaining earlier requests help?
+
+| Workload | Clients | Output tok/s with 32-request history | GPU J/token | First token, ms | Mean token interval, ms | Accepted / proposed |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Repeated Python edits | 1 | 47.77 | 0.726 | 116 | 19.39 | 426 / 521 |
+| Repeated Python edits | 4 | 139.07 | 0.288 | 296 | 22.77 | 428 / 511 |
+| Unrelated prose | 1 | 13.33 | 2.473 | 125 | 73.00 | 148 / 697 |
+| Unrelated prose | 4 | 45.60 | 0.704 | 249 | 78.47 | 164 / 720 |
+
+Retaining up to 32 requests slowed the editing workload by 5.9% at one client and 8.4% at four relative to current-request-only suffix drafting. It still produced the exact ordinary-decoder token sequence for every edit. The additional history offered more edit tokens but accepted fewer. On prose, history increased single-client throughput by 5.8% against current-request-only suffix and 7.8% against ordinary decoding. At four clients it produced 45.60 tok/s against 44.18 and 45.47, respectively. All 24 history-enabled prose outputs differed from the ordinary decoder's. [32-request history receipts](suffix32-turns.jsonl.gz) · [GPU counters](suffix32-energy.csv.gz)
+
+Each history-enabled workload and concurrency started in a fresh process, received one excluded common warm-up, then ran twelve requests in the same order as the other methods. The 32-request limit exceeded the total number of requests in each replay. Within a four-client turn the server scheduled arrivals concurrently. Runs took place in method order on the same Spark, and the small prose deltas warrant further replication. For this edit task the ordinary prompt already supplied the copyable text. [Reproduce all four methods](../../experiments/qwen-replay/)
