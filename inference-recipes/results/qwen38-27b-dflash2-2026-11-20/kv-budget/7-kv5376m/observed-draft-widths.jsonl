@@ -1,0 +1,6 @@
+{"concurrency": 1, "repeat": 1, "reported_drafts": 102.0, "reported_tokens": 714.0, "mean_width": 7.0}
+{"concurrency": 1, "repeat": 2, "reported_drafts": 105.0, "reported_tokens": 735.0, "mean_width": 7.0}
+{"concurrency": 1, "repeat": 3, "reported_drafts": 104.0, "reported_tokens": 728.0, "mean_width": 7.0}
+{"concurrency": 4, "repeat": 1, "reported_drafts": 98.0, "reported_tokens": 686.0, "mean_width": 7.0}
+{"concurrency": 4, "repeat": 2, "reported_drafts": 112.0, "reported_tokens": 784.0, "mean_width": 7.0}
+{"concurrency": 4, "repeat": 3, "reported_drafts": 105.0, "reported_tokens": 735.0, "mean_width": 7.0}

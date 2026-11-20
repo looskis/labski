@@ -1,0 +1,10 @@
+{
+  "num_gpu_blocks": 330,
+  "kv_cache_max_concurrency": 2.558139534883721,
+  "kv_cache_size_tokens": 20956,
+  "kv_cache_memory_bytes": 5637144576,
+  "block_size": 832,
+  "mamba_block_size": 8192,
+  "mamba_ssm_cache_dtype": "float32",
+  "mamba_cache_mode": "none"
+}
