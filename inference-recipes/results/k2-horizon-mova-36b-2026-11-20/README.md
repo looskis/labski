@@ -19,6 +19,32 @@ On the 60 matched WikiText continuations (139,378 UTF-8 bytes), MoVA FP8 scored 
 
 The FP8 files also contain original BF16 tensors. In a staging experiment, two Spark-built BF16 shards matched the official hashes after fetching only the missing tensor bytes and headers. The mixed-shard test used a verified source on the ConnectX peer. [Per-shard measurements and restoration commands](../../experiments/k2-horizon-family/#reuse-the-official-mova-fp8-cache-when-staging-bf16)
 
+## Official BF16 and FP8 on the same Spark
+
+The two publisher checkpoints ran with the same vLLM image, serving options and prompts. Both completed three four-request prose trials per client count after an excluded warm-up. GPU energy covers the measured request window. [BF16 launch recipe](../../recipes/k2-horizon-mova-36b-bf16.json) · [FP8 launch recipe](../../recipes/k2-horizon-mova-36b-fp8.json)
+
+| Checkpoint | Clients | Median aggregate output tok/s | Median trial p95 first delta, ms | Median GPU J/output token |
+| --- | ---: | ---: | ---: | ---: |
+| FP8 | 1 | 5.38 | 536 | 7.006 |
+| FP8 | 4 | 18.51 | 909 | 2.115 |
+| BF16 | 1 | 5.17 | 579 | 7.032 |
+| BF16 | 4 | 18.13 | 994 | 2.013 |
+
+On 139,378 matched continuation bytes, FP8 scored **0.62375 bits/byte** and BF16 **0.62322**. BF16 assigned higher probability to the observed continuation on 33 of 60 passages, with 0 ties. Token-weighted WikiText perplexity over 30,935 positions was 7.4741 for FP8 and 7.4636 for BF16. [FP8 per-passage scores](fp8/bytes.jsonl) · [BF16 per-passage scores](bf16/bytes.jsonl)
+
+| Paired question panel | FP8 correct | BF16 correct | Only FP8 correct | Only BF16 correct |
+| --- | ---: | ---: | ---: | ---: |
+| Forced first letter | 19/112 | 23/112 | 0 | 4 |
+| Open answer, 128-token cap | 7/14 | 8/14 | 0 | 1 |
+| Open answer, 512-token cap | 9/14 | 10/14 | 0 | 1 |
+| Exact inventory lookup | 8/8 | 8/8 | 0 | 0 |
+
+The forced-letter panel constrains the first token. The open panels score a stopped, exact answer on 14 prompts each. The two checkpoints each had one timed launch. [Paired comparison](paired-precision.json) · [BF16 trial records](bf16/trials.jsonl) · [BF16 energy](bf16/k2-mova-bf16-energy.jsonl) · [Recompute from the two archives](compare_precisions.py)
+
+```sh
+python3 compare_precisions.py fp8 bf16
+```
+
 ## Reproduce
 
 Run these commands from `inference-recipes/` on one Spark. Use the matched K2 32B benchmark procedure with the MoVA served name for the two client counts and diagnostic panels. [Throughput, question and retrieval commands](../k2-horizon-32b-2026-11-20/#reproduce)
