@@ -22,3 +22,12 @@ python3 experiments/step5-reasoning/pair.py "$MODEL" "$CORPUS" pairs.jsonl \
   --lookups-only --lookup-seed 1000 --lookup-count 64 --limit 384
 python3 experiments/step5-reasoning/lookup_policy.py "$MODEL" bin-0022 inventory.txt
 ```
+
+## Live retry comparison fixed before collection
+
+Run both the complete retry client and a native-reasoning client on 64 new inventories, seeds 2000–2063. Each client receives the same key and input text. Alternate client order by seed. The retry decision sees only the requested key and completion. Time the full client call, including prompt tokenization and any second generation. Compare the final six-digit values, number of retries, total generated tokens and fleet GPU energy per query. [Live paired benchmark](../../../../experiments/step5-reasoning/benchmark_policy.py)
+
+```sh
+python3 experiments/step5-reasoning/benchmark_policy.py "$MODEL" live-pairs.jsonl \
+  --seed 2000 --count 64 --limit 384
+```
