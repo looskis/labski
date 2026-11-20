@@ -1,0 +1,29 @@
+{
+  "purpose": "Compare the official K2 Horizon 32B precisions on one Spark at low reasoning effort.",
+  "model": "IFM/K2-Horizon-32B",
+  "revision": "4747a54389ea187eb9e28dc43c0af10a374090f1",
+  "precision": "IFM BF16",
+  "nodes": [
+    1
+  ],
+  "per_node_gb": 128,
+  "image": "vllm-0.33.0",
+  "context": 8192,
+  "sequences": 4,
+  "memory_fraction": 0.78,
+  "container_memory_gib": 110,
+  "options": {
+    "--dtype": "bfloat16",
+    "--kv-cache-dtype": "auto",
+    "--kv-cache-memory-bytes": 3221225472,
+    "--reasoning-parser": "k2_horizon",
+    "--no-enable-prefix-caching": true,
+    "--max-num-batched-tokens": 2048,
+    "--model-impl": "vllm",
+    "--trust-remote-code": true,
+    "--default-chat-template-kwargs": {
+      "reasoning_effort": "low"
+    }
+  },
+  "source": "https://huggingface.co/IFM/K2-Horizon-32B/tree/4747a54389ea187eb9e28dc43c0af10a374090f1"
+}
