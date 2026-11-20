@@ -1,0 +1,332 @@
+{
+  "prompt_pairs": [
+    {
+      "left": "control-1",
+      "right": "tuned-1",
+      "total": 14,
+      "first_id_matches": 8,
+      "visible_matches": 8,
+      "mismatched_input_lengths": [
+        2560,
+        2560,
+        3072,
+        3072,
+        4096,
+        8192
+      ]
+    },
+    {
+      "left": "control-1",
+      "right": "replay-tuned-1",
+      "total": 14,
+      "first_id_matches": 9,
+      "visible_matches": 9,
+      "mismatched_input_lengths": [
+        2560,
+        3072,
+        3072,
+        4096,
+        8192
+      ]
+    },
+    {
+      "left": "control-1",
+      "right": "replay-tuned-2",
+      "total": 14,
+      "first_id_matches": 7,
+      "visible_matches": 7,
+      "mismatched_input_lengths": [
+        2560,
+        3072,
+        3072,
+        4096,
+        4096,
+        8192,
+        32768
+      ]
+    },
+    {
+      "left": "control-1",
+      "right": "replay-control-1",
+      "total": 14,
+      "first_id_matches": 9,
+      "visible_matches": 9,
+      "mismatched_input_lengths": [
+        2560,
+        3072,
+        3072,
+        4096,
+        8192
+      ]
+    },
+    {
+      "left": "control-1",
+      "right": "replay-control-2",
+      "total": 14,
+      "first_id_matches": 7,
+      "visible_matches": 7,
+      "mismatched_input_lengths": [
+        2560,
+        3072,
+        3072,
+        4096,
+        4096,
+        8192,
+        32768
+      ]
+    },
+    {
+      "left": "tuned-1",
+      "right": "replay-tuned-1",
+      "total": 14,
+      "first_id_matches": 11,
+      "visible_matches": 11,
+      "mismatched_input_lengths": [
+        2560,
+        3072,
+        4096
+      ]
+    },
+    {
+      "left": "tuned-1",
+      "right": "replay-tuned-2",
+      "total": 14,
+      "first_id_matches": 7,
+      "visible_matches": 7,
+      "mismatched_input_lengths": [
+        2560,
+        3072,
+        3072,
+        4096,
+        4096,
+        8192,
+        32768
+      ]
+    },
+    {
+      "left": "tuned-1",
+      "right": "replay-control-1",
+      "total": 14,
+      "first_id_matches": 11,
+      "visible_matches": 11,
+      "mismatched_input_lengths": [
+        2560,
+        3072,
+        4096
+      ]
+    },
+    {
+      "left": "tuned-1",
+      "right": "replay-control-2",
+      "total": 14,
+      "first_id_matches": 7,
+      "visible_matches": 7,
+      "mismatched_input_lengths": [
+        2560,
+        3072,
+        3072,
+        4096,
+        4096,
+        8192,
+        32768
+      ]
+    },
+    {
+      "left": "replay-tuned-1",
+      "right": "replay-tuned-2",
+      "total": 14,
+      "first_id_matches": 6,
+      "visible_matches": 6,
+      "mismatched_input_lengths": [
+        2560,
+        2560,
+        3072,
+        3072,
+        4096,
+        4096,
+        8192,
+        32768
+      ]
+    },
+    {
+      "left": "replay-tuned-1",
+      "right": "replay-control-1",
+      "total": 14,
+      "first_id_matches": 14,
+      "visible_matches": 14,
+      "mismatched_input_lengths": []
+    },
+    {
+      "left": "replay-tuned-1",
+      "right": "replay-control-2",
+      "total": 14,
+      "first_id_matches": 6,
+      "visible_matches": 6,
+      "mismatched_input_lengths": [
+        2560,
+        2560,
+        3072,
+        3072,
+        4096,
+        4096,
+        8192,
+        32768
+      ]
+    },
+    {
+      "left": "replay-tuned-2",
+      "right": "replay-control-1",
+      "total": 14,
+      "first_id_matches": 6,
+      "visible_matches": 6,
+      "mismatched_input_lengths": [
+        2560,
+        2560,
+        3072,
+        3072,
+        4096,
+        4096,
+        8192,
+        32768
+      ]
+    },
+    {
+      "left": "replay-tuned-2",
+      "right": "replay-control-2",
+      "total": 14,
+      "first_id_matches": 14,
+      "visible_matches": 14,
+      "mismatched_input_lengths": []
+    },
+    {
+      "left": "replay-control-1",
+      "right": "replay-control-2",
+      "total": 14,
+      "first_id_matches": 6,
+      "visible_matches": 6,
+      "mismatched_input_lengths": [
+        2560,
+        2560,
+        3072,
+        3072,
+        4096,
+        4096,
+        8192,
+        32768
+      ]
+    }
+  ],
+  "original_subsets": {
+    "originally_matched": {
+      "cases": 8,
+      "identical_in_all_six_passes": 6,
+      "changed_within_either_new_launch": 2
+    },
+    "originally_different": {
+      "cases": 6,
+      "identical_in_all_six_passes": 0,
+      "changed_within_either_new_launch": 6
+    }
+  },
+  "lookup": [
+    {
+      "mode": "tuned",
+      "cases": 24,
+      "strict": 1,
+      "stopped": 10,
+      "expected_six_digits_anywhere_in_visible_text": 3,
+      "per_length": [
+        {
+          "tokens": 2048,
+          "correct": 1,
+          "cases": 8
+        },
+        {
+          "tokens": 4096,
+          "correct": 0,
+          "cases": 8
+        },
+        {
+          "tokens": 8192,
+          "correct": 0,
+          "cases": 8
+        }
+      ]
+    },
+    {
+      "mode": "control",
+      "cases": 24,
+      "strict": 1,
+      "stopped": 9,
+      "expected_six_digits_anywhere_in_visible_text": 3,
+      "per_length": [
+        {
+          "tokens": 2048,
+          "correct": 1,
+          "cases": 8
+        },
+        {
+          "tokens": 4096,
+          "correct": 0,
+          "cases": 8
+        },
+        {
+          "tokens": 8192,
+          "correct": 0,
+          "cases": 8
+        }
+      ]
+    }
+  ],
+  "paired_lookups": {
+    "both_correct": 1,
+    "tuned_only": 0,
+    "control_only": 0,
+    "neither": 23,
+    "identical_visible_output": 20
+  },
+  "uncached_input_tokens_per_second": [
+    {
+      "input_tokens": 1024,
+      "control": 1250.320243843339,
+      "tuned": 1288.6969067913744,
+      "tuned_gain_percent": 3.0693466843398465
+    },
+    {
+      "input_tokens": 2048,
+      "control": 1415.266745151028,
+      "tuned": 1463.33252079854,
+      "tuned_gain_percent": 3.3962343715200127
+    },
+    {
+      "input_tokens": 2560,
+      "control": 1355.5836670689307,
+      "tuned": 1397.212954105119,
+      "tuned_gain_percent": 3.070949292727909
+    },
+    {
+      "input_tokens": 3072,
+      "control": 1335.3124580865804,
+      "tuned": 1360.4624016225216,
+      "tuned_gain_percent": 1.8834500781921504
+    },
+    {
+      "input_tokens": 4096,
+      "control": 1291.2538599670377,
+      "tuned": 1316.0110277062176,
+      "tuned_gain_percent": 1.9172967072339953
+    },
+    {
+      "input_tokens": 8192,
+      "control": 1360.5655229027934,
+      "tuned": 1388.6867334753197,
+      "tuned_gain_percent": 2.0668766111704207
+    },
+    {
+      "input_tokens": 32768,
+      "control": 1419.2661823177027,
+      "tuned": 1444.057256244957,
+      "tuned_gain_percent": 1.7467529513575553
+    }
+  ]
+}
