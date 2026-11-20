@@ -4,11 +4,18 @@ A single 128 GB Spark served NVIDIA’s 21.92 GB mixed NVFP4/FP8 target with z-l
 
 | Proposed tokens | Output tok/s, 1 / 4 clients | GPU J/output token, 1 / 4 | First delta, ms, 1 / 4 | Free answers / 28 | Exact lookups / 8 |
 | ---: | ---: | ---: | ---: | ---: | ---: |
+| [0](0/) | 12.06 / 44.44 | 2.76 / 0.83 | 147 / 262 | 19 | 8 |
 | [7](7/) | 30.90 / 48.20 | 1.16 / 0.80 | 232 / 2105 | 19 | 8 |
 
-Each concurrency used three timed trials of four 96-token prose continuations after a warm-up. Reported rates and first-delta times are medians of trial summaries. GPU energy integrates timestamped NVML power readings over each trial. The target used BF16 KV, an 8K request limit, four scheduler slots, 3 GiB of KV memory and disabled prefix caching. The questions used greedy, thinking-off decoding with a 16-token answer budget. Each lookup asked for one value among 32 records.
+Each concurrency used three timed trials of four 96-token prose continuations after a warm-up. Reported rates and first-delta times are medians of trial summaries. GPU energy uses differences in the timestamped cumulative NVML energy counter over each trial. The target used BF16 KV, an 8K request limit, four scheduler slots, 3 GiB of KV memory and disabled prefix caching. The questions used greedy, thinking-off decoding with a 16-token answer budget. Each lookup asked for one value among 32 records.
 
-The earlier ordinary-decoding run on this Spark measured 12.84 and 47.42 tok/s at one and four clients. That run let vLLM size its KV pool. These figures give a point of reference while the fixed-pool ordinary-decoding comparison is pending. [Earlier precision crossover](../qwen38-27b-precision-2026-11-19/)
+At one client, seven proposals produced **2.56×** the ordinary decoding rate and used **58.1% less GPU energy per generated token**. At four clients the median first streamed delta was 8.0× longer.
+
+Within the 0-proposal condition, 0/12 prose prompts gave identical visible continuations when replayed at one and four clients. Both runs used temperature zero.
+
+Within the 7-proposal condition, 0/12 prose prompts gave identical visible continuations when replayed at one and four clients. Both runs used temperature zero.
+
+Against ordinary decoding at the same 3 GiB KV budget, 7 draft tokens changed one-client throughput by +156.2% and four-client throughput by +8.5%. 0/24 prose continuations had identical visible text and finish reasons. 26/28 short answers had identical visible text and finish reasons. 8/8 lookup answers had identical visible text and finish reasons. The short-answer panel gained 1 correct and lost 1.
 
 ## Draft acceptance
 
