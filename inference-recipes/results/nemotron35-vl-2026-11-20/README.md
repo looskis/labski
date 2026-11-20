@@ -6,6 +6,7 @@ The official NVFP4 release stores the 120B-parameter vision-language model in 88
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | [Ordinary decoding](../../recipes/nemotron35-vl-plain.json) | 18.99 / 57.17 | 229 / 475 | 23/28 | 8/8 | 5/8 | 3.4170 |
 | [Five native MTP proposals](../../recipes/nemotron35-vl-mtp5.json) | 34.36 / 80.19 | 340 / 508 | 22/28 | 8/8 | 4/8 | 3.4148 |
+| [Seven LiLiCorr proposals](../../recipes/nemotron35-vl-lilicorr7.json) | 33.94 / 79.54 | 424 / 641 | 23/28 | 8/8 | 6/8 | 3.4185 |
 
 Rates are medians of three trials per client count, with four requests per trial and one excluded warm-up. Each timed request asked for at most 96 output tokens. The short-answer panel used a 32-token cap. Text and image lookups required an exact six-digit answer. The vision panel contains eight synthetic 12-row inventory cards. Each image record includes the expected value, the image SHA-256 and the response hash. [Image fixtures](cards/) · [Vision harness](vision_check.py)
 
@@ -13,6 +14,7 @@ Rates are medians of three trials per client count, with four requests per trial
 
 - **Ordinary decoding**. [Timing](plain/trials.jsonl) · [Settings](plain/settings.jsonl) · [Individual requests](plain/requests.jsonl.gz) · [Short answers](plain/short.jsonl.gz) · [Text lookups](plain/lookup.json) · [Image lookups](plain/vision.jsonl) · [Per-passage likelihoods](plain/wikitext.jsonl)
 - **Five native MTP proposals**. [Timing](mtp5/trials.jsonl) · [Settings](mtp5/settings.jsonl) · [Individual requests](mtp5/requests.jsonl.gz) · [Short answers](mtp5/short.jsonl.gz) · [Text lookups](mtp5/lookup.json) · [Image lookups](mtp5/vision.jsonl) · [Per-passage likelihoods](mtp5/wikitext.jsonl)
+- **Seven LiLiCorr proposals**. [Timing](lilicorr7/trials.jsonl) · [Settings](lilicorr7/settings.jsonl) · [Individual requests](lilicorr7/requests.jsonl.gz) · [Short answers](lilicorr7/short.jsonl.gz) · [Text lookups](lilicorr7/lookup.json) · [Image lookups](lilicorr7/vision.jsonl) · [Per-passage likelihoods](lilicorr7/wikitext.jsonl)
 
 ## Reproduce
 
