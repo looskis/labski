@@ -1,6 +1,6 @@
 # Thinking Machines Inkling on DGX Spark
 
-The original Inkling has 947.03B parameters across 66 transformer layers. The lab compiled the Inkling llama.cpp branch for ARM64 and SM121a. It accepted all 1,512 tensor descriptors in both the 343.96 GB Q2_K and 451.04 GB Q3_K_M GGUFs. This page records prompt rendering and engine memory projections. Full-weight generation is pending. [Pinned conversions](https://huggingface.co/DevQuasar/thinkingmachines.Inkling-GGUF/tree/c79703c0c9f308b5f097a7082257a8e8603185eb) · [Architecture implementation](https://github.com/danielhanchen/llama.cpp/tree/eeac951be2038fc27e89613d8d1158c31d97d732) · [Loader checks](../../leaderboard/gguf-loader-2026-11-20.csv)
+The original Inkling has 947.03B parameters across 66 transformer layers. The lab compiled the Inkling llama.cpp branch for ARM64 and SM121a. It accepted all 1,512 tensor descriptors in both the 343.96 GB Q2_K and 451.04 GB Q3_K_M GGUFs. The full Q3_K_M checkpoint served on four Sparks. Unified FP16 KV reached 6.15 output tokens/s for one client and 9.91 aggregate for four, with 18/28 exact short answers and 8/8 exact inventory lookups. [Measured serving comparison](../../results/inkling-mistral-four-spark-2026-11-20/) [Pinned conversions](https://huggingface.co/DevQuasar/thinkingmachines.Inkling-GGUF/tree/c79703c0c9f308b5f097a7082257a8e8603185eb) · [Architecture implementation](https://github.com/danielhanchen/llama.cpp/tree/eeac951be2038fc27e89613d8d1158c31d97d732) · [Loader checks](../../leaderboard/gguf-loader-2026-11-20.csv)
 
 ## Set thinking effort in the actual prompt
 
@@ -30,7 +30,7 @@ We also instantiated the full model’s context and computation graph in the eng
 
 ## KV precision and prefill memory
 
-At four slots of 16,384 tokens, using balanced shares and a unified KV buffer, quantizing the keys to Q8_0 reduced context storage but grew the compute scratch enough to raise the peak from **117.42 to 130.67 GiB** at microbatch 256. At microbatch 64, FP16 and Q8 keys projected 115.37 and 117.42 GiB. With separate slot buffers at that same microbatch, the ordering reversed, at 116.07 and 114.14 GiB. The engine rejected a quantized value cache for Inkling. We repeated 21 cache configurations on four physical Sparks. All 18 successful projections and all three Q8-value rejections reproduced the one-GPU calculation. These are candidate settings for a speed and quality comparison. [Four-Spark cache trials](four-spark-kv.jsonl) · [Loopback microbatch sweep](loopback-kv.jsonl)
+At four slots of 16,384 tokens, using balanced shares and a unified KV buffer, quantizing the keys to Q8_0 reduced context storage but grew the compute scratch enough to raise the peak from **117.42 to 130.67 GiB** at microbatch 256. At microbatch 64, FP16 and Q8 keys projected 115.37 and 117.42 GiB. With separate slot buffers at that same microbatch, the ordering reversed, at 116.07 and 114.14 GiB. The engine rejected a quantized value cache for Inkling. We repeated 21 cache configurations on four physical Sparks. All 18 successful projections and all three Q8-value rejections reproduced the one-GPU calculation. The full-weight serving comparison below used four slots of 8,192 tokens. [Four-Spark cache trials](four-spark-kv.jsonl) · [Loopback microbatch sweep](loopback-kv.jsonl)
 
 ## Reproduce the graph check
 
@@ -50,7 +50,7 @@ Each RPC argument is a worker address and port. To reproduce the one-GPU calcula
 
 ## Stage the original model for serving
 
-From this recipe directory, build the pinned Inkling engine on one Spark. A build with six parallel jobs completed on the lab machine. The public launch candidate below uses the Q3_K_M checkpoint on one head and one runtime copy per worker. It selects numeric zero thinking effort, balanced layer shares, four client slots and a unified FP16 KV buffer. [Shared ARM64 builder](../mimo26-rpc/compile.sh) · [Shared RPC launcher](../mimo26-rpc/launch.py)
+From this recipe directory, build the pinned Inkling engine on one Spark. A build with six parallel jobs completed on the lab machine. The measured FP16 launch below uses the Q3_K_M checkpoint on one head and one runtime copy per worker. It selects numeric zero thinking effort, balanced layer shares, four client slots and a unified FP16 KV buffer. [Shared ARM64 builder](../mimo26-rpc/compile.sh) · [Shared RPC launcher](../mimo26-rpc/launch.py)
 
 ```sh
 work="$PWD/inkling-build"
