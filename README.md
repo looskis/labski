@@ -5,6 +5,7 @@ labski publishes reproducible experiments on local AI hardware. Each research sc
 | Research scope | First platform | What you can reproduce |
 | --- | --- | --- |
 | [Inference recipes](inference-recipes/) | Four NVIDIA DGX Sparks | Serve open-weight models and measure how checkpoint precision, speculative decoding and the number of Sparks affect inference. |
+| [Inkling architecture and decision models](research/inkling/) | CPU audit and a proposed one-Spark experiment | Reproduce where five checkpoints put an answer, examine original Inkling’s constrained-answer accuracy, and compare the computation needed at different loop depths. |
 
 ## Measured on DGX Spark
 
