@@ -1,0 +1,809 @@
+{
+  "run_name": "gemma4-31b-control-1pass-lora",
+  "model_label": "Gemma-4-31B-it",
+  "model_path": "/exp/hf-cache/hub/models--google--gemma-4-31B-it/snapshots/842da3794eaa0b77d5f08bae87a17459d91ff475",
+  "hostname": "524538e15e8e",
+  "gpu": "NVIDIA GB10",
+  "loop_config": {
+    "backbone_family": "gemma4",
+    "model_id": "Gemma-4-31B-it",
+    "num_hidden_layers": 60,
+    "hidden_size": 5376,
+    "loop_start": 18,
+    "loop_end": 42,
+    "block_size": 6,
+    "num_passes": 3,
+    "gate_rank": 64,
+    "rms_norm_eps": 1e-06,
+    "mode": "lora_only",
+    "core_lora_rank": 32,
+    "core_lora_alpha": 32.0,
+    "scale_match_message": true
+  },
+  "train_args": {
+    "mode": "lora_only",
+    "num_passes": 3,
+    "varloop": false,
+    "steps": 160,
+    "grad_accum": 8,
+    "lr": 0.0003,
+    "lm_weight": 0.25,
+    "seed": 42
+  },
+  "param_stats": {
+    "total_params": 30795288832,
+    "trainable_params": 97943552,
+    "loop_controller_params": 0,
+    "core_lora_params": 97943552,
+    "trainable_pct": 0.318
+  },
+  "load_time_s": 18.2,
+  "train_elapsed_s": 1635.4,
+  "peak_train_mem_gib": 59.71,
+  "step0_identity_check": {
+    "max_abs_diff_p1_vs_stock": 0.10222244262695312,
+    "max_abs_diff_p3_vs_p1": 0.0,
+    "max_abs_diff_p3_vs_stock": 0.10222244262695312
+  },
+  "layer_rms_profile": [
+    {
+      "layer": -1,
+      "rms": 1.3044270277023315
+    },
+    {
+      "layer": 0,
+      "rms": 1.1042591333389282
+    },
+    {
+      "layer": 1,
+      "rms": 1.343140721321106
+    },
+    {
+      "layer": 2,
+      "rms": 1.4162726402282715
+    },
+    {
+      "layer": 3,
+      "rms": 1.6425848007202148
+    },
+    {
+      "layer": 4,
+      "rms": 1.689940094947815
+    },
+    {
+      "layer": 5,
+      "rms": 2.262671947479248
+    },
+    {
+      "layer": 6,
+      "rms": 2.675968647003174
+    },
+    {
+      "layer": 7,
+      "rms": 3.0139472484588623
+    },
+    {
+      "layer": 8,
+      "rms": 3.140756845474243
+    },
+    {
+      "layer": 9,
+      "rms": 3.336193323135376
+    },
+    {
+      "layer": 10,
+      "rms": 3.5580027103424072
+    },
+    {
+      "layer": 11,
+      "rms": 3.6089110374450684
+    },
+    {
+      "layer": 12,
+      "rms": 3.6520800590515137
+    },
+    {
+      "layer": 13,
+      "rms": 3.725107431411743
+    },
+    {
+      "layer": 14,
+      "rms": 3.7832400798797607
+    },
+    {
+      "layer": 15,
+      "rms": 4.093977928161621
+    },
+    {
+      "layer": 16,
+      "rms": 4.172302722930908
+    },
+    {
+      "layer": 17,
+      "rms": 4.359534740447998
+    },
+    {
+      "layer": 18,
+      "rms": 4.451341152191162
+    },
+    {
+      "layer": 19,
+      "rms": 4.561582565307617
+    },
+    {
+      "layer": 20,
+      "rms": 4.781589508056641
+    },
+    {
+      "layer": 21,
+      "rms": 4.895571231842041
+    },
+    {
+      "layer": 22,
+      "rms": 4.918681621551514
+    },
+    {
+      "layer": 23,
+      "rms": 4.542990684509277
+    },
+    {
+      "layer": 24,
+      "rms": 4.58198881149292
+    },
+    {
+      "layer": 25,
+      "rms": 4.525662899017334
+    },
+    {
+      "layer": 26,
+      "rms": 4.144506454467773
+    },
+    {
+      "layer": 27,
+      "rms": 3.764505624771118
+    },
+    {
+      "layer": 28,
+      "rms": 3.505600929260254
+    },
+    {
+      "layer": 29,
+      "rms": 3.4259958267211914
+    },
+    {
+      "layer": 30,
+      "rms": 3.7291030883789062
+    },
+    {
+      "layer": 31,
+      "rms": 4.120967388153076
+    },
+    {
+      "layer": 32,
+      "rms": 4.307590007781982
+    },
+    {
+      "layer": 33,
+      "rms": 4.374785900115967
+    },
+    {
+      "layer": 34,
+      "rms": 4.357128143310547
+    },
+    {
+      "layer": 35,
+      "rms": 4.217308044433594
+    },
+    {
+      "layer": 36,
+      "rms": 3.9480326175689697
+    },
+    {
+      "layer": 37,
+      "rms": 3.6627109050750732
+    },
+    {
+      "layer": 38,
+      "rms": 3.2751963138580322
+    },
+    {
+      "layer": 39,
+      "rms": 2.6847620010375977
+    },
+    {
+      "layer": 40,
+      "rms": 2.384615421295166
+    },
+    {
+      "layer": 41,
+      "rms": 2.551367998123169
+    },
+    {
+      "layer": 42,
+      "rms": 2.516852378845215
+    },
+    {
+      "layer": 43,
+      "rms": 2.2545254230499268
+    },
+    {
+      "layer": 44,
+      "rms": 2.1403939723968506
+    },
+    {
+      "layer": 45,
+      "rms": 1.977704405784607
+    },
+    {
+      "layer": 46,
+      "rms": 1.8448315858840942
+    },
+    {
+      "layer": 47,
+      "rms": 1.8498468399047852
+    },
+    {
+      "layer": 48,
+      "rms": 1.8890948295593262
+    },
+    {
+      "layer": 49,
+      "rms": 1.7080130577087402
+    },
+    {
+      "layer": 50,
+      "rms": 1.5323179960250854
+    },
+    {
+      "layer": 51,
+      "rms": 1.232304334640503
+    },
+    {
+      "layer": 52,
+      "rms": 0.8085870742797852
+    },
+    {
+      "layer": 53,
+      "rms": 0.98289555311203
+    },
+    {
+      "layer": 54,
+      "rms": 1.0307050943374634
+    },
+    {
+      "layer": 55,
+      "rms": 1.0844825506210327
+    },
+    {
+      "layer": 56,
+      "rms": 1.021689772605896
+    },
+    {
+      "layer": 57,
+      "rms": 0.8997188806533813
+    },
+    {
+      "layer": 58,
+      "rms": 1.1426559686660767
+    },
+    {
+      "layer": 59,
+      "rms": 0.13250930607318878
+    }
+  ],
+  "hardware_forward_cost": {
+    "P1": {
+      "seq_len": 178,
+      "ms_per_forward": 436.02,
+      "toks_per_sec": 408.2,
+      "mean_watts": 62.23,
+      "joules_per_forward": 26.253
+    }
+  },
+  "baseline_p1": {
+    "serial": {
+      "num_passes": 1,
+      "message_mode": "normal",
+      "overall": {
+        "n": 214,
+        "correct": 60,
+        "acc": 0.2804,
+        "mean_ans_nll": 2.5173
+      },
+      "overall_id": {
+        "n": 134,
+        "correct": 51,
+        "acc": 0.3806,
+        "mean_ans_nll": 2.5195
+      },
+      "overall_ood": {
+        "n": 80,
+        "correct": 9,
+        "acc": 0.1125,
+        "mean_ans_nll": 2.5135
+      },
+      "per_task": {
+        "graph_bfs": {
+          "id": {
+            "n": 30,
+            "correct": 13,
+            "acc": 0.4333,
+            "mean_ans_nll": 2.7476
+          },
+          "ood": {
+            "n": 20,
+            "correct": 2,
+            "acc": 0.1,
+            "mean_ans_nll": 3.5431
+          },
+          "by_depth": {
+            "eval_id_d0": {
+              "n": 10,
+              "correct": 2,
+              "acc": 0.2,
+              "mean_ans_nll": 5.8019
+            },
+            "eval_id_d2": {
+              "n": 10,
+              "correct": 8,
+              "acc": 0.8,
+              "mean_ans_nll": 0.5001
+            },
+            "eval_id_d3": {
+              "n": 10,
+              "correct": 3,
+              "acc": 0.3,
+              "mean_ans_nll": 1.9408
+            },
+            "eval_ood_d4": {
+              "n": 10,
+              "correct": 2,
+              "acc": 0.2,
+              "mean_ans_nll": 2.5391
+            },
+            "eval_ood_d5": {
+              "n": 10,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 4.5472
+            }
+          }
+        },
+        "mod_register": {
+          "id": {
+            "n": 30,
+            "correct": 14,
+            "acc": 0.4667,
+            "mean_ans_nll": 0.8593
+          },
+          "ood": {
+            "n": 20,
+            "correct": 1,
+            "acc": 0.05,
+            "mean_ans_nll": 1.4002
+          },
+          "by_depth": {
+            "eval_id_d2": {
+              "n": 10,
+              "correct": 8,
+              "acc": 0.8,
+              "mean_ans_nll": 0.1694
+            },
+            "eval_id_d3": {
+              "n": 10,
+              "correct": 3,
+              "acc": 0.3,
+              "mean_ans_nll": 0.7853
+            },
+            "eval_id_d4": {
+              "n": 10,
+              "correct": 3,
+              "acc": 0.3,
+              "mean_ans_nll": 1.6231
+            },
+            "eval_ood_d5": {
+              "n": 10,
+              "correct": 1,
+              "acc": 0.1,
+              "mean_ans_nll": 1.143
+            },
+            "eval_ood_d6": {
+              "n": 10,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 1.6574
+            }
+          }
+        },
+        "perm_track": {
+          "id": {
+            "n": 44,
+            "correct": 11,
+            "acc": 0.25,
+            "mean_ans_nll": 4.0674
+          },
+          "ood": {
+            "n": 20,
+            "correct": 2,
+            "acc": 0.1,
+            "mean_ans_nll": 3.2313
+          },
+          "by_depth": {
+            "eval_id_d3": {
+              "n": 11,
+              "correct": 4,
+              "acc": 0.3636,
+              "mean_ans_nll": 2.8597
+            },
+            "eval_id_d4": {
+              "n": 11,
+              "correct": 3,
+              "acc": 0.2727,
+              "mean_ans_nll": 5.6197
+            },
+            "eval_id_d5": {
+              "n": 11,
+              "correct": 2,
+              "acc": 0.1818,
+              "mean_ans_nll": 4.1586
+            },
+            "eval_id_d6": {
+              "n": 11,
+              "correct": 2,
+              "acc": 0.1818,
+              "mean_ans_nll": 3.6315
+            },
+            "eval_ood_d7": {
+              "n": 10,
+              "correct": 1,
+              "acc": 0.1,
+              "mean_ans_nll": 2.9564
+            },
+            "eval_ood_d8": {
+              "n": 10,
+              "correct": 1,
+              "acc": 0.1,
+              "mean_ans_nll": 3.5062
+            }
+          }
+        },
+        "pointer_chase": {
+          "id": {
+            "n": 30,
+            "correct": 13,
+            "acc": 0.4333,
+            "mean_ans_nll": 1.6816
+          },
+          "ood": {
+            "n": 20,
+            "correct": 4,
+            "acc": 0.2,
+            "mean_ans_nll": 1.8795
+          },
+          "by_depth": {
+            "eval_id_d2": {
+              "n": 10,
+              "correct": 7,
+              "acc": 0.7,
+              "mean_ans_nll": 1.1321
+            },
+            "eval_id_d3": {
+              "n": 10,
+              "correct": 5,
+              "acc": 0.5,
+              "mean_ans_nll": 1.4088
+            },
+            "eval_id_d4": {
+              "n": 10,
+              "correct": 1,
+              "acc": 0.1,
+              "mean_ans_nll": 2.5038
+            },
+            "eval_ood_d5": {
+              "n": 10,
+              "correct": 3,
+              "acc": 0.3,
+              "mean_ans_nll": 1.6273
+            },
+            "eval_ood_d6": {
+              "n": 10,
+              "correct": 1,
+              "acc": 0.1,
+              "mean_ans_nll": 2.1318
+            }
+          }
+        }
+      },
+      "diagnostics": null
+    },
+    "wikitext2": {
+      "num_passes": 1,
+      "passages": 16,
+      "scored_tokens": 3931,
+      "mean_nll": 8.15683,
+      "perplexity": 3487.102,
+      "per_passage_nll": [
+        7.54021,
+        8.16195,
+        9.11262,
+        8.54855,
+        7.5952,
+        11.11667,
+        10.93855,
+        8.92082,
+        7.84418,
+        6.77597,
+        11.23293,
+        5.83221,
+        6.93867,
+        4.41215,
+        7.02897,
+        9.00544
+      ]
+    },
+    "gsm8k_direct": {
+      "num_passes": 1,
+      "n": 32,
+      "correct": 17,
+      "acc": 0.5312,
+      "mean_ans_nll": 0.7423
+    }
+  },
+  "baseline_naive_p3": null,
+  "post_training": {
+    "serial": {
+      "P1": {
+        "num_passes": 1,
+        "message_mode": "normal",
+        "overall": {
+          "n": 214,
+          "correct": 85,
+          "acc": 0.3972,
+          "mean_ans_nll": 1.2516
+        },
+        "overall_id": {
+          "n": 134,
+          "correct": 78,
+          "acc": 0.5821,
+          "mean_ans_nll": 0.654
+        },
+        "overall_ood": {
+          "n": 80,
+          "correct": 7,
+          "acc": 0.0875,
+          "mean_ans_nll": 2.2525
+        },
+        "per_task": {
+          "graph_bfs": {
+            "id": {
+              "n": 30,
+              "correct": 28,
+              "acc": 0.9333,
+              "mean_ans_nll": 0.0915
+            },
+            "ood": {
+              "n": 20,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 3.9417
+            },
+            "by_depth": {
+              "eval_id_d0": {
+                "n": 10,
+                "correct": 10,
+                "acc": 1.0,
+                "mean_ans_nll": 0.0118
+              },
+              "eval_id_d2": {
+                "n": 10,
+                "correct": 8,
+                "acc": 0.8,
+                "mean_ans_nll": 0.2304
+              },
+              "eval_id_d3": {
+                "n": 10,
+                "correct": 10,
+                "acc": 1.0,
+                "mean_ans_nll": 0.0323
+              },
+              "eval_ood_d4": {
+                "n": 10,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 2.7694
+              },
+              "eval_ood_d5": {
+                "n": 10,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 5.1141
+              }
+            }
+          },
+          "mod_register": {
+            "id": {
+              "n": 30,
+              "correct": 9,
+              "acc": 0.3,
+              "mean_ans_nll": 0.8282
+            },
+            "ood": {
+              "n": 20,
+              "correct": 1,
+              "acc": 0.05,
+              "mean_ans_nll": 1.2184
+            },
+            "by_depth": {
+              "eval_id_d2": {
+                "n": 10,
+                "correct": 8,
+                "acc": 0.8,
+                "mean_ans_nll": 0.2477
+              },
+              "eval_id_d3": {
+                "n": 10,
+                "correct": 1,
+                "acc": 0.1,
+                "mean_ans_nll": 0.9779
+              },
+              "eval_id_d4": {
+                "n": 10,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.259
+              },
+              "eval_ood_d5": {
+                "n": 10,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.1627
+              },
+              "eval_ood_d6": {
+                "n": 10,
+                "correct": 1,
+                "acc": 0.1,
+                "mean_ans_nll": 1.2741
+              }
+            }
+          },
+          "perm_track": {
+            "id": {
+              "n": 44,
+              "correct": 20,
+              "acc": 0.4545,
+              "mean_ans_nll": 1.2196
+            },
+            "ood": {
+              "n": 20,
+              "correct": 6,
+              "acc": 0.3,
+              "mean_ans_nll": 1.372
+            },
+            "by_depth": {
+              "eval_id_d3": {
+                "n": 11,
+                "correct": 10,
+                "acc": 0.9091,
+                "mean_ans_nll": 0.342
+              },
+              "eval_id_d4": {
+                "n": 11,
+                "correct": 7,
+                "acc": 0.6364,
+                "mean_ans_nll": 1.1602
+              },
+              "eval_id_d5": {
+                "n": 11,
+                "correct": 2,
+                "acc": 0.1818,
+                "mean_ans_nll": 1.5826
+              },
+              "eval_id_d6": {
+                "n": 11,
+                "correct": 1,
+                "acc": 0.0909,
+                "mean_ans_nll": 1.7938
+              },
+              "eval_ood_d7": {
+                "n": 10,
+                "correct": 3,
+                "acc": 0.3,
+                "mean_ans_nll": 1.2846
+              },
+              "eval_ood_d8": {
+                "n": 10,
+                "correct": 3,
+                "acc": 0.3,
+                "mean_ans_nll": 1.4594
+              }
+            }
+          },
+          "pointer_chase": {
+            "id": {
+              "n": 30,
+              "correct": 21,
+              "acc": 0.7,
+              "mean_ans_nll": 0.2129
+            },
+            "ood": {
+              "n": 20,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 2.4778
+            },
+            "by_depth": {
+              "eval_id_d2": {
+                "n": 10,
+                "correct": 10,
+                "acc": 1.0,
+                "mean_ans_nll": 0.0031
+              },
+              "eval_id_d3": {
+                "n": 10,
+                "correct": 7,
+                "acc": 0.7,
+                "mean_ans_nll": 0.2045
+              },
+              "eval_id_d4": {
+                "n": 10,
+                "correct": 4,
+                "acc": 0.4,
+                "mean_ans_nll": 0.431
+              },
+              "eval_ood_d5": {
+                "n": 10,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 2.0821
+              },
+              "eval_ood_d6": {
+                "n": 10,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 2.8734
+              }
+            }
+          }
+        },
+        "diagnostics": null
+      }
+    },
+    "wikitext2": {
+      "P1": {
+        "num_passes": 1,
+        "passages": 16,
+        "scored_tokens": 3931,
+        "mean_nll": 3.10239,
+        "perplexity": 22.2511,
+        "per_passage_nll": [
+          2.84455,
+          3.38165,
+          2.74681,
+          2.76213,
+          3.13385,
+          3.76331,
+          3.68374,
+          3.8899,
+          3.11921,
+          2.99366,
+          3.77082,
+          2.27094,
+          2.82968,
+          1.73408,
+          3.12299,
+          4.27757
+        ]
+      }
+    },
+    "gsm8k_direct": {
+      "P1": {
+        "num_passes": 1,
+        "n": 32,
+        "correct": 18,
+        "acc": 0.5625,
+        "mean_ans_nll": 0.5908
+      }
+    }
+  },
+  "causal_ablations": {}
+}

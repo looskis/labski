@@ -1,0 +1,428 @@
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "R4", "pred": "R4", "raw_pred": " R4\n\n", "correct": 1, "ans_nll": 0.48386}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "X6", "pred": "X6", "raw_pred": " X6\n\n", "correct": 1, "ans_nll": 0.41809}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "S1", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 0.48532}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "R5", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 0.59777}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "P9", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 0.61444}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "V5", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 0.65928}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "S8", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 0.62303}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "X4", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 0.60821}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "Q5", "pred": "Q5", "raw_pred": " Q5\n\n", "correct": 1, "ans_nll": 0.36294}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "V2", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 0.70115}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "Q3", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.28278}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "V9", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 0.91928}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "V7", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.14425}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "N3", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 0.53958}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "S2", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.36571}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "T3", "pred": "T3", "raw_pred": " T3\n\n", "correct": 1, "ans_nll": 0.55907}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "Q3", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.55453}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "S8", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.49647}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "Q6", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.51376}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "Q2", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.94868}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "Q9", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.7394}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "Q5", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 2.17981}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "W5", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.10276}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "P3", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.81154}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "T6", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.77647}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "W9", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 2.01829}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "P2", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 0.97923}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "X6", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 2.48077}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "V8", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.84174}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "S2", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.76175}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "V9", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.60564}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "R2", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 2.05244}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "Z4", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 2.31805}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "V4", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.84115}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "V5", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 2.36968}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "Q7", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.40276}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "Z5", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.65552}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "R4", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.61506}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "T4", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.08247}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "V7", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 2.02471}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "T8", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.57335}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "T2", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 2.29713}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "Z8", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 3.62109}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "R8", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 2.28651}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "P5", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.70467}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "P7", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.73388}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "R2", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 2.66961}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "X8", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 2.3602}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "Q6", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.77303}
+{"eval_tag": "baseline_P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "S9", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 2.56693}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "17", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.17321}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "12", "pred": "12", "raw_pred": " 12\n\n", "correct": 1, "ans_nll": 0.20731}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "12", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.05889}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "6", "pred": "6", "raw_pred": " 6\n\n", "correct": 1, "ans_nll": 0.06223}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "11", "pred": "12", "raw_pred": " 12\n\n", "correct": 0, "ans_nll": 1.53212}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "17", "pred": "3", "raw_pred": " 3\n\n", "correct": 0, "ans_nll": 2.14009}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "9", "pred": "8", "raw_pred": " 8\n\n", "correct": 0, "ans_nll": 1.0146}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "12", "pred": "12", "raw_pred": " 12\n\n", "correct": 1, "ans_nll": 0.36477}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "7", "pred": "7", "raw_pred": " 7\n\n", "correct": 1, "ans_nll": 0.48951}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "16", "pred": "18", "raw_pred": " 18\n\n", "correct": 0, "ans_nll": 0.99799}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "15", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.14197}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "12", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.03669}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "14", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.1319}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "1", "pred": "1", "raw_pred": " 1\n\n", "correct": 1, "ans_nll": 0.46281}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "11", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.08111}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "17", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.01746}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "16", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.14422}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "5", "pred": "5", "raw_pred": " 5\n\n", "correct": 1, "ans_nll": 0.10617}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "2", "pred": "2", "raw_pred": " 2\n\n", "correct": 1, "ans_nll": 0.0867}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "6", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.56559}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "5", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.56705}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "4", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.47477}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "15", "pred": "16", "raw_pred": " 16\n\n", "correct": 0, "ans_nll": 1.17718}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "0", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.75706}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "15", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 0.97601}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "11", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.08725}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "5", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.4322}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "7", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.59768}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "14", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.05979}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "15", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.0065}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "3", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.46826}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "11", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.03726}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "18", "pred": "17", "raw_pred": " 17\n\n", "correct": 0, "ans_nll": 1.0357}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "8", "pred": "15", "raw_pred": " 15\n\n", "correct": 0, "ans_nll": 1.3652}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "18", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.10442}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "13", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.03652}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "8", "pred": "15", "raw_pred": " 15\n\n", "correct": 0, "ans_nll": 1.25271}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "14", "pred": "10", "raw_pred": " 10\n\n", "correct": 0, "ans_nll": 1.00185}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "3", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.60634}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "10", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.16767}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "15", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.05858}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "6", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.68791}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "8", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.27072}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "7", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.46675}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "2", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.50098}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "0", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.36745}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "2", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.60882}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "13", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.06779}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "10", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.19825}
+{"eval_tag": "baseline_P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "6", "pred": "1", "raw_pred": " 1\n\n", "correct": 0, "ans_nll": 1.58305}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "3", "raw_pred": " 3", "correct": 0, "ans_nll": 6.00632}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "4", "raw_pred": " 4", "correct": 0, "ans_nll": 8.09536}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "3", "raw_pred": " 3", "correct": 0, "ans_nll": 4.91006}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.37372}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "3", "raw_pred": " 3", "correct": 0, "ans_nll": 6.55252}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "3", "raw_pred": " 3", "correct": 0, "ans_nll": 4.91305}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "4", "raw_pred": " 4", "correct": 0, "ans_nll": 8.39008}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "4", "raw_pred": " 4", "correct": 0, "ans_nll": 7.35794}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "3", "raw_pred": " 3", "correct": 0, "ans_nll": 6.1213}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "", "raw_pred": " ", "correct": 0, "ans_nll": 6.08781}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2", "correct": 1, "ans_nll": 0.42382}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "1", "raw_pred": " 1", "correct": 0, "ans_nll": 3.00724}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2", "correct": 1, "ans_nll": 0.4754}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2", "correct": 1, "ans_nll": 0.54741}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2", "correct": 1, "ans_nll": 0.30231}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2", "correct": 1, "ans_nll": 0.24159}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2", "correct": 1, "ans_nll": 0.30754}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2\n\n", "correct": 1, "ans_nll": 0.35113}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "3", "raw_pred": " 3", "correct": 0, "ans_nll": 0.57612}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2", "correct": 1, "ans_nll": 0.50576}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "3", "raw_pred": " 3", "correct": 1, "ans_nll": 0.59633}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "2", "raw_pred": " 2", "correct": 0, "ans_nll": 1.11098}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "3", "raw_pred": " 3", "correct": 1, "ans_nll": 0.58634}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "3", "raw_pred": " 3", "correct": 1, "ans_nll": 0.74934}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.13925}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "3", "raw_pred": " 3", "correct": 1, "ans_nll": 0.6687}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "4", "raw_pred": " 4", "correct": 0, "ans_nll": 0.89494}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "2", "raw_pred": " 2", "correct": 0, "ans_nll": 0.78489}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "3", "raw_pred": " 3", "correct": 1, "ans_nll": 0.54109}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "2", "raw_pred": " 2", "correct": 0, "ans_nll": 1.32218}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "3", "raw_pred": " 3", "correct": 0, "ans_nll": 0.71959}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "2", "raw_pred": " 2", "correct": 0, "ans_nll": 2.88688}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.37255}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "3", "raw_pred": " 3", "correct": 0, "ans_nll": 0.94437}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "3", "raw_pred": " 3", "correct": 0, "ans_nll": 0.74648}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "4", "raw_pred": " 4", "correct": 1, "ans_nll": 0.92851}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "3", "raw_pred": " 3", "correct": 0, "ans_nll": 0.85659}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "4", "raw_pred": " 4", "correct": 1, "ans_nll": 0.74504}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.53745}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "", "raw_pred": " ", "correct": 0, "ans_nll": 1.03379}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 3.34263}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.89402}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "4", "raw_pred": " 4", "correct": 0, "ans_nll": 1.39434}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "3", "raw_pred": " 3", "correct": 0, "ans_nll": 1.75599}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "5", "raw_pred": " 5", "correct": 1, "ans_nll": 0.93631}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "3", "raw_pred": " 3", "correct": 0, "ans_nll": 1.97931}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "2", "raw_pred": " 2", "correct": 0, "ans_nll": 2.54997}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "3", "raw_pred": " 3", "correct": 0, "ans_nll": 2.29261}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "3", "raw_pred": " 3", "correct": 0, "ans_nll": 2.89729}
+{"eval_tag": "baseline_P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "3", "raw_pred": " 3", "correct": 0, "ans_nll": 1.58265}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "coral", "pred": "inlet", "raw_pred": " inlet\n\n", "correct": 0, "ans_nll": 2.05612}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "jewel", "pred": "acorn", "raw_pred": " acorn\n\n", "correct": 0, "ans_nll": 1.73423}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "acorn", "pred": "acorn", "raw_pred": " acorn\n\n", "correct": 1, "ans_nll": 0.36869}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "lotus", "pred": "lotus", "raw_pred": " lotus\n\n", "correct": 1, "ans_nll": 0.02998}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "otter", "pred": "ridge", "raw_pred": " ridge\n\n", "correct": 0, "ans_nll": 2.33146}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "spark", "pred": "spark", "raw_pred": " spark\n\n", "correct": 1, "ans_nll": 0.1397}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "mango", "pred": "drift", "raw_pred": " drift\n\n", "correct": 0, "ans_nll": 0.99954}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "inlet", "pred": "inlet", "raw_pred": " inlet\n\n", "correct": 1, "ans_nll": 0.09355}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "epoch", "pred": "spark", "raw_pred": " spark\n\n", "correct": 0, "ans_nll": 1.44875}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "acorn", "pred": "acorn", "raw_pred": " acorn\n\n", "correct": 1, "ans_nll": 0.46855}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "frost", "pred": "drift", "raw_pred": " drift\n\n", "correct": 0, "ans_nll": 3.13127}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "waltz", "pred": "yacht", "raw_pred": " yacht\n\n", "correct": 0, "ans_nll": 1.28362}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "blaze", "pred": "gleam", "raw_pred": " gleam\n\n", "correct": 0, "ans_nll": 4.07276}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "mango", "pred": "acorn", "raw_pred": " acorn\n\n", "correct": 0, "ans_nll": 2.23154}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "mango", "pred": "mango", "raw_pred": " mango\n\n", "correct": 1, "ans_nll": 0.05955}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "mango", "pred": "acorn", "raw_pred": " acorn\n\n", "correct": 0, "ans_nll": 1.69999}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "blaze", "pred": "tulip", "raw_pred": " tulip\n\n", "correct": 0, "ans_nll": 2.17089}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "mango", "pred": "spark", "raw_pred": " spark\n\n", "correct": 0, "ans_nll": 1.15085}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "waltz", "pred": "kayak", "raw_pred": " kayak\n\n", "correct": 0, "ans_nll": 1.20114}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "jewel", "pred": "quartz", "raw_pred": " quartz\n\n", "correct": 0, "ans_nll": 1.40683}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "yacht", "pred": "coral", "raw_pred": " coral\n\n", "correct": 0, "ans_nll": 1.98364}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "tulip", "pred": "gleam", "raw_pred": " gleam\n\n", "correct": 0, "ans_nll": 0.75103}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "yacht", "pred": "plume", "raw_pred": " plume\n\n", "correct": 0, "ans_nll": 4.12562}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "kayak", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.5367}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "kayak", "pred": "kayak", "raw_pred": " kayak\n\n", "correct": 1, "ans_nll": 1.16298}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "inlet", "pred": "mango", "raw_pred": " mango\n\n", "correct": 0, "ans_nll": 4.76583}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "kayak", "pred": "kayak", "raw_pred": " kayak\n\n", "correct": 1, "ans_nll": 1.14019}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "quartz", "pred": "yacht", "raw_pred": " yacht\n\n", "correct": 0, "ans_nll": 1.91185}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "otter", "pred": "tulip", "raw_pred": " tulip\n\n", "correct": 0, "ans_nll": 1.26955}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "tulip", "pred": "epoch", "raw_pred": " epoch\n\n", "correct": 0, "ans_nll": 1.20949}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "tulip", "pred": "gleam", "raw_pred": " gleam\n\n", "correct": 0, "ans_nll": 1.54179}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "jewel", "pred": "ultra", "raw_pred": " ultra\n\n", "correct": 0, "ans_nll": 4.30292}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "inlet", "pred": "vault", "raw_pred": " vault\n\n", "correct": 0, "ans_nll": 2.84003}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "tulip", "pred": "tulip", "raw_pred": " tulip\n\n", "correct": 1, "ans_nll": 0.73132}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "acorn", "pred": "ultra", "raw_pred": " ultra\n\n", "correct": 0, "ans_nll": 1.46764}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "plume", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.37373}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "coral", "pred": "coral", "raw_pred": " coral\n\n", "correct": 1, "ans_nll": 0.43926}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "nexus", "pred": "epoch", "raw_pred": " epoch\n\n", "correct": 0, "ans_nll": 3.06222}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "waltz", "pred": "coral", "raw_pred": " coral\n\n", "correct": 0, "ans_nll": 0.84323}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "jewel", "pred": "epoch", "raw_pred": " epoch\n\n", "correct": 0, "ans_nll": 2.75543}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "nexus", "pred": "nexus", "raw_pred": " nexus\n\n", "correct": 1, "ans_nll": 1.1332}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "kayak", "pred": "kayak", "raw_pred": " kayak\n\n", "correct": 1, "ans_nll": 0.95778}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "ridge", "pred": "ridge", "raw_pred": " ridge\n\n", "correct": 1, "ans_nll": 0.58575}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "inlet", "pred": "ridge", "raw_pred": " ridge\n\n", "correct": 0, "ans_nll": 3.39029}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "frost", "pred": "otter", "raw_pred": " otter\n\n", "correct": 0, "ans_nll": 2.98595}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "ridge", "pred": "acorn", "raw_pred": " acorn\n\n", "correct": 0, "ans_nll": 1.50435}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "frost", "pred": "epoch", "raw_pred": " epoch\n\n", "correct": 0, "ans_nll": 2.23232}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "acorn", "pred": "mango", "raw_pred": " mango\n\n", "correct": 0, "ans_nll": 1.12579}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "acorn", "pred": "coral", "raw_pred": " coral\n\n", "correct": 0, "ans_nll": 0.81415}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "lotus", "pred": "gleam", "raw_pred": " gleam\n\n", "correct": 0, "ans_nll": 0.94339}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "acorn", "pred": "acorn", "raw_pred": " acorn\n\n", "correct": 1, "ans_nll": 0.41384}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "tulip", "pred": "tulip", "raw_pred": " tulip\n\n", "correct": 1, "ans_nll": 0.26976}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "vault", "pred": "ridge", "raw_pred": " ridge\n\n", "correct": 0, "ans_nll": 1.95856}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "blaze", "pred": "ridge", "raw_pred": " ridge\n\n", "correct": 0, "ans_nll": 2.95829}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "gleam", "pred": "drift", "raw_pred": " drift\n\n", "correct": 0, "ans_nll": 1.36915}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "epoch", "pred": "kayak", "raw_pred": " kayak\n\n", "correct": 0, "ans_nll": 1.93124}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "jewel", "pred": "drift", "raw_pred": " drift\n\n", "correct": 0, "ans_nll": 3.25813}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "heron", "pred": "ridge", "raw_pred": " ridge\n\n", "correct": 0, "ans_nll": 1.51657}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "vault", "pred": "otter", "raw_pred": " otter\n\n", "correct": 0, "ans_nll": 2.66576}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "spark", "pred": "kayak", "raw_pred": " kayak\n\n", "correct": 0, "ans_nll": 2.49357}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "nexus", "pred": "acorn", "raw_pred": " acorn\n\n", "correct": 0, "ans_nll": 2.88822}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "otter", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 2.01931}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "spark", "pred": "spark", "raw_pred": " spark\n\n", "correct": 1, "ans_nll": 1.34295}
+{"eval_tag": "baseline_P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "ultra", "pred": "", "raw_pred": "\n\n", "correct": 0, "ans_nll": 1.64483}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "R4", "pred": "R4", "raw_pred": " R4\n", "correct": 1, "ans_nll": 0.00017}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "X6", "pred": "X6", "raw_pred": " X6\n", "correct": 1, "ans_nll": 0.00046}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "S1", "pred": "S1", "raw_pred": " S1\n", "correct": 1, "ans_nll": 0.00038}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "R5", "pred": "R5", "raw_pred": " R5\n", "correct": 1, "ans_nll": 6e-05}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "P9", "pred": "P9", "raw_pred": " P9\n", "correct": 1, "ans_nll": 0.00013}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "V5", "pred": "V5", "raw_pred": " V5\n", "correct": 1, "ans_nll": 0.00026}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "S8", "pred": "S8", "raw_pred": " S8\n", "correct": 1, "ans_nll": 0.00388}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "X4", "pred": "X4", "raw_pred": " X4\n", "correct": 1, "ans_nll": 0.00013}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "Q5", "pred": "Q5", "raw_pred": " Q5\n", "correct": 1, "ans_nll": 0.00018}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 2, "gold": "V2", "pred": "V2", "raw_pred": " V2\n", "correct": 1, "ans_nll": 0.00061}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "Q3", "pred": "Q3", "raw_pred": " Q3\n", "correct": 1, "ans_nll": 0.20759}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "V9", "pred": "V9", "raw_pred": " V9\n", "correct": 1, "ans_nll": 0.07862}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "V7", "pred": "V7", "raw_pred": " V7\n", "correct": 1, "ans_nll": 0.01217}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "N3", "pred": "N3", "raw_pred": " N3\n", "correct": 1, "ans_nll": 0.00383}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "S2", "pred": "S2", "raw_pred": " S2\n", "correct": 1, "ans_nll": 0.00371}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "T3", "pred": "T3", "raw_pred": " T3\n", "correct": 1, "ans_nll": 0.05038}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "Q3", "pred": "Q3", "raw_pred": " Q3\n", "correct": 1, "ans_nll": 0.02118}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "S8", "pred": "Z8", "raw_pred": " Z8\n", "correct": 0, "ans_nll": 0.85141}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "Q6", "pred": "Q6", "raw_pred": " Q6\n", "correct": 1, "ans_nll": 0.0163}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 3, "gold": "Q2", "pred": "Q2", "raw_pred": " Q2\n", "correct": 1, "ans_nll": 0.00082}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "Q9", "pred": "Q9", "raw_pred": " Q9\n", "correct": 1, "ans_nll": 0.22177}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "Q5", "pred": "Q5", "raw_pred": " Q5\n", "correct": 1, "ans_nll": 0.12823}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "W5", "pred": "W5", "raw_pred": " W5\n", "correct": 1, "ans_nll": 0.25976}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "P3", "pred": "S7", "raw_pred": " S7\n", "correct": 0, "ans_nll": 1.48994}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "T6", "pred": "T6", "raw_pred": " T6\n", "correct": 1, "ans_nll": 0.04882}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "W9", "pred": "W9", "raw_pred": " W9\n", "correct": 1, "ans_nll": 0.01591}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "P2", "pred": "P2", "raw_pred": " P2\n", "correct": 1, "ans_nll": 0.065}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "X6", "pred": "X6", "raw_pred": " X6\n", "correct": 1, "ans_nll": 0.20201}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "V8", "pred": "V8", "raw_pred": " V8\n", "correct": 1, "ans_nll": 0.03562}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_id", "depth": 4, "gold": "S2", "pred": "S2", "raw_pred": " S2\n", "correct": 1, "ans_nll": 0.01971}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "V9", "pred": "Z5", "raw_pred": " Z5\n", "correct": 0, "ans_nll": 1.31099}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "R2", "pred": "R2", "raw_pred": " R2\n", "correct": 1, "ans_nll": 0.19825}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "Z4", "pred": "N3", "raw_pred": " N3\n", "correct": 0, "ans_nll": 0.91711}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "V4", "pred": "V4", "raw_pred": " V4\n", "correct": 1, "ans_nll": 0.15794}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "V5", "pred": "V5", "raw_pred": " V5\n", "correct": 1, "ans_nll": 0.15703}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "Q7", "pred": "W2", "raw_pred": " W2\n", "correct": 0, "ans_nll": 0.63216}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "Z5", "pred": "Z5", "raw_pred": " Z5\n", "correct": 1, "ans_nll": 0.17472}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "R4", "pred": "Q7", "raw_pred": " Q7\n", "correct": 0, "ans_nll": 1.33567}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "T4", "pred": "T4", "raw_pred": " T4\n", "correct": 1, "ans_nll": 0.16453}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 5, "gold": "V7", "pred": "V1", "raw_pred": " V1\n", "correct": 0, "ans_nll": 1.64533}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "T8", "pred": "T8", "raw_pred": " T8\n", "correct": 1, "ans_nll": 0.14974}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "T2", "pred": "Z1", "raw_pred": " Z1\n", "correct": 0, "ans_nll": 2.05005}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "Z8", "pred": "W4", "raw_pred": " W4\n", "correct": 0, "ans_nll": 1.25553}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "R8", "pred": "S4", "raw_pred": " S4\n", "correct": 0, "ans_nll": 1.2562}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "P5", "pred": "Z9", "raw_pred": " Z9\n", "correct": 0, "ans_nll": 0.96838}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "P7", "pred": "P7", "raw_pred": " P7\n", "correct": 1, "ans_nll": 0.60887}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "R2", "pred": "R7", "raw_pred": " R7\n", "correct": 0, "ans_nll": 1.06091}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "X8", "pred": "Z1", "raw_pred": " Z1\n", "correct": 0, "ans_nll": 0.91685}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "Q6", "pred": "T4", "raw_pred": " T4\n", "correct": 0, "ans_nll": 0.59118}
+{"eval_tag": "P1", "task": "pointer_chase", "split": "eval_ood", "depth": 6, "gold": "S9", "pred": "Q3", "raw_pred": " Q3\n", "correct": 0, "ans_nll": 2.33392}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "17", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 0.98949}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "12", "pred": "12", "raw_pred": " 12\n", "correct": 1, "ans_nll": 0.76571}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "12", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 0.97014}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "6", "pred": "6", "raw_pred": " 6\n", "correct": 1, "ans_nll": 0.00131}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "11", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 0.85293}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "17", "pred": "8", "raw_pred": " 8\n", "correct": 0, "ans_nll": 1.47537}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "9", "pred": "9", "raw_pred": " 9\n", "correct": 1, "ans_nll": 0.00261}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "12", "pred": "14", "raw_pred": " 14\n", "correct": 0, "ans_nll": 0.91896}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "7", "pred": "7", "raw_pred": " 7\n", "correct": 1, "ans_nll": 0.00749}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 2, "gold": "16", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 0.9534}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "15", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 0.98411}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "12", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 0.98466}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "14", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.03125}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "1", "pred": "15", "raw_pred": " 15\n", "correct": 0, "ans_nll": 0.31743}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "11", "pred": "13", "raw_pred": " 13\n", "correct": 0, "ans_nll": 0.994}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "17", "pred": "13", "raw_pred": " 13\n", "correct": 0, "ans_nll": 0.94923}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "16", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.04356}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "5", "pred": "5", "raw_pred": " 5\n", "correct": 1, "ans_nll": 0.00964}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "2", "pred": "2", "raw_pred": " 2\n", "correct": 1, "ans_nll": 0.0116}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 3, "gold": "6", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.50495}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "5", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.41117}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "4", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.45674}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "15", "pred": "14", "raw_pred": " 14\n", "correct": 0, "ans_nll": 0.52293}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "0", "pred": "15", "raw_pred": " 15\n", "correct": 0, "ans_nll": 1.50164}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "15", "pred": "12", "raw_pred": " 12\n", "correct": 0, "ans_nll": 0.94529}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "11", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.01912}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "5", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.48264}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "7", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.47675}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "14", "pred": "13", "raw_pred": " 13\n", "correct": 0, "ans_nll": 0.97997}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_id", "depth": 4, "gold": "15", "pred": "13", "raw_pred": " 13\n", "correct": 0, "ans_nll": 0.95712}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "3", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.48906}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "11", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 0.97476}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "18", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.02879}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "8", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.50495}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "18", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.04579}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "13", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 0.96356}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "8", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.45674}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "14", "pred": "13", "raw_pred": " 13\n", "correct": 0, "ans_nll": 0.98312}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "3", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.45354}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 5, "gold": "10", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 0.98026}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "15", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 0.95989}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "6", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.50539}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "8", "pred": "15", "raw_pred": " 15\n", "correct": 0, "ans_nll": 1.51282}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "7", "pred": "13", "raw_pred": " 13\n", "correct": 0, "ans_nll": 1.4522}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "2", "pred": "13", "raw_pred": " 13\n", "correct": 0, "ans_nll": 1.56167}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "0", "pred": "13", "raw_pred": " 13\n", "correct": 0, "ans_nll": 1.39695}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "2", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.46928}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "13", "pred": "1", "raw_pred": " 1\n", "correct": 0, "ans_nll": 1.02038}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "10", "pred": "10", "raw_pred": " 10\n", "correct": 1, "ans_nll": 0.95303}
+{"eval_tag": "P1", "task": "mod_register", "split": "eval_ood", "depth": 6, "gold": "6", "pred": "15", "raw_pred": " 15\n", "correct": 0, "ans_nll": 1.50865}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "NONE", "raw_pred": " NONE\n", "correct": 1, "ans_nll": 0.3513}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "NONE", "raw_pred": " NONE\n", "correct": 1, "ans_nll": 0.03404}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "NONE", "raw_pred": " NONE\n", "correct": 1, "ans_nll": 0.03843}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "NONE", "raw_pred": " NONE\n", "correct": 1, "ans_nll": 0.00223}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "NONE", "raw_pred": " NONE\n", "correct": 1, "ans_nll": 0.11411}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "NONE", "raw_pred": " NONE\n", "correct": 1, "ans_nll": 0.00367}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "NONE", "raw_pred": " NONE\n", "correct": 1, "ans_nll": 0.07966}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "NONE", "raw_pred": " NONE\n", "correct": 1, "ans_nll": 0.04923}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "NONE", "raw_pred": " NONE\n", "correct": 1, "ans_nll": 0.00224}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 0, "gold": "NONE", "pred": "NONE", "raw_pred": " NONE\n", "correct": 1, "ans_nll": 0.00417}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2\n", "correct": 1, "ans_nll": 0.01109}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2\n", "correct": 1, "ans_nll": 0.01579}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2\n", "correct": 1, "ans_nll": 0.00187}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2\n", "correct": 1, "ans_nll": 0.09308}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2\n", "correct": 1, "ans_nll": 0.02128}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2\n", "correct": 1, "ans_nll": 0.00737}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2\n", "correct": 1, "ans_nll": 0.04567}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2\n", "correct": 1, "ans_nll": 0.03176}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2\n", "correct": 1, "ans_nll": 0.15901}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 2, "gold": "2", "pred": "2", "raw_pred": " 2\n", "correct": 1, "ans_nll": 0.00886}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "3", "raw_pred": " 3\n", "correct": 1, "ans_nll": 0.34277}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "3", "raw_pred": " 3\n", "correct": 1, "ans_nll": 0.18528}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "3", "raw_pred": " 3\n", "correct": 1, "ans_nll": 0.1985}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 1.34217}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 1.78902}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "3", "raw_pred": " 3\n", "correct": 1, "ans_nll": 0.44359}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "3", "raw_pred": " 3\n", "correct": 1, "ans_nll": 0.01879}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 1.60205}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "3", "raw_pred": " 3\n", "correct": 1, "ans_nll": 0.02719}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_id", "depth": 3, "gold": "3", "pred": "3", "raw_pred": " 3\n", "correct": 1, "ans_nll": 0.16256}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "3", "raw_pred": " 3\n", "correct": 0, "ans_nll": 2.59016}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 3.70544}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 2.16413}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 2.84801}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 0.83448}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 1.97899}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 1.81895}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 2.28599}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 2.19496}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 4, "gold": "4", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 0.75438}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 5.49128}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 4.9142}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 3.79298}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 5.88968}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 1.90025}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 3.88229}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 5.39146}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 4.05624}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 5.5158}
+{"eval_tag": "P1", "task": "graph_bfs", "split": "eval_ood", "depth": 5, "gold": "5", "pred": "NONE", "raw_pred": " NONE\n", "correct": 0, "ans_nll": 3.61388}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "coral", "pred": "coral", "raw_pred": " coral\n", "correct": 1, "ans_nll": 0.00182}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "jewel", "pred": "jewel", "raw_pred": " jewel\n", "correct": 1, "ans_nll": 0.00086}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "acorn", "pred": "acorn", "raw_pred": " acorn\n", "correct": 1, "ans_nll": 3e-05}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "lotus", "pred": "lotus", "raw_pred": " lotus\n", "correct": 1, "ans_nll": 1e-05}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "otter", "pred": "otter", "raw_pred": " otter\n", "correct": 1, "ans_nll": 0.00312}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "spark", "pred": "spark", "raw_pred": " spark\n", "correct": 1, "ans_nll": 0.00027}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "mango", "pred": "mango", "raw_pred": " mango\n", "correct": 1, "ans_nll": 9e-05}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "inlet", "pred": "inlet", "raw_pred": " inlet\n", "correct": 1, "ans_nll": 4e-05}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "epoch", "pred": "epoch", "raw_pred": " epoch\n", "correct": 1, "ans_nll": 0.01109}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "acorn", "pred": "acorn", "raw_pred": " acorn\n", "correct": 1, "ans_nll": 5e-05}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 3, "gold": "frost", "pred": "blaze", "raw_pred": " blaze\n", "correct": 0, "ans_nll": 3.75153}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "waltz", "pred": "waltz", "raw_pred": " waltz\n", "correct": 1, "ans_nll": 0.00159}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "blaze", "pred": "blaze", "raw_pred": " blaze\n", "correct": 1, "ans_nll": 0.06121}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "mango", "pred": "mango", "raw_pred": " mango\n", "correct": 1, "ans_nll": 0.003}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "mango", "pred": "mango", "raw_pred": " mango\n", "correct": 1, "ans_nll": 0.00021}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "mango", "pred": "mango", "raw_pred": " mango\n", "correct": 1, "ans_nll": 0.81641}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "blaze", "pred": "blaze", "raw_pred": " blaze\n", "correct": 1, "ans_nll": 0.32107}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "mango", "pred": "ultra", "raw_pred": " ultra\n", "correct": 0, "ans_nll": 1.36427}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "waltz", "pred": "waltz", "raw_pred": " waltz\n", "correct": 1, "ans_nll": 0.00254}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "jewel", "pred": "quartz", "raw_pred": " quartz\n", "correct": 0, "ans_nll": 1.8659}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "yacht", "pred": "yacht", "raw_pred": " yacht\n", "correct": 1, "ans_nll": 0.00144}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 4, "gold": "tulip", "pred": "tulip", "raw_pred": " tulip\n", "correct": 1, "ans_nll": 0.02605}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "yacht", "pred": "nexus", "raw_pred": " nexus\n", "correct": 0, "ans_nll": 5.83585}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "kayak", "pred": "waltz", "raw_pred": " waltz\n", "correct": 0, "ans_nll": 1.22991}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "kayak", "pred": "kayak", "raw_pred": " kayak\n", "correct": 1, "ans_nll": 0.47981}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "inlet", "pred": "inlet", "raw_pred": " inlet\n", "correct": 1, "ans_nll": 0.31936}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "kayak", "pred": "ultra", "raw_pred": " ultra\n", "correct": 0, "ans_nll": 1.32485}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "quartz", "pred": "frost", "raw_pred": " frost\n", "correct": 0, "ans_nll": 1.97518}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "otter", "pred": "tulip", "raw_pred": " tulip\n", "correct": 0, "ans_nll": 2.11008}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "tulip", "pred": "tulip", "raw_pred": " tulip\n", "correct": 1, "ans_nll": 0.20236}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "tulip", "pred": "tulip", "raw_pred": " tulip\n", "correct": 1, "ans_nll": 0.29093}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "jewel", "pred": "blaze", "raw_pred": " blaze\n", "correct": 0, "ans_nll": 2.07699}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 5, "gold": "inlet", "pred": "inlet", "raw_pred": " inlet\n", "correct": 1, "ans_nll": 0.11728}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "tulip", "pred": "quartz", "raw_pred": " quartz\n", "correct": 0, "ans_nll": 0.72927}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "acorn", "pred": "acorn", "raw_pred": " acorn\n", "correct": 1, "ans_nll": 0.34792}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "plume", "pred": "plume", "raw_pred": " plume\n", "correct": 1, "ans_nll": 0.09243}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "coral", "pred": "coral", "raw_pred": " coral\n", "correct": 1, "ans_nll": 0.92923}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "nexus", "pred": "epoch", "raw_pred": " epoch\n", "correct": 0, "ans_nll": 1.8181}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "waltz", "pred": "waltz", "raw_pred": " waltz\n", "correct": 1, "ans_nll": 0.20593}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "jewel", "pred": "acorn", "raw_pred": " acorn\n", "correct": 0, "ans_nll": 4.18732}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "nexus", "pred": "kayak", "raw_pred": " kayak\n", "correct": 0, "ans_nll": 8.29842}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "kayak", "pred": "inlet", "raw_pred": " inlet\n", "correct": 0, "ans_nll": 0.82478}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "ridge", "pred": "inlet", "raw_pred": " inlet\n", "correct": 0, "ans_nll": 1.75586}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_id", "depth": 6, "gold": "inlet", "pred": "inlet", "raw_pred": " inlet\n", "correct": 1, "ans_nll": 0.3216}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "frost", "pred": "coral", "raw_pred": " coral\n", "correct": 0, "ans_nll": 1.92846}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "ridge", "pred": "ridge", "raw_pred": " ridge\n", "correct": 1, "ans_nll": 0.03847}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "frost", "pred": "kayak", "raw_pred": " kayak\n", "correct": 0, "ans_nll": 4.3924}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "acorn", "pred": "mango", "raw_pred": " mango\n", "correct": 0, "ans_nll": 0.731}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "acorn", "pred": "spark", "raw_pred": " spark\n", "correct": 0, "ans_nll": 0.84432}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "lotus", "pred": "mango", "raw_pred": " mango\n", "correct": 0, "ans_nll": 1.32783}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "acorn", "pred": "acorn", "raw_pred": " acorn\n", "correct": 1, "ans_nll": 0.35015}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "tulip", "pred": "spark", "raw_pred": " spark\n", "correct": 0, "ans_nll": 0.9491}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "vault", "pred": "vault", "raw_pred": " vault\n", "correct": 1, "ans_nll": 1.07576}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 7, "gold": "blaze", "pred": "acorn", "raw_pred": " acorn\n", "correct": 0, "ans_nll": 4.80283}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "gleam", "pred": "kayak", "raw_pred": " kayak\n", "correct": 0, "ans_nll": 1.61239}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "epoch", "pred": "epoch", "raw_pred": " epoch\n", "correct": 1, "ans_nll": 1.05928}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "jewel", "pred": "drift", "raw_pred": " drift\n", "correct": 0, "ans_nll": 1.57291}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "heron", "pred": "kayak", "raw_pred": " kayak\n", "correct": 0, "ans_nll": 0.86881}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "vault", "pred": "gleam", "raw_pred": " gleam\n", "correct": 0, "ans_nll": 3.35062}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "spark", "pred": "spark", "raw_pred": " spark\n", "correct": 1, "ans_nll": 0.71617}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "nexus", "pred": "lotus", "raw_pred": " lotus\n", "correct": 0, "ans_nll": 2.45803}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "otter", "pred": "acorn", "raw_pred": " acorn\n", "correct": 0, "ans_nll": 0.65816}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "spark", "pred": "spark", "raw_pred": " spark\n", "correct": 1, "ans_nll": 0.08793}
+{"eval_tag": "P1", "task": "perm_track", "split": "eval_ood", "depth": 8, "gold": "ultra", "pred": "kayak", "raw_pred": " kayak\n", "correct": 0, "ans_nll": 2.02254}

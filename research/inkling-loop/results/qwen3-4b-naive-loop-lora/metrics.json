@@ -1,0 +1,1912 @@
+{
+  "run_name": "qwen3-4b-naive-loop-lora",
+  "model_label": "Qwen3-4B",
+  "model_path": "/exp/hf-cache/hub/models--Qwen--Qwen3-4B/snapshots/1cfa9a7208912126459214e8b04321603b3df60c",
+  "hostname": "8b30fdbd57c9",
+  "gpu": "NVIDIA GB10",
+  "loop_config": {
+    "backbone_family": "qwen3",
+    "model_id": "Qwen3-4B",
+    "num_hidden_layers": 36,
+    "hidden_size": 2560,
+    "loop_start": 6,
+    "loop_end": 30,
+    "block_size": 6,
+    "num_passes": 3,
+    "gate_rank": 64,
+    "rms_norm_eps": 1e-06,
+    "mode": "naive_loop",
+    "core_lora_rank": 48,
+    "core_lora_alpha": 32.0,
+    "scale_match_message": true
+  },
+  "train_args": {
+    "mode": "naive_loop",
+    "num_passes": 3,
+    "varloop": false,
+    "steps": 200,
+    "grad_accum": 8,
+    "lr": 0.0003,
+    "lm_weight": 0.25,
+    "seed": 42
+  },
+  "param_stats": {
+    "total_params": 4088528384,
+    "trainable_params": 66060288,
+    "loop_controller_params": 0,
+    "core_lora_params": 66060288,
+    "trainable_pct": 1.6157
+  },
+  "load_time_s": 1.8,
+  "train_elapsed_s": 1113.4,
+  "peak_train_mem_gib": 9.09,
+  "step0_identity_check": {
+    "max_abs_diff_p1_vs_stock": 0.03125,
+    "max_abs_diff_p3_vs_p1": 25.6015625,
+    "max_abs_diff_p3_vs_stock": 25.6015625
+  },
+  "layer_rms_profile": [
+    {
+      "layer": -1,
+      "rms": 0.02050093561410904
+    },
+    {
+      "layer": 0,
+      "rms": 0.1497677117586136
+    },
+    {
+      "layer": 1,
+      "rms": 0.25454992055892944
+    },
+    {
+      "layer": 2,
+      "rms": 0.30192461609840393
+    },
+    {
+      "layer": 3,
+      "rms": 0.35280919075012207
+    },
+    {
+      "layer": 4,
+      "rms": 0.45512959361076355
+    },
+    {
+      "layer": 5,
+      "rms": 0.5527822971343994
+    },
+    {
+      "layer": 6,
+      "rms": 13.926392555236816
+    },
+    {
+      "layer": 7,
+      "rms": 13.92762565612793
+    },
+    {
+      "layer": 8,
+      "rms": 13.929683685302734
+    },
+    {
+      "layer": 9,
+      "rms": 13.930076599121094
+    },
+    {
+      "layer": 10,
+      "rms": 13.930294036865234
+    },
+    {
+      "layer": 11,
+      "rms": 13.931668281555176
+    },
+    {
+      "layer": 12,
+      "rms": 13.934499740600586
+    },
+    {
+      "layer": 13,
+      "rms": 13.935079574584961
+    },
+    {
+      "layer": 14,
+      "rms": 13.939208030700684
+    },
+    {
+      "layer": 15,
+      "rms": 13.940018653869629
+    },
+    {
+      "layer": 16,
+      "rms": 14.30907154083252
+    },
+    {
+      "layer": 17,
+      "rms": 14.314949035644531
+    },
+    {
+      "layer": 18,
+      "rms": 14.320127487182617
+    },
+    {
+      "layer": 19,
+      "rms": 14.329798698425293
+    },
+    {
+      "layer": 20,
+      "rms": 14.3397216796875
+    },
+    {
+      "layer": 21,
+      "rms": 14.347569465637207
+    },
+    {
+      "layer": 22,
+      "rms": 14.361414909362793
+    },
+    {
+      "layer": 23,
+      "rms": 14.395435333251953
+    },
+    {
+      "layer": 24,
+      "rms": 14.451057434082031
+    },
+    {
+      "layer": 25,
+      "rms": 14.490909576416016
+    },
+    {
+      "layer": 26,
+      "rms": 14.555063247680664
+    },
+    {
+      "layer": 27,
+      "rms": 14.61917495727539
+    },
+    {
+      "layer": 28,
+      "rms": 14.712316513061523
+    },
+    {
+      "layer": 29,
+      "rms": 14.865017890930176
+    },
+    {
+      "layer": 30,
+      "rms": 15.0970458984375
+    },
+    {
+      "layer": 31,
+      "rms": 15.397069931030273
+    },
+    {
+      "layer": 32,
+      "rms": 15.720675468444824
+    },
+    {
+      "layer": 33,
+      "rms": 16.33148765563965
+    },
+    {
+      "layer": 34,
+      "rms": 15.76115894317627
+    },
+    {
+      "layer": 35,
+      "rms": 12.98001766204834
+    }
+  ],
+  "hardware_forward_cost": {
+    "P1": {
+      "seq_len": 176,
+      "ms_per_forward": 79.58,
+      "toks_per_sec": 2211.5,
+      "mean_watts": 44.87,
+      "joules_per_forward": 2.968
+    },
+    "P2": {
+      "seq_len": 176,
+      "ms_per_forward": 136.11,
+      "toks_per_sec": 1293.1,
+      "mean_watts": 53.16,
+      "joules_per_forward": 7.1
+    },
+    "P3": {
+      "seq_len": 176,
+      "ms_per_forward": 191.03,
+      "toks_per_sec": 921.3,
+      "mean_watts": 52.86,
+      "joules_per_forward": 9.252
+    }
+  },
+  "baseline_p1": {
+    "serial": {
+      "num_passes": 1,
+      "message_mode": "normal",
+      "overall": {
+        "n": 252,
+        "correct": 30,
+        "acc": 0.119,
+        "mean_ans_nll": 2.1367
+      },
+      "overall_id": {
+        "n": 156,
+        "correct": 25,
+        "acc": 0.1603,
+        "mean_ans_nll": 2.0436
+      },
+      "overall_ood": {
+        "n": 96,
+        "correct": 5,
+        "acc": 0.0521,
+        "mean_ans_nll": 2.288
+      },
+      "per_task": {
+        "graph_bfs": {
+          "id": {
+            "n": 36,
+            "correct": 10,
+            "acc": 0.2778,
+            "mean_ans_nll": 1.8021
+          },
+          "ood": {
+            "n": 24,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 1.865
+          },
+          "by_depth": {
+            "eval_id_d0": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 4.2598
+            },
+            "eval_id_d2": {
+              "n": 12,
+              "correct": 9,
+              "acc": 0.75,
+              "mean_ans_nll": 0.4238
+            },
+            "eval_id_d3": {
+              "n": 12,
+              "correct": 1,
+              "acc": 0.0833,
+              "mean_ans_nll": 0.7227
+            },
+            "eval_ood_d4": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 1.5237
+            },
+            "eval_ood_d5": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 2.2062
+            }
+          }
+        },
+        "mod_register": {
+          "id": {
+            "n": 36,
+            "correct": 5,
+            "acc": 0.1389,
+            "mean_ans_nll": 1.2633
+          },
+          "ood": {
+            "n": 24,
+            "correct": 1,
+            "acc": 0.0417,
+            "mean_ans_nll": 1.284
+          },
+          "by_depth": {
+            "eval_id_d2": {
+              "n": 12,
+              "correct": 2,
+              "acc": 0.1667,
+              "mean_ans_nll": 1.1251
+            },
+            "eval_id_d3": {
+              "n": 12,
+              "correct": 2,
+              "acc": 0.1667,
+              "mean_ans_nll": 1.1941
+            },
+            "eval_id_d4": {
+              "n": 12,
+              "correct": 1,
+              "acc": 0.0833,
+              "mean_ans_nll": 1.4707
+            },
+            "eval_ood_d5": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 1.3453
+            },
+            "eval_ood_d6": {
+              "n": 12,
+              "correct": 1,
+              "acc": 0.0833,
+              "mean_ans_nll": 1.2228
+            }
+          }
+        },
+        "perm_track": {
+          "id": {
+            "n": 48,
+            "correct": 9,
+            "acc": 0.1875,
+            "mean_ans_nll": 2.2303
+          },
+          "ood": {
+            "n": 24,
+            "correct": 4,
+            "acc": 0.1667,
+            "mean_ans_nll": 2.2842
+          },
+          "by_depth": {
+            "eval_id_d3": {
+              "n": 12,
+              "correct": 5,
+              "acc": 0.4167,
+              "mean_ans_nll": 2.3118
+            },
+            "eval_id_d4": {
+              "n": 12,
+              "correct": 3,
+              "acc": 0.25,
+              "mean_ans_nll": 1.5558
+            },
+            "eval_id_d5": {
+              "n": 12,
+              "correct": 1,
+              "acc": 0.0833,
+              "mean_ans_nll": 2.8708
+            },
+            "eval_id_d6": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 2.1827
+            },
+            "eval_ood_d7": {
+              "n": 12,
+              "correct": 1,
+              "acc": 0.0833,
+              "mean_ans_nll": 2.5947
+            },
+            "eval_ood_d8": {
+              "n": 12,
+              "correct": 3,
+              "acc": 0.25,
+              "mean_ans_nll": 1.9738
+            }
+          }
+        },
+        "pointer_chase": {
+          "id": {
+            "n": 36,
+            "correct": 1,
+            "acc": 0.0278,
+            "mean_ans_nll": 2.8166
+          },
+          "ood": {
+            "n": 24,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 3.7187
+          },
+          "by_depth": {
+            "eval_id_d2": {
+              "n": 12,
+              "correct": 1,
+              "acc": 0.0833,
+              "mean_ans_nll": 1.9152
+            },
+            "eval_id_d3": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 3.3663
+            },
+            "eval_id_d4": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 3.1683
+            },
+            "eval_ood_d5": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 3.2515
+            },
+            "eval_ood_d6": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 4.1858
+            }
+          }
+        }
+      },
+      "diagnostics": null
+    },
+    "wikitext2": {
+      "num_passes": 1,
+      "passages": 24,
+      "scored_tokens": 6015,
+      "mean_nll": 2.94918,
+      "perplexity": 19.0903,
+      "per_passage_nll": [
+        2.76488,
+        3.30404,
+        2.84554,
+        3.05431,
+        3.44028,
+        3.60365,
+        3.20176,
+        3.78469,
+        3.09547,
+        2.93793,
+        3.33723,
+        2.64233,
+        2.90785,
+        2.25166,
+        3.70908,
+        2.71128,
+        2.61339,
+        2.66198,
+        2.23993,
+        2.46472,
+        2.50248,
+        3.24453,
+        2.97601,
+        2.38738
+      ]
+    },
+    "gsm8k_direct": {
+      "num_passes": 1,
+      "n": 48,
+      "correct": 18,
+      "acc": 0.375,
+      "mean_ans_nll": 1.1956
+    }
+  },
+  "baseline_naive_p3": {
+    "num_passes": 3,
+    "message_mode": "normal",
+    "overall": {
+      "n": 252,
+      "correct": 0,
+      "acc": 0.0,
+      "mean_ans_nll": 12.016
+    },
+    "overall_id": {
+      "n": 156,
+      "correct": 0,
+      "acc": 0.0,
+      "mean_ans_nll": 12.0353
+    },
+    "overall_ood": {
+      "n": 96,
+      "correct": 0,
+      "acc": 0.0,
+      "mean_ans_nll": 11.9846
+    },
+    "per_task": {
+      "graph_bfs": {
+        "id": {
+          "n": 36,
+          "correct": 0,
+          "acc": 0.0,
+          "mean_ans_nll": 11.7579
+        },
+        "ood": {
+          "n": 24,
+          "correct": 0,
+          "acc": 0.0,
+          "mean_ans_nll": 11.6316
+        },
+        "by_depth": {
+          "eval_id_d0": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 12.2407
+          },
+          "eval_id_d2": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 11.4681
+          },
+          "eval_id_d3": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 11.565
+          },
+          "eval_ood_d4": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 11.6734
+          },
+          "eval_ood_d5": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 11.5898
+          }
+        }
+      },
+      "mod_register": {
+        "id": {
+          "n": 36,
+          "correct": 0,
+          "acc": 0.0,
+          "mean_ans_nll": 11.668
+        },
+        "ood": {
+          "n": 24,
+          "correct": 0,
+          "acc": 0.0,
+          "mean_ans_nll": 11.7419
+        },
+        "by_depth": {
+          "eval_id_d2": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 11.7295
+          },
+          "eval_id_d3": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 11.6396
+          },
+          "eval_id_d4": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 11.635
+          },
+          "eval_ood_d5": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 11.7925
+          },
+          "eval_ood_d6": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 11.6913
+          }
+        }
+      },
+      "perm_track": {
+        "id": {
+          "n": 48,
+          "correct": 0,
+          "acc": 0.0,
+          "mean_ans_nll": 12.3835
+        },
+        "ood": {
+          "n": 24,
+          "correct": 0,
+          "acc": 0.0,
+          "mean_ans_nll": 12.2964
+        },
+        "by_depth": {
+          "eval_id_d3": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 12.4187
+          },
+          "eval_id_d4": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 12.2421
+          },
+          "eval_id_d5": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 12.5597
+          },
+          "eval_id_d6": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 12.3135
+          },
+          "eval_ood_d7": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 12.2943
+          },
+          "eval_ood_d8": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 12.2985
+          }
+        }
+      },
+      "pointer_chase": {
+        "id": {
+          "n": 36,
+          "correct": 0,
+          "acc": 0.0,
+          "mean_ans_nll": 12.2156
+        },
+        "ood": {
+          "n": 24,
+          "correct": 0,
+          "acc": 0.0,
+          "mean_ans_nll": 12.2684
+        },
+        "by_depth": {
+          "eval_id_d2": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 12.26
+          },
+          "eval_id_d3": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 12.1564
+          },
+          "eval_id_d4": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 12.2303
+          },
+          "eval_ood_d5": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 12.1466
+          },
+          "eval_ood_d6": {
+            "n": 12,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 12.3901
+          }
+        }
+      }
+    },
+    "diagnostics": null
+  },
+  "post_training": {
+    "serial": {
+      "P1": {
+        "num_passes": 1,
+        "message_mode": "normal",
+        "overall": {
+          "n": 252,
+          "correct": 47,
+          "acc": 0.1865,
+          "mean_ans_nll": 1.7284
+        },
+        "overall_id": {
+          "n": 156,
+          "correct": 40,
+          "acc": 0.2564,
+          "mean_ans_nll": 1.2983
+        },
+        "overall_ood": {
+          "n": 96,
+          "correct": 7,
+          "acc": 0.0729,
+          "mean_ans_nll": 2.4273
+        },
+        "per_task": {
+          "graph_bfs": {
+            "id": {
+              "n": 36,
+              "correct": 24,
+              "acc": 0.6667,
+              "mean_ans_nll": 0.4121
+            },
+            "ood": {
+              "n": 24,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 4.9845
+            },
+            "by_depth": {
+              "eval_id_d0": {
+                "n": 12,
+                "correct": 12,
+                "acc": 1.0,
+                "mean_ans_nll": 0.0031
+              },
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 4,
+                "acc": 0.3333,
+                "mean_ans_nll": 0.7834
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 8,
+                "acc": 0.6667,
+                "mean_ans_nll": 0.4497
+              },
+              "eval_ood_d4": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 3.4802
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 6.4888
+              }
+            }
+          },
+          "mod_register": {
+            "id": {
+              "n": 36,
+              "correct": 4,
+              "acc": 0.1111,
+              "mean_ans_nll": 1.1958
+            },
+            "ood": {
+              "n": 24,
+              "correct": 2,
+              "acc": 0.0833,
+              "mean_ans_nll": 1.137
+            },
+            "by_depth": {
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 3,
+                "acc": 0.25,
+                "mean_ans_nll": 1.127
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.1586
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.3018
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 1.2338
+              },
+              "eval_ood_d6": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.0403
+              }
+            }
+          },
+          "perm_track": {
+            "id": {
+              "n": 48,
+              "correct": 10,
+              "acc": 0.2083,
+              "mean_ans_nll": 2.0361
+            },
+            "ood": {
+              "n": 24,
+              "correct": 4,
+              "acc": 0.1667,
+              "mean_ans_nll": 2.1616
+            },
+            "by_depth": {
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 2.3268
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 1.9884
+              },
+              "eval_id_d5": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 2.2661
+              },
+              "eval_id_d6": {
+                "n": 12,
+                "correct": 4,
+                "acc": 0.3333,
+                "mean_ans_nll": 1.5631
+              },
+              "eval_ood_d7": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 2.1638
+              },
+              "eval_ood_d8": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 2.1594
+              }
+            }
+          },
+          "pointer_chase": {
+            "id": {
+              "n": 36,
+              "correct": 2,
+              "acc": 0.0556,
+              "mean_ans_nll": 1.3032
+            },
+            "ood": {
+              "n": 24,
+              "correct": 1,
+              "acc": 0.0417,
+              "mean_ans_nll": 1.4263
+            },
+            "by_depth": {
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.1945
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.3697
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.3454
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.4304
+              },
+              "eval_ood_d6": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.4221
+              }
+            }
+          }
+        },
+        "diagnostics": null
+      },
+      "P2": {
+        "num_passes": 2,
+        "message_mode": "normal",
+        "overall": {
+          "n": 252,
+          "correct": 43,
+          "acc": 0.1706,
+          "mean_ans_nll": 1.7124
+        },
+        "overall_id": {
+          "n": 156,
+          "correct": 39,
+          "acc": 0.25,
+          "mean_ans_nll": 1.2603
+        },
+        "overall_ood": {
+          "n": 96,
+          "correct": 4,
+          "acc": 0.0417,
+          "mean_ans_nll": 2.4471
+        },
+        "per_task": {
+          "graph_bfs": {
+            "id": {
+              "n": 36,
+              "correct": 24,
+              "acc": 0.6667,
+              "mean_ans_nll": 0.3027
+            },
+            "ood": {
+              "n": 24,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 5.0597
+            },
+            "by_depth": {
+              "eval_id_d0": {
+                "n": 12,
+                "correct": 12,
+                "acc": 1.0,
+                "mean_ans_nll": 0.0065
+              },
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 3,
+                "acc": 0.25,
+                "mean_ans_nll": 0.5896
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 9,
+                "acc": 0.75,
+                "mean_ans_nll": 0.3119
+              },
+              "eval_ood_d4": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 3.4638
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 6.6555
+              }
+            }
+          },
+          "mod_register": {
+            "id": {
+              "n": 36,
+              "correct": 3,
+              "acc": 0.0833,
+              "mean_ans_nll": 1.2274
+            },
+            "ood": {
+              "n": 24,
+              "correct": 1,
+              "acc": 0.0417,
+              "mean_ans_nll": 1.1252
+            },
+            "by_depth": {
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 1.1838
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.1728
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.3256
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.2148
+              },
+              "eval_ood_d6": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.0356
+              }
+            }
+          },
+          "perm_track": {
+            "id": {
+              "n": 48,
+              "correct": 11,
+              "acc": 0.2292,
+              "mean_ans_nll": 1.9615
+            },
+            "ood": {
+              "n": 24,
+              "correct": 1,
+              "acc": 0.0417,
+              "mean_ans_nll": 2.237
+            },
+            "by_depth": {
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 2.2749
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 3,
+                "acc": 0.25,
+                "mean_ans_nll": 1.7679
+              },
+              "eval_id_d5": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 2.2231
+              },
+              "eval_id_d6": {
+                "n": 12,
+                "correct": 4,
+                "acc": 0.3333,
+                "mean_ans_nll": 1.5802
+              },
+              "eval_ood_d7": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.9918
+              },
+              "eval_ood_d8": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 2.4822
+              }
+            }
+          },
+          "pointer_chase": {
+            "id": {
+              "n": 36,
+              "correct": 1,
+              "acc": 0.0278,
+              "mean_ans_nll": 1.3158
+            },
+            "ood": {
+              "n": 24,
+              "correct": 2,
+              "acc": 0.0833,
+              "mean_ans_nll": 1.3666
+            },
+            "by_depth": {
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.2514
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.401
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.2951
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 1.348
+              },
+              "eval_ood_d6": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.3853
+              }
+            }
+          }
+        },
+        "diagnostics": null
+      },
+      "P3": {
+        "num_passes": 3,
+        "message_mode": "normal",
+        "overall": {
+          "n": 252,
+          "correct": 45,
+          "acc": 0.1786,
+          "mean_ans_nll": 1.7018
+        },
+        "overall_id": {
+          "n": 156,
+          "correct": 40,
+          "acc": 0.2564,
+          "mean_ans_nll": 1.2794
+        },
+        "overall_ood": {
+          "n": 96,
+          "correct": 5,
+          "acc": 0.0521,
+          "mean_ans_nll": 2.3881
+        },
+        "per_task": {
+          "graph_bfs": {
+            "id": {
+              "n": 36,
+              "correct": 23,
+              "acc": 0.6389,
+              "mean_ans_nll": 0.2884
+            },
+            "ood": {
+              "n": 24,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 4.741
+            },
+            "by_depth": {
+              "eval_id_d0": {
+                "n": 12,
+                "correct": 12,
+                "acc": 1.0,
+                "mean_ans_nll": 0.0102
+              },
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 0.5916
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 9,
+                "acc": 0.75,
+                "mean_ans_nll": 0.2635
+              },
+              "eval_ood_d4": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 3.1784
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 6.3037
+              }
+            }
+          },
+          "mod_register": {
+            "id": {
+              "n": 36,
+              "correct": 1,
+              "acc": 0.0278,
+              "mean_ans_nll": 1.2394
+            },
+            "ood": {
+              "n": 24,
+              "correct": 1,
+              "acc": 0.0417,
+              "mean_ans_nll": 1.1141
+            },
+            "by_depth": {
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.1971
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.1934
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.3277
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.2032
+              },
+              "eval_ood_d6": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.025
+              }
+            }
+          },
+          "perm_track": {
+            "id": {
+              "n": 48,
+              "correct": 14,
+              "acc": 0.2917,
+              "mean_ans_nll": 2.0269
+            },
+            "ood": {
+              "n": 24,
+              "correct": 3,
+              "acc": 0.125,
+              "mean_ans_nll": 2.3676
+            },
+            "by_depth": {
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 3,
+                "acc": 0.25,
+                "mean_ans_nll": 2.3889
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 5,
+                "acc": 0.4167,
+                "mean_ans_nll": 1.7127
+              },
+              "eval_id_d5": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 2.3251
+              },
+              "eval_id_d6": {
+                "n": 12,
+                "correct": 4,
+                "acc": 0.3333,
+                "mean_ans_nll": 1.681
+              },
+              "eval_ood_d7": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 2.1723
+              },
+              "eval_ood_d8": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 2.5628
+              }
+            }
+          },
+          "pointer_chase": {
+            "id": {
+              "n": 36,
+              "correct": 2,
+              "acc": 0.0556,
+              "mean_ans_nll": 1.3137
+            },
+            "ood": {
+              "n": 24,
+              "correct": 1,
+              "acc": 0.0417,
+              "mean_ans_nll": 1.3296
+            },
+            "by_depth": {
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.2687
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.3774
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.2951
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.2909
+              },
+              "eval_ood_d6": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.3683
+              }
+            }
+          }
+        },
+        "diagnostics": {
+          "passes": [
+            {
+              "pass": 1,
+              "layers": []
+            },
+            {
+              "pass": 2,
+              "layers": []
+            },
+            {
+              "pass": 3,
+              "layers": []
+            }
+          ]
+        }
+      },
+      "P4": {
+        "num_passes": 4,
+        "message_mode": "normal",
+        "overall": {
+          "n": 252,
+          "correct": 50,
+          "acc": 0.1984,
+          "mean_ans_nll": 1.7005
+        },
+        "overall_id": {
+          "n": 156,
+          "correct": 38,
+          "acc": 0.2436,
+          "mean_ans_nll": 1.3366
+        },
+        "overall_ood": {
+          "n": 96,
+          "correct": 12,
+          "acc": 0.125,
+          "mean_ans_nll": 2.2918
+        },
+        "per_task": {
+          "graph_bfs": {
+            "id": {
+              "n": 36,
+              "correct": 22,
+              "acc": 0.6111,
+              "mean_ans_nll": 0.2742
+            },
+            "ood": {
+              "n": 24,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 4.1899
+            },
+            "by_depth": {
+              "eval_id_d0": {
+                "n": 12,
+                "correct": 12,
+                "acc": 1.0,
+                "mean_ans_nll": 0.0237
+              },
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 0.5503
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 9,
+                "acc": 0.75,
+                "mean_ans_nll": 0.2486
+              },
+              "eval_ood_d4": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 2.7169
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 5.6628
+              }
+            }
+          },
+          "mod_register": {
+            "id": {
+              "n": 36,
+              "correct": 1,
+              "acc": 0.0278,
+              "mean_ans_nll": 1.2454
+            },
+            "ood": {
+              "n": 24,
+              "correct": 2,
+              "acc": 0.0833,
+              "mean_ans_nll": 1.1176
+            },
+            "by_depth": {
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.2004
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.2064
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.3294
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.2042
+              },
+              "eval_ood_d6": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.0311
+              }
+            }
+          },
+          "perm_track": {
+            "id": {
+              "n": 48,
+              "correct": 13,
+              "acc": 0.2708,
+              "mean_ans_nll": 2.2016
+            },
+            "ood": {
+              "n": 24,
+              "correct": 3,
+              "acc": 0.125,
+              "mean_ans_nll": 2.5667
+            },
+            "by_depth": {
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 2.5953
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 5,
+                "acc": 0.4167,
+                "mean_ans_nll": 1.8351
+              },
+              "eval_id_d5": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 2.4779
+              },
+              "eval_id_d6": {
+                "n": 12,
+                "correct": 4,
+                "acc": 0.3333,
+                "mean_ans_nll": 1.8981
+              },
+              "eval_ood_d7": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 2.462
+              },
+              "eval_ood_d8": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 2.6713
+              }
+            }
+          },
+          "pointer_chase": {
+            "id": {
+              "n": 36,
+              "correct": 2,
+              "acc": 0.0556,
+              "mean_ans_nll": 1.3371
+            },
+            "ood": {
+              "n": 24,
+              "correct": 7,
+              "acc": 0.2917,
+              "mean_ans_nll": 1.2932
+            },
+            "by_depth": {
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.3374
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.3278
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.3461
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 4,
+                "acc": 0.3333,
+                "mean_ans_nll": 1.2384
+              },
+              "eval_ood_d6": {
+                "n": 12,
+                "correct": 3,
+                "acc": 0.25,
+                "mean_ans_nll": 1.3481
+              }
+            }
+          }
+        },
+        "diagnostics": null
+      },
+      "P5": {
+        "num_passes": 5,
+        "message_mode": "normal",
+        "overall": {
+          "n": 252,
+          "correct": 56,
+          "acc": 0.2222,
+          "mean_ans_nll": 1.8934
+        },
+        "overall_id": {
+          "n": 156,
+          "correct": 45,
+          "acc": 0.2885,
+          "mean_ans_nll": 1.5964
+        },
+        "overall_ood": {
+          "n": 96,
+          "correct": 11,
+          "acc": 0.1146,
+          "mean_ans_nll": 2.376
+        },
+        "per_task": {
+          "graph_bfs": {
+            "id": {
+              "n": 36,
+              "correct": 23,
+              "acc": 0.6389,
+              "mean_ans_nll": 0.279
+            },
+            "ood": {
+              "n": 24,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 3.6403
+            },
+            "by_depth": {
+              "eval_id_d0": {
+                "n": 12,
+                "correct": 12,
+                "acc": 1.0,
+                "mean_ans_nll": 0.0562
+              },
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 0.5308
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 10,
+                "acc": 0.8333,
+                "mean_ans_nll": 0.2499
+              },
+              "eval_ood_d4": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 2.3192
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 4.9615
+              }
+            }
+          },
+          "mod_register": {
+            "id": {
+              "n": 36,
+              "correct": 3,
+              "acc": 0.0833,
+              "mean_ans_nll": 1.2331
+            },
+            "ood": {
+              "n": 24,
+              "correct": 2,
+              "acc": 0.0833,
+              "mean_ans_nll": 1.117
+            },
+            "by_depth": {
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 1.2106
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.2051
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.2835
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.1898
+              },
+              "eval_ood_d6": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.0442
+              }
+            }
+          },
+          "perm_track": {
+            "id": {
+              "n": 48,
+              "correct": 15,
+              "acc": 0.3125,
+              "mean_ans_nll": 2.9952
+            },
+            "ood": {
+              "n": 24,
+              "correct": 6,
+              "acc": 0.25,
+              "mean_ans_nll": 3.363
+            },
+            "by_depth": {
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 3.479
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 5,
+                "acc": 0.4167,
+                "mean_ans_nll": 2.573
+              },
+              "eval_id_d5": {
+                "n": 12,
+                "correct": 3,
+                "acc": 0.25,
+                "mean_ans_nll": 3.1073
+              },
+              "eval_id_d6": {
+                "n": 12,
+                "correct": 5,
+                "acc": 0.4167,
+                "mean_ans_nll": 2.8216
+              },
+              "eval_ood_d7": {
+                "n": 12,
+                "correct": 3,
+                "acc": 0.25,
+                "mean_ans_nll": 3.467
+              },
+              "eval_ood_d8": {
+                "n": 12,
+                "correct": 3,
+                "acc": 0.25,
+                "mean_ans_nll": 3.259
+              }
+            }
+          },
+          "pointer_chase": {
+            "id": {
+              "n": 36,
+              "correct": 4,
+              "acc": 0.1111,
+              "mean_ans_nll": 1.412
+            },
+            "ood": {
+              "n": 24,
+              "correct": 3,
+              "acc": 0.125,
+              "mean_ans_nll": 1.3837
+            },
+            "by_depth": {
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.4452
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.3893
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 3,
+                "acc": 0.25,
+                "mean_ans_nll": 1.4015
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 1.2875
+              },
+              "eval_ood_d6": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.4799
+              }
+            }
+          }
+        },
+        "diagnostics": null
+      }
+    },
+    "wikitext2": {
+      "P1": {
+        "num_passes": 1,
+        "passages": 24,
+        "scored_tokens": 6015,
+        "mean_nll": 3.31521,
+        "perplexity": 27.5281,
+        "per_passage_nll": [
+          3.0639,
+          3.53309,
+          3.53482,
+          3.3395,
+          3.85513,
+          3.98492,
+          3.65914,
+          3.88185,
+          3.6067,
+          3.41875,
+          4.01687,
+          2.80455,
+          2.92737,
+          2.33846,
+          3.60415,
+          3.22902,
+          3.22103,
+          3.04441,
+          2.48924,
+          2.75917,
+          2.78444,
+          3.82612,
+          3.63904,
+          2.96782
+        ]
+      },
+      "P2": {
+        "num_passes": 2,
+        "passages": 24,
+        "scored_tokens": 6015,
+        "mean_nll": 2.92986,
+        "perplexity": 18.7251,
+        "per_passage_nll": [
+          2.96258,
+          3.24102,
+          2.93916,
+          2.93435,
+          3.33121,
+          3.50785,
+          3.29541,
+          3.44371,
+          3.12145,
+          3.1093,
+          3.36155,
+          2.66807,
+          2.77829,
+          2.09852,
+          3.11053,
+          2.93594,
+          2.74147,
+          2.68948,
+          2.30234,
+          2.2117,
+          2.45479,
+          3.43388,
+          3.12208,
+          2.52457
+        ]
+      },
+      "P3": {
+        "num_passes": 3,
+        "passages": 24,
+        "scored_tokens": 6015,
+        "mean_nll": 3.09992,
+        "perplexity": 22.1962,
+        "per_passage_nll": [
+          3.15023,
+          3.42262,
+          3.09907,
+          3.02714,
+          3.38101,
+          3.58512,
+          3.42044,
+          3.62685,
+          3.251,
+          3.33485,
+          3.53931,
+          2.90367,
+          2.88063,
+          2.24394,
+          3.33685,
+          3.14348,
+          2.92576,
+          2.85505,
+          2.55414,
+          2.43478,
+          2.65744,
+          3.59478,
+          3.26471,
+          2.78315
+        ]
+      }
+    },
+    "gsm8k_direct": {
+      "P1": {
+        "num_passes": 1,
+        "n": 48,
+        "correct": 15,
+        "acc": 0.3125,
+        "mean_ans_nll": 1.1418
+      },
+      "P2": {
+        "num_passes": 2,
+        "n": 48,
+        "correct": 11,
+        "acc": 0.2292,
+        "mean_ans_nll": 1.0651
+      },
+      "P3": {
+        "num_passes": 3,
+        "n": 48,
+        "correct": 7,
+        "acc": 0.1458,
+        "mean_ans_nll": 1.1568
+      }
+    }
+  },
+  "causal_ablations": {}
+}

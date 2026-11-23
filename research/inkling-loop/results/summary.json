@@ -1,0 +1,2068 @@
+[
+  {
+    "run_name": "gemma4-26b-a4b-control-1pass-lora",
+    "model_label": "Gemma-4-26B-A4B-it",
+    "hostname": "445cf7a3a557",
+    "mode": "lora_only",
+    "varloop": false,
+    "steps": 200,
+    "params": {
+      "total_params": 25277747200,
+      "trainable_params": 44605440,
+      "loop_controller_params": 0,
+      "core_lora_params": 44605440,
+      "trainable_pct": 0.1765
+    },
+    "peak_mem_gib": 48.74,
+    "train_elapsed_s": 1128.0,
+    "step0_max_diff_p3_p1": 0.0,
+    "hw": {
+      "P1": {
+        "seq_len": 178,
+        "ms_per_forward": 230.63,
+        "toks_per_sec": 771.8,
+        "mean_watts": 42.38,
+        "joules_per_forward": 9.415
+      }
+    },
+    "baseline_p1": {
+      "id_acc": 0.3209,
+      "ood_acc": 0.075,
+      "id_nll": 2.5958,
+      "ood_nll": 2.9321,
+      "wt_ppl": 65984.5051,
+      "gsm_acc": 0.3438
+    },
+    "post_serial": {
+      "P1": {
+        "id_acc": 0.6119,
+        "ood_acc": 0.1125,
+        "id_nll": 0.6949,
+        "ood_nll": 2.5225
+      }
+    },
+    "post_wt_ppl": {
+      "P1": 19.7482
+    },
+    "post_gsm_acc": {
+      "P1": 0.5625
+    },
+    "causal_ablations": {},
+    "paired_ci_vs_p1": {}
+  },
+  {
+    "run_name": "gemma4-26b-a4b-inkling2-plus-lora",
+    "model_label": "Gemma-4-26B-A4B-it",
+    "hostname": "e2f4509bd54c",
+    "mode": "inkling2",
+    "varloop": true,
+    "steps": 200,
+    "params": {
+      "total_params": 25296400384,
+      "trainable_params": 63258624,
+      "loop_controller_params": 52107264,
+      "core_lora_params": 11151360,
+      "trainable_pct": 0.2501
+    },
+    "peak_mem_gib": 50.14,
+    "train_elapsed_s": 2425.2,
+    "step0_max_diff_p3_p1": 0.0,
+    "hw": {
+      "P1": {
+        "seq_len": 178,
+        "ms_per_forward": 225.59,
+        "toks_per_sec": 789.0,
+        "mean_watts": 42.35,
+        "joules_per_forward": 9.237
+      },
+      "P2": {
+        "seq_len": 178,
+        "ms_per_forward": 377.25,
+        "toks_per_sec": 471.8,
+        "mean_watts": 42.81,
+        "joules_per_forward": 15.805
+      },
+      "P3": {
+        "seq_len": 178,
+        "ms_per_forward": 531.43,
+        "toks_per_sec": 334.9,
+        "mean_watts": 43.01,
+        "joules_per_forward": 22.612
+      }
+    },
+    "baseline_p1": {
+      "id_acc": 0.3209,
+      "ood_acc": 0.075,
+      "id_nll": 2.5958,
+      "ood_nll": 2.9321,
+      "wt_ppl": 65984.5051,
+      "gsm_acc": 0.3438
+    },
+    "post_serial": {
+      "P1": {
+        "id_acc": 0.3881,
+        "ood_acc": 0.1375,
+        "id_nll": 1.1082,
+        "ood_nll": 1.8044
+      },
+      "P2": {
+        "id_acc": 0.3209,
+        "ood_acc": 0.1125,
+        "id_nll": 1.3429,
+        "ood_nll": 2.5666
+      },
+      "P3": {
+        "id_acc": 0.3209,
+        "ood_acc": 0.1,
+        "id_nll": 1.2558,
+        "ood_nll": 2.443
+      },
+      "P4": {
+        "id_acc": 0.3657,
+        "ood_acc": 0.0875,
+        "id_nll": 1.2666,
+        "ood_nll": 2.4025
+      },
+      "P5": {
+        "id_acc": 0.3507,
+        "ood_acc": 0.0875,
+        "id_nll": 1.2577,
+        "ood_nll": 2.3905
+      }
+    },
+    "post_wt_ppl": {
+      "P1": 26.9873,
+      "P2": 60.5234,
+      "P3": 55.9357
+    },
+    "post_gsm_acc": {
+      "P1": 0.375,
+      "P2": 0.0,
+      "P3": 0.0
+    },
+    "causal_ablations": {
+      "zero": {
+        "id_acc": 0.306,
+        "ood_acc": 0.1125,
+        "id_nll": 1.1046,
+        "ood_nll": 1.7027
+      },
+      "shuffle_tokens": {
+        "id_acc": 0.0224,
+        "ood_acc": 0.0125,
+        "id_nll": 8.0852,
+        "ood_nll": 9.3689
+      },
+      "freeze_pass1": {
+        "id_acc": 0.3209,
+        "ood_acc": 0.1125,
+        "id_nll": 1.3429,
+        "ood_nll": 2.5666
+      }
+    },
+    "paired_ci_vs_p1": {
+      "P2": {
+        "overall_acc_delta_ci": [
+          0.014,
+          -0.0561,
+          0.0841
+        ],
+        "id_acc_delta_ci": [
+          0.0,
+          -0.1119,
+          0.1045
+        ],
+        "ood_acc_delta_ci": [
+          0.0375,
+          -0.0375,
+          0.1125
+        ],
+        "nll_delta_ci": [
+          -0.9212,
+          -1.278,
+          -0.5736
+        ],
+        "gained": 32,
+        "lost": 29
+      },
+      "P3": {
+        "overall_acc_delta_ci": [
+          0.0093,
+          -0.0561,
+          0.0748
+        ],
+        "id_acc_delta_ci": [
+          0.0,
+          -0.1045,
+          0.097
+        ],
+        "ood_acc_delta_ci": [
+          0.025,
+          -0.0375,
+          0.1
+        ],
+        "nll_delta_ci": [
+          -1.0219,
+          -1.3747,
+          -0.6803
+        ],
+        "gained": 28,
+        "lost": 26
+      },
+      "P4": {
+        "overall_acc_delta_ci": [
+          0.0327,
+          -0.0374,
+          0.1028
+        ],
+        "id_acc_delta_ci": [
+          0.0448,
+          -0.0597,
+          0.1493
+        ],
+        "ood_acc_delta_ci": [
+          0.0125,
+          -0.05,
+          0.075
+        ],
+        "nll_delta_ci": [
+          -1.0303,
+          -1.382,
+          -0.6927
+        ],
+        "gained": 32,
+        "lost": 25
+      },
+      "P5": {
+        "overall_acc_delta_ci": [
+          0.0234,
+          -0.0467,
+          0.0935
+        ],
+        "id_acc_delta_ci": [
+          0.0299,
+          -0.0746,
+          0.1343
+        ],
+        "ood_acc_delta_ci": [
+          0.0125,
+          -0.05,
+          0.075
+        ],
+        "nll_delta_ci": [
+          -1.0403,
+          -1.3908,
+          -0.704
+        ],
+        "gained": 31,
+        "lost": 26
+      }
+    }
+  },
+  {
+    "run_name": "gemma4-26b-a4b-inkling2-varloop",
+    "model_label": "Gemma-4-26B-A4B-it",
+    "hostname": "6ce27191bf14",
+    "mode": "inkling2",
+    "varloop": true,
+    "steps": 200,
+    "params": {
+      "total_params": 25285249024,
+      "trainable_params": 52107264,
+      "loop_controller_params": 52107264,
+      "core_lora_params": 0,
+      "trainable_pct": 0.2061
+    },
+    "peak_mem_gib": 49.78,
+    "train_elapsed_s": 2103.4,
+    "step0_max_diff_p3_p1": 0.0,
+    "hw": {
+      "P1": {
+        "seq_len": 178,
+        "ms_per_forward": 217.45,
+        "toks_per_sec": 818.6,
+        "mean_watts": 39.64,
+        "joules_per_forward": 7.775
+      },
+      "P2": {
+        "seq_len": 178,
+        "ms_per_forward": 365.17,
+        "toks_per_sec": 487.4,
+        "mean_watts": 40.02,
+        "joules_per_forward": 13.993
+      },
+      "P3": {
+        "seq_len": 178,
+        "ms_per_forward": 509.7,
+        "toks_per_sec": 349.2,
+        "mean_watts": 40.35,
+        "joules_per_forward": 20.292
+      }
+    },
+    "baseline_p1": {
+      "id_acc": 0.3209,
+      "ood_acc": 0.075,
+      "id_nll": 2.5958,
+      "ood_nll": 2.9321,
+      "wt_ppl": 65984.5051,
+      "gsm_acc": 0.3438
+    },
+    "post_serial": {
+      "P1": {
+        "id_acc": 0.3209,
+        "ood_acc": 0.075,
+        "id_nll": 2.5958,
+        "ood_nll": 2.9321
+      },
+      "P2": {
+        "id_acc": 0.3358,
+        "ood_acc": 0.1,
+        "id_nll": 1.2064,
+        "ood_nll": 3.2648
+      },
+      "P3": {
+        "id_acc": 0.3731,
+        "ood_acc": 0.1,
+        "id_nll": 1.1265,
+        "ood_nll": 3.3098
+      },
+      "P4": {
+        "id_acc": 0.3433,
+        "ood_acc": 0.1125,
+        "id_nll": 1.168,
+        "ood_nll": 3.2085
+      },
+      "P5": {
+        "id_acc": 0.3358,
+        "ood_acc": 0.1125,
+        "id_nll": 1.1627,
+        "ood_nll": 3.0721
+      }
+    },
+    "post_wt_ppl": {
+      "P1": 65984.5051,
+      "P2": 89.7261,
+      "P3": 74.3097
+    },
+    "post_gsm_acc": {
+      "P1": 0.3438,
+      "P2": 0.0,
+      "P3": 0.0
+    },
+    "causal_ablations": {
+      "zero": {
+        "id_acc": 0.306,
+        "ood_acc": 0.1375,
+        "id_nll": 1.3722,
+        "ood_nll": 1.5995
+      },
+      "shuffle_tokens": {
+        "id_acc": 0.0075,
+        "ood_acc": 0.025,
+        "id_nll": 11.7694,
+        "ood_nll": 12.4365
+      },
+      "freeze_pass1": {
+        "id_acc": 0.3358,
+        "ood_acc": 0.1,
+        "id_nll": 1.2064,
+        "ood_nll": 3.2648
+      }
+    },
+    "paired_ci_vs_p1": {
+      "P2": {
+        "overall_acc_delta_ci": [
+          0.0187,
+          -0.0467,
+          0.0888
+        ],
+        "id_acc_delta_ci": [
+          0.0149,
+          -0.0896,
+          0.1194
+        ],
+        "ood_acc_delta_ci": [
+          0.025,
+          -0.025,
+          0.0875
+        ],
+        "nll_delta_ci": [
+          -0.7456,
+          -1.1577,
+          -0.3408
+        ],
+        "gained": 29,
+        "lost": 25
+      },
+      "P3": {
+        "overall_acc_delta_ci": [
+          0.0421,
+          -0.028,
+          0.1121
+        ],
+        "id_acc_delta_ci": [
+          0.0522,
+          -0.0522,
+          0.1567
+        ],
+        "ood_acc_delta_ci": [
+          0.025,
+          -0.0375,
+          0.0875
+        ],
+        "nll_delta_ci": [
+          -0.7788,
+          -1.2025,
+          -0.356
+        ],
+        "gained": 33,
+        "lost": 24
+      },
+      "P4": {
+        "overall_acc_delta_ci": [
+          0.028,
+          -0.0421,
+          0.0981
+        ],
+        "id_acc_delta_ci": [
+          0.0224,
+          -0.0821,
+          0.1269
+        ],
+        "ood_acc_delta_ci": [
+          0.0375,
+          -0.0375,
+          0.1125
+        ],
+        "nll_delta_ci": [
+          -0.7907,
+          -1.2067,
+          -0.3847
+        ],
+        "gained": 33,
+        "lost": 27
+      },
+      "P5": {
+        "overall_acc_delta_ci": [
+          0.0234,
+          -0.0467,
+          0.0935
+        ],
+        "id_acc_delta_ci": [
+          0.0149,
+          -0.0896,
+          0.1194
+        ],
+        "ood_acc_delta_ci": [
+          0.0375,
+          -0.0375,
+          0.1125
+        ],
+        "nll_delta_ci": [
+          -0.845,
+          -1.2499,
+          -0.4546
+        ],
+        "gained": 32,
+        "lost": 27
+      }
+    }
+  },
+  {
+    "run_name": "gemma4-31b-control-1pass-lora",
+    "model_label": "Gemma-4-31B-it",
+    "hostname": "524538e15e8e",
+    "mode": "lora_only",
+    "varloop": false,
+    "steps": 160,
+    "params": {
+      "total_params": 30795288832,
+      "trainable_params": 97943552,
+      "loop_controller_params": 0,
+      "core_lora_params": 97943552,
+      "trainable_pct": 0.318
+    },
+    "peak_mem_gib": 59.71,
+    "train_elapsed_s": 1635.4,
+    "step0_max_diff_p3_p1": 0.0,
+    "hw": {
+      "P1": {
+        "seq_len": 178,
+        "ms_per_forward": 436.02,
+        "toks_per_sec": 408.2,
+        "mean_watts": 62.23,
+        "joules_per_forward": 26.253
+      }
+    },
+    "baseline_p1": {
+      "id_acc": 0.3806,
+      "ood_acc": 0.1125,
+      "id_nll": 2.5195,
+      "ood_nll": 2.5135,
+      "wt_ppl": 3487.102,
+      "gsm_acc": 0.5312
+    },
+    "post_serial": {
+      "P1": {
+        "id_acc": 0.5821,
+        "ood_acc": 0.0875,
+        "id_nll": 0.654,
+        "ood_nll": 2.2525
+      }
+    },
+    "post_wt_ppl": {
+      "P1": 22.2511
+    },
+    "post_gsm_acc": {
+      "P1": 0.5625
+    },
+    "causal_ablations": {},
+    "paired_ci_vs_p1": {}
+  },
+  {
+    "run_name": "gemma4-31b-inkling2-varloop",
+    "model_label": "Gemma-4-31B-it",
+    "hostname": "8c0b803c3620",
+    "mode": "inkling2",
+    "varloop": true,
+    "steps": 160,
+    "params": {
+      "total_params": 30829981952,
+      "trainable_params": 132636672,
+      "loop_controller_params": 132636672,
+      "core_lora_params": 0,
+      "trainable_pct": 0.4302
+    },
+    "peak_mem_gib": 62.95,
+    "train_elapsed_s": 2954.7,
+    "step0_max_diff_p3_p1": 0.0,
+    "hw": {
+      "P1": {
+        "seq_len": 178,
+        "ms_per_forward": 400.84,
+        "toks_per_sec": 444.1,
+        "mean_watts": 63.48,
+        "joules_per_forward": 24.963
+      },
+      "P2": {
+        "seq_len": 178,
+        "ms_per_forward": 621.45,
+        "toks_per_sec": 286.4,
+        "mean_watts": 61.92,
+        "joules_per_forward": 37.02
+      },
+      "P3": {
+        "seq_len": 178,
+        "ms_per_forward": 844.8,
+        "toks_per_sec": 210.7,
+        "mean_watts": 61.24,
+        "joules_per_forward": 50.892
+      }
+    },
+    "baseline_p1": {
+      "id_acc": 0.3806,
+      "ood_acc": 0.1125,
+      "id_nll": 2.5195,
+      "ood_nll": 2.5135,
+      "wt_ppl": 3487.102,
+      "gsm_acc": 0.5312
+    },
+    "post_serial": {
+      "P1": {
+        "id_acc": 0.3806,
+        "ood_acc": 0.1125,
+        "id_nll": 2.5195,
+        "ood_nll": 2.5135
+      },
+      "P2": {
+        "id_acc": 0.2388,
+        "ood_acc": 0.1,
+        "id_nll": 1.4496,
+        "ood_nll": 2.0146
+      },
+      "P3": {
+        "id_acc": 0.2463,
+        "ood_acc": 0.125,
+        "id_nll": 1.4155,
+        "ood_nll": 1.7518
+      },
+      "P4": {
+        "id_acc": 0.2388,
+        "ood_acc": 0.1375,
+        "id_nll": 1.3922,
+        "ood_nll": 1.7402
+      },
+      "P5": {
+        "id_acc": 0.2313,
+        "ood_acc": 0.1375,
+        "id_nll": 1.3924,
+        "ood_nll": 1.7507
+      }
+    },
+    "post_wt_ppl": {
+      "P1": 3487.102,
+      "P2": 383.8793,
+      "P3": 175.865
+    },
+    "post_gsm_acc": {
+      "P1": 0.5312,
+      "P2": 0.0,
+      "P3": 0.0
+    },
+    "causal_ablations": {
+      "zero": {
+        "id_acc": 0.3955,
+        "ood_acc": 0.1,
+        "id_nll": 2.6594,
+        "ood_nll": 2.28
+      },
+      "shuffle_tokens": {
+        "id_acc": 0.0373,
+        "ood_acc": 0.0125,
+        "id_nll": 8.5129,
+        "ood_nll": 10.9395
+      },
+      "freeze_pass1": {
+        "id_acc": 0.2388,
+        "ood_acc": 0.1,
+        "id_nll": 1.4496,
+        "ood_nll": 2.0146
+      }
+    },
+    "paired_ci_vs_p1": {
+      "P2": {
+        "overall_acc_delta_ci": [
+          -0.0935,
+          -0.1682,
+          -0.0187
+        ],
+        "id_acc_delta_ci": [
+          -0.1418,
+          -0.2537,
+          -0.0373
+        ],
+        "ood_acc_delta_ci": [
+          -0.0125,
+          -0.1,
+          0.075
+        ],
+        "nll_delta_ci": [
+          -0.8565,
+          -1.2488,
+          -0.4816
+        ],
+        "gained": 24,
+        "lost": 44
+      },
+      "P3": {
+        "overall_acc_delta_ci": [
+          -0.0794,
+          -0.1542,
+          -0.0047
+        ],
+        "id_acc_delta_ci": [
+          -0.1343,
+          -0.2388,
+          -0.0299
+        ],
+        "ood_acc_delta_ci": [
+          0.0125,
+          -0.075,
+          0.1
+        ],
+        "nll_delta_ci": [
+          -0.9761,
+          -1.3718,
+          -0.6041
+        ],
+        "gained": 25,
+        "lost": 42
+      },
+      "P4": {
+        "overall_acc_delta_ci": [
+          -0.0794,
+          -0.1542,
+          -0.0047
+        ],
+        "id_acc_delta_ci": [
+          -0.1418,
+          -0.2463,
+          -0.0373
+        ],
+        "ood_acc_delta_ci": [
+          0.025,
+          -0.0625,
+          0.1125
+        ],
+        "nll_delta_ci": [
+          -0.995,
+          -1.391,
+          -0.6229
+        ],
+        "gained": 25,
+        "lost": 42
+      },
+      "P5": {
+        "overall_acc_delta_ci": [
+          -0.0841,
+          -0.1589,
+          -0.0093
+        ],
+        "id_acc_delta_ci": [
+          -0.1493,
+          -0.2537,
+          -0.0448
+        ],
+        "ood_acc_delta_ci": [
+          0.025,
+          -0.0625,
+          0.1125
+        ],
+        "nll_delta_ci": [
+          -0.9909,
+          -1.3869,
+          -0.6185
+        ],
+        "gained": 25,
+        "lost": 43
+      }
+    }
+  },
+  {
+    "run_name": "qwen3-4b-control-1pass-lora",
+    "model_label": "Qwen3-4B",
+    "hostname": "2796233eddae",
+    "mode": "lora_only",
+    "varloop": false,
+    "steps": 200,
+    "params": {
+      "total_params": 4088528384,
+      "trainable_params": 66060288,
+      "loop_controller_params": 0,
+      "core_lora_params": 66060288,
+      "trainable_pct": 1.6157
+    },
+    "peak_mem_gib": 9.03,
+    "train_elapsed_s": 440.0,
+    "step0_max_diff_p3_p1": 0.0,
+    "hw": {
+      "P1": {
+        "seq_len": 176,
+        "ms_per_forward": 80.3,
+        "toks_per_sec": 2191.8,
+        "mean_watts": 41.02,
+        "joules_per_forward": 2.76
+      }
+    },
+    "baseline_p1": {
+      "id_acc": 0.1603,
+      "ood_acc": 0.0521,
+      "id_nll": 2.0436,
+      "ood_nll": 2.288,
+      "wt_ppl": 19.0903,
+      "gsm_acc": 0.375
+    },
+    "post_serial": {
+      "P1": {
+        "id_acc": 0.4808,
+        "ood_acc": 0.1354,
+        "id_nll": 0.8539,
+        "ood_nll": 2.1679
+      }
+    },
+    "post_wt_ppl": {
+      "P1": 12.7242
+    },
+    "post_gsm_acc": {
+      "P1": 0.4375
+    },
+    "causal_ablations": {},
+    "paired_ci_vs_p1": {}
+  },
+  {
+    "run_name": "qwen3-4b-inkling2-fixed3",
+    "model_label": "Qwen3-4B",
+    "hostname": "0c693947b656",
+    "mode": "inkling2",
+    "varloop": false,
+    "steps": 200,
+    "params": {
+      "total_params": 4085628416,
+      "trainable_params": 63160320,
+      "loop_controller_params": 63160320,
+      "core_lora_params": 0,
+      "trainable_pct": 1.5459
+    },
+    "peak_mem_gib": 10.28,
+    "train_elapsed_s": 1135.4,
+    "step0_max_diff_p3_p1": 0.0,
+    "hw": {
+      "P1": {
+        "seq_len": 176,
+        "ms_per_forward": 63.5,
+        "toks_per_sec": 2771.8,
+        "mean_watts": 41.06,
+        "joules_per_forward": 1.828
+      },
+      "P2": {
+        "seq_len": 176,
+        "ms_per_forward": 136.7,
+        "toks_per_sec": 1287.5,
+        "mean_watts": 53.13,
+        "joules_per_forward": 7.145
+      },
+      "P3": {
+        "seq_len": 176,
+        "ms_per_forward": 209.96,
+        "toks_per_sec": 838.2,
+        "mean_watts": 51.49,
+        "joules_per_forward": 10.125
+      }
+    },
+    "baseline_p1": {
+      "id_acc": 0.1603,
+      "ood_acc": 0.0521,
+      "id_nll": 2.0436,
+      "ood_nll": 2.288,
+      "wt_ppl": 19.0903,
+      "gsm_acc": 0.375
+    },
+    "post_serial": {
+      "P1": {
+        "id_acc": 0.1603,
+        "ood_acc": 0.0521,
+        "id_nll": 2.0436,
+        "ood_nll": 2.288
+      },
+      "P2": {
+        "id_acc": 0.109,
+        "ood_acc": 0.0104,
+        "id_nll": 5.2431,
+        "ood_nll": 5.1283
+      },
+      "P3": {
+        "id_acc": 0.2628,
+        "ood_acc": 0.0312,
+        "id_nll": 1.2753,
+        "ood_nll": 2.3023
+      },
+      "P4": {
+        "id_acc": 0.0449,
+        "ood_acc": 0.0729,
+        "id_nll": 3.2815,
+        "ood_nll": 2.9659
+      },
+      "P5": {
+        "id_acc": 0.25,
+        "ood_acc": 0.0521,
+        "id_nll": 1.273,
+        "ood_nll": 2.34
+      }
+    },
+    "post_wt_ppl": {
+      "P1": 19.0903,
+      "P2": 13.6288,
+      "P3": 13.07
+    },
+    "post_gsm_acc": {
+      "P1": 0.375,
+      "P2": 0.0,
+      "P3": 0.25
+    },
+    "causal_ablations": {
+      "zero": {
+        "id_acc": 0.2051,
+        "ood_acc": 0.1458,
+        "id_nll": 1.304,
+        "ood_nll": 1.7712
+      },
+      "shuffle_tokens": {
+        "id_acc": 0.0897,
+        "ood_acc": 0.1042,
+        "id_nll": 1.5927,
+        "ood_nll": 2.0417
+      },
+      "freeze_pass1": {
+        "id_acc": 0.109,
+        "ood_acc": 0.0104,
+        "id_nll": 5.2431,
+        "ood_nll": 5.1283
+      }
+    },
+    "paired_ci_vs_p1": {
+      "P2": {
+        "overall_acc_delta_ci": [
+          -0.0476,
+          -0.0992,
+          0.004
+        ],
+        "id_acc_delta_ci": [
+          -0.0513,
+          -0.1282,
+          0.0256
+        ],
+        "ood_acc_delta_ci": [
+          -0.0417,
+          -0.0938,
+          0.0
+        ],
+        "nll_delta_ci": [
+          3.0627,
+          2.578,
+          3.5406
+        ],
+        "gained": 17,
+        "lost": 29
+      },
+      "P3": {
+        "overall_acc_delta_ci": [
+          0.0556,
+          -0.004,
+          0.1151
+        ],
+        "id_acc_delta_ci": [
+          0.1026,
+          0.0128,
+          0.1923
+        ],
+        "ood_acc_delta_ci": [
+          -0.0208,
+          -0.0729,
+          0.0312
+        ],
+        "nll_delta_ci": [
+          -0.4702,
+          -0.7027,
+          -0.2394
+        ],
+        "gained": 36,
+        "lost": 22
+      },
+      "P4": {
+        "overall_acc_delta_ci": [
+          -0.0635,
+          -0.1111,
+          -0.0159
+        ],
+        "id_acc_delta_ci": [
+          -0.1154,
+          -0.1795,
+          -0.0513
+        ],
+        "ood_acc_delta_ci": [
+          0.0208,
+          -0.0521,
+          0.0938
+        ],
+        "nll_delta_ci": [
+          1.0246,
+          0.7121,
+          1.3337
+        ],
+        "gained": 13,
+        "lost": 29
+      },
+      "P5": {
+        "overall_acc_delta_ci": [
+          0.0556,
+          -0.004,
+          0.1151
+        ],
+        "id_acc_delta_ci": [
+          0.0897,
+          0.0,
+          0.1795
+        ],
+        "ood_acc_delta_ci": [
+          0.0,
+          -0.0625,
+          0.0625
+        ],
+        "nll_delta_ci": [
+          -0.4573,
+          -0.6922,
+          -0.222
+        ],
+        "gained": 37,
+        "lost": 23
+      }
+    }
+  },
+  {
+    "run_name": "qwen3-4b-inkling2-plus-lora",
+    "model_label": "Qwen3-4B",
+    "hostname": "48404f500943",
+    "mode": "inkling2",
+    "varloop": true,
+    "steps": 200,
+    "params": {
+      "total_params": 4107648512,
+      "trainable_params": 85180416,
+      "loop_controller_params": 63160320,
+      "core_lora_params": 22020096,
+      "trainable_pct": 2.0737
+    },
+    "peak_mem_gib": 10.9,
+    "train_elapsed_s": 1267.9,
+    "step0_max_diff_p3_p1": 0.0,
+    "hw": {
+      "P1": {
+        "seq_len": 176,
+        "ms_per_forward": 79.66,
+        "toks_per_sec": 2209.3,
+        "mean_watts": 46.0,
+        "joules_per_forward": 3.143
+      },
+      "P2": {
+        "seq_len": 176,
+        "ms_per_forward": 167.43,
+        "toks_per_sec": 1051.2,
+        "mean_watts": 51.16,
+        "joules_per_forward": 7.875
+      },
+      "P3": {
+        "seq_len": 176,
+        "ms_per_forward": 254.39,
+        "toks_per_sec": 691.9,
+        "mean_watts": 50.09,
+        "joules_per_forward": 12.062
+      }
+    },
+    "baseline_p1": {
+      "id_acc": 0.1603,
+      "ood_acc": 0.0521,
+      "id_nll": 2.0436,
+      "ood_nll": 2.288,
+      "wt_ppl": 19.0903,
+      "gsm_acc": 0.375
+    },
+    "post_serial": {
+      "P1": {
+        "id_acc": 0.1923,
+        "ood_acc": 0.0938,
+        "id_nll": 1.3586,
+        "ood_nll": 1.9337
+      },
+      "P2": {
+        "id_acc": 0.2885,
+        "ood_acc": 0.0521,
+        "id_nll": 1.2779,
+        "ood_nll": 2.0564
+      },
+      "P3": {
+        "id_acc": 0.2821,
+        "ood_acc": 0.0521,
+        "id_nll": 1.2636,
+        "ood_nll": 2.1046
+      },
+      "P4": {
+        "id_acc": 0.2821,
+        "ood_acc": 0.0521,
+        "id_nll": 1.2752,
+        "ood_nll": 2.0725
+      },
+      "P5": {
+        "id_acc": 0.2692,
+        "ood_acc": 0.0521,
+        "id_nll": 1.2664,
+        "ood_nll": 2.1037
+      }
+    },
+    "post_wt_ppl": {
+      "P1": 12.3837,
+      "P2": 12.102,
+      "P3": 12.1073
+    },
+    "post_gsm_acc": {
+      "P1": 0.3125,
+      "P2": 0.2083,
+      "P3": 0.2083
+    },
+    "causal_ablations": {
+      "zero": {
+        "id_acc": 0.2115,
+        "ood_acc": 0.0833,
+        "id_nll": 1.3134,
+        "ood_nll": 1.9831
+      },
+      "shuffle_tokens": {
+        "id_acc": 0.2051,
+        "ood_acc": 0.0625,
+        "id_nll": 1.2894,
+        "ood_nll": 2.0057
+      },
+      "freeze_pass1": {
+        "id_acc": 0.2885,
+        "ood_acc": 0.0521,
+        "id_nll": 1.2779,
+        "ood_nll": 2.0564
+      }
+    },
+    "paired_ci_vs_p1": {
+      "P2": {
+        "overall_acc_delta_ci": [
+          0.0794,
+          0.0159,
+          0.1429
+        ],
+        "id_acc_delta_ci": [
+          0.1282,
+          0.0321,
+          0.2244
+        ],
+        "ood_acc_delta_ci": [
+          0.0,
+          -0.0625,
+          0.0625
+        ],
+        "nll_delta_ci": [
+          -0.5623,
+          -0.7802,
+          -0.3535
+        ],
+        "gained": 45,
+        "lost": 25
+      },
+      "P3": {
+        "overall_acc_delta_ci": [
+          0.0754,
+          0.0119,
+          0.1389
+        ],
+        "id_acc_delta_ci": [
+          0.1218,
+          0.0256,
+          0.2115
+        ],
+        "ood_acc_delta_ci": [
+          0.0,
+          -0.0625,
+          0.0625
+        ],
+        "nll_delta_ci": [
+          -0.5527,
+          -0.7744,
+          -0.3401
+        ],
+        "gained": 43,
+        "lost": 24
+      },
+      "P4": {
+        "overall_acc_delta_ci": [
+          0.0754,
+          0.0119,
+          0.1389
+        ],
+        "id_acc_delta_ci": [
+          0.1218,
+          0.0256,
+          0.2115
+        ],
+        "ood_acc_delta_ci": [
+          0.0,
+          -0.0625,
+          0.0625
+        ],
+        "nll_delta_ci": [
+          -0.5578,
+          -0.776,
+          -0.3475
+        ],
+        "gained": 43,
+        "lost": 24
+      },
+      "P5": {
+        "overall_acc_delta_ci": [
+          0.0675,
+          0.004,
+          0.131
+        ],
+        "id_acc_delta_ci": [
+          0.109,
+          0.0128,
+          0.2051
+        ],
+        "ood_acc_delta_ci": [
+          0.0,
+          -0.0625,
+          0.0625
+        ],
+        "nll_delta_ci": [
+          -0.5513,
+          -0.7739,
+          -0.3372
+        ],
+        "gained": 43,
+        "lost": 26
+      }
+    }
+  },
+  {
+    "run_name": "qwen3-4b-inkling2-varloop",
+    "model_label": "Qwen3-4B",
+    "hostname": "2b0904c87dea",
+    "mode": "inkling2",
+    "varloop": true,
+    "steps": 200,
+    "params": {
+      "total_params": 4085628416,
+      "trainable_params": 63160320,
+      "loop_controller_params": 63160320,
+      "core_lora_params": 0,
+      "trainable_pct": 1.5459
+    },
+    "peak_mem_gib": 10.27,
+    "train_elapsed_s": 1067.4,
+    "step0_max_diff_p3_p1": 0.0,
+    "hw": {
+      "P1": {
+        "seq_len": 176,
+        "ms_per_forward": 63.97,
+        "toks_per_sec": 2751.1,
+        "mean_watts": 37.34,
+        "joules_per_forward": 1.648
+      },
+      "P2": {
+        "seq_len": 176,
+        "ms_per_forward": 136.48,
+        "toks_per_sec": 1289.5,
+        "mean_watts": 49.58,
+        "joules_per_forward": 6.69
+      },
+      "P3": {
+        "seq_len": 176,
+        "ms_per_forward": 208.34,
+        "toks_per_sec": 844.8,
+        "mean_watts": 48.15,
+        "joules_per_forward": 9.55
+      }
+    },
+    "baseline_p1": {
+      "id_acc": 0.1603,
+      "ood_acc": 0.0521,
+      "id_nll": 2.0436,
+      "ood_nll": 2.288,
+      "wt_ppl": 19.0903,
+      "gsm_acc": 0.375
+    },
+    "post_serial": {
+      "P1": {
+        "id_acc": 0.1603,
+        "ood_acc": 0.0521,
+        "id_nll": 2.0436,
+        "ood_nll": 2.288
+      },
+      "P2": {
+        "id_acc": 0.1603,
+        "ood_acc": 0.0625,
+        "id_nll": 1.6386,
+        "ood_nll": 2.1778
+      },
+      "P3": {
+        "id_acc": 0.2051,
+        "ood_acc": 0.0417,
+        "id_nll": 1.3043,
+        "ood_nll": 2.1265
+      },
+      "P4": {
+        "id_acc": 0.2308,
+        "ood_acc": 0.0417,
+        "id_nll": 1.5315,
+        "ood_nll": 2.1803
+      },
+      "P5": {
+        "id_acc": 0.2244,
+        "ood_acc": 0.0312,
+        "id_nll": 1.3134,
+        "ood_nll": 2.1213
+      }
+    },
+    "post_wt_ppl": {
+      "P1": 19.0903,
+      "P2": 13.4385,
+      "P3": 13.4454
+    },
+    "post_gsm_acc": {
+      "P1": 0.375,
+      "P2": 0.2917,
+      "P3": 0.3125
+    },
+    "causal_ablations": {
+      "zero": {
+        "id_acc": 0.1859,
+        "ood_acc": 0.0729,
+        "id_nll": 1.318,
+        "ood_nll": 1.7298
+      },
+      "shuffle_tokens": {
+        "id_acc": 0.2051,
+        "ood_acc": 0.0625,
+        "id_nll": 1.3423,
+        "ood_nll": 1.8972
+      },
+      "freeze_pass1": {
+        "id_acc": 0.1603,
+        "ood_acc": 0.0625,
+        "id_nll": 1.6386,
+        "ood_nll": 2.1778
+      }
+    },
+    "paired_ci_vs_p1": {
+      "P2": {
+        "overall_acc_delta_ci": [
+          0.004,
+          -0.0516,
+          0.0595
+        ],
+        "id_acc_delta_ci": [
+          0.0,
+          -0.0769,
+          0.0769
+        ],
+        "ood_acc_delta_ci": [
+          0.0104,
+          -0.0625,
+          0.0833
+        ],
+        "nll_delta_ci": [
+          -0.2927,
+          -0.4743,
+          -0.1161
+        ],
+        "gained": 24,
+        "lost": 23
+      },
+      "P3": {
+        "overall_acc_delta_ci": [
+          0.0238,
+          -0.0317,
+          0.0794
+        ],
+        "id_acc_delta_ci": [
+          0.0449,
+          -0.0385,
+          0.1282
+        ],
+        "ood_acc_delta_ci": [
+          -0.0104,
+          -0.0729,
+          0.0521
+        ],
+        "nll_delta_ci": [
+          -0.5192,
+          -0.7329,
+          -0.3071
+        ],
+        "gained": 29,
+        "lost": 23
+      },
+      "P4": {
+        "overall_acc_delta_ci": [
+          0.0397,
+          -0.0198,
+          0.0992
+        ],
+        "id_acc_delta_ci": [
+          0.0705,
+          -0.0192,
+          0.1603
+        ],
+        "ood_acc_delta_ci": [
+          -0.0104,
+          -0.0729,
+          0.0521
+        ],
+        "nll_delta_ci": [
+          -0.3581,
+          -0.5545,
+          -0.1692
+        ],
+        "gained": 34,
+        "lost": 24
+      },
+      "P5": {
+        "overall_acc_delta_ci": [
+          0.0317,
+          -0.0238,
+          0.0873
+        ],
+        "id_acc_delta_ci": [
+          0.0641,
+          -0.0192,
+          0.1474
+        ],
+        "ood_acc_delta_ci": [
+          -0.0208,
+          -0.0833,
+          0.0312
+        ],
+        "nll_delta_ci": [
+          -0.5156,
+          -0.7283,
+          -0.3047
+        ],
+        "gained": 30,
+        "lost": 22
+      }
+    }
+  },
+  {
+    "run_name": "qwen3-4b-naive-loop-lora",
+    "model_label": "Qwen3-4B",
+    "hostname": "8b30fdbd57c9",
+    "mode": "naive_loop",
+    "varloop": false,
+    "steps": 200,
+    "params": {
+      "total_params": 4088528384,
+      "trainable_params": 66060288,
+      "loop_controller_params": 0,
+      "core_lora_params": 66060288,
+      "trainable_pct": 1.6157
+    },
+    "peak_mem_gib": 9.09,
+    "train_elapsed_s": 1113.4,
+    "step0_max_diff_p3_p1": 25.6015625,
+    "hw": {
+      "P1": {
+        "seq_len": 176,
+        "ms_per_forward": 79.58,
+        "toks_per_sec": 2211.5,
+        "mean_watts": 44.87,
+        "joules_per_forward": 2.968
+      },
+      "P2": {
+        "seq_len": 176,
+        "ms_per_forward": 136.11,
+        "toks_per_sec": 1293.1,
+        "mean_watts": 53.16,
+        "joules_per_forward": 7.1
+      },
+      "P3": {
+        "seq_len": 176,
+        "ms_per_forward": 191.03,
+        "toks_per_sec": 921.3,
+        "mean_watts": 52.86,
+        "joules_per_forward": 9.252
+      }
+    },
+    "baseline_p1": {
+      "id_acc": 0.1603,
+      "ood_acc": 0.0521,
+      "id_nll": 2.0436,
+      "ood_nll": 2.288,
+      "wt_ppl": 19.0903,
+      "gsm_acc": 0.375
+    },
+    "post_serial": {
+      "P1": {
+        "id_acc": 0.2564,
+        "ood_acc": 0.0729,
+        "id_nll": 1.2983,
+        "ood_nll": 2.4273
+      },
+      "P2": {
+        "id_acc": 0.25,
+        "ood_acc": 0.0417,
+        "id_nll": 1.2603,
+        "ood_nll": 2.4471
+      },
+      "P3": {
+        "id_acc": 0.2564,
+        "ood_acc": 0.0521,
+        "id_nll": 1.2794,
+        "ood_nll": 2.3881
+      },
+      "P4": {
+        "id_acc": 0.2436,
+        "ood_acc": 0.125,
+        "id_nll": 1.3366,
+        "ood_nll": 2.2918
+      },
+      "P5": {
+        "id_acc": 0.2885,
+        "ood_acc": 0.1146,
+        "id_nll": 1.5964,
+        "ood_nll": 2.376
+      }
+    },
+    "post_wt_ppl": {
+      "P1": 27.5281,
+      "P2": 18.7251,
+      "P3": 22.1962
+    },
+    "post_gsm_acc": {
+      "P1": 0.3125,
+      "P2": 0.2292,
+      "P3": 0.1458
+    },
+    "causal_ablations": {},
+    "paired_ci_vs_p1": {
+      "P2": {
+        "overall_acc_delta_ci": [
+          0.0516,
+          -0.0079,
+          0.1111
+        ],
+        "id_acc_delta_ci": [
+          0.0897,
+          0.0,
+          0.1795
+        ],
+        "ood_acc_delta_ci": [
+          -0.0104,
+          -0.0625,
+          0.0417
+        ],
+        "nll_delta_ci": [
+          -0.4243,
+          -0.67,
+          -0.1838
+        ],
+        "gained": 36,
+        "lost": 23
+      },
+      "P3": {
+        "overall_acc_delta_ci": [
+          0.0595,
+          0.0,
+          0.119
+        ],
+        "id_acc_delta_ci": [
+          0.0962,
+          0.0064,
+          0.1795
+        ],
+        "ood_acc_delta_ci": [
+          0.0,
+          -0.0625,
+          0.0625
+        ],
+        "nll_delta_ci": [
+          -0.4349,
+          -0.671,
+          -0.2037
+        ],
+        "gained": 36,
+        "lost": 21
+      },
+      "P4": {
+        "overall_acc_delta_ci": [
+          0.0794,
+          0.0159,
+          0.1389
+        ],
+        "id_acc_delta_ci": [
+          0.0833,
+          -0.0064,
+          0.1667
+        ],
+        "ood_acc_delta_ci": [
+          0.0729,
+          0.0,
+          0.1562
+        ],
+        "nll_delta_ci": [
+          -0.4362,
+          -0.6617,
+          -0.2154
+        ],
+        "gained": 42,
+        "lost": 22
+      },
+      "P5": {
+        "overall_acc_delta_ci": [
+          0.1032,
+          0.0397,
+          0.1667
+        ],
+        "id_acc_delta_ci": [
+          0.1282,
+          0.0385,
+          0.2179
+        ],
+        "ood_acc_delta_ci": [
+          0.0625,
+          -0.0104,
+          0.1354
+        ],
+        "nll_delta_ci": [
+          -0.2433,
+          -0.4787,
+          -0.0129
+        ],
+        "gained": 47,
+        "lost": 21
+      }
+    }
+  },
+  {
+    "run_name": "qwen3-4b-scalar-gate-loop",
+    "model_label": "Qwen3-4B",
+    "hostname": "edf343a0f2e1",
+    "mode": "scalar_gate_loop",
+    "varloop": true,
+    "steps": 200,
+    "params": {
+      "total_params": 4023205376,
+      "trainable_params": 737280,
+      "loop_controller_params": 737280,
+      "core_lora_params": 0,
+      "trainable_pct": 0.0183
+    },
+    "peak_mem_gib": 9.26,
+    "train_elapsed_s": 768.5,
+    "step0_max_diff_p3_p1": 0.0,
+    "hw": {
+      "P1": {
+        "seq_len": 176,
+        "ms_per_forward": 63.21,
+        "toks_per_sec": 2784.4,
+        "mean_watts": 40.11,
+        "joules_per_forward": 1.797
+      },
+      "P2": {
+        "seq_len": 176,
+        "ms_per_forward": 120.52,
+        "toks_per_sec": 1460.4,
+        "mean_watts": 54.29,
+        "joules_per_forward": 5.985
+      },
+      "P3": {
+        "seq_len": 176,
+        "ms_per_forward": 178.67,
+        "toks_per_sec": 985.1,
+        "mean_watts": 53.58,
+        "joules_per_forward": 9.458
+      }
+    },
+    "baseline_p1": {
+      "id_acc": 0.1603,
+      "ood_acc": 0.0521,
+      "id_nll": 2.0436,
+      "ood_nll": 2.288,
+      "wt_ppl": 19.0903,
+      "gsm_acc": 0.375
+    },
+    "post_serial": {
+      "P1": {
+        "id_acc": 0.1603,
+        "ood_acc": 0.0521,
+        "id_nll": 2.0436,
+        "ood_nll": 2.288
+      },
+      "P2": {
+        "id_acc": 0.3782,
+        "ood_acc": 0.1042,
+        "id_nll": 0.9884,
+        "ood_nll": 1.7314
+      },
+      "P3": {
+        "id_acc": 0.4103,
+        "ood_acc": 0.1042,
+        "id_nll": 0.9768,
+        "ood_nll": 1.7788
+      },
+      "P4": {
+        "id_acc": 0.3974,
+        "ood_acc": 0.0938,
+        "id_nll": 0.9784,
+        "ood_nll": 1.7802
+      },
+      "P5": {
+        "id_acc": 0.4103,
+        "ood_acc": 0.1042,
+        "id_nll": 0.9743,
+        "ood_nll": 1.7824
+      }
+    },
+    "post_wt_ppl": {
+      "P1": 19.0903,
+      "P2": 15.0511,
+      "P3": 14.9699
+    },
+    "post_gsm_acc": {
+      "P1": 0.375,
+      "P2": 0.3542,
+      "P3": 0.3958
+    },
+    "causal_ablations": {
+      "zero": {
+        "id_acc": 0.3141,
+        "ood_acc": 0.1042,
+        "id_nll": 1.1552,
+        "ood_nll": 1.5321
+      },
+      "shuffle_tokens": {
+        "id_acc": 0.3077,
+        "ood_acc": 0.1146,
+        "id_nll": 1.1316,
+        "ood_nll": 1.5368
+      },
+      "freeze_pass1": {
+        "id_acc": 0.3782,
+        "ood_acc": 0.1042,
+        "id_nll": 0.9884,
+        "ood_nll": 1.7314
+      }
+    },
+    "paired_ci_vs_p1": {
+      "P2": {
+        "overall_acc_delta_ci": [
+          0.1548,
+          0.0952,
+          0.2143
+        ],
+        "id_acc_delta_ci": [
+          0.2179,
+          0.1346,
+          0.3013
+        ],
+        "ood_acc_delta_ci": [
+          0.0521,
+          -0.0104,
+          0.125
+        ],
+        "nll_delta_ci": [
+          -0.8653,
+          -1.0551,
+          -0.685
+        ],
+        "gained": 50,
+        "lost": 11
+      },
+      "P3": {
+        "overall_acc_delta_ci": [
+          0.1746,
+          0.1151,
+          0.2341
+        ],
+        "id_acc_delta_ci": [
+          0.25,
+          0.1667,
+          0.3333
+        ],
+        "ood_acc_delta_ci": [
+          0.0521,
+          0.0,
+          0.1146
+        ],
+        "nll_delta_ci": [
+          -0.8544,
+          -1.0475,
+          -0.6696
+        ],
+        "gained": 54,
+        "lost": 10
+      },
+      "P4": {
+        "overall_acc_delta_ci": [
+          0.1627,
+          0.1071,
+          0.2222
+        ],
+        "id_acc_delta_ci": [
+          0.2372,
+          0.1538,
+          0.3205
+        ],
+        "ood_acc_delta_ci": [
+          0.0417,
+          -0.0104,
+          0.1042
+        ],
+        "nll_delta_ci": [
+          -0.8528,
+          -1.0452,
+          -0.6676
+        ],
+        "gained": 51,
+        "lost": 10
+      },
+      "P5": {
+        "overall_acc_delta_ci": [
+          0.1746,
+          0.119,
+          0.2341
+        ],
+        "id_acc_delta_ci": [
+          0.25,
+          0.1667,
+          0.3333
+        ],
+        "ood_acc_delta_ci": [
+          0.0521,
+          0.0,
+          0.1146
+        ],
+        "nll_delta_ci": [
+          -0.8546,
+          -1.047,
+          -0.6692
+        ],
+        "gained": 54,
+        "lost": 10
+      }
+    }
+  },
+  {
+    "run_name": "qwen38-27b-control-1pass-lora",
+    "model_label": "Qwen3.8-27B",
+    "hostname": "e72fc1807631",
+    "mode": "lora_only",
+    "varloop": false,
+    "steps": 160,
+    "params": {
+      "total_params": 26940825088,
+      "trainable_params": 44826624,
+      "loop_controller_params": 0,
+      "core_lora_params": 44826624,
+      "trainable_pct": 0.1664
+    },
+    "peak_mem_gib": 51.6,
+    "train_elapsed_s": 1659.1,
+    "step0_max_diff_p3_p1": 0.0,
+    "hw": {
+      "P1": {
+        "seq_len": 177,
+        "ms_per_forward": 429.85,
+        "toks_per_sec": 411.8,
+        "mean_watts": 57.64,
+        "joules_per_forward": 23.895
+      }
+    },
+    "baseline_p1": {
+      "id_acc": 0.2761,
+      "ood_acc": 0.075,
+      "id_nll": 1.6031,
+      "ood_nll": 1.6897,
+      "wt_ppl": 9.044,
+      "gsm_acc": 0.1562
+    },
+    "post_serial": {
+      "P1": {
+        "id_acc": 0.6716,
+        "ood_acc": 0.175,
+        "id_nll": 0.6056,
+        "ood_nll": 1.7447
+      }
+    },
+    "post_wt_ppl": {
+      "P1": 9.0412
+    },
+    "post_gsm_acc": {
+      "P1": 0.5938
+    },
+    "causal_ablations": {},
+    "paired_ci_vs_p1": {}
+  },
+  {
+    "run_name": "qwen38-27b-inkling2-varloop",
+    "model_label": "Qwen3.8-27B",
+    "hostname": "c8476a0988ad",
+    "mode": "inkling2",
+    "varloop": true,
+    "steps": 160,
+    "params": {
+      "total_params": 26975133184,
+      "trainable_params": 79134720,
+      "loop_controller_params": 79134720,
+      "core_lora_params": 0,
+      "trainable_pct": 0.2934
+    },
+    "peak_mem_gib": 55.19,
+    "train_elapsed_s": 2802.8,
+    "step0_max_diff_p3_p1": 0.0,
+    "hw": {
+      "P1": {
+        "seq_len": 177,
+        "ms_per_forward": 409.65,
+        "toks_per_sec": 432.1,
+        "mean_watts": 57.34,
+        "joules_per_forward": 22.24
+      },
+      "P2": {
+        "seq_len": 177,
+        "ms_per_forward": 613.98,
+        "toks_per_sec": 288.3,
+        "mean_watts": 56.31,
+        "joules_per_forward": 33.945
+      },
+      "P3": {
+        "seq_len": 177,
+        "ms_per_forward": 813.43,
+        "toks_per_sec": 217.6,
+        "mean_watts": 55.99,
+        "joules_per_forward": 44.727
+      }
+    },
+    "baseline_p1": {
+      "id_acc": 0.2761,
+      "ood_acc": 0.075,
+      "id_nll": 1.6031,
+      "ood_nll": 1.6897,
+      "wt_ppl": 9.044,
+      "gsm_acc": 0.1562
+    },
+    "post_serial": {
+      "P1": {
+        "id_acc": 0.2761,
+        "ood_acc": 0.075,
+        "id_nll": 1.6031,
+        "ood_nll": 1.6897
+      },
+      "P2": {
+        "id_acc": 0.194,
+        "ood_acc": 0.1,
+        "id_nll": 1.2031,
+        "ood_nll": 1.9769
+      },
+      "P3": {
+        "id_acc": 0.3134,
+        "ood_acc": 0.1375,
+        "id_nll": 1.0282,
+        "ood_nll": 1.7759
+      },
+      "P4": {
+        "id_acc": 0.2612,
+        "ood_acc": 0.0875,
+        "id_nll": 1.0709,
+        "ood_nll": 1.8688
+      },
+      "P5": {
+        "id_acc": 0.2836,
+        "ood_acc": 0.075,
+        "id_nll": 1.0525,
+        "ood_nll": 1.8415
+      }
+    },
+    "post_wt_ppl": {
+      "P1": 9.044,
+      "P2": 9.4,
+      "P3": 9.3945
+    },
+    "post_gsm_acc": {
+      "P1": 0.1562,
+      "P2": 0.5,
+      "P3": 0.5312
+    },
+    "causal_ablations": {
+      "zero": {
+        "id_acc": 0.3806,
+        "ood_acc": 0.1125,
+        "id_nll": 0.9784,
+        "ood_nll": 1.6205
+      },
+      "shuffle_tokens": {
+        "id_acc": 0.3358,
+        "ood_acc": 0.0625,
+        "id_nll": 1.0534,
+        "ood_nll": 1.7358
+      },
+      "freeze_pass1": {
+        "id_acc": 0.194,
+        "ood_acc": 0.1,
+        "id_nll": 1.2031,
+        "ood_nll": 1.9769
+      }
+    },
+    "paired_ci_vs_p1": {
+      "P2": {
+        "overall_acc_delta_ci": [
+          -0.0421,
+          -0.1075,
+          0.0187
+        ],
+        "id_acc_delta_ci": [
+          -0.0821,
+          -0.1716,
+          0.0075
+        ],
+        "ood_acc_delta_ci": [
+          0.025,
+          -0.0375,
+          0.1
+        ],
+        "nll_delta_ci": [
+          -0.1431,
+          -0.3579,
+          0.0585
+        ],
+        "gained": 19,
+        "lost": 28
+      },
+      "P3": {
+        "overall_acc_delta_ci": [
+          0.0467,
+          -0.0187,
+          0.1121
+        ],
+        "id_acc_delta_ci": [
+          0.0373,
+          -0.0522,
+          0.1269
+        ],
+        "ood_acc_delta_ci": [
+          0.0625,
+          -0.025,
+          0.15
+        ],
+        "nll_delta_ci": [
+          -0.3277,
+          -0.5118,
+          -0.1518
+        ],
+        "gained": 31,
+        "lost": 21
+      },
+      "P4": {
+        "overall_acc_delta_ci": [
+          -0.0047,
+          -0.0701,
+          0.0607
+        ],
+        "id_acc_delta_ci": [
+          -0.0149,
+          -0.1045,
+          0.0821
+        ],
+        "ood_acc_delta_ci": [
+          0.0125,
+          -0.0625,
+          0.0875
+        ],
+        "nll_delta_ci": [
+          -0.2663,
+          -0.468,
+          -0.077
+        ],
+        "gained": 24,
+        "lost": 25
+      },
+      "P5": {
+        "overall_acc_delta_ci": [
+          0.0047,
+          -0.0561,
+          0.0654
+        ],
+        "id_acc_delta_ci": [
+          0.0075,
+          -0.0821,
+          0.097
+        ],
+        "ood_acc_delta_ci": [
+          0.0,
+          -0.0625,
+          0.075
+        ],
+        "nll_delta_ci": [
+          -0.2881,
+          -0.479,
+          -0.106
+        ],
+        "gained": 23,
+        "lost": 22
+      }
+    }
+  }
+]

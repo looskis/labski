@@ -1,0 +1,16 @@
+{
+  "backbone_family": "gemma4",
+  "model_id": "Gemma-4-31B-it",
+  "num_hidden_layers": 60,
+  "hidden_size": 5376,
+  "loop_start": 18,
+  "loop_end": 42,
+  "block_size": 6,
+  "num_passes": 3,
+  "gate_rank": 64,
+  "rms_norm_eps": 1e-06,
+  "mode": "lora_only",
+  "core_lora_rank": 32,
+  "core_lora_alpha": 32.0,
+  "scale_match_message": true
+}

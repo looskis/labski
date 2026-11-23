@@ -1,0 +1,825 @@
+{
+  "run_name": "qwen38-27b-control-1pass-lora",
+  "model_label": "Qwen3.8-27B",
+  "model_path": "/hfcache/hub/models--Qwen--Qwen3.8-27B/snapshots/37561816e66b5b9153b1b64c10968c18c1e6f4a0",
+  "hostname": "e72fc1807631",
+  "gpu": "NVIDIA GB10",
+  "loop_config": {
+    "backbone_family": "qwen3_5",
+    "model_id": "Qwen3.8-27B",
+    "num_hidden_layers": 64,
+    "hidden_size": 5120,
+    "loop_start": 20,
+    "loop_end": 44,
+    "block_size": 4,
+    "num_passes": 3,
+    "gate_rank": 64,
+    "rms_norm_eps": 1e-06,
+    "mode": "lora_only",
+    "core_lora_rank": 24,
+    "core_lora_alpha": 32.0,
+    "scale_match_message": true
+  },
+  "train_args": {
+    "mode": "lora_only",
+    "num_passes": 3,
+    "varloop": false,
+    "steps": 160,
+    "grad_accum": 8,
+    "lr": 0.0003,
+    "lm_weight": 0.25,
+    "seed": 42
+  },
+  "param_stats": {
+    "total_params": 26940825088,
+    "trainable_params": 44826624,
+    "loop_controller_params": 0,
+    "core_lora_params": 44826624,
+    "trainable_pct": 0.1664
+  },
+  "load_time_s": 9.5,
+  "train_elapsed_s": 1659.1,
+  "peak_train_mem_gib": 51.6,
+  "step0_identity_check": {
+    "max_abs_diff_p1_vs_stock": 0.03125,
+    "max_abs_diff_p3_vs_p1": 0.0,
+    "max_abs_diff_p3_vs_stock": 0.03125
+  },
+  "layer_rms_profile": [
+    {
+      "layer": -1,
+      "rms": 0.013908401131629944
+    },
+    {
+      "layer": 0,
+      "rms": 0.20000509917736053
+    },
+    {
+      "layer": 1,
+      "rms": 0.2501104772090912
+    },
+    {
+      "layer": 2,
+      "rms": 0.23493753373622894
+    },
+    {
+      "layer": 3,
+      "rms": 0.3486626148223877
+    },
+    {
+      "layer": 4,
+      "rms": 0.3750920295715332
+    },
+    {
+      "layer": 5,
+      "rms": 0.4065399169921875
+    },
+    {
+      "layer": 6,
+      "rms": 0.4132053554058075
+    },
+    {
+      "layer": 7,
+      "rms": 0.4512539803981781
+    },
+    {
+      "layer": 8,
+      "rms": 0.5128713250160217
+    },
+    {
+      "layer": 9,
+      "rms": 0.5710809230804443
+    },
+    {
+      "layer": 10,
+      "rms": 0.6244158148765564
+    },
+    {
+      "layer": 11,
+      "rms": 0.7209431529045105
+    },
+    {
+      "layer": 12,
+      "rms": 0.7793634533882141
+    },
+    {
+      "layer": 13,
+      "rms": 0.8133135437965393
+    },
+    {
+      "layer": 14,
+      "rms": 0.8475326299667358
+    },
+    {
+      "layer": 15,
+      "rms": 0.8963274359703064
+    },
+    {
+      "layer": 16,
+      "rms": 0.9234467148780823
+    },
+    {
+      "layer": 17,
+      "rms": 0.9273256659507751
+    },
+    {
+      "layer": 18,
+      "rms": 0.9123629331588745
+    },
+    {
+      "layer": 19,
+      "rms": 0.8888806700706482
+    },
+    {
+      "layer": 20,
+      "rms": 0.8467385172843933
+    },
+    {
+      "layer": 21,
+      "rms": 0.9103627800941467
+    },
+    {
+      "layer": 22,
+      "rms": 0.9456369876861572
+    },
+    {
+      "layer": 23,
+      "rms": 0.9239702224731445
+    },
+    {
+      "layer": 24,
+      "rms": 0.9458630084991455
+    },
+    {
+      "layer": 25,
+      "rms": 1.0290987491607666
+    },
+    {
+      "layer": 26,
+      "rms": 1.1062822341918945
+    },
+    {
+      "layer": 27,
+      "rms": 1.1057647466659546
+    },
+    {
+      "layer": 28,
+      "rms": 1.092686414718628
+    },
+    {
+      "layer": 29,
+      "rms": 1.1321467161178589
+    },
+    {
+      "layer": 30,
+      "rms": 1.2140822410583496
+    },
+    {
+      "layer": 31,
+      "rms": 1.2100554704666138
+    },
+    {
+      "layer": 32,
+      "rms": 1.1879557371139526
+    },
+    {
+      "layer": 33,
+      "rms": 1.1810567378997803
+    },
+    {
+      "layer": 34,
+      "rms": 1.2218823432922363
+    },
+    {
+      "layer": 35,
+      "rms": 1.2431938648223877
+    },
+    {
+      "layer": 36,
+      "rms": 1.1889042854309082
+    },
+    {
+      "layer": 37,
+      "rms": 1.2182642221450806
+    },
+    {
+      "layer": 38,
+      "rms": 1.2576652765274048
+    },
+    {
+      "layer": 39,
+      "rms": 1.224462866783142
+    },
+    {
+      "layer": 40,
+      "rms": 1.1785838603973389
+    },
+    {
+      "layer": 41,
+      "rms": 1.1994380950927734
+    },
+    {
+      "layer": 42,
+      "rms": 1.3030831813812256
+    },
+    {
+      "layer": 43,
+      "rms": 1.3198955059051514
+    },
+    {
+      "layer": 44,
+      "rms": 1.3232300281524658
+    },
+    {
+      "layer": 45,
+      "rms": 1.3774718046188354
+    },
+    {
+      "layer": 46,
+      "rms": 1.4968914985656738
+    },
+    {
+      "layer": 47,
+      "rms": 1.5221225023269653
+    },
+    {
+      "layer": 48,
+      "rms": 1.517551064491272
+    },
+    {
+      "layer": 49,
+      "rms": 1.5728991031646729
+    },
+    {
+      "layer": 50,
+      "rms": 1.6990129947662354
+    },
+    {
+      "layer": 51,
+      "rms": 1.9062294960021973
+    },
+    {
+      "layer": 52,
+      "rms": 2.0364556312561035
+    },
+    {
+      "layer": 53,
+      "rms": 2.2000691890716553
+    },
+    {
+      "layer": 54,
+      "rms": 2.7354846000671387
+    },
+    {
+      "layer": 55,
+      "rms": 2.728752851486206
+    },
+    {
+      "layer": 56,
+      "rms": 2.8356661796569824
+    },
+    {
+      "layer": 57,
+      "rms": 2.976205825805664
+    },
+    {
+      "layer": 58,
+      "rms": 3.4484169483184814
+    },
+    {
+      "layer": 59,
+      "rms": 3.4131903648376465
+    },
+    {
+      "layer": 60,
+      "rms": 3.7734193801879883
+    },
+    {
+      "layer": 61,
+      "rms": 4.135568141937256
+    },
+    {
+      "layer": 62,
+      "rms": 4.428562164306641
+    },
+    {
+      "layer": 63,
+      "rms": 6.429754734039307
+    }
+  ],
+  "hardware_forward_cost": {
+    "P1": {
+      "seq_len": 177,
+      "ms_per_forward": 429.85,
+      "toks_per_sec": 411.8,
+      "mean_watts": 57.64,
+      "joules_per_forward": 23.895
+    }
+  },
+  "baseline_p1": {
+    "serial": {
+      "num_passes": 1,
+      "message_mode": "normal",
+      "overall": {
+        "n": 214,
+        "correct": 43,
+        "acc": 0.2009,
+        "mean_ans_nll": 1.6355
+      },
+      "overall_id": {
+        "n": 134,
+        "correct": 37,
+        "acc": 0.2761,
+        "mean_ans_nll": 1.6031
+      },
+      "overall_ood": {
+        "n": 80,
+        "correct": 6,
+        "acc": 0.075,
+        "mean_ans_nll": 1.6897
+      },
+      "per_task": {
+        "graph_bfs": {
+          "id": {
+            "n": 30,
+            "correct": 13,
+            "acc": 0.4333,
+            "mean_ans_nll": 2.498
+          },
+          "ood": {
+            "n": 20,
+            "correct": 3,
+            "acc": 0.15,
+            "mean_ans_nll": 1.6198
+          },
+          "by_depth": {
+            "eval_id_d0": {
+              "n": 10,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 5.9808
+            },
+            "eval_id_d2": {
+              "n": 10,
+              "correct": 8,
+              "acc": 0.8,
+              "mean_ans_nll": 0.6738
+            },
+            "eval_id_d3": {
+              "n": 10,
+              "correct": 5,
+              "acc": 0.5,
+              "mean_ans_nll": 0.8394
+            },
+            "eval_ood_d4": {
+              "n": 10,
+              "correct": 2,
+              "acc": 0.2,
+              "mean_ans_nll": 1.1771
+            },
+            "eval_ood_d5": {
+              "n": 10,
+              "correct": 1,
+              "acc": 0.1,
+              "mean_ans_nll": 2.0625
+            }
+          }
+        },
+        "mod_register": {
+          "id": {
+            "n": 30,
+            "correct": 7,
+            "acc": 0.2333,
+            "mean_ans_nll": 1.0317
+          },
+          "ood": {
+            "n": 20,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 1.2943
+          },
+          "by_depth": {
+            "eval_id_d2": {
+              "n": 10,
+              "correct": 4,
+              "acc": 0.4,
+              "mean_ans_nll": 0.9041
+            },
+            "eval_id_d3": {
+              "n": 10,
+              "correct": 3,
+              "acc": 0.3,
+              "mean_ans_nll": 0.8775
+            },
+            "eval_id_d4": {
+              "n": 10,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 1.3135
+            },
+            "eval_ood_d5": {
+              "n": 10,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 1.2076
+            },
+            "eval_ood_d6": {
+              "n": 10,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 1.381
+            }
+          }
+        },
+        "perm_track": {
+          "id": {
+            "n": 44,
+            "correct": 13,
+            "acc": 0.2955,
+            "mean_ans_nll": 1.6673
+          },
+          "ood": {
+            "n": 20,
+            "correct": 3,
+            "acc": 0.15,
+            "mean_ans_nll": 1.8168
+          },
+          "by_depth": {
+            "eval_id_d3": {
+              "n": 11,
+              "correct": 5,
+              "acc": 0.4545,
+              "mean_ans_nll": 1.1638
+            },
+            "eval_id_d4": {
+              "n": 11,
+              "correct": 1,
+              "acc": 0.0909,
+              "mean_ans_nll": 1.6374
+            },
+            "eval_id_d5": {
+              "n": 11,
+              "correct": 2,
+              "acc": 0.1818,
+              "mean_ans_nll": 2.3461
+            },
+            "eval_id_d6": {
+              "n": 11,
+              "correct": 5,
+              "acc": 0.4545,
+              "mean_ans_nll": 1.5218
+            },
+            "eval_ood_d7": {
+              "n": 10,
+              "correct": 2,
+              "acc": 0.2,
+              "mean_ans_nll": 1.5206
+            },
+            "eval_ood_d8": {
+              "n": 10,
+              "correct": 1,
+              "acc": 0.1,
+              "mean_ans_nll": 2.113
+            }
+          }
+        },
+        "pointer_chase": {
+          "id": {
+            "n": 30,
+            "correct": 4,
+            "acc": 0.1333,
+            "mean_ans_nll": 1.1857
+          },
+          "ood": {
+            "n": 20,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 2.0277
+          },
+          "by_depth": {
+            "eval_id_d2": {
+              "n": 10,
+              "correct": 3,
+              "acc": 0.3,
+              "mean_ans_nll": 0.5554
+            },
+            "eval_id_d3": {
+              "n": 10,
+              "correct": 1,
+              "acc": 0.1,
+              "mean_ans_nll": 1.2324
+            },
+            "eval_id_d4": {
+              "n": 10,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 1.7692
+            },
+            "eval_ood_d5": {
+              "n": 10,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 1.7967
+            },
+            "eval_ood_d6": {
+              "n": 10,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 2.2586
+            }
+          }
+        }
+      },
+      "diagnostics": null
+    },
+    "wikitext2": {
+      "num_passes": 1,
+      "passages": 16,
+      "scored_tokens": 3933,
+      "mean_nll": 2.2021,
+      "perplexity": 9.044,
+      "per_passage_nll": [
+        2.00297,
+        2.47647,
+        1.72502,
+        2.10436,
+        2.38057,
+        2.59963,
+        2.54115,
+        2.64065,
+        2.36609,
+        2.17107,
+        2.58088,
+        1.43615,
+        2.19093,
+        1.35388,
+        2.40921,
+        2.32597
+      ]
+    },
+    "gsm8k_direct": {
+      "num_passes": 1,
+      "n": 32,
+      "correct": 5,
+      "acc": 0.1562,
+      "mean_ans_nll": 0.8757
+    }
+  },
+  "baseline_naive_p3": null,
+  "post_training": {
+    "serial": {
+      "P1": {
+        "num_passes": 1,
+        "message_mode": "normal",
+        "overall": {
+          "n": 214,
+          "correct": 104,
+          "acc": 0.486,
+          "mean_ans_nll": 1.0314
+        },
+        "overall_id": {
+          "n": 134,
+          "correct": 90,
+          "acc": 0.6716,
+          "mean_ans_nll": 0.6056
+        },
+        "overall_ood": {
+          "n": 80,
+          "correct": 14,
+          "acc": 0.175,
+          "mean_ans_nll": 1.7447
+        },
+        "per_task": {
+          "graph_bfs": {
+            "id": {
+              "n": 30,
+              "correct": 27,
+              "acc": 0.9,
+              "mean_ans_nll": 0.2396
+            },
+            "ood": {
+              "n": 20,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 3.2812
+            },
+            "by_depth": {
+              "eval_id_d0": {
+                "n": 10,
+                "correct": 10,
+                "acc": 1.0,
+                "mean_ans_nll": 0.0679
+              },
+              "eval_id_d2": {
+                "n": 10,
+                "correct": 10,
+                "acc": 1.0,
+                "mean_ans_nll": 0.0396
+              },
+              "eval_id_d3": {
+                "n": 10,
+                "correct": 7,
+                "acc": 0.7,
+                "mean_ans_nll": 0.6112
+              },
+              "eval_ood_d4": {
+                "n": 10,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 2.1175
+              },
+              "eval_ood_d5": {
+                "n": 10,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 4.4448
+              }
+            }
+          },
+          "mod_register": {
+            "id": {
+              "n": 30,
+              "correct": 6,
+              "acc": 0.2,
+              "mean_ans_nll": 0.884
+            },
+            "ood": {
+              "n": 20,
+              "correct": 1,
+              "acc": 0.05,
+              "mean_ans_nll": 1.261
+            },
+            "by_depth": {
+              "eval_id_d2": {
+                "n": 10,
+                "correct": 4,
+                "acc": 0.4,
+                "mean_ans_nll": 0.6937
+              },
+              "eval_id_d3": {
+                "n": 10,
+                "correct": 2,
+                "acc": 0.2,
+                "mean_ans_nll": 0.783
+              },
+              "eval_id_d4": {
+                "n": 10,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.1753
+              },
+              "eval_ood_d5": {
+                "n": 10,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 1.1881
+              },
+              "eval_ood_d6": {
+                "n": 10,
+                "correct": 1,
+                "acc": 0.1,
+                "mean_ans_nll": 1.334
+              }
+            }
+          },
+          "perm_track": {
+            "id": {
+              "n": 44,
+              "correct": 29,
+              "acc": 0.6591,
+              "mean_ans_nll": 0.9933
+            },
+            "ood": {
+              "n": 20,
+              "correct": 6,
+              "acc": 0.3,
+              "mean_ans_nll": 1.5424
+            },
+            "by_depth": {
+              "eval_id_d3": {
+                "n": 11,
+                "correct": 10,
+                "acc": 0.9091,
+                "mean_ans_nll": 0.3426
+              },
+              "eval_id_d4": {
+                "n": 11,
+                "correct": 9,
+                "acc": 0.8182,
+                "mean_ans_nll": 0.4058
+              },
+              "eval_id_d5": {
+                "n": 11,
+                "correct": 5,
+                "acc": 0.4545,
+                "mean_ans_nll": 1.4511
+              },
+              "eval_id_d6": {
+                "n": 11,
+                "correct": 5,
+                "acc": 0.4545,
+                "mean_ans_nll": 1.7737
+              },
+              "eval_ood_d7": {
+                "n": 10,
+                "correct": 3,
+                "acc": 0.3,
+                "mean_ans_nll": 1.644
+              },
+              "eval_ood_d8": {
+                "n": 10,
+                "correct": 3,
+                "acc": 0.3,
+                "mean_ans_nll": 1.4407
+              }
+            }
+          },
+          "pointer_chase": {
+            "id": {
+              "n": 30,
+              "correct": 28,
+              "acc": 0.9333,
+              "mean_ans_nll": 0.1246
+            },
+            "ood": {
+              "n": 20,
+              "correct": 7,
+              "acc": 0.35,
+              "mean_ans_nll": 0.8943
+            },
+            "by_depth": {
+              "eval_id_d2": {
+                "n": 10,
+                "correct": 10,
+                "acc": 1.0,
+                "mean_ans_nll": 0.0006
+              },
+              "eval_id_d3": {
+                "n": 10,
+                "correct": 9,
+                "acc": 0.9,
+                "mean_ans_nll": 0.1246
+              },
+              "eval_id_d4": {
+                "n": 10,
+                "correct": 9,
+                "acc": 0.9,
+                "mean_ans_nll": 0.2487
+              },
+              "eval_ood_d5": {
+                "n": 10,
+                "correct": 5,
+                "acc": 0.5,
+                "mean_ans_nll": 0.6694
+              },
+              "eval_ood_d6": {
+                "n": 10,
+                "correct": 2,
+                "acc": 0.2,
+                "mean_ans_nll": 1.1192
+              }
+            }
+          }
+        },
+        "diagnostics": null
+      }
+    },
+    "wikitext2": {
+      "P1": {
+        "num_passes": 1,
+        "passages": 16,
+        "scored_tokens": 3933,
+        "mean_nll": 2.2018,
+        "perplexity": 9.0412,
+        "per_passage_nll": [
+          2.00111,
+          2.4738,
+          1.7262,
+          2.1022,
+          2.38524,
+          2.58887,
+          2.54316,
+          2.63693,
+          2.36827,
+          2.16725,
+          2.57861,
+          1.44377,
+          2.19891,
+          1.35691,
+          2.40677,
+          2.31734
+        ]
+      }
+    },
+    "gsm8k_direct": {
+      "P1": {
+        "num_passes": 1,
+        "n": 32,
+        "correct": 19,
+        "acc": 0.5938,
+        "mean_ans_nll": 0.4247
+      }
+    }
+  },
+  "causal_ablations": {}
+}

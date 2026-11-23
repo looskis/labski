@@ -1,0 +1,16 @@
+{
+  "backbone_family": "qwen3_5",
+  "model_id": "Qwen3.8-27B",
+  "num_hidden_layers": 64,
+  "hidden_size": 5120,
+  "loop_start": 20,
+  "loop_end": 44,
+  "block_size": 4,
+  "num_passes": 3,
+  "gate_rank": 64,
+  "rms_norm_eps": 1e-06,
+  "mode": "lora_only",
+  "core_lora_rank": 24,
+  "core_lora_alpha": 32.0,
+  "scale_match_message": true
+}

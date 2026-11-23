@@ -1,0 +1,729 @@
+{
+  "run_name": "qwen3-4b-control-1pass-lora",
+  "model_label": "Qwen3-4B",
+  "model_path": "/exp/hf-cache/hub/models--Qwen--Qwen3-4B/snapshots/1cfa9a7208912126459214e8b04321603b3df60c",
+  "hostname": "2796233eddae",
+  "gpu": "NVIDIA GB10",
+  "loop_config": {
+    "backbone_family": "qwen3",
+    "model_id": "Qwen3-4B",
+    "num_hidden_layers": 36,
+    "hidden_size": 2560,
+    "loop_start": 6,
+    "loop_end": 30,
+    "block_size": 6,
+    "num_passes": 3,
+    "gate_rank": 64,
+    "rms_norm_eps": 1e-06,
+    "mode": "lora_only",
+    "core_lora_rank": 48,
+    "core_lora_alpha": 32.0,
+    "scale_match_message": true
+  },
+  "train_args": {
+    "mode": "lora_only",
+    "num_passes": 3,
+    "varloop": false,
+    "steps": 200,
+    "grad_accum": 8,
+    "lr": 0.0003,
+    "lm_weight": 0.25,
+    "seed": 42
+  },
+  "param_stats": {
+    "total_params": 4088528384,
+    "trainable_params": 66060288,
+    "loop_controller_params": 0,
+    "core_lora_params": 66060288,
+    "trainable_pct": 1.6157
+  },
+  "load_time_s": 1.8,
+  "train_elapsed_s": 440.0,
+  "peak_train_mem_gib": 9.03,
+  "step0_identity_check": {
+    "max_abs_diff_p1_vs_stock": 0.03125,
+    "max_abs_diff_p3_vs_p1": 0.0,
+    "max_abs_diff_p3_vs_stock": 0.03125
+  },
+  "layer_rms_profile": [
+    {
+      "layer": -1,
+      "rms": 0.02050093561410904
+    },
+    {
+      "layer": 0,
+      "rms": 0.1497677117586136
+    },
+    {
+      "layer": 1,
+      "rms": 0.25454992055892944
+    },
+    {
+      "layer": 2,
+      "rms": 0.30192461609840393
+    },
+    {
+      "layer": 3,
+      "rms": 0.35280919075012207
+    },
+    {
+      "layer": 4,
+      "rms": 0.45512959361076355
+    },
+    {
+      "layer": 5,
+      "rms": 0.5527822971343994
+    },
+    {
+      "layer": 6,
+      "rms": 13.926392555236816
+    },
+    {
+      "layer": 7,
+      "rms": 13.92762565612793
+    },
+    {
+      "layer": 8,
+      "rms": 13.929683685302734
+    },
+    {
+      "layer": 9,
+      "rms": 13.930076599121094
+    },
+    {
+      "layer": 10,
+      "rms": 13.930294036865234
+    },
+    {
+      "layer": 11,
+      "rms": 13.931668281555176
+    },
+    {
+      "layer": 12,
+      "rms": 13.934499740600586
+    },
+    {
+      "layer": 13,
+      "rms": 13.935079574584961
+    },
+    {
+      "layer": 14,
+      "rms": 13.939208030700684
+    },
+    {
+      "layer": 15,
+      "rms": 13.940018653869629
+    },
+    {
+      "layer": 16,
+      "rms": 14.30907154083252
+    },
+    {
+      "layer": 17,
+      "rms": 14.314949035644531
+    },
+    {
+      "layer": 18,
+      "rms": 14.320127487182617
+    },
+    {
+      "layer": 19,
+      "rms": 14.329798698425293
+    },
+    {
+      "layer": 20,
+      "rms": 14.3397216796875
+    },
+    {
+      "layer": 21,
+      "rms": 14.347569465637207
+    },
+    {
+      "layer": 22,
+      "rms": 14.361414909362793
+    },
+    {
+      "layer": 23,
+      "rms": 14.395435333251953
+    },
+    {
+      "layer": 24,
+      "rms": 14.451057434082031
+    },
+    {
+      "layer": 25,
+      "rms": 14.490909576416016
+    },
+    {
+      "layer": 26,
+      "rms": 14.555063247680664
+    },
+    {
+      "layer": 27,
+      "rms": 14.61917495727539
+    },
+    {
+      "layer": 28,
+      "rms": 14.712316513061523
+    },
+    {
+      "layer": 29,
+      "rms": 14.865017890930176
+    },
+    {
+      "layer": 30,
+      "rms": 15.0970458984375
+    },
+    {
+      "layer": 31,
+      "rms": 15.397069931030273
+    },
+    {
+      "layer": 32,
+      "rms": 15.720675468444824
+    },
+    {
+      "layer": 33,
+      "rms": 16.33148765563965
+    },
+    {
+      "layer": 34,
+      "rms": 15.76115894317627
+    },
+    {
+      "layer": 35,
+      "rms": 12.98001766204834
+    }
+  ],
+  "hardware_forward_cost": {
+    "P1": {
+      "seq_len": 176,
+      "ms_per_forward": 80.3,
+      "toks_per_sec": 2191.8,
+      "mean_watts": 41.02,
+      "joules_per_forward": 2.76
+    }
+  },
+  "baseline_p1": {
+    "serial": {
+      "num_passes": 1,
+      "message_mode": "normal",
+      "overall": {
+        "n": 252,
+        "correct": 30,
+        "acc": 0.119,
+        "mean_ans_nll": 2.1367
+      },
+      "overall_id": {
+        "n": 156,
+        "correct": 25,
+        "acc": 0.1603,
+        "mean_ans_nll": 2.0436
+      },
+      "overall_ood": {
+        "n": 96,
+        "correct": 5,
+        "acc": 0.0521,
+        "mean_ans_nll": 2.288
+      },
+      "per_task": {
+        "graph_bfs": {
+          "id": {
+            "n": 36,
+            "correct": 10,
+            "acc": 0.2778,
+            "mean_ans_nll": 1.8021
+          },
+          "ood": {
+            "n": 24,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 1.865
+          },
+          "by_depth": {
+            "eval_id_d0": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 4.2598
+            },
+            "eval_id_d2": {
+              "n": 12,
+              "correct": 9,
+              "acc": 0.75,
+              "mean_ans_nll": 0.4238
+            },
+            "eval_id_d3": {
+              "n": 12,
+              "correct": 1,
+              "acc": 0.0833,
+              "mean_ans_nll": 0.7227
+            },
+            "eval_ood_d4": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 1.5237
+            },
+            "eval_ood_d5": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 2.2062
+            }
+          }
+        },
+        "mod_register": {
+          "id": {
+            "n": 36,
+            "correct": 5,
+            "acc": 0.1389,
+            "mean_ans_nll": 1.2633
+          },
+          "ood": {
+            "n": 24,
+            "correct": 1,
+            "acc": 0.0417,
+            "mean_ans_nll": 1.284
+          },
+          "by_depth": {
+            "eval_id_d2": {
+              "n": 12,
+              "correct": 2,
+              "acc": 0.1667,
+              "mean_ans_nll": 1.1251
+            },
+            "eval_id_d3": {
+              "n": 12,
+              "correct": 2,
+              "acc": 0.1667,
+              "mean_ans_nll": 1.1941
+            },
+            "eval_id_d4": {
+              "n": 12,
+              "correct": 1,
+              "acc": 0.0833,
+              "mean_ans_nll": 1.4707
+            },
+            "eval_ood_d5": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 1.3453
+            },
+            "eval_ood_d6": {
+              "n": 12,
+              "correct": 1,
+              "acc": 0.0833,
+              "mean_ans_nll": 1.2228
+            }
+          }
+        },
+        "perm_track": {
+          "id": {
+            "n": 48,
+            "correct": 9,
+            "acc": 0.1875,
+            "mean_ans_nll": 2.2303
+          },
+          "ood": {
+            "n": 24,
+            "correct": 4,
+            "acc": 0.1667,
+            "mean_ans_nll": 2.2842
+          },
+          "by_depth": {
+            "eval_id_d3": {
+              "n": 12,
+              "correct": 5,
+              "acc": 0.4167,
+              "mean_ans_nll": 2.3118
+            },
+            "eval_id_d4": {
+              "n": 12,
+              "correct": 3,
+              "acc": 0.25,
+              "mean_ans_nll": 1.5558
+            },
+            "eval_id_d5": {
+              "n": 12,
+              "correct": 1,
+              "acc": 0.0833,
+              "mean_ans_nll": 2.8708
+            },
+            "eval_id_d6": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 2.1827
+            },
+            "eval_ood_d7": {
+              "n": 12,
+              "correct": 1,
+              "acc": 0.0833,
+              "mean_ans_nll": 2.5947
+            },
+            "eval_ood_d8": {
+              "n": 12,
+              "correct": 3,
+              "acc": 0.25,
+              "mean_ans_nll": 1.9738
+            }
+          }
+        },
+        "pointer_chase": {
+          "id": {
+            "n": 36,
+            "correct": 1,
+            "acc": 0.0278,
+            "mean_ans_nll": 2.8166
+          },
+          "ood": {
+            "n": 24,
+            "correct": 0,
+            "acc": 0.0,
+            "mean_ans_nll": 3.7187
+          },
+          "by_depth": {
+            "eval_id_d2": {
+              "n": 12,
+              "correct": 1,
+              "acc": 0.0833,
+              "mean_ans_nll": 1.9152
+            },
+            "eval_id_d3": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 3.3663
+            },
+            "eval_id_d4": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 3.1683
+            },
+            "eval_ood_d5": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 3.2515
+            },
+            "eval_ood_d6": {
+              "n": 12,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 4.1858
+            }
+          }
+        }
+      },
+      "diagnostics": null
+    },
+    "wikitext2": {
+      "num_passes": 1,
+      "passages": 24,
+      "scored_tokens": 6015,
+      "mean_nll": 2.94918,
+      "perplexity": 19.0903,
+      "per_passage_nll": [
+        2.76488,
+        3.30404,
+        2.84554,
+        3.05431,
+        3.44028,
+        3.60365,
+        3.20176,
+        3.78469,
+        3.09547,
+        2.93793,
+        3.33723,
+        2.64233,
+        2.90785,
+        2.25166,
+        3.70908,
+        2.71128,
+        2.61339,
+        2.66198,
+        2.23993,
+        2.46472,
+        2.50248,
+        3.24453,
+        2.97601,
+        2.38738
+      ]
+    },
+    "gsm8k_direct": {
+      "num_passes": 1,
+      "n": 48,
+      "correct": 18,
+      "acc": 0.375,
+      "mean_ans_nll": 1.1956
+    }
+  },
+  "baseline_naive_p3": null,
+  "post_training": {
+    "serial": {
+      "P1": {
+        "num_passes": 1,
+        "message_mode": "normal",
+        "overall": {
+          "n": 252,
+          "correct": 88,
+          "acc": 0.3492,
+          "mean_ans_nll": 1.3545
+        },
+        "overall_id": {
+          "n": 156,
+          "correct": 75,
+          "acc": 0.4808,
+          "mean_ans_nll": 0.8539
+        },
+        "overall_ood": {
+          "n": 96,
+          "correct": 13,
+          "acc": 0.1354,
+          "mean_ans_nll": 2.1679
+        },
+        "per_task": {
+          "graph_bfs": {
+            "id": {
+              "n": 36,
+              "correct": 29,
+              "acc": 0.8056,
+              "mean_ans_nll": 0.2619
+            },
+            "ood": {
+              "n": 24,
+              "correct": 0,
+              "acc": 0.0,
+              "mean_ans_nll": 4.5631
+            },
+            "by_depth": {
+              "eval_id_d0": {
+                "n": 12,
+                "correct": 12,
+                "acc": 1.0,
+                "mean_ans_nll": 0.0633
+              },
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 8,
+                "acc": 0.6667,
+                "mean_ans_nll": 0.2603
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 9,
+                "acc": 0.75,
+                "mean_ans_nll": 0.4621
+              },
+              "eval_ood_d4": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 3.6403
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 0,
+                "acc": 0.0,
+                "mean_ans_nll": 5.4858
+              }
+            }
+          },
+          "mod_register": {
+            "id": {
+              "n": 36,
+              "correct": 9,
+              "acc": 0.25,
+              "mean_ans_nll": 0.9656
+            },
+            "ood": {
+              "n": 24,
+              "correct": 2,
+              "acc": 0.0833,
+              "mean_ans_nll": 1.1201
+            },
+            "by_depth": {
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 4,
+                "acc": 0.3333,
+                "mean_ans_nll": 0.8184
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 3,
+                "acc": 0.25,
+                "mean_ans_nll": 0.9053
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 1.1732
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.1954
+              },
+              "eval_ood_d6": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.0448
+              }
+            }
+          },
+          "perm_track": {
+            "id": {
+              "n": 48,
+              "correct": 18,
+              "acc": 0.375,
+              "mean_ans_nll": 1.4224
+            },
+            "ood": {
+              "n": 24,
+              "correct": 7,
+              "acc": 0.2917,
+              "mean_ans_nll": 1.3426
+            },
+            "by_depth": {
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 5,
+                "acc": 0.4167,
+                "mean_ans_nll": 1.5702
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 4,
+                "acc": 0.3333,
+                "mean_ans_nll": 1.4736
+              },
+              "eval_id_d5": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 1.5401
+              },
+              "eval_id_d6": {
+                "n": 12,
+                "correct": 7,
+                "acc": 0.5833,
+                "mean_ans_nll": 1.1057
+              },
+              "eval_ood_d7": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 1.5393
+              },
+              "eval_ood_d8": {
+                "n": 12,
+                "correct": 6,
+                "acc": 0.5,
+                "mean_ans_nll": 1.1459
+              }
+            }
+          },
+          "pointer_chase": {
+            "id": {
+              "n": 36,
+              "correct": 19,
+              "acc": 0.5278,
+              "mean_ans_nll": 0.5763
+            },
+            "ood": {
+              "n": 24,
+              "correct": 4,
+              "acc": 0.1667,
+              "mean_ans_nll": 1.646
+            },
+            "by_depth": {
+              "eval_id_d2": {
+                "n": 12,
+                "correct": 10,
+                "acc": 0.8333,
+                "mean_ans_nll": 0.2451
+              },
+              "eval_id_d3": {
+                "n": 12,
+                "correct": 7,
+                "acc": 0.5833,
+                "mean_ans_nll": 0.6275
+              },
+              "eval_id_d4": {
+                "n": 12,
+                "correct": 2,
+                "acc": 0.1667,
+                "mean_ans_nll": 0.8562
+              },
+              "eval_ood_d5": {
+                "n": 12,
+                "correct": 3,
+                "acc": 0.25,
+                "mean_ans_nll": 1.2268
+              },
+              "eval_ood_d6": {
+                "n": 12,
+                "correct": 1,
+                "acc": 0.0833,
+                "mean_ans_nll": 2.0652
+              }
+            }
+          }
+        },
+        "diagnostics": null
+      }
+    },
+    "wikitext2": {
+      "P1": {
+        "num_passes": 1,
+        "passages": 24,
+        "scored_tokens": 6015,
+        "mean_nll": 2.54351,
+        "perplexity": 12.7242,
+        "per_passage_nll": [
+          2.48566,
+          2.844,
+          2.49992,
+          2.66169,
+          3.05005,
+          3.17718,
+          2.89094,
+          3.19597,
+          2.79215,
+          2.56903,
+          3.02739,
+          2.20574,
+          2.50436,
+          1.78343,
+          2.79246,
+          2.49817,
+          2.2629,
+          2.24945,
+          1.84054,
+          1.88664,
+          2.08463,
+          2.88395,
+          2.69393,
+          2.14531
+        ]
+      }
+    },
+    "gsm8k_direct": {
+      "P1": {
+        "num_passes": 1,
+        "n": 48,
+        "correct": 21,
+        "acc": 0.4375,
+        "mean_ans_nll": 0.7519
+      }
+    }
+  },
+  "causal_ablations": {}
+}
